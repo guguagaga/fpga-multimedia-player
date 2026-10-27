@@ -1,0 +1,1 @@
+Generated 2026-10-27. Artificial FAT32 BPB, six generic songs, four generic images and one video/audio pair. No sector data, names or timestamps copied from a real SD card. Legacy 800x600 benches only; FAT-chain tests have their own generated disk model.

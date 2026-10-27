@@ -1,0 +1,229 @@
+--- v18/rtl/fat32_list.v
++++ v19/rtl/fat32_list.v
+@@ -177,6 +177,8 @@
+     reg read_valid_q;
+     reg [15:0] meta_word_q;
+     reg [31:0] song5_sector_r;
++    reg [5:0]  count;
++    reg [31:0] song_off_r;
+     wire song_commit = state == ST_READ_ROOT && sd_sec_read_data_valid_q &&
+                        entry_off == 31 && collecting && (is_wav || is_qoa) && count < MAX_SONGS;
+     always @(posedge clk) begin
+@@ -201,7 +203,6 @@
+             end
+         end
+     end
+-    reg [5:0]  count;
+     // 【2026-10-17 视频】第一个 .VID 文件的起始扇区（单驱动：只在下面的
+     //   commit always 块里写，rst 时清 0）
+     reg [31:0] video_sector_r;
+@@ -372,7 +373,6 @@
+     //   等价性：cur_cluster 在目录项的第 26/27 字节装好，到 entry_off==30 已经
+     //   稳定 3 拍，所以第 2 级用"上一拍的 cur_m2_r"取到的就是同一个值 ✓
+     reg [31:0] song_m2_r;
+-    reg [31:0] song_off_r;
+     always @(posedge clk or posedge rst) begin
+         if (rst) begin
+             song_m2_r  <= 32'd0;
+--- v18/user_source/hdl_source/SD/bmp_read.v
++++ v19/user_source/hdl_source/SD/bmp_read.v
+@@ -46,7 +46,8 @@
+     //   SCALING_EN=1 → 上限放到 4096x4096 能容纳的最大源像素数，
+     //                  计数器加宽到 23 位（16,777,216 < 2^24）。
+     // ================================================================
+-    parameter        SCALING_EN = 1'b0
++    parameter        SCALING_EN = 1'b0,
++    parameter        FAST_ROW_EN = 1'b1
+ )(
+     input wire load_abort,
+     input wire sd_grant,
+@@ -153,10 +154,11 @@
+ always @(posedge clk or posedge rst)begin
+  if(rst)is_qoi<=0;else is_qoi<=(q_magic==32'h716f6966);
+ end
++reg fast_rows;
+ reg[15:0]meta_h,meta_w;
+ always @(posedge clk or posedge rst)begin
+  if(rst)begin meta_h<=0;meta_w<=0;end
+- else begin meta_h<=is_qoi?q_height[15:0]:height[15:0];meta_w<=is_qoi?q_width[15:0]:width[15:0];end
++ else begin meta_h<=is_qoi?q_height[15:0]:(fast_rows?16'd480:height[15:0]);meta_w<=is_qoi?q_width[15:0]:width[15:0];end
+ end
+ assign source_top_down=is_qoi;
+ wire q_header_match=is_qoi && q_width>=bmp_width && q_width<=4096 &&
+@@ -252,7 +254,63 @@
+ assign img_h_o       = meta_h;
+ // 2026-10-14 SCALING: 源图宽度，与 img_h_o 同源同时机
+ assign img_w_o       = meta_w;
++// 2026-10-26: exact vertical decimation before SD transfer.
++// For 2x/3x/4x integer vertical reduction, the existing scaler selects
++// rows 0,N,2N,...,479N. Read only sectors intersecting these rows, emit
++// their complete RGB streams, and report H=480 to the unchanged scaler.
++// Width must be four-byte aligned (no BMP row padding). Other dimensions
++// retain the original full-stream path. No in-flight sector is cancelled.
++reg [13:0] fast_row_bytes;
++reg [15:0] fast_step_bytes;
++// Fast offsets fit 25 bits: pixel_offset < 64 KiB and the largest
++// accepted source is 4096*1920*3 bytes (< 24 MiB). Unusual headers
++// with larger pixel offsets retain the original full-stream fallback.
++reg [24:0] fast_start, fast_end, fast_next;
++reg [31:0] fast_lba;
++// Header fields settle before header-end; row lookahead settles during
++// the current row. Keep the address adder outside the request/state mux.
++always @(posedge clk or posedge rst) begin
++    if (rst) fast_lba <= 0;
++    else fast_lba <= load_sector_latched + ((state == ST_LOAD_HDR) ?
++                     {9'd0,pixel_offset[31:9]} : {16'd0,fast_next[24:9]});
++end
++reg [8:0] fast_row;
+ reg [31:0] bmp_len_cnt;
++wire fast_row_done = fast_rows && (bmp_len_cnt >= fast_end);
++always @(posedge clk or posedge rst) begin
++    if (rst) begin
++        fast_rows <= 0;
++        fast_row_bytes <= 0;
++        fast_step_bytes <= 0;
++    end else begin
++        fast_rows <= FAST_ROW_EN && SCALING_EN && !is_qoi &&
++                     (pixel_offset[31:16] == 0) &&
++                     (width[1:0] == 0) && (width >= 640) && (width <= 4096) &&
++                     ((height == 960) || (height == 1440) || (height == 1920));
++        fast_row_bytes <= {1'b0,width[12:0]} + {width[12:0],1'b0};
++        case (height)
++            960: fast_step_bytes <= {1'b0,fast_row_bytes,1'b0};
++            1440: fast_step_bytes <= {2'b0,fast_row_bytes} + {1'b0,fast_row_bytes,1'b0};
++            default: fast_step_bytes <= {fast_row_bytes,2'b0};
++        endcase
++    end
++end
++always @(posedge clk or posedge rst) begin
++    if (rst) begin
++        fast_start <= 0; fast_end <= 0; fast_next <= 0; fast_row <= 0;
++    end else begin
++        // Pipelined lookahead settles during the header/ack and each row.
++        fast_end <= fast_start + {11'd0,fast_row_bytes};
++        fast_next <= fast_start + {9'd0,fast_step_bytes};
++        if (state != ST_LOAD_DATA) begin
++            fast_start <= pixel_offset[24:0];
++            fast_row <= 0;
++        end else if (sector_end && fast_row_done && (fast_row != 479)) begin
++            fast_start <= fast_next;
++            fast_row <= fast_row + 1'b1;
++        end
++    end
++end
+ reg [1:0]  bmp_byte_idx;
+ 
+ wire header_match;
+@@ -303,7 +361,7 @@
+         //   改法：用**解析出来的图像宽度** `width`，而不是参数 `bmp_width`。
+         //   `bmp_width`/`bmp_height` 仍保留作接受条件的上界。
+         // ================================================================
+-        image_pixels <= img_w_o * img_h_o;
++        image_pixels <= is_qoi ? (q_width[15:0]*q_height[15:0]) : (width[15:0]*height[15:0]);
+         image_bytes <= image_pixels * 32'd3;
+         image_end <= pixel_offset + image_bytes;
+     end
+@@ -384,6 +442,7 @@
+ assign bmp_data_valid = !is_qoi && (sd_sec_read_data_valid == 1'b1) &&
+                         (bmp_len_cnt >= pixel_offset) &&
+                         (bmp_len_cnt < image_end) &&
++                        (!fast_rows || ((bmp_len_cnt >= fast_start) && (bmp_len_cnt < fast_end))) &&
+                         // 【2026-10-16 SCALING_EN】决定"源流什么时候停"。
+                         //   不缩放：wr_total 数到 FRAME_WORDS 就停 —— 与原来逐字
+                         //     相同（源就是帧）。
+@@ -468,8 +527,12 @@
+ always @(posedge clk or posedge rst) begin
+     if (rst) begin
+         bmp_len_cnt <= 32'd0;
++    end else if (state == ST_LOAD_WAIT && fast_rows) begin
++        bmp_len_cnt <= {pixel_offset[31:9],9'd0};
+     end else if (state == ST_LOAD_DATA) begin
+-        if (sd_sec_read_data_valid)
++        if (sector_end && fast_row_done && (fast_row != 479))
++            bmp_len_cnt <= {7'd0,fast_next[24:9],9'd0};
++        else if (sd_sec_read_data_valid)
+             bmp_len_cnt <= bmp_len_cnt + 32'd1;
+     end else begin
+         bmp_len_cnt <= 32'd0;
+@@ -683,7 +746,7 @@
+                     sd_sec_read <= 1'b0;
+                     if (header_ok_r) begin
+                         write_req        <= 1'b1;
+-                        sd_sec_read_addr <= load_sector_latched;
++                        sd_sec_read_addr <= fast_rows ? fast_lba : load_sector_latched;
+                         state            <= ST_LOAD_WAIT;
+                     end else begin
+                         state <= ST_IDLE;
+@@ -716,7 +779,10 @@
+ 
+                 if (sector_end) begin
+                     sd_sec_read <= 1'b0;
+-                    if (bmp_len_cnt >= file_len) begin
++                    if (fast_rows && fast_row_done) begin
++                        if (fast_row == 479) state <= ST_IDLE;
++                        else sd_sec_read_addr <= fast_lba;
++                    end else if (bmp_len_cnt >= file_len) begin
+                         // 【2026-10-08 缩放·写侧补黑】像素流发完了，但本帧
+                         //   还没写满 FRAME_WORDS ⇒ 进 ST_FILL 补黑；
+                         //   H=480 时 wr_total 已经等于 FRAME_WORDS ⇒ 直接收尾，
+--- v18/user_source/hdl_source/SD/sd_card_bmp.v
++++ v19/user_source/hdl_source/SD/sd_card_bmp.v
+@@ -165,6 +165,7 @@
+ // 【2026-10-22 轮播计时起点】load_busy 下降沿 = 一次图片加载结束（新图该上屏了）。
+ //   用它做轮播计时起点，覆盖所有切换路径（读卡加载 / 命中缓存 / 首图），
+ //   比 fade_done_pulse 可靠：命中缓存时不产生转场，fade_done 不会来 ✗
++reg              load_busy;
+ reg              load_busy_q;
+ always @(posedge clk or posedge rst) begin
+     if (rst) load_busy_q <= 1'b0;
+@@ -203,7 +204,6 @@
+ reg [31:0]       img_sector2;
+ reg [31:0]       img_sector3;
+ reg              next_req_pending;
+-reg              load_busy;
+ // 【FIX 2026-10-02 现象2 兜底】加载看门狗计数（声明必须在下面所有 always 之前）
+ reg [31:0]       load_wait_cnt;
+ 
+--- v18/user_source/hdl_source/SD/sd_card_cmd.v
++++ v19/user_source/hdl_source/SD/sd_card_cmd.v
+@@ -61,6 +61,8 @@
+ //     拿它传块数会把读命令带进写数据状态机（踩过）。
+ //   nb_blk == 0 按 1 块处理，保证老路径 cmd_data_len=0 时行为不变。
+ reg[15:0]                     blk_done;
++// Capture command type: CMD18 needs CMD12 even when only one block is read.
++reg                           read_is_multi;
+ wire[15:0]                    nb_blk = (nb_blk_in == 16'd0) ? 16'd1 : nb_blk_in;
+ 
+ assign cmd_req_ack = (state == S_END);
+@@ -82,6 +84,7 @@
+ 		state <= S_IDLE;
+ 		cmd_req_error <= 1'b0;
+ 		wr_data_cnt <= 10'd0;
++		read_is_multi <= 1'b0;
+ 	end
+ 	else
+ 		case(state)
+@@ -119,8 +122,10 @@
+ 				cmd_req_error <= 1'b0;
+ 				wr_data_cnt <= 10'd0;
+ 				//wait for  instruction
+-				if(cmd_req == 1'b1)
++				if(cmd_req == 1'b1) begin
+ 					state <= S_CMD_PRE;
++					read_is_multi <= (cmd[45:40] == 6'd18);
++				end
+ 				else if(block_read_req == 1'b1)
+ 					state <= S_READ_WAIT;
+ 				else if(block_write_req == 1'b1)
+@@ -266,7 +271,10 @@
+ 						//   0xFE 令牌；令牌与数据之间的字节一律不产生 valid。
+ 						if(blk_done + 16'd1 >= nb_blk)
+ 						begin
+-							state      <= S_STOP_CMD;   // 【修复】不直接 ack，先停流+排空
++							// 2026-10-26 speed fix: CMD17 ends after data + two CRC bytes.
++							// The old unconditional branch added CMD12 + 600 dummy bytes
++							// to EVERY single-sector read. Keep CMD18 cleanup unchanged.
++							state <= read_is_multi ? S_STOP_CMD : S_READ_ACK;
+ 							spi_wr_req <= 1'b0;
+ 							blk_done   <= 16'd0;
+ 							byte_cnt   <= 16'd0;

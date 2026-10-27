@@ -1,0 +1,56 @@
+// Indivisible SD sector -> backpressured bytes. One synchronous 512-byte RAM.
+// cancel never withdraws an in-flight request. restart is legal only idle.
+module sector_byte_source #(
+ // The FAT mapper terminates stalled physical I/O at 250ms (100MHz).
+ // This fallback must not preempt it, nor charge time owned by other clients.
+ parameter [24:0] TIMEOUT_CYCLES=25'd30000000,
+ parameter [1:0] SHORT_RETRIES=2
+ )(
+ input wire clk,rst,restart,cancel,enable,input wire[31:0]base_sector,
+ output reg sd_req,output reg[31:0]sd_addr,input wire[7:0]sd_data,
+ input wire sd_valid,sd_end,sd_grant,
+ output reg[7:0]dout,output reg valid,input wire ready,
+ output wire busy,output reg error);
+ reg[7:0]mem[0:511],mem_q;
+ reg active,have,pending;reg[9:0]wr_pos,rd_pos;
+ reg[3:0]gap;reg[15:0]orphan;reg[24:0]watchdog;reg[1:0]retries;
+ wire recovered_end=sd_req&&wr_pos==512&&!sd_grant&&orphan==59999;
+ assign busy=sd_req;
+ always @(posedge clk)begin
+  mem_q<=mem[rd_pos[8:0]];
+  if(sd_req&&sd_valid&&wr_pos<512)mem[wr_pos[8:0]]<=sd_data;
+ end
+ always @(posedge clk or posedge rst)begin
+  if(rst)begin sd_req<=0;sd_addr<=0;dout<=0;valid<=0;active<=0;have<=0;pending<=0;
+   wr_pos<=0;rd_pos<=0;gap<=0;orphan<=0;watchdog<=0;error<=0;retries<=0;end
+  else if(restart&&!sd_req)begin
+   sd_addr<=base_sector;valid<=0;active<=1;have<=0;pending<=0;wr_pos<=0;rd_pos<=0;gap<=4;orphan<=0;watchdog<=0;error<=0;retries<=0;
+  end else begin
+   if(gap!=0)gap<=gap-1'b1;
+   if(!sd_req||sd_valid||sd_end||sd_grant)orphan<=0;
+   else if(orphan<59999)orphan<=orphan+1'b1;
+   if(!sd_req||!sd_grant||sd_valid||sd_end)watchdog<=0;
+   else if(watchdog<TIMEOUT_CYCLES)watchdog<=watchdog+1'b1;
+   if(sd_req&&sd_grant&&!sd_valid&&!sd_end&&watchdog==TIMEOUT_CYCLES)begin
+    error<=1;active<=0;
+   end
+   if(active&&!error&&enable&&!cancel&&!sd_req&&!have&&!pending&&!valid&&gap==0)begin sd_req<=1;wr_pos<=0;end
+   if(sd_req&&sd_valid&&wr_pos<512)wr_pos<=wr_pos+1'b1;
+   if(sd_req&&(sd_end||recovered_end))begin
+    sd_req<=0;rd_pos<=0;gap<=4;
+    // Publish only an entire sector. Retry the original LBA after a short
+    // completed transaction; the decoder has consumed none of this RAM.
+    if(cancel||!active||error)have<=0;
+    else if(wr_pos+(sd_valid?1:0)==512)begin
+     sd_addr<=sd_addr+1'b1;have<=1;retries<=0;
+    end else if(retries<SHORT_RETRIES)begin retries<=retries+1'b1;have<=0;end
+    else begin error<=1;active<=0;have<=0;end
+   end
+   if(have&&!pending&&!valid&&rd_pos<512)begin pending<=1;rd_pos<=rd_pos+1'b1;end
+   if(pending)begin dout<=mem_q;valid<=1;pending<=0;end
+   if(valid&&ready)valid<=0;
+   if(have&&rd_pos==512&&!pending&&!valid)have<=0;
+   if(cancel)active<=0;
+  end
+ end
+endmodule

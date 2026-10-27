@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "scope": "Isolated proposed0x86/RAW research decoder,1003 valid packets,8malformed,100cancel/restart cases, deterministic input gaps/pause/output backpressure, pixel-exact Python reference. Not production integration, synthesis, timing or movie throughput.",
+  "seconds": 3.6549248695373535,
+  "summary": "PASS experimental bounds cases=       1011 pixels=      70592 aborts=        100 cycles=     548225\nC:\\Users\\Admin\\Documents\\Codex\\2026-10-25\\nih\\raw_bounds_rtl_research\\tb.v:33: $finish called at 5482252000 (1ps)\n",
+  "source_sha256": {
+    "C:\\Users\\Admin\\Documents\\Codex\\2026-10-25\\nih\\experimental_raw_bounds_decoder.v": "7cf9b1c60416cc9adc02479f8c9897749759c5af3b7cb9e6f9e3e00adb48c33b",
+    "C:\\Users\\Admin\\Documents\\Codex\\2026-10-25\\nih\\experimental_raw_bounds.py": "9e7e1ebfffd9a183734e99cc3136866a1375875567a3c993bcbaa834666e6eab",
+    "C:\\Users\\Admin\\Documents\\Codex\\2026-10-25\\nih\\raw_bounds_rtl_research\\tb.v": "5a29200646f7f5fb517e2d1b1d8924d379fa019dc78d335507895eb20b9c012b"
+  }
+}

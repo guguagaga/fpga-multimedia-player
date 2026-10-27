@@ -1,0 +1,1 @@
+{"passed": true, "blocks": 11005, "pixels": 704320, "rejected_packets": 12, "scope": "Offline experimental packet roundtrip and malformed rejection: unknown/reserved modes, short packets, illegal RGB widths, reserved metadata, channel overflow, trailing bytes. No productionRTL integration."}

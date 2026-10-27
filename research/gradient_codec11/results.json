@@ -1,0 +1,264 @@
+{
+  "scope": "Codec11 research: new 9-byte bilinear-gradient token. Same pre-repack C9-style frame budgets,15 frames,5 scenes. NOT compatible with current bitstreams, no RTL/resource/timing proof, not an SD release.",
+  "seconds": 19.194054126739502,
+  "results": [
+    {
+      "scene": 18,
+      "budget": 165000,
+      "baseline": {
+        "mse": 11.265189646026235,
+        "psnr": 37.61341853531591,
+        "grid4_gradient_rmse": 4.963473015019064,
+        "grid8_gradient_rmse": 5.30470080700861
+      },
+      "experimental": {
+        "mse": 10.010610652970678,
+        "psnr": 38.12619790368953,
+        "grid4_gradient_rmse": 4.555877740867468,
+        "grid8_gradient_rmse": 4.926070192589973
+      },
+      "token_counts": {
+        "128": 23066,
+        "129": 14587,
+        "134": 3202,
+        "132": 793,
+        "131": 1552
+      }
+    },
+    {
+      "scene": 18,
+      "budget": 185000,
+      "baseline": {
+        "mse": 9.83323917341821,
+        "psnr": 38.203837582528685,
+        "grid4_gradient_rmse": 4.626474855888965,
+        "grid8_gradient_rmse": 4.933389343491706
+      },
+      "experimental": {
+        "mse": 8.712013647762346,
+        "psnr": 38.729618137777635,
+        "grid4_gradient_rmse": 4.247954559611151,
+        "grid8_gradient_rmse": 4.584722339014769
+      },
+      "token_counts": {
+        "128": 18428,
+        "129": 19270,
+        "134": 3139,
+        "132": 699,
+        "131": 1664
+      }
+    },
+    {
+      "scene": 67,
+      "budget": 165000,
+      "baseline": {
+        "mse": 6.406026234567901,
+        "psnr": 40.064916479723976,
+        "grid4_gradient_rmse": 3.6896933233931053,
+        "grid8_gradient_rmse": 3.900359539062524
+      },
+      "experimental": {
+        "mse": 6.036142095871914,
+        "psnr": 40.323209059859124,
+        "grid4_gradient_rmse": 3.518063777205072,
+        "grid8_gradient_rmse": 3.741842785241115
+      },
+      "token_counts": {
+        "128": 30040,
+        "129": 9718,
+        "134": 1195,
+        "132": 184,
+        "131": 2063
+      }
+    },
+    {
+      "scene": 67,
+      "budget": 185000,
+      "baseline": {
+        "mse": 5.398325255594136,
+        "psnr": 40.80821313093835,
+        "grid4_gradient_rmse": 3.3788341763630694,
+        "grid8_gradient_rmse": 3.5549572918061165
+      },
+      "experimental": {
+        "mse": 5.084670500578704,
+        "psnr": 41.06817546070695,
+        "grid4_gradient_rmse": 3.226071120354178,
+        "grid8_gradient_rmse": 3.4172665456610467
+      },
+      "token_counts": {
+        "128": 25534,
+        "129": 14239,
+        "134": 1102,
+        "132": 138,
+        "131": 2187
+      }
+    },
+    {
+      "scene": 154,
+      "budget": 165000,
+      "baseline": {
+        "mse": 28.436952763310185,
+        "psnr": 33.59197304287784,
+        "grid4_gradient_rmse": 7.663882623779191,
+        "grid8_gradient_rmse": 8.305822716050775
+      },
+      "experimental": {
+        "mse": 24.543171175733026,
+        "psnr": 34.231496845003996,
+        "grid4_gradient_rmse": 6.870773717937158,
+        "grid8_gradient_rmse": 7.729187667058263
+      },
+      "token_counts": {
+        "128": 23924,
+        "129": 4114,
+        "134": 11594,
+        "132": 1624,
+        "131": 1944
+      }
+    },
+    {
+      "scene": 154,
+      "budget": 185000,
+      "baseline": {
+        "mse": 26.13043704185957,
+        "psnr": 33.9593368733344,
+        "grid4_gradient_rmse": 7.399867504724296,
+        "grid8_gradient_rmse": 8.004491405579525
+      },
+      "experimental": {
+        "mse": 22.49650692033179,
+        "psnr": 34.60965271334081,
+        "grid4_gradient_rmse": 6.619450440955752,
+        "grid8_gradient_rmse": 7.411507385153105
+      },
+      "token_counts": {
+        "128": 21894,
+        "129": 5029,
+        "134": 11861,
+        "132": 2104,
+        "131": 2312
+      }
+    },
+    {
+      "scene": 276,
+      "budget": 165000,
+      "baseline": {
+        "mse": 33.79636284722222,
+        "psnr": 32.84210396696052,
+        "grid4_gradient_rmse": 7.691066293208828,
+        "grid8_gradient_rmse": 8.206872478987304
+      },
+      "experimental": {
+        "mse": 33.03385513117284,
+        "psnr": 32.941211009973756,
+        "grid4_gradient_rmse": 7.54183734379081,
+        "grid8_gradient_rmse": 8.159471048743963
+      },
+      "token_counts": {
+        "129": 9524,
+        "128": 28831,
+        "134": 2063,
+        "132": 773,
+        "131": 2009
+      }
+    },
+    {
+      "scene": 276,
+      "budget": 185000,
+      "baseline": {
+        "mse": 29.948439308449075,
+        "psnr": 33.3670616577494,
+        "grid4_gradient_rmse": 7.3003922675098485,
+        "grid8_gradient_rmse": 7.816748661812895
+      },
+      "experimental": {
+        "mse": 29.300468991126543,
+        "psnr": 33.46205789024783,
+        "grid4_gradient_rmse": 7.171201923256722,
+        "grid8_gradient_rmse": 7.764242980492589
+      },
+      "token_counts": {
+        "129": 9736,
+        "132": 857,
+        "134": 2113,
+        "128": 28032,
+        "131": 2462
+      }
+    },
+    {
+      "scene": 401,
+      "budget": 165000,
+      "baseline": {
+        "mse": 78.6374464699074,
+        "psnr": 29.174509583077423,
+        "grid4_gradient_rmse": 11.495193063906308,
+        "grid8_gradient_rmse": 12.297988455142162
+      },
+      "experimental": {
+        "mse": 74.54550986207562,
+        "psnr": 29.406588713733477,
+        "grid4_gradient_rmse": 10.925425728396196,
+        "grid8_gradient_rmse": 11.858753519079048
+      },
+      "token_counts": {
+        "128": 24818,
+        "134": 4583,
+        "129": 11035,
+        "132": 1006,
+        "131": 1758
+      }
+    },
+    {
+      "scene": 401,
+      "budget": 185000,
+      "baseline": {
+        "mse": 71.58314489293981,
+        "psnr": 29.582695863494493,
+        "grid4_gradient_rmse": 11.01957431641028,
+        "grid8_gradient_rmse": 11.858053982414402
+      },
+      "experimental": {
+        "mse": 67.62105770158179,
+        "psnr": 29.82998401324171,
+        "grid4_gradient_rmse": 10.438189412803947,
+        "grid8_gradient_rmse": 11.399901829580411
+      },
+      "token_counts": {
+        "128": 24326,
+        "134": 4727,
+        "129": 10867,
+        "132": 1041,
+        "131": 2239
+      }
+    }
+  ],
+  "aggregate": [
+    {
+      "budget": 165000,
+      "baseline": {
+        "psnr": 33.11906093078579,
+        "grid8": 7.603148799250275,
+        "grid4": 7.1006616638613
+      },
+      "experimental": {
+        "psnr": 33.41292168548987,
+        "grid8": 7.283065042542472,
+        "grid4": 6.682395661639342
+      }
+    },
+    {
+      "budget": 185000,
+      "baseline": {
+        "psnr": 33.570376309522516,
+        "grid8": 7.233528137020929,
+        "grid4": 6.745028624179293
+      },
+      "experimental": {
+        "psnr": 33.874981562146125,
+        "grid8": 6.915528215980385,
+        "grid4": 6.34057349139635
+      }
+    }
+  ]
+}

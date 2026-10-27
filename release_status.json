@@ -1,0 +1,57 @@
+{
+  "version": "v114",
+  "updated": "2026-10-28T02:45:04.389268",
+  "status": "TEST_ONLY_NOT_TIMING_CLOSED",
+  "board_passed": false,
+  "baseline": "v113: user confirmed picture/video visible; reported audio restarts from beginning near displayed3min while video continues.",
+  "setup_wns_ns": -1.98,
+  "hold_wns_ns": 0.027,
+  "setup_failed_endpoints": 338.0,
+  "hold_failed_endpoints": 0.0,
+  "slices_percent": 95.28,
+  "ram_blocks": 65.0,
+  "dsps": 24.0,
+  "timing_passed": false,
+  "bit_sha256": "764fce083906ed5bc6b19e986dce8da7d801ddc2db3e5fa5bcbef6de8ac1ee1c",
+  "tests": {
+    "sector_recovery": true,
+    "restart_policy": true,
+    "fragmented_audio": true,
+    "audio_fault": true,
+    "top_source_switch": true,
+    "source_audit": true,
+    "fullfilm_audio": true,
+    "joint165_pcm": true,
+    "q185_pcm": true
+  },
+  "root_cause": "Board trigger unconfirmed. Reproduced unsafe standalone audio reselection after ready loss; reproduced sector robustness defects. No claim that all board failures are fixed.",
+  "sd_card_updated": true,
+  "github_uploaded": false,
+  "video_cadence": {
+    "joint165_pcm": {
+      "cadence_15fps_passed": false,
+      "effective_fps_between_presentations": 14.9999970000006,
+      "present_cycles": [
+        8333335,
+        13333336,
+        21666671
+      ]
+    },
+    "q185_pcm": {
+      "cadence_15fps_passed": false,
+      "effective_fps_between_presentations": 12.631576421053136,
+      "present_cycles": [
+        8333335,
+        16666670,
+        23333338,
+        31666673,
+        40000008,
+        46666676,
+        55000011,
+        63333346,
+        71666681
+      ]
+    }
+  },
+  "release": "v114-20261028-final-test"
+}

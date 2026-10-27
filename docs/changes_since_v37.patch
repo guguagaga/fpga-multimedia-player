@@ -1,0 +1,823 @@
+--- v37/rtl/fat32_list.v
++++ fat_chain_v56/rtl/fat32_list.v
+@@ -231,8 +231,35 @@
+     reg [31:0] song5_sector_r;
+     reg [5:0]  count;
+     reg [31:0] song_off_r;
+-    wire song_commit = state == ST_READ_ROOT && sd_sec_read_data_valid_q &&
+-                       entry_off == 31 && collecting && (is_wav || is_qoa) && count < MAX_SONGS;
++    // Commit one cycle after byte31. With consecutive byte events the
++    // following byte is byte0: its name/type resets take effect AFTER
++    // the commit edge, so the completed entry remains available here.
++    reg video_empty_q, vaudio_empty_q;
++    reg entry_commit_q;
++    reg image_commit_q, song_commit_q, video_commit_q, vaudio_commit_q;
++    reg cluster_valid_q;
++    // The cluster completes at byte27, at least four clocks before byte31.
++    // Preserve the original unsigned >=2 test while removing this wide
++    // comparator from all media register enables and downstream selectors.
++    always @(posedge clk or posedge rst) begin
++        if(rst) cluster_valid_q<=0;
++        else cluster_valid_q<=(cur_cluster>=32'd2);
++    end
++    reg [31:0] entry_sector_q;
++    always @(posedge clk or posedge rst) begin
++        if(rst)begin entry_commit_q<=0;entry_sector_q<=0;
++            image_commit_q<=0;song_commit_q<=0;video_commit_q<=0;vaudio_commit_q<=0;end
++        else begin
++            entry_commit_q <= state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31;
++            image_commit_q <= state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31 && collecting && (is_bmp||is_qoi) && cluster_valid_q && image_count_o<4;
++            song_commit_q <= state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31 && collecting && (is_wav||is_qoa) && count<MAX_SONGS;
++            video_commit_q <= state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31 && collecting && is_vid && video_empty_q;
++            vaudio_commit_q <= state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31 && collecting && is_vau && vaudio_empty_q;
++            if(state==ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off==31)
++                entry_sector_q <= data_start + song_off_r;
++        end
++    end
++    wire song_commit = song_commit_q;
+     always @(posedge clk) begin
+         if(write_word<6) song_meta[{write_idx,write_word}] <= write_shift[15:0];
+         meta_word_q <= song_meta[{read_idx,read_word}];
+@@ -243,7 +270,7 @@
+             read_shift<=0;read_word<=0;read_idx<=0;read_valid_q<=0;
+         end else begin
+             if(song_commit)begin
+-                write_shift<={cur_name,data_start+song_off_r};write_word<=0;write_idx<=count[IDX_W-1:0];
++                write_shift<={cur_name,entry_sector_q};write_word<=0;write_idx<=count[IDX_W-1:0];
+             end else if(write_word<6)begin write_shift<=write_shift>>16;write_word<=write_word+1'b1;end
+             if(!list_ready || list_idx>=song_count)begin read_valid_q<=0;read_word<=0;end
+             else if(read_idx!=list_idx[IDX_W-1:0])begin
+@@ -447,7 +474,7 @@
+ 
+     // Entries are at least 32 byte events apart, so the local empty flags
+     // settle long before another VID/VAU commit can occur.
+-    reg video_empty_q, vaudio_empty_q;
++
+     always @(posedge clk or posedge rst) begin
+         if (rst) begin video_empty_q <= 1; vaudio_empty_q <= 1; end
+         else begin
+@@ -465,18 +492,17 @@
+             //   TD 对数组下标做**静态**范围检查，越界会报 HDL-8007 并把整个模块
+             //   变成 black box（网表里逻辑直接消失），所以要显式写在范围内。
+             song5_sector_r <= 0;
+-        end else if (state == ST_READ_ROOT && sd_sec_read_data_valid_q &&
+-                     entry_off == 5'd31) begin
+-            if (collecting && (is_bmp || is_qoi) && cur_cluster >= 2 && image_count_o < 4) begin
++        end else begin
++            if (image_commit_q) begin
+                 case (image_count_o)
+-                    0: image0_o <= data_start + song_off_r;
+-                    1: image1_o <= data_start + song_off_r;
+-                    2: image2_o <= data_start + song_off_r;
+-                    3: image3_o <= data_start + song_off_r;
++                    0: image0_o <= entry_sector_q;
++                    1: image1_o <= entry_sector_q;
++                    2: image2_o <= entry_sector_q;
++                    3: image3_o <= entry_sector_q;
+                 endcase
+                 image_count_o <= image_count_o + 1'b1;
+             end
+-            if (collecting && (is_wav || is_qoa) && (count < MAX_SONGS)) begin
++            if (song_commit_q) begin
+                 // 【面积回收 A】用 count 的低 IDX_W 位做下标：count<MAX_SONGS 已保证
+                 //   不越界，但这里显式截断是为了让 TD 的静态范围检查通过
+                 //   （否则 HDL-8007 -> black box，且黑盒网表照样能生成"新"bit，
+@@ -484,16 +510,16 @@
+ 
+                 // cluster -> sector: data_start + song_off_r
+                 //   乘法已在上面预寄存，这里**只做一次 32 位加法**。
+-                if(count==5) song5_sector_r <= data_start + song_off_r;
++                if(count==5) song5_sector_r <= entry_sector_q;
+                 count <= count + 6'd1;
+             end
+             // 【2026-10-17 视频】第一个 .VID 文件的起始扇区（同样只做一次加法）
+-            if (collecting && is_vid && video_empty_q)
+-                video_sector_r <= data_start + song_off_r;
++            if (video_commit_q)
++                video_sector_r <= entry_sector_q;
+             // 【2026-10-17 视频音轨】第一个 .VAU 文件的起始扇区。
+             //   和 .VID 一样"只认第一个"，多放了也只会取第一个，避免选择逻辑。
+-            if (collecting && is_vau && vaudio_empty_q)
+-                vaudio_sector_r <= data_start + song_off_r;
++            if (vaudio_commit_q)
++                vaudio_sector_r <= entry_sector_q;
+         end
+     end
+ 
+@@ -590,9 +616,20 @@
+     endfunction
+     // ---- computed geometry（分两级流水，见下）----
+     // 第 1 级：data_start = partition + reserved + num_fats*fat_sz
+-    wire [31:0] data_start_w = partition_start +
+-                               {16'd0, reserved_secs} +
+-                               ({24'd0, num_fats} * fat_sz);
++    // BPB bytes16/39/41 settle long before DBR byte511. These rare
++    // mount calculations have independent pipeline registers; no chained
++    // multiply/add/subtract must complete at the state transition.
++    reg[31:0]fat_span_q,overhead_q,reserved_base_q,active_span_q;
++    always @(posedge clk or posedge rst)begin
++        if(rst)begin fat_span_q<=0;overhead_q<=0;reserved_base_q<=0;active_span_q<=0;end
++        else begin
++            fat_span_q<=num_fats*fat_sz;
++            overhead_q<={16'd0,reserved_secs}+fat_span_q;
++            reserved_base_q<=partition_start+{16'd0,reserved_secs};
++            active_span_q<=ext_flags[7]?ext_flags[3:0]*fat_sz:32'd0;
++        end
++    end
++    wire[31:0]data_start_w=partition_start+overhead_q;
+     // 第 2 级：用**已寄存**的 data_start_r 再算根目录扇区
+     //   root_dir = data_start + (root_cluster-2)*sec_per_cluster
+     // 2026-10-13 TIMING FIX (merged): worst sd_card_clk path was
+@@ -626,6 +663,25 @@
+ 
+ wire [31:0] root_dir_w2  = data_start_r + root_cluster_off_r;
+ 
++    // BPB fields finish by byte47 and are consumed at end-of-sector.
++    // Register the validity reduction instead of routing it through the
++    // state/list_ready enables in the same cycle (measured WNS -4.619ns).
++    reg geometry_bad_q;
++    always @(posedge clk or posedge rst) begin
++        if(rst)geometry_bad_q<=1;
++        else geometry_bad_q <= spc_shift>7 || bytes_per_sec!=512 || fat_sz==0 || total_sectors==0 ||
++                              (ext_flags[7] && ext_flags[3:0]>=num_fats);
++    end
++    reg[27:0]max_cluster_local_q;
++    // Geometry settles long before the root FAT sector. Only this stable
++    // bound is pipelined: root_next can finish at the last sector byte,
++    // so its compare must see the current parsed value at end-of-sector.
++    always @(posedge clk or posedge rst)begin
++      if(rst)max_cluster_local_q<=0;
++      else max_cluster_local_q<=max_cluster_o;
++    end
++    wire root_next_bad = root_next[27:0]<2 || root_next[27:0]>max_cluster_local_q ||
++          root_next[27:0]==root_current || root_next[27:0]==root_cluster[27:0] || root_hops>=4096;
+     // ---- main state machine ----
+     always @(posedge clk or posedge rst) begin
+         if (rst) begin
+@@ -686,8 +742,7 @@
+                         data_start_r      <= data_start_w;
+                         root_sectors_total <= sec_per_cluster;
+                         root_sector_done   <= 32'd0;
+-                        if(spc_shift>7||bytes_per_sec!=512||fat_sz==0||total_sectors==0||
+-                          (ext_flags[7]&&ext_flags[3:0]>=num_fats))begin filesystem_error_o<=1;list_ready<=1;state<=ST_DONE;end
++                        if(geometry_bad_q)begin filesystem_error_o<=1;list_ready<=1;state<=ST_DONE;end
+                         else state <= ST_CALC_ROOT;
+                     end
+                 end
+@@ -698,10 +753,10 @@
+                 ST_CALC_ROOT: begin
+     // 2026-10-13 timing fix: only compute+register the cluster offset here.
+     data_start      <= data_start_r;
+-    fat_base_r<=partition_start+reserved_secs+(ext_flags[7]?ext_flags[3:0]*fat_sz:0);
++    fat_base_r<=reserved_base_q+active_span_q;
+     // Geometry calculations are rare. Reuse the result registers as a
+     // one-bit-per-clock shifter instead of two wide barrel networks.
+-    volume_clusters<=total_sectors-(data_start_r-partition_start);
++    volume_clusters<=total_sectors-overhead_q;
+     geometry_shift<=spc_shift;
+     root_current<=root_cluster[27:0];
+     state <= ST_VOLUME_SHIFT;
+@@ -757,7 +812,7 @@
+                         root_current<=root_next[27:0];root_hops<=root_hops+1'b1;
+                         if(root_fat_count!=512)begin filesystem_error_o<=1;state<=ST_DONE;list_ready<=1;song_count<=count;end
+                         else if(root_next[27:0]>=28'hffffff8)begin state<=ST_DONE;list_ready<=1;song_count<=count;end
+-                        else if(root_next[27:0]<2||root_next[27:0]>max_cluster_o||root_next[27:0]==root_current||root_next[27:0]==root_cluster[27:0]||root_hops>=4096)begin
++                        else if(root_next_bad)begin
+                             filesystem_error_o<=1;state<=ST_DONE;list_ready<=1;song_count<=count;
+                         end else state<=ST_ROOT_CHECK;
+                     end
+--- v37/rtl/image_center_720p.v
++++ fat_chain_v56/rtl/image_center_720p.v
+@@ -18,11 +18,25 @@
+  reg [10:0] x;
+  reg [9:0] y;
+  reg running,primed;
++ reg empty_q,one_q;
+  reg [5:0] settle;
+  wire [9:0] used=wp-rp;
+  wire center=(x>=240 && x<1040 && y>=60 && y<660);
+- wire fire=running && settle==0 && !sink_high && (!center || (used!=0 && primed));
++ wire fire=running && settle==0 && !sink_high && (!center || (!empty_q && primed));
+  assign source_high=used>=128;
++ // Predict exact empty/one-entry state after each accepted push/pop.
++ // This removes wp-rp -> empty reduction from the high-fanout pixel enable.
++ // No extra latency is introduced in the FIFO or its backpressure.
++ wire pop=fire&&center;
++ always @(posedge clk or posedge rst)begin
++  if(rst)begin empty_q<=1;one_q<=0;end
++  else if(disable_image||write_req)begin empty_q<=1;one_q<=0;end
++  else case({source_valid,pop})
++   2'b10:begin empty_q<=0;one_q<=empty_q;end
++   2'b01:begin empty_q<=one_q;one_q<=used==2;end
++   default:;
++  endcase
++ end
+  // Synchronous read, forward next pointer when consuming the current pixel.
+  always @(posedge clk)begin
+   fifo_q<=fifo[(fire && center)?(rp[8:0]+9'd1):rp[8:0]];
+@@ -36,8 +50,8 @@
+    else if(write_req)begin wp<=0;rp<=0;x<=0;y<=0;running<=1;primed<=0;settle<=32;end
+    else begin
+     if(source_valid)wp<=wp+1'b1;
+-    if(!primed && used!=0)primed<=1;
+-    if(fire && center && used==1)primed<=0;
++    if(!primed && !empty_q)primed<=1;
++    if(fire && center && one_q)primed<=0;
+     if(settle!=0)settle<=settle-1'b1;
+     if(fire)begin
+      out_valid<=1;out_data<=center?{fifo_q,8'd0}:32'd0;
+@@ -53,6 +67,7 @@
+  end
+ `ifndef SYNTHESIS
+  always @(posedge clk)if(!rst&&!disable_image&&!write_req)begin
++  if(empty_q!==(used==0)||one_q!==(used==1))$fatal(1,"image-center occupancy flags mismatch");
+   if(source_valid && used>=511)$fatal(1,"720p image pad input overflow");
+  end
+ `endif
+--- v37/rtl/img_scaler.v
++++ fat_chain_v56/rtl/img_scaler.v
+@@ -93,6 +93,7 @@
+ `timescale 1ns/1ps
+ 
+ module img_scaler #(
++    parameter BOUNDED_WIDTH = 0, //production headers accept width<=4096
+     parameter [15:0] DST_W = 16'd640,
+     parameter [15:0] DST_H = 16'd480
+ )(
+@@ -346,7 +347,8 @@
+     always @(posedge clk) w_eff_q <= w_eff;
+ 
+     reg [3:0]  wq_r;                       // w_eff / DST_W,  registered
+-    reg [15:0] wr_r;                       // w_eff % DST_W,  registered
++    localparam WR_W=(BOUNDED_WIDTH && DST_W==640)?10:16;
++    reg [WR_W-1:0] wr_r;                       // w_eff % DST_W,  registered
+ 
+     // wr must be derived from the REGISTERED wq, not from a second `/ DST_W`.
+     //   Writing `wr_r <= w_eff_q - ((w_eff_q / DST_W) * DST_W)` puts the divide
+@@ -360,15 +362,33 @@
+     end
+ 
+     reg [21:0] col_off;
+-    reg [15:0] crem_q;
+-
+-    wire [16:0] crem_sum = {1'b0, crem_q} + {1'b0, wr_r};   // <= 1278
+-    wire        crem_cy  = (crem_sum >= DST_W);
+-    wire [3:0]  cstep    = wq_r + {3'd0, crem_cy};
+-    wire [15:0] crem_nxt = crem_cy ? (crem_sum[15:0] - DST_W) : crem_sum[15:0];
++    reg [WR_W-1:0] crem_q;
++
++    wire crem_cy;wire [3:0] cstep;wire [WR_W-1:0] crem_nxt;
++    generate if(BOUNDED_WIDTH && DST_W==640)begin:g_bounded_column
++        // wr is frame-stable and lies in0..639 for every accepted header.
++        // Compare against640-wr directly: no recurrence adder precedes the
++        // carry decision. Prepare both possible quotient steps in advance.
++        reg [9:0] threshold_q;
++        reg [3:0] quotient_plus_one_q;
++        always @(posedge clk)begin
++            threshold_q<=10'd640-wr_r;
++            quotient_plus_one_q<=wq_r+1'b1;
++        end
++        assign crem_cy=crem_q>=threshold_q;
++        assign cstep=crem_cy?quotient_plus_one_q:wq_r;
++        assign crem_nxt=crem_cy?(crem_q-threshold_q):(crem_q+wr_r);
++    end else begin:g_legacy_column
++        wire [16:0] crem_sum = {1'b0,crem_q}+{1'b0,wr_r};
++        assign crem_cy=crem_sum>=DST_W;
++        assign cstep=wq_r+{3'd0,crem_cy};
++        assign crem_nxt=crem_cy?(crem_sum[15:0]-DST_W):crem_sum[15:0];
++    end endgenerate
+ 
+     wire [31:0] want    = row_base + {10'd0, col_off};
+-    wire final_one = ((ptr + 32'd1) > want);
++    // For unsigned 32-bit values, ptr+1>want iff ptr>=want,
++    // except wrap at UINT32_MAX. Preserve that corner explicitly.
++    wire final_one = (ptr >= want) && (ptr != 32'hffffffff);
+ 
+     wire last_col  = (out_col == 10'd639);
+     wire last_row  = (out_row + 16'd1 >= DST_H);
+@@ -529,7 +549,7 @@
+ module image_expand_5_4 (
+  input wire clk, input wire rst, input wire frame_start,
+  input wire in_valid, input wire [23:0] in_pixel,
+- output wire high, output reg overflow,
++ output reg high, output reg overflow,
+  input wire out_blocked,
+  output reg out_valid, output reg [23:0] out_pixel
+ );
+@@ -547,7 +567,13 @@
+  wire take = (state == LIVE) && qvalid && !out_blocked;
+  wire fetch_fifo = (!qvalid || take) && (count != 0);
+  wire push = in_valid && (count != 256);
+- assign high = (count >= 64);
++ // A sector already in flight can add at most 171 RGB pixels. Register
++ // the 64-entry threshold to break count -> QOI ready -> push -> count.
++ // One extra accepted pixel leaves >=191 free slots, still above 171.
++ always @(posedge clk) begin
++   if (rst || frame_start) high <= 0;
++   else high <= (count >= 64);
++ end
+ 
+  // Synchronous memory reads infer block RAM. No RAM content reset needed.
+  always @(posedge clk) begin
+--- v37/rtl/video_player.v
++++ fat_chain_v56/rtl/video_player.v
+@@ -373,6 +373,23 @@
+             up_x <= (up_x == FRAME_W-1) ? 0 : up_x + 1'b1;
+     end
+ 
++    // sec_addr is stable throughout a 512-byte transfer. Prepare its
++    // successor before completion rather than adding, comparing and
++    // selecting a loop address on the sec_addr feedback path.
++    reg [31:0] sec_successor_q, payload_start_q;
++    reg [31:0] end_previous_q;reg end_zero_q;
++    // end_sec changes only when a valid header completes. V_REQ/SETTLE
++    // provides >20cycles before the first payload request; later sectors
++    // use a frame-stable end. The unsigned identity includes both wraps:
++    // (sec+1)>=end iff end==0 || (sec!=UINT_MAX && sec>=end-1).
++    always @(posedge clk or posedge rst)begin
++        if(rst)begin end_previous_q<=32'hffffffff;end_zero_q<=1;end
++        else begin end_previous_q<=end_sec-32'd1;end_zero_q<=end_sec==0;end
++    end
++    always @(posedge clk or posedge rst) begin
++        if(rst)begin sec_successor_q<=0;payload_start_q<=0;end
++        else begin sec_successor_q<=sec_addr+32'd1;payload_start_q<=base_sec+32'd1;end
++    end
+     // Count real bytes, not elapsed time while another SD owner is active.
+     // A missed completion is recoverable only after all 512 bytes arrived AND
+     // the arbiter released ownership. Never fabricate a missing data byte.
+@@ -386,7 +403,7 @@
+                 orphan_timer <= 0;
+             else if (!recovered_end) orphan_timer <= orphan_timer + 1'b1;
+             if (!inflight && !sd_sec_read)
+-                read_last <= (state != V_HDR) && (sec_addr + 32'd1 >= end_sec);
++                read_last <= (state != V_HDR) && (end_zero_q || (sec_addr!=32'hffffffff && sec_addr>=end_previous_q));
+         end
+     end
+ 
+@@ -549,10 +566,10 @@
+                 if (sector_done && inflight) begin
+                     sd_sec_read <= 1'b0;
+                     inflight    <= 1'b0;
+-                    if (sec_addr + 32'd1 >= end_sec)
+-                        sec_addr <= base_sec + 32'd1;   // loop: back to payload start
++                    if (read_last)
++                        sec_addr <= payload_start_q;   // loop: back to payload start
+                     else
+-                        sec_addr <= sec_addr + 32'd1;
++                        sec_addr <= sec_successor_q;
+                 end
+ 
+                 case (state)
+--- v37/user_source/hdl_source/qoi_stream.v
++++ fat_chain_v56/user_source/hdl_source/qoi_stream.v
+@@ -1,7 +1,7 @@
+ // Independently implemented from the public QOI specification, 2026-10-26.
+ // RGB/RGBA opcodes, modulo-256 deltas, 64-entry RGBA index, RUN and end marker.
+ // ready/valid at both ends; outputs RGB (alpha is tracked for correct hashing).
+-module qoi_stream #(parameter EXTERNAL_PIXELS=1'b0)(
++module qoi_stream #(parameter EXTERNAL_PIXELS=1'b0, parameter BRAM32_INDEX=0)(
+  input wire clk,rst,start,
+  input wire [7:0]din,input wire din_valid,output wire din_ready,
+  output wire [23:0]pixel,output wire pixel_valid,input wire pixel_ready,
+@@ -12,10 +12,12 @@
+  reg[5:0]clear_addr,run_left;
+  reg[3:0]head_pos,end_pos;
+  reg[31:0]magic,prev,candidate;
+- reg[31:0]index_mem[0:63];reg[31:0]index_q;
++ wire[31:0]index_q;
+  reg rgba_op;
+  reg[7:0]green_delta;
+  reg[24:0]remaining,pixel_total;
++ reg remaining_large,remaining_last;
++ wire[24:0]initial_remaining=EXTERNAL_PIXELS?expected_pixels:pixel_total;
+  reg[7:0]channels;
+  wire[7:0]r=prev[31:24],g=prev[23:16],b=prev[15:8],a=prev[7:0];
+  wire[7:0]dr=din[5:4]-8'd2,dg=din[3:2]-8'd2,db=din[1:0]-8'd2;
+@@ -33,18 +35,38 @@
+                    state==RGB_B||state==RGBA_A||state==LUMA||state==ENDING);
+  assign pixel_valid=(state==EMIT);
+  assign pixel=candidate[31:8];
++ // Both halves are accessed together. PortA holds low16 at addresses0..63,
++ // portB high16 at64..127. During writes neither read result is consumed;
++ // the following OP edge supplies the same synchronous INDEX lookup as
++ // the inferred32-bit reference. CLEAR initializes every entry each start.
++ generate if(BRAM32_INDEX)begin:g_bram32_index
++  wire wr=(state==CLEAR)||(state==EMIT&&pixel_ready);
++  wire[5:0]wa=(state==CLEAR)?clear_addr:hash_sum;
++  wire[5:0]a=wr?wa:din[5:0];
++  wire[31:0]wd=(state==CLEAR)?32'd0:candidate;
++  EG_PHY_BRAM32K #(.MODE("DP16K"),.DATA_WIDTH_A("16"),.DATA_WIDTH_B("16"),
++   .REGMODE_A("NOREG"),.REGMODE_B("NOREG"),.WRITEMODE_A("NORMAL"),.WRITEMODE_B("NORMAL")) mem(
++   .doa(index_q[15:0]),.dia(wd[15:0]),.addra({5'd0,a}),.bytea(1'b0),.bytewea(1'b0),
++   .csa(1'b1),.wea(wr),.clka(clk),.rsta(1'b0),.ocea(1'b1),
++   .dob(index_q[31:16]),.dib(wd[31:16]),.addrb({4'd0,1'b1,a}),.byteb(1'b0),.byteweb(1'b0),
++   .csb(1'b1),.web(wr),.clkb(clk),.rstb(1'b0),.oceb(1'b1));
++ end else begin:g_inferred_index
++  reg[31:0]index_mem[0:63];reg[31:0]q;assign index_q=q;
++  always @(posedge clk)begin
++   q<=index_mem[din[5:0]];
++   if(state==CLEAR)index_mem[clear_addr]<=0;
++   else if(state==EMIT&&pixel_ready)index_mem[hash_sum]<=candidate;
++  end
++ end endgenerate
+  always @(posedge clk)begin
+-  index_q<=index_mem[din[5:0]];
+-  if(state==CLEAR)index_mem[clear_addr]<=0;
+-  else if(state==EMIT&&pixel_ready)index_mem[hash_sum[5:0]]<=candidate;
+   pixel_total<=width[15:0]*height[15:0];
+  end
+  always @(posedge clk or posedge rst)begin
+   if(rst)begin state<=STOP;done<=0;error<=0;width<=0;height<=0;clear_addr<=0;
+    head_pos<=0;end_pos<=0;magic<=0;prev<=32'h000000ff;candidate<=0;
+-   remaining<=0;run_left<=0;rgba_op<=0;green_delta<=0;channels<=0;end
++   remaining<=0;remaining_large<=0;remaining_last<=0;run_left<=0;rgba_op<=0;green_delta<=0;channels<=0;end
+   else if(start)begin state<=CLEAR;done<=0;error<=0;width<=0;height<=0;clear_addr<=0;
+-   head_pos<=0;end_pos<=0;magic<=0;prev<=32'h000000ff;candidate<=0;remaining<=0;run_left<=0;end
++   head_pos<=0;end_pos<=0;magic<=0;prev<=32'h000000ff;candidate<=0;remaining<=0;remaining_large<=0;remaining_last<=0;run_left<=0;end
+   else begin
+    case(state)
+     CLEAR:if(clear_addr==63)state<=HEADER;else clear_addr<=clear_addr+1'b1;
+@@ -58,7 +80,8 @@
+       13:begin
+        if(!EXTERNAL_PIXELS && (magic!=32'h716f6966||width==0||width>4096||height==0||height>4096||
+           (channels!=3&&channels!=4)||din>1))begin error<=1;state<=STOP;end
+-       else begin remaining<=EXTERNAL_PIXELS?expected_pixels:pixel_total;state<=OP;end
++       else begin remaining<=initial_remaining;
++        remaining_large<=|initial_remaining[24:6];remaining_last<=initial_remaining==1;state<=OP;end
+       end
+      endcase
+     end
+@@ -70,7 +93,7 @@
+       1:begin candidate<={rr,gg,bb,a};state<=EMIT;end
+       2:begin green_delta<={2'd0,din[5:0]}-8'd32;state<=LUMA;end
+       3:begin
+-       if({19'd0,din[5:0]}>=remaining)begin error<=1;state<=STOP;end
++       if(!remaining_large && din[5:0]>=remaining[5:0])begin error<=1;state<=STOP;end
+        else begin run_left<=din[5:0];state<=EMIT;end
+       end
+      endcase
+@@ -83,7 +106,11 @@
+     LUMA:if(din_valid)begin candidate<={lr,lg,lb,a};state<=EMIT;end
+     EMIT:if(pixel_ready)begin
+      prev<=candidate;remaining<=remaining-1'b1;
+-     if(remaining==1)begin state<=ENDING;end_pos<=0;end
++     // Upper bits only change when the low six-bit digit borrows. Keep
++     // predecoded flags aligned with the same decrement, not a cycle late.
++     if(remaining[5:0]==0)remaining_large<=remaining[24:6]!=1;
++     remaining_last<=!remaining_large && remaining[5:0]==2;
++     if(remaining_last)begin state<=ENDING;end_pos<=0;end
+      else if(run_left!=0)run_left<=run_left-1'b1;
+      else state<=OP;
+     end
+--- v37/user_source/hdl_source/SD/bmp_read.v
++++ fat_chain_v56/user_source/hdl_source/SD/bmp_read.v
+@@ -115,8 +115,8 @@
+     output wire [31:0]          scan_sector_o
+ );
+ 
+-localparam ST_IDLE      = 3'd0;
+-localparam ST_SCAN      = 3'd1;
++localparam ST_IDLE      = 6'b000001;
++localparam ST_SCAN      = 6'b000010;
+ // Recover a lost client end pulse only AFTER all 512 bytes were received
+ // and the arbiter released ownership. Never time out an active SD transfer.
+ reg [9:0] sector_bytes;
+@@ -134,15 +134,15 @@
+         else if (!recovered_end) end_wait <= end_wait + 1'b1;
+     end
+ end
+-localparam ST_LOAD_HDR  = 3'd2;
+-localparam ST_LOAD_WAIT = 3'd3;
+-localparam ST_LOAD_DATA = 3'd4;
++localparam ST_LOAD_HDR  = 6'b000100;
++localparam ST_LOAD_WAIT = 6'b001000;
++localparam ST_LOAD_DATA = 6'b010000;
+ // 【2026-10-08 缩放·写侧补黑】补黑阶段：像素流发完后，用本地节拍器继续发 32'd0，
+ //   直到本帧总字数**恰好** FRAME_WORDS(=307200)。H=480 时补黑 0 字、该状态永不进入
+ //   ⇒ 与改动前逐位相同。
+-localparam ST_FILL      = 3'd5;
+-
+-reg [2:0]  state;
++localparam ST_FILL      = 6'b100000;
++
++reg [5:0] state;
+ reg [9:0]  rd_cnt;
+ reg [31:0] image_pixels;
+ reg [31:0] width;
+@@ -162,9 +162,19 @@
+  else begin meta_h<=is_qoi?q_height[15:0]:(fast_rows?16'd480:height[15:0]);meta_w<=is_qoi?q_width[15:0]:width[15:0];end
+ end
+ assign source_top_down=is_qoi;
+-wire q_header_match=is_qoi && q_width>=bmp_width && q_width<=4096 &&
+- q_height>=1 && q_height<=4096 && (SCALING_EN || q_height<=bmp_height) &&
+- (q_channels==3 || q_channels==4) && q_colorspace<=1;
++// All fields complete by byte33; decisions occur after byte511.
++// Width, height and format checks are independent register stages, so
++// a32-bit bound comparator cannot feed an entire header-wide AND tree.
++reg q_width_ok_q,q_height_ok_q,q_format_ok_q;
++always @(posedge clk or posedge rst)begin
++ if(rst)begin q_width_ok_q<=0;q_height_ok_q<=0;q_format_ok_q<=0;end
++ else begin
++  q_width_ok_q<=q_width>=bmp_width && q_width<=4096;
++  q_height_ok_q<=q_height>=1 && q_height<=4096 && (SCALING_EN || q_height<=bmp_height);
++  q_format_ok_q<=is_qoi && (q_channels==3||q_channels==4) && q_colorspace<=1;
++ end
++end
++wire q_header_match=q_width_ok_q && q_height_ok_q && q_format_ok_q;
+ reg bmp_pixel_wr_en;reg[23:0]bmp_pixel_data;
+ wire q_done,q_error,q_byte_ready,q_pixel_valid;
+ wire [23:0]q_pixel;
+@@ -208,7 +218,7 @@
+   if(q_have&&q_pos==512&&!q_pending&&!q_valid)q_have<=0;
+  end
+ end
+-qoi_stream #(.EXTERNAL_PIXELS(1'b1)) u_qoi(.clk(clk),.rst(rst||load_abort||!sd_init_done),.start(q_start),
++qoi_stream #(.EXTERNAL_PIXELS(1'b1),.BRAM32_INDEX(1)) u_qoi(.clk(clk),.rst(rst||load_abort||!sd_init_done),.start(q_start),
+  .din(q_byte),.din_valid(q_valid),.din_ready(q_byte_ready),.pixel(q_pixel),
+  .expected_pixels(image_pixels[24:0]),.pixel_valid(q_pixel_valid),.pixel_ready(q_pixel_ready),.done(q_done),.error(q_error),.width(),.height());
+ 
+@@ -277,6 +287,15 @@
+ end
+ reg [8:0] fast_row;
+ reg [31:0] bmp_len_cnt;
++// QOI must decode the entire buffered sector before requesting another.
++// At !q_have/!q_pending/!q_valid, bmp_len_cnt has been stable for many
++// clocks. Register its byte-limit comparison before the request-enable
++// cone; the in-flight sector and byte counters are never interrupted.
++reg q_limit_hit_q;
++always @(posedge clk or posedge rst)begin
++ if(rst)q_limit_hit_q<=0;
++ else q_limit_hit_q<=bmp_len_cnt>=q_byte_limit;
++end
+ wire fast_row_done = fast_rows && (bmp_len_cnt >= fast_end);
+ always @(posedge clk or posedge rst) begin
+     if (rst) begin
+@@ -324,6 +343,15 @@
+ // than putting multiply/add/compare in every pixel's 100 MHz enable path.
+ // Three pipeline stages settle long before ST_LOAD_DATA can be entered.
+ 
++// Header geometry settles hundreds of byte clocks before any pixel load.
++// Select the source dimensions BEFORE the product, allowing one shared
++// DSP instead of parallel BMP/QOI products plus a32-bit result mux.
++reg[15:0]source_width_q,source_height_q;
++always @(posedge clk or posedge rst)begin
++ if(rst)begin source_width_q<=0;source_height_q<=0;end
++ else begin source_width_q<=is_qoi?q_width[15:0]:width[15:0];
++            source_height_q<=is_qoi?q_height[15:0]:height[15:0];end
++end
+ reg [31:0] image_bytes;
+ reg [31:0] image_end;
+ always @(posedge clk or posedge rst) begin
+@@ -362,7 +390,7 @@
+         //   改法：用**解析出来的图像宽度** `width`，而不是参数 `bmp_width`。
+         //   `bmp_width`/`bmp_height` 仍保留作接受条件的上界。
+         // ================================================================
+-        image_pixels <= is_qoi ? (q_width[15:0]*q_height[15:0]) : (width[15:0]*height[15:0]);
++        image_pixels <= source_width_q*source_height_q;
+         image_bytes <= image_pixels * 32'd3;
+         image_end <= pixel_offset + image_bytes;
+     end
+@@ -398,48 +426,17 @@
+ end
+ wire bmp_header_match;
+ assign header_match = q_header_match || bmp_header_match;
+-assign bmp_header_match = (header_0 == "B") &&
+-                      (header_1 == "M") &&
+-                      // ============================================================
+-                      // 2026-10-16：宽度条件按 SCALING_EN 分两种
+-                      //
+-                      //   写侧 frame_fifo_write 的地址**只在 wr_x == 639 时跳行**：
+-                      //       if (wr_x == VFLIP_LINE_LAST_X)   // = 639
+-                      //           App_wr_addr_r -= VFLIP_LINE_JUMP;
+-                      //       else
+-                      //           App_wr_addr_r += 1'b1;
+-                      //   所以：
+-                      //     · width == 640  → 行边界与访存边界对齐 ⇒ 正确
+-                      //     · width  < 640  → 像素被连续打包进 640 宽的访存行
+-                      //       （101 宽时一行装 6.3 整行图），整幅图里行跳转只发生
+-                      //       **一次** ⇒ 图像变成横带，**乱码**
+-                      //     · width  > 640  → 必须先由 scaler 缩小成恰好 640
+-                      //
+-                      //   SCALING_EN=0（无 scaler，源 == 帧）：必须 width == 640。
+-                      //   SCALING_EN=1（有 scaler）：接受 640..4096。
+-                      //       scaler 恒输出 640x480 ⇒ 宽度 >640 被缩到恰好 640，
+-                      //       行边界自然对齐；宽度 ==640 走 bypass 直通。
+-                      //       ⚠️ 仍然**不能**接受 <640：scaler 只缩不放，
+-                      //          而且写侧的 640 字行边界对不齐。
+-                      // ============================================================
+-                      (width >= {16'd0, bmp_width}) &&
+-                      (width <= 32'd4096) &&
+-                      // 【2026-10-08 缩放·口径 A1】高度校验**放宽**：原来要求
+-                      //   height == bmp_height(=480)，现在接受 1..480 的任意高度。
+-                      //   判定依据来自 **BMP 头本身**；height > 480 仍然跳过
+-                      //   （本阶段只支持 <=480，图顶部对齐，不做居中）。
+-                      //   写侧会按这个高度把图放到内存行 0..H-1，并把余下部分补黑。
+-                      (height >= 32'd1) &&
+-                      // 2026-10-16：高度上限也按 SCALING_EN 分两种
+-                      //   （高度不影响写侧打包，只决定 VFLIP 起始行 (H-1)*640；
+-                      //     >480 时由 scaler 缩到 480）
+-                      (SCALING_EN ? (height <= 32'd4096)
+-                                  : (height <= {16'd0, bmp_height})) &&
+-                      (pixel_offset >= 32'd54) &&
+-                      header_length_ok &&
+-                      (header_payload_bytes >= image_bytes) &&
+-                      (bit_count    == 16'd24) &&
+-                      (compression  == 32'd0);
++reg bmp_width_ok_q,bmp_height_ok_q,bmp_format_ok_q,bmp_payload_ok_q;
++always @(posedge clk or posedge rst)begin
++ if(rst)begin bmp_width_ok_q<=0;bmp_height_ok_q<=0;bmp_format_ok_q<=0;bmp_payload_ok_q<=0;end
++ else begin
++  bmp_width_ok_q<=width>={16'd0,bmp_width} && width<=32'd4096;
++  bmp_height_ok_q<=height>=32'd1 && (SCALING_EN?height<=32'd4096:height<={16'd0,bmp_height});
++  bmp_format_ok_q<=header_0=="B" && header_1=="M" && bit_count==16'd24 && compression==32'd0;
++  bmp_payload_ok_q<=pixel_offset>=32'd54 && header_length_ok && header_payload_bytes>=image_bytes;
++ end
++end
++assign bmp_header_match=bmp_width_ok_q && bmp_height_ok_q && bmp_format_ok_q && bmp_payload_ok_q;
+ assign bmp_data_valid = !is_qoi && (sd_sec_read_data_valid == 1'b1) &&
+                         (bmp_len_cnt >= pixel_offset) &&
+                         (bmp_len_cnt < image_end) &&
+@@ -767,7 +764,7 @@
+                 state_code  <= 4'd4;
+                 if(is_qoi)begin
+                     if(!sd_sec_read && !q_have && !q_pending && !q_valid && !q_done && !q_error)begin
+-                        if(bmp_len_cnt>=q_byte_limit)begin load_error<=1;state<=ST_IDLE;end
++                        if(q_limit_hit_q)begin load_error<=1;state<=ST_IDLE;end
+                         else sd_sec_read<=1;
+                     end
+                     if(sector_end)begin sd_sec_read<=0;sd_sec_read_addr<=sd_sec_read_addr+1'b1;end
+--- v37/user_source/hdl_source/SD/sd_card_bmp.v
++++ fat_chain_v56/user_source/hdl_source/SD/sd_card_bmp.v
+@@ -335,7 +335,7 @@
+ wire [3:0]  px_fifo_count;
+ wire        px_fifo_rd;
+ 
+-wire img_native800,img_needs_scale;
++reg img_native800,img_needs_scale;
+ pixel_fifo_24x8 u_px_fifo (
+     .clk   (clk),
+     .rst   (rst || vid_lock),
+@@ -388,14 +388,22 @@
+ // ================================================================
+ // 只有"源图超出 640x480"才需要 scaler 缩小。bmp_read 在 SCALING_EN=1 时
+ //   只接受 width>=640，所以 img_src_w 恒 >=640，"宽度不够"这一支不会触发。
+-assign img_native800 = (img_src_w == 16'd800) && (img_src_h == 16'd600);
+-assign img_needs_scale = (img_src_w > 16'd640) || (img_src_h > 16'd480);
++// Parsed metadata settles during the header sector, long before pixels.
++// Pipeline path classification to keep wide dimension comparators off
++// the QOI backpressure/state and pixel FIFO enable paths.
++always @(posedge clk or posedge rst)begin
++ if(rst)begin img_native800<=0;img_needs_scale<=0;end
++ else begin
++  img_native800<=(img_src_w==16'd800)&&(img_src_h==16'd600);
++  img_needs_scale<=(img_src_w>16'd640)||(img_src_h>16'd480);
++ end
++end
+ 
+ assign img_src_h = img_h_raw;
+ wire [15:0] image_h_640 = (img_h_raw > 480) ? 16'd480 : img_h_raw;
+ assign img_h_o = image_h_640 + ((image_h_640 + 16'd3) >> 2);
+ 
+-img_scaler #(.DST_W(16'd640), .DST_H(16'd480)) u_img_scaler (
++img_scaler #(.BOUNDED_WIDTH(1), .DST_W(16'd640), .DST_H(16'd480)) u_img_scaler (
+     .clk             (clk),
+     .rst             (rst),
+     .src_w           (img_src_w),
+--- v37/user_source/hdl_source/SD/sd_card_sec_read_write.v
++++ fat_chain_v56/user_source/hdl_source/SD/sd_card_sec_read_write.v
+@@ -1,6 +1,7 @@
+ 
+ module sd_card_sec_read_write
+ #(
++	parameter PREFETCH_BRAM32 = 0,
+ 	parameter  SPI_LOW_SPEED_DIV = 248,         // spi clk speed = clk speed /((SPI_LOW_SPEED_DIV + 2) * 2 )
+ 	parameter  SPI_HIGH_SPEED_DIV = 0           // spi clk speed = clk speed /((SPI_HIGH_SPEED_DIV + 2) * 2 )
+ )
+@@ -102,13 +103,13 @@
+ reg[31:0]                      sec_addr;
+ 
+ // ---- 预取缓冲 ----
+-reg[7:0]                       pbuf [0:NB_BLK*512-1];
++
+ reg[31:0]                      pbuf_lba;
+ reg[4:0]                       pbuf_n;          // 有效块数 0..NB_BLK-1
+ reg[31:0]                      rd_cnt;          // 本批已收数据字节（不含令牌/CRC）
+ reg[9:0]                       hit_cnt;
+ reg[12:0]                      hit_idx;         // 命中块在 pbuf 里的起始偏移
+-reg[7:0]                       hit_q;
++wire[7:0]                      hit_q;
+ reg hit_slow;
+ reg [1:0] hit_phase;
+ wire hit_advance = !hit_slow || (hit_phase == 0);
+@@ -176,18 +177,22 @@
+ // 【2026-10-20 D1】MULTI_ON=0 时写口恒不动作 ⇒ pbuf 整个数组（8KB ERAM）与
+ //   读复用器、hit_idx/hit_cnt/rd_cnt 的扫描逻辑都会被综合器删掉，省 1 个 ERAM
+ //   和一片 LUT。MULTI_ON=1 时行为与原来逐位相同。
+-always@(posedge clk)
+-begin
+-	if(MULTI_ON && (state == S_READM) && block_read_valid && !rd_client)
+-		pbuf[rd_cnt[12:0] - 13'd512] <= block_read_data;
+-end
+-
+-// 命中读侧：BRAM 读有一拍延迟，所以有效位也打一拍
+-// 【BRAM 推断】读口必须是**无条件同步读**，否则综合器会把 8KB 缓冲推断成
+-//   分布式 RAM（LUT），MSlice 直接爆到 6031 > 4900 上限（实测踩过）。
+-//   有效位单独打拍，和数据保持同拍对齐。
+-always@(posedge clk)
+-	hit_q <= pbuf[hit_idx + {3'd0, hit_cnt[8:0]}];
++wire pbuf_we=MULTI_ON && state==S_READM && block_read_valid && !rd_client;
++wire[12:0]pbuf_wa=rd_cnt[12:0]-13'd512;
++wire[12:0]pbuf_ra=hit_idx+{3'd0,hit_cnt[8:0]};
++generate if(PREFETCH_BRAM32)begin:g_prefetch32
++ // Same byte-lane primitive used by the existing video FIFO. Two32K
++ // blocks replace eight9K blocks; one synchronous read cycle unchanged.
++ video_byte_ram #(.AW(13)) cache(.clk(clk),.we(pbuf_we),.re(1'b1),
++  .wa(pbuf_wa),.ra(pbuf_ra),.data(block_read_data),.q(hit_q));
++end else begin:g_prefetch_infer
++ reg[7:0]pbuf[0:NB_BLK*512-1];reg[7:0]q;
++ always @(posedge clk)begin
++  if(pbuf_we)pbuf[pbuf_wa]<=block_read_data;
++  q<=pbuf[pbuf_ra];
++ end
++ assign hit_q=q;
++end endgenerate
+ 
+ always@(posedge clk)
+ begin
+--- v37/user_source/hdl_source/SD/sd_card_top.v
++++ fat_chain_v56/user_source/hdl_source/SD/sd_card_top.v
+@@ -1,6 +1,7 @@
+ 
+ module sd_card_top
+ #(
++	parameter PREFETCH_BRAM32 = 0,
+ 	parameter  SPI_LOW_SPEED_DIV = 248,         // SD card low speed mode frequency division parameter,spi clk speed = clk speed /((SPI_LOW_SPEED_DIV + 2) * 2 )
+ 	// 【2026-10-02 对照 bit-3 / probeSlowSPI】SPI_HIGH_SPEED_DIV 由 0 改成 2。
+ 	//
+@@ -78,6 +79,7 @@
+ wire[15:0]           clk_div;
+ sd_card_sec_read_write
+ #(
++	.PREFETCH_BRAM32(PREFETCH_BRAM32),
+ 	.SPI_LOW_SPEED_DIV(SPI_LOW_SPEED_DIV),
+ 	.SPI_HIGH_SPEED_DIV(SPI_HIGH_SPEED_DIV)
+ )
+--- v37/user_source/hdl_source/SD/seg_scan.v
++++ fat_chain_v56/user_source/hdl_source/SD/seg_scan.v
+@@ -12,6 +12,7 @@
+ 	input[7:0]      seg_data_4,
+ 	input[7:0]      seg_data_5
+ );
++parameter SAME_CLOCK = 0;
+ parameter SCAN_FREQ = 200;     //scan frequency
+ parameter CLK_FREQ = 50000000; //clock frequency
+ 
+@@ -20,12 +21,23 @@
+ // Status originates in the 100MHz domain. Half-cycle staging keeps
+ // it away from coincident 50MHz scan edges. No false path is added.
+ reg [7:0] glyph_0,glyph_1,glyph_2,glyph_3,glyph_4,glyph_5;
++// SAME_CLOCK=1 is used by the 100MHz production top: status and scan
++// are synchronous, with a full cycle for the glyph mux instead of a 5ns
++// half-cycle path into the 50MHz domain. Default retains legacy wiring.
++generate if (SAME_CLOCK) begin:g_same_clock
++always @(posedge clk or negedge rst_n)begin
++ if(!rst_n)begin glyph_0<=8'hff;glyph_1<=8'hff;glyph_2<=8'hff;glyph_3<=8'hff;glyph_4<=8'hff;glyph_5<=8'hff;end
++ else begin glyph_0<=seg_data_0;glyph_1<=seg_data_1;glyph_2<=seg_data_2;glyph_3<=seg_data_3;glyph_4<=seg_data_4;glyph_5<=seg_data_5;end
++end
++end else begin:g_legacy_clock
+ always @(negedge status_clk or negedge rst_n)begin
+  if(!rst_n)begin glyph_0<=8'hff;glyph_1<=8'hff;glyph_2<=8'hff;glyph_3<=8'hff;glyph_4<=8'hff;glyph_5<=8'hff;end
+  else begin glyph_0<=seg_data_0;glyph_1<=seg_data_1;glyph_2<=seg_data_2;glyph_3<=seg_data_3;glyph_4<=seg_data_4;glyph_5<=seg_data_5;end
+ end
+-reg[31:0] scan_timer;  //scan time counter
+-reg[3:0] scan_sel;     //Scan select counter
++end endgenerate
++localparam TIMER_W=(SCAN_COUNT<2)?1:$clog2(SCAN_COUNT+1);
++reg[TIMER_W-1:0] scan_timer;  //scan time counter
++reg[2:0] scan_sel;     //Scan select counter
+ always@(posedge clk or negedge rst_n)
+ begin
+ 	if(rst_n == 1'b0)
+--- v37/user_source/hdl_source/top_tf_hdmi_audio.v
++++ fat_chain_v56/user_source/hdl_source/top_tf_hdmi_audio.v
+@@ -2869,7 +2869,7 @@
+  else fs_transport_reset<=fs_error&&(fs_error_code==5);
+ end
+ 
+-sd_card_top sd_card_top_m0(
++sd_card_top #(.PREFETCH_BRAM32(1)) sd_card_top_m0(
+     .clk(sd_card_clk), .rst(rst_all|fs_transport_reset),
+     .SD_nCS(sd_ncs), .SD_DCLK(sd_dclk), .SD_MOSI(sd_mosi), .SD_MISO(sd_miso),
+     .sd_init_done(sd_init_done),
+@@ -3054,9 +3054,9 @@
+ end
+ 
+ 
+-seg_scan seg_scan_m0(
++seg_scan #(.SAME_CLOCK(1),.CLK_FREQ(100000000)) seg_scan_m0(
+     .status_clk        (sd_card_clk),
+-    .clk               (clk),
++    .clk               (sd_card_clk),
+     .rst_n             (rst_n),
+     .seg_sel           (seg_sel),
+     .seg_data          (seg_data),

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "scope": "Isolated arithmetic emitter,262144 pixels,stalls. No production token parser,raster integration,synthesis or timing proof.",
+  "summary": "PASS gradient engine blocks=4096 pixels=262144 random stalls; endpoint extrema and random RGB565 corners",
+  "source_sha256": "b5cf967ec61cc434ad92d72672d0eea7c76844131a13182161e5b1cdc9af943b"
+}
