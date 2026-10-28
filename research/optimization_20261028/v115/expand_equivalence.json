@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "seconds": 14.342098951339722,
+  "summary": "PASS dense sector bursts + random/5000-cycle stalls pixels=480000 peak_fifo=234\nPASS interrupted image restart: exact full frame, no stale pixels\nPASS EXPAND EQUIVALENCE fullframes=2 abort=1",
+  "scope": "Cycle-exact production module comparison against v114; functional simulation, not gate-level timing or board validation.",
+  "source_sha256": {
+    "tb.v": "dc9b04435806c7bd3cac0173a2571da3767b51d00b043ba8b3fa8a14e8cce44a",
+    "reference.v": "698827c27343f16a0b505f7df311f8de63c38ed475e66af0bc39d43fc682daa8",
+    "img_scaler.v": "38685903928cb3ddd36a7ad403825678c1a40d0803a58fae8563b0abf5fc5a00"
+  }
+}

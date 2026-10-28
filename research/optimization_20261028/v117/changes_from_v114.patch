@@ -1,0 +1,28 @@
+--- a/rtl/spectrum/spectrum_display.v
++++ b/rtl/spectrum/spectrum_display.v
+@@ -291,8 +291,23 @@
+     // ---- bar index / fraction from X ----
+     wire       in_xrange = (active_x >= X0) && (active_x < X1);
+     wire [9:0] bx        = active_x - X0;
+-    wire [6:0] bar_index = bx / PITCH;
+-    wire [4:0] x_in_bar  = bx - (bar_index * PITCH);   // 0..17
++    // Exact quotient/remainder recurrence for the sequential 10-bit X.
++    // bx=(active_x-32) mod1024: at X=0, bx=992=55*18+2.
++    // The only non-unit transition of bx is X=31 ->32 (1023 ->0).
++    // Keep these coordinates in the SAME stage as active_x, not a delay.
++    reg [6:0] bar_index;
++    reg [4:0] x_in_bar;
++    always @(posedge clk or negedge rst_n) begin
++        if (!rst_n) begin bar_index<=7'd55; x_in_bar<=5'd2; end
++        else if (vs_nedge || (!de && de_d)) begin
++            bar_index<=7'd55; x_in_bar<=5'd2;
++        end else if (de && (x_phase != 0)) begin
++            if (active_x == 10'd31) begin bar_index<=0; x_in_bar<=0; end
++            else if (x_in_bar == 5'd17) begin
++                bar_index<=bar_index+1'b1; x_in_bar<=0;
++            end else x_in_bar<=x_in_bar+1'b1;
++        end
++    end
+ 
+     // ★2026-10-17 回绕阈值必须跟着柱数走★
+     //   72 柱 => 合法下标 0..71，所以：

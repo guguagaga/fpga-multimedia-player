@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-28",
+  "input": "Original RGB565LE reference frames; no earlier palette refinement or decoded lossy input",
+  "width": 1280,
+  "height": 720,
+  "frames_per_scene": 3,
+  "scenes_seconds": [
+    35,
+    110,
+    210,
+    335
+  ],
+  "budgets_before_run_packing": [
+    145000,
+    155000,
+    165000
+  ],
+  "source_sha256": {
+    "s35.rgb565": "4605246ccbb6a1bda092b11eb67e29cf9607c50ecbdb443bd254a44f0febbd26",
+    "s110.rgb565": "cd74fae31a52c47eb052aa93d5479194cb1a9b53f15f166c8a9de11967f2b357",
+    "s210.rgb565": "a3a12e9dfeccfb4c2c9484b5e1b29102a16118a4834666f2fd4d1ef791f21d02",
+    "s335.rgb565": "de7c302af404b86d120e5d3db652d775347e78cca08eb1b705b46ee56d680e48"
+  },
+  "encoder_sha256": {
+    "codec9": "811288b84eb6276b44efb261d6b08f8851fccbc0c96dbbe012e2696626589db1",
+    "gradient11": "441ba45901e69c387e484f98dc741a7a425f99ec15fd3fa02685331784d0c080"
+  },
+  "limitations": [
+    "Same film only, sampled frames, no full-film or physical SD results",
+    "Gradient token is unsupported by v114",
+    "145k does not dominate 165k baseline in every scene",
+    "No whole-decoder synthesis, layout, timing or throughput proof"
+  ],
+  "encoder_source_sha256": {
+    "codec9": "1effc708753a0cfde152769fc97c5553fc5938989169642b56d751478150281e",
+    "gradient11": "b16f14da44648907c6736d2f671a00141a6d325e23116664e88ee743b3689d53"
+  }
+}

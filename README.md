@@ -19,6 +19,8 @@ HDMI 输出为 **1280×720、60Hz**；媒体视频标称 **15fps**，两者不�
 |[验证状态](docs/VALIDATION.md)|测试通过范围、模型边界及已知失败|
 |[FAT32链读取](docs/FAT32_CHAIN.md)|物理碎片读取与文件系统限制|
 |[GitHub提交指南](docs/GITHUB_UPLOAD.md)|创建仓库、提交、邀请组员|
+|[组内协作与版本顺序](docs/COLLABORATION.md)|分支、PR、同步与上板版本对应|
+|[后续优化记录（10月28日）](research/optimization_20261028/README.md)|未采用的时序候选、抽样画质结果与架构探索|
 |[依赖与许可](docs/DEPENDENCIES.md)|厂商依赖及公开范围|
 |[资料与日期](docs/REFERENCES.md)|既有参考文献、仓库版本和检索日期|
 

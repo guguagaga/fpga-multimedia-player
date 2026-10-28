@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "seconds": 14.214868545532227,
+  "scope": "12 held-out frames from four new temporal locations in same film. Frozen discrete09 selection; canonical format validation and software quality proxies, not RTL throughput/full-film/board test.",
+  "aggregate": [
+    {
+      "config": "baseline",
+      "psnr": 34.47446544112223,
+      "grid4": 6.870650810587516,
+      "grid8": 7.425090020782564
+    },
+    {
+      "config": "joint1",
+      "psnr": 34.29785716292808,
+      "grid4": 6.546376893743932,
+      "grid8": 7.073005227138666
+    },
+    {
+      "config": "discrete09",
+      "psnr": 34.31261453609264,
+      "grid4": 6.537071875795803,
+      "grid8": 7.052685716103881
+    }
+  ],
+  "results": [
+    {
+      "scene": 35,
+      "config": "baseline",
+      "sha256": "47684ada36a432010ac3380856736c1074e8a67141961e70aece5189685489ad",
+      "bytes": 495616,
+      "mse": 24.46540569540895,
+      "psnr": 34.24527939062712,
+      "grid4_gradient_rmse": 7.494630791465167,
+      "grid8_gradient_rmse": 8.034351991815566
+    },
+    {
+      "scene": 35,
+      "config": "joint1",
+      "sha256": "b331df1ee8ec856e76ecf59ca44da2d8d1ef9dd523762c4341f88374dc4231d1",
+      "bytes": 495616,
+      "mse": 25.45220679012346,
+      "psnr": 34.0735491780126,
+      "grid4_gradient_rmse": 7.180735347967986,
+      "grid8_gradient_rmse": 7.683321651569645
+    },
+    {
+      "scene": 35,
+      "config": "discrete09",
+      "sha256": "87f4837bb03bbab0e18256fdd3deef7c078e0d633995f47c6a6ff993df85f24e",
+      "bytes": 495616,
+      "mse": 25.353485484182098,
+      "psnr": 34.09042688224509,
+      "grid4_gradient_rmse": 7.170332034436391,
+      "grid8_gradient_rmse": 7.659724229210983
+    },
+    {
+      "scene": 110,
+      "config": "baseline",
+      "sha256": "2cd9fa2c354a4919a57cf3e3591967c971ad870c371eac48451f2d119428b49e",
+      "bytes": 495616,
+      "mse": 34.34410927854938,
+      "psnr": 32.77228103525008,
+      "grid4_gradient_rmse": 8.147050663593562,
+      "grid8_gradient_rmse": 8.986530238353911
+    },
+    {
+      "scene": 110,
+      "config": "joint1",
+      "sha256": "298a7dd014500e6b9f5802c8cbd389ff27380145c15268c860c3dc641f16cc09",
+      "bytes": 495616,
+      "mse": 35.879986014660496,
+      "psnr": 32.58228095775593,
+      "grid4_gradient_rmse": 7.6650872265893675,
+      "grid8_gradient_rmse": 8.438368788738138
+    },
+    {
+      "scene": 110,
+      "config": "discrete09",
+      "sha256": "17e4f843a7f478fdd4d2f9c8441473401c1463a10fe52b8c02c967192fa64457",
+      "bytes": 495616,
+      "mse": 35.76219449266976,
+      "psnr": 32.59656200106026,
+      "grid4_gradient_rmse": 7.658625652530307,
+      "grid8_gradient_rmse": 8.419042308926477
+    },
+    {
+      "scene": 210,
+      "config": "baseline",
+      "sha256": "755f61952885598845ba749df8019f681680d2b1bf44882f1a2c1916da9f493a",
+      "bytes": 495616,
+      "mse": 10.270044367283951,
+      "psnr": 38.015080410851425,
+      "grid4_gradient_rmse": 4.796777223618307,
+      "grid8_gradient_rmse": 5.089893463515301
+    },
+    {
+      "scene": 210,
+      "config": "joint1",
+      "sha256": "e1d39b3f6acbf6f234f45117d13f86263993d6770cf5c3532c4c6a12bb0c33d6",
+      "bytes": 495616,
+      "mse": 10.526535976080247,
+      "psnr": 37.907948817980895,
+      "grid4_gradient_rmse": 4.671343740235374,
+      "grid8_gradient_rmse": 4.972033335507197
+    },
+    {
+      "scene": 210,
+      "config": "discrete09",
+      "sha256": "43759d014d5a8d6f81c72e890b9479f2e2df568d44a09b9804af10ac14176c8c",
+      "bytes": 495616,
+      "mse": 10.498819323881174,
+      "psnr": 37.91939898936475,
+      "grid4_gradient_rmse": 4.663421958090208,
+      "grid8_gradient_rmse": 4.9584187029987605
+    },
+    {
+      "scene": 335,
+      "config": "baseline",
+      "sha256": "8f30dbfefa8eac117c09e04c79778fcd616550b0eeea93b4b4a8530f83ceacff",
+      "bytes": 495616,
+      "mse": 23.751607228973764,
+      "psnr": 34.37387357978294,
+      "grid4_gradient_rmse": 7.044144563673026,
+      "grid8_gradient_rmse": 7.589584389445479
+    },
+    {
+      "scene": 335,
+      "config": "joint1",
+      "sha256": "db268b7e06320ba8271d546459ca0385d04eeb207380356619ba973404a695db",
+      "bytes": 495616,
+      "mse": 24.82527705439815,
+      "psnr": 34.181862568716944,
+      "grid4_gradient_rmse": 6.668341260183002,
+      "grid8_gradient_rmse": 7.198297132739687
+    },
+    {
+      "scene": 335,
+      "config": "discrete09",
+      "sha256": "cd69ceab130e9eac0242a1fde5ea430b562e58eecd8435328d8304bbd700b5d7",
+      "bytes": 495616,
+      "mse": 24.741530791859567,
+      "psnr": 34.196537943585334,
+      "grid4_gradient_rmse": 6.655907858126303,
+      "grid8_gradient_rmse": 7.173557623279307
+    }
+  ],
+  "dominates_joint1": true,
+  "refiner_sha256": "d1c65ba7c5bb81246dd0cc85f9c13eb3f8423b0cd67639451726ac83021521d2"
+}

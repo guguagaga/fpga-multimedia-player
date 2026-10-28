@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "seconds": 168.39950323104858,
+  "summary": "PASS SPECTRUM EQUIVALENCE checks=1873719 exhaustive_palette=196608",
+  "scope": "Cycle-exact production module comparison against v114; functional simulation, not gate-level timing or board validation.",
+  "source_sha256": {
+    "tb.v": "e701543a3d78c35a1d4dc0d1eddf6b97ac1ac860909dc91d40bc115b8451cf97",
+    "reference.v": "15abcd57db21ae15a89d97020ec3b3b237e539331061e56d81ddbb933856244d",
+    "spectrum_display.v": "698169f766cc0a4e4b2af28c84dd6e5c58019f8655761684baf508ae3d910cfc"
+  }
+}

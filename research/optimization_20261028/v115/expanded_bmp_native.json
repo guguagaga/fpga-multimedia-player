@@ -1,0 +1,20 @@
+{
+  "case": "bmp_native",
+  "passed": true,
+  "seconds": 195.46437692642212,
+  "source_sha256": {
+    "tb.v": "b89994a3d97c69141babea9405e8561cea99590f1d732722550e3bc23af81640",
+    "sd_card_bmp.v": "be2dfb0a7cc799de5a4475ac628eb78d487c08dc43372dde8e43ac53da2e41e2",
+    "bmp_read.v": "f0ca6bdb4a863bb27475e07effda916f54ffa680a0700b60a77b0ad976ab8841",
+    "qoi_stream.v": "5bcd6640c5b5e65874c87f70943f7004c290e5f38c7103c57db3d7506fbc723c",
+    "img_scaler.v": "38685903928cb3ddd36a7ad403825678c1a40d0803a58fae8563b0abf5fc5a00",
+    "pixel_fifo_24x8.v": "f142c880df0de1ee13869bd1b4628dd5186abf83b982076517bdb2b6b6020910",
+    "sd_arbiter.v": "05d515e40d75848564e938f35ed6d3bf3c2ff3eea5b8c4403f8e498996d33341",
+    "sd_card_sec_read_write.v": "426cd26095538776b66e76047da2c7e1f0f67601c7013a8240b24bccd7eda407",
+    "frame_fifo_write.v": "ed47cbe16f1962f495f945a94335af334dc199a6c72c362059fa74558a52221c",
+    "fat32_sector_mapper.v": "4e070de8aebbbfe1dbcaffa525072fb22c2d21a639681280a3f252bc8d49851a",
+    "eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+  },
+  "summary": "# PASS image_sd_cache scale=1 multi=1 cycles=5867600 load_cycles=5848689 first_pixel=20092 cmd17=58 cmd18=114 wire_bytes=963584 audio_sectors=10 audio_max_wait=37350 peak_expand=194 peak_source=0 pixels=480000\n# Errors: 0, Warnings: 31"
+}

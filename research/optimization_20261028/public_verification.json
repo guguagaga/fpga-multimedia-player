@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "checked_encoded_samples": 24,
+  "scope": "Portable decoder and metric runner reproduce saved metrics from all 24 existing encoded samples; Python compile checks. This does not rerun encoding or validate physical timing."
+}

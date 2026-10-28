@@ -1,0 +1,676 @@
+Created by          : Tang Dynasty v6.2.168116
+Generated           : Wed Oct 28 12:13:00 2026
+STA coverage        : 96.51%
+Confidence          : Routed
+Slack               : -5.278ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_retire_eof_q_n_syn_77.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_i2s_transmitter/shift_reg_b1[51]_syn_9.a[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 14.998ns (cell 3.421ns (22%), net 11.577ns (78%))
+Logic Level         : 8 ( LUT5=6  LUT4=1  LUT2=1 )
+Max Fanout          : 8
+Slack               : -4.407ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/add10_syn_140.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/bmp_before_end_q_n_syn_85.d[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 14.055ns (cell 2.309ns (16%), net 11.746ns (84%))
+Logic Level         : 6 ( LUT4=2  LUT3=2  LUT5=1  LUT2=1 )
+Max Fanout          : 5
+Slack               : -3.801ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_retire_eof_q_n_syn_77.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/bmp_after_fast_q_reg_syn_5.a[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 13.549ns (cell 3.077ns (22%), net 10.472ns (78%))
+Logic Level         : 7 ( LUT5=6  LUT3=1 )
+Max Fanout          : 8
+Slack               : -3.594ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/fast_next_reg[14]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/bmp_retire_eof_q_n_syn_79.d[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 13.314ns (cell 2.399ns (18%), net 10.915ns (82%))
+Logic Level         : 6 ( LUT5=3  LUT2=2  LUT3=1 )
+Max Fanout          : 2
+Slack               : -3.532ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_before_end_q_n_syn_79.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/q_limit_hit_q_reg_syn_5.d[1] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 13.180ns (cell 3.419ns (25%), net 9.761ns (75%))
+Logic Level         : 8 ( LUT5=5  LUT4=2  LUT3=1 )
+Max Fanout          : 13
+Slack               : -2.213ns
+Begin Point         : sel_pending_reg_syn_5.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : seg_data_b6[6]_syn_6.b[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 11.861ns (cell 1.905ns (16%), net 9.956ns (84%))
+Logic Level         : 4 ( LUT4=3  LUT2=1 )
+Max Fanout          : 22
+Slack               : -2.176ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/file_len_reg[3]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/header_length_ok_reg_syn_5.d[1] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 11.824ns (cell 3.476ns (29%), net 8.348ns (71%))
+Logic Level         : 8 ( LUT5=6  LUT4=1  LUT3=1 )
+Max Fanout          : 3
+Slack               : -1.716ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_height_ok_q_reg_syn_5.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/u_img_scaler/out_col_reg[2]_syn_4.sr (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 11.365ns (cell 2.605ns (22%), net 8.760ns (78%))
+Logic Level         : 7 ( LUT2=3  LUT4=2  LUT5=1  LUT3=1 )
+Max Fanout          : 23
+Slack               : -1.716ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_height_ok_q_reg_syn_5.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/u_img_scaler/out_col_reg[4]_syn_4.sr (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 11.365ns (cell 2.605ns (22%), net 8.760ns (78%))
+Logic Level         : 7 ( LUT2=3  LUT4=2  LUT5=1  LUT3=1 )
+Max Fanout          : 23
+Slack               : -1.716ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/bmp_height_ok_q_reg_syn_5.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/u_img_scaler/out_col_reg[6]_syn_4.sr (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 11.365ns (cell 2.605ns (22%), net 8.760ns (78%))
+Logic Level         : 7 ( LUT2=3  LUT4=2  LUT5=1  LUT3=1 )
+Max Fanout          : 23
+Slack               : 0.037ns
+Begin Point         : u_async_fifo/wr_ptr_reg[8]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_async_fifo/ramread0_syn_18.addra[7] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.382ns (cell 0.109ns (28%), net 0.273ns (72%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 10
+Slack               : 0.048ns
+Begin Point         : u_wav_reader/u_core/compressed/q/out_idx_reg[2]_syn_7.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_wav_reader/u_core/compressed/q/ramread7_syn_6.addrb[6] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.393ns (cell 0.109ns (27%), net 0.284ns (73%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 6
+Slack               : 0.094ns
+Begin Point         : image_pad/wp_reg[3]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : image_pad/ramread0_syn_7.addra[8] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.439ns (cell 0.109ns (24%), net 0.330ns (76%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 3
+Slack               : 0.136ns
+Begin Point         : u_wav_reader/u_core/compressed/q/state_reg[0]_syn_361.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_wav_reader/u_core/compressed/q/ramread7_syn_6.addra[5] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.481ns (cell 0.109ns (22%), net 0.372ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 8
+Slack               : 0.136ns
+Begin Point         : u_wav_reader/u_core/compressed/src/wr_pos_reg[1]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_wav_reader/u_core/compressed/src/ramread0_syn_6.addra[4] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.481ns (cell 0.109ns (22%), net 0.372ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 4
+Slack               : 0.139ns
+Begin Point         : u_async_fifo/wr_ptr_reg[4]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_async_fifo/ramread0_syn_16.addra[4] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.484ns (cell 0.109ns (22%), net 0.375ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 10
+Slack               : 0.140ns
+Begin Point         : u_wav_reader/u_core/compressed/q/out_idx_reg[4]_syn_7.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : u_wav_reader/u_core/compressed/q/ramread6_syn_6.addrb[7] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.485ns (cell 0.109ns (22%), net 0.376ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 5
+Slack               : 0.146ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/sd_sec_read_addr_b[14]_syn_8.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : frame_read_write_m0/write_buf/ram_inst/ramread0_syn_6.addra[5] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.491ns (cell 0.109ns (22%), net 0.382ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 6
+Slack               : 0.148ns
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/sector_bytes_reg[4]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/ramread0_syn_6.addra[7] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.493ns (cell 0.109ns (22%), net 0.384ns (78%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 3
+Slack               : 0.159ns
+Begin Point         : dg_vfr_reg[7]_syn_4.clk (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+End Point           : dg_vfr_prev_reg[5]_syn_4.mi[0] (rising edge triggered by clock sd_card_clk  { rise@0.000000ns  fall@5.000000ns  period=10.000000 })
+Data Path Delay     : 0.428ns (cell 0.204ns (47%), net 0.224ns (53%))
+Logic Level         : 0
+Max Fanout          : 3
+Slack               : -1.618ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/mult4_syn_1.a[11] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 14.633ns (cell 3.325ns (22%), net 11.308ns (78%))
+Logic Level         : 9 ( ADDER=3  LUT5=2  LUT4=2  MULT18=1  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.889ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : g_spec$u_spectrum_display/rgb_q_reg[20]_syn_4.a[0] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 14.076ns (cell 3.443ns (24%), net 10.633ns (76%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.871ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[4]_syn_4.a[1] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 14.058ns (cell 3.500ns (24%), net 10.558ns (76%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.725ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[6]_syn_4.a[1] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.912ns (cell 3.589ns (25%), net 10.323ns (75%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.702ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[6]_syn_4.a[0] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.889ns (cell 3.451ns (24%), net 10.438ns (76%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.525ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[1]_syn_4.a[0] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.712ns (cell 3.289ns (23%), net 10.423ns (77%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.451ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[4]_syn_4.a[0] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.638ns (cell 3.362ns (24%), net 10.276ns (76%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : -0.421ns
+Begin Point         : u_video_coord/active_y_reg[4]_syn_4.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/u_brand_rom/ramread0_syn_5.addra[10] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.474ns (cell 5.497ns (40%), net 7.977ns (60%))
+Logic Level         : 12 ( ADDER=6  LUT5=2  LUT4=2  LUT3=1  EMB=1 )
+Max Fanout          : 14
+Slack               : -0.361ns
+Begin Point         : u_video_coord/active_x_reg[5]_syn_4.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/u_char_rom/ramread0_syn_10.addra[8] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.342ns (cell 3.739ns (28%), net 9.603ns (72%))
+Logic Level         : 10 ( LUT2=4  LUT5=2  LUT4=2  LUT3=1  EMB=1 )
+Max Fanout          : 85
+Slack               : -0.352ns
+Begin Point         : u_fade_in/lvl_reg[2]_syn_8.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_osd_player_ui/video_g_d_reg[1]_syn_4.a[1] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 13.539ns (cell 3.216ns (23%), net 10.323ns (77%))
+Logic Level         : 8 ( ADDER=3  LUT5=2  LUT4=2  LUT3=1 )
+Max Fanout          : 25
+Slack               : 0.024ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo[1]__2_syn_4.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo_syn_624.addrb[4] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.369ns (cell 0.109ns (29%), net 0.260ns (71%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 14
+Slack               : 0.027ns
+Begin Point         : u_osd_player_ui/sub27_syn_543.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_assemble/S_CH2_D2_shift_reg[13]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.409ns (cell 0.161ns (39%), net 0.248ns (61%))
+Logic Level         : 0
+Max Fanout          : 33
+Slack               : 0.027ns
+Begin Point         : u_osd_player_ui/sub27_syn_543.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/O_BCH_block_0_reg[30]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.409ns (cell 0.161ns (39%), net 0.248ns (61%))
+Logic Level         : 0
+Max Fanout          : 33
+Slack               : 0.033ns
+Begin Point         : g_spec$u_audio_frame/sample_q_reg[15]_syn_4.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo_syn_544.dia[4] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.441ns (cell 0.109ns (24%), net 0.332ns (76%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 1
+Slack               : 0.035ns
+Begin Point         : u_osd_player_ui/sub27_syn_543.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_assemble/S_CH1_D0_shift_reg[30]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.417ns (cell 0.161ns (38%), net 0.256ns (62%))
+Logic Level         : 0
+Max Fanout          : 33
+Slack               : 0.035ns
+Begin Point         : g_spec$u_fft_256/u_im_ram/addra[2]_syn_10.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/O_BCH_block_1_reg[62]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.417ns (cell 0.161ns (38%), net 0.256ns (62%))
+Logic Level         : 0
+Max Fanout          : 55
+Slack               : 0.035ns
+Begin Point         : g_spec$u_fft_256/u_im_ram/addra[2]_syn_10.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo[10]__3_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.417ns (cell 0.161ns (38%), net 0.256ns (62%))
+Logic Level         : 0
+Max Fanout          : 55
+Slack               : 0.042ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/S_packet_body_1d_reg[34]_syn_4.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo_syn_554.dia[7] (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.450ns (cell 0.109ns (24%), net 0.341ns (76%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 1
+Slack               : 0.054ns
+Begin Point         : video_clk_syn_719.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo[1]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.436ns (cell 0.161ns (36%), net 0.275ns (64%))
+Logic Level         : 0
+Max Fanout          : 21
+Slack               : 0.054ns
+Begin Point         : video_clk_syn_719.clk (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u_hdmi_island_data_gen/U_audio_sample_packet_2_channel/u_w96_d1024_fifo/u_logic_ramfifo[2]_syn_4.sr (rising edge triggered by clock video_clk  { rise@0.000000ns  fall@6.733000ns  period=13.467000 })
+Data Path Delay     : 0.436ns (cell 0.161ns (36%), net 0.275ns (64%))
+Logic Level         : 0
+Max Fanout          : 21
+Slack               : 0.888ns
+Begin Point         : U3/u2_ram/u2_wrrd/rw_vld_reg_syn_12.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/sdram_syn_15.do[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.500ns (cell 0.351ns (5%), net 6.149ns (95%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 22
+Slack               : 1.370ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[18]_syn_4.a[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.393ns (cell 3.005ns (47%), net 3.388ns (53%))
+Logic Level         : 6 ( LUT5=4  LUT4=2 )
+Max Fanout          : 10
+Slack               : 1.479ns
+Begin Point         : frame_read_write_m0/frame_fifo_read_m0/App_rd_en_r_reg_syn_40.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/write_buf/ram_inst/ramread0_syn_25.addrb[11] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.035ns (cell 0.613ns (10%), net 5.422ns (90%))
+Logic Level         : 3 ( LUT4=1  LUT2=1  EMB=1 )
+Max Fanout          : 20
+Slack               : 1.493ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[19]_syn_4.a[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.227ns (cell 3.005ns (48%), net 3.222ns (52%))
+Logic Level         : 6 ( LUT5=4  LUT4=2 )
+Max Fanout          : 10
+Slack               : 1.520ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[20]_syn_4.a[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.200ns (cell 2.815ns (45%), net 3.385ns (55%))
+Logic Level         : 6 ( LUT5=4  LUT4=2 )
+Max Fanout          : 10
+Slack               : 1.563ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[15]_syn_4.a[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.157ns (cell 2.653ns (43%), net 3.504ns (57%))
+Logic Level         : 6 ( LUT5=3  LUT4=3 )
+Max Fanout          : 10
+Slack               : 1.631ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[14]_syn_4.a[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 6.132ns (cell 2.637ns (43%), net 3.495ns (57%))
+Logic Level         : 6 ( LUT4=4  LUT5=2 )
+Max Fanout          : 10
+Slack               : 1.679ns
+Begin Point         : U3/u2_ram/u2_wrrd/rw_vld_reg_syn_12.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/sdram_syn_9.do[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 5.709ns (cell 0.494ns (8%), net 5.215ns (92%))
+Logic Level         : 1 ( LUT4=1 )
+Max Fanout          : 22
+Slack               : 1.702ns
+Begin Point         : U3/u2_ram/u2_wrrd/rw_vld_reg_syn_12.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/sdram_syn_6.do[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 5.758ns (cell 0.479ns (8%), net 5.279ns (92%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 22
+Slack               : 1.822ns
+Begin Point         : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[13]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/frame_fifo_write_m0/App_wr_addr_r_reg[15]_syn_4.a[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 5.898ns (cell 2.815ns (47%), net 3.083ns (53%))
+Logic Level         : 6 ( LUT5=4  LUT4=2 )
+Max Fanout          : 10
+Slack               : 0.102ns
+Begin Point         : frame_read_write_m0/read_buf/asy_w_rst1_reg_syn_5.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/read_buf/wr_addr_next1_reg[0]_syn_4.sr (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.500ns (cell 0.161ns (32%), net 0.339ns (68%))
+Logic Level         : 0
+Max Fanout          : 34
+Slack               : 0.102ns
+Begin Point         : frame_read_write_m0/read_buf/asy_w_rst1_reg_syn_5.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[5]_syn_4.sr (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.500ns (cell 0.161ns (32%), net 0.339ns (68%))
+Logic Level         : 0
+Max Fanout          : 34
+Slack               : 0.214ns
+Begin Point         : frame_read_write_m0/frame_fifo_read_m0/App_rd_addr_r_reg[10]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/u2_ram/u2_wrrd/app_rd_addr_1d_reg[10]_syn_4.mi[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.420ns (cell 0.204ns (48%), net 0.216ns (52%))
+Logic Level         : 0
+Max Fanout          : 2
+Slack               : 0.214ns
+Begin Point         : U3/u2_ram/u2_wrrd/app_wr_addr_3d_reg[7]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/u2_ram/u2_wrrd/app_wr_addr_4d_reg[1]_syn_4.mi[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.420ns (cell 0.204ns (48%), net 0.216ns (52%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.223ns
+Begin Point         : U3/u2_ram/u2_wrrd/app_wr_din_5d_reg[12]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : g_spec$u_spectrum_display/dout_rgb_b[5]_syn_9.mi[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.429ns (cell 0.204ns (47%), net 0.225ns (53%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.223ns
+Begin Point         : U3/u2_ram/u2_wrrd/app_wr_din_4d_reg[16]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : sd_card_bmp_m0/bmp_read_m0/u_qoi/add8_syn_60.mi[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.429ns (cell 0.204ns (47%), net 0.225ns (53%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.223ns
+Begin Point         : U3/u2_ram/u2_wrrd/app_wr_din_5d_reg[28]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : u_button_ctrl/add1_syn_128.mi[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.429ns (cell 0.204ns (47%), net 0.225ns (53%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.223ns
+Begin Point         : frame_read_write_m0/frame_fifo_read_m0/App_rd_addr_r_reg[4]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/u2_ram/u2_wrrd/app_rd_addr_1d_reg[5]_syn_4.mi[1] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.429ns (cell 0.204ns (47%), net 0.225ns (53%))
+Logic Level         : 0
+Max Fanout          : 2
+Slack               : 0.223ns
+Begin Point         : U3/u2_ram/u2_wrrd/app_rd_addr_2d_reg[4]_syn_4.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : U3/u2_ram/u2_wrrd/app_rd_addr_3d_reg[1]_syn_4.mi[0] (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.429ns (cell 0.204ns (47%), net 0.225ns (53%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.227ns
+Begin Point         : frame_read_write_m0/read_buf/asy_w_rst1_reg_syn_5.clk (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[4]_syn_4.sr (rising edge triggered by clock ext_mem_clk  { rise@0.000000ns  fall@4.000000ns  period=8.000000 })
+Data Path Delay     : 0.625ns (cell 0.161ns (25%), net 0.464ns (75%))
+Logic Level         : 0
+Max Fanout          : 34
+Slack               : 59.904ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/pending_right_reg[16]_syn_4.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 21.150ns (cell 2.970ns (14%), net 18.180ns (86%))
+Logic Level         : 7 ( LUT5=3  LUT4=3  LUT3=1 )
+Max Fanout          : 59
+Slack               : 60.195ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/shift_reg_reg[51]_syn_4.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 20.787ns (cell 3.125ns (15%), net 17.662ns (85%))
+Logic Level         : 8 ( LUT5=4  LUT4=2  LUT3=2 )
+Max Fanout          : 59
+Slack               : 60.466ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/sample_right_reg_reg[5]_syn_4.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 20.588ns (cell 2.970ns (14%), net 17.618ns (86%))
+Logic Level         : 7 ( LUT5=3  LUT4=3  LUT2=1 )
+Max Fanout          : 59
+Slack               : 60.621ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/pending_right_reg[13]_syn_4.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 20.433ns (cell 2.954ns (14%), net 17.479ns (86%))
+Logic Level         : 7 ( LUT5=3  LUT4=3  LUT3=1 )
+Max Fanout          : 59
+Slack               : 61.267ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/shift_reg_reg[51]_syn_4.d[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 19.715ns (cell 3.125ns (15%), net 16.590ns (85%))
+Logic Level         : 8 ( LUT5=4  LUT4=2  LUT3=2 )
+Max Fanout          : 59
+Slack               : 61.638ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/sample_right_reg_reg[19]_syn_4.d[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 19.344ns (cell 2.913ns (15%), net 16.431ns (85%))
+Logic Level         : 7 ( LUT5=3  LUT4=2  LUT3=1  LUT2=1 )
+Max Fanout          : 59
+Slack               : 61.721ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/shift_reg_reg[59]_syn_4.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 19.261ns (cell 3.125ns (16%), net 16.136ns (84%))
+Logic Level         : 8 ( LUT5=3  LUT3=3  LUT4=2 )
+Max Fanout          : 59
+Slack               : 61.799ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/sample_right_reg_reg[5]_syn_4.d[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 19.255ns (cell 2.954ns (15%), net 16.301ns (85%))
+Logic Level         : 7 ( LUT5=3  LUT4=3  LUT2=1 )
+Max Fanout          : 59
+Slack               : 62.158ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/sample_right_reg_reg[4]_syn_4.d[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 18.824ns (cell 2.913ns (15%), net 15.911ns (85%))
+Logic Level         : 7 ( LUT5=3  LUT4=3  LUT2=1 )
+Max Fanout          : 59
+Slack               : 62.161ns
+Begin Point         : u_av_sample_sync/budget_reg[0]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/shift_reg_b1[60]_syn_8.d[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 18.893ns (cell 3.084ns (16%), net 15.809ns (84%))
+Logic Level         : 8 ( LUT5=3  LUT4=3  LUT3=2 )
+Max Fanout          : 59
+Slack               : 0.054ns
+Begin Point         : u_async_fifo/rd_ptr_reg[4]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_async_fifo/ramread0_syn_16.addrb[3] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.399ns (cell 0.109ns (27%), net 0.290ns (73%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 9
+Slack               : 0.286ns
+Begin Point         : u_async_fifo/rd_ptr_reg[8]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_async_fifo/ramread0_syn_18.addrb[8] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.631ns (cell 0.109ns (17%), net 0.522ns (83%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 9
+Slack               : 0.320ns
+Begin Point         : u_async_fifo/wr_ptr_g_s1_reg[10]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_async_fifo/wr_ptr_g_s2_reg[11]_syn_4.mi[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.526ns (cell 0.204ns (38%), net 0.322ns (62%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.329ns
+Begin Point         : u_async_fifo/wr_ptr_g_s1_reg[12]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_fat32_list/add8_syn_75.mi[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.535ns (cell 0.204ns (38%), net 0.331ns (62%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.345ns
+Begin Point         : u_async_fifo/wr_ptr_g_s1_reg[2]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_async_fifo/wr_ptr_g_s2_reg[2]_syn_4.mi[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.535ns (cell 0.204ns (38%), net 0.331ns (62%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.369ns
+Begin Point         : sb_tog_sync_reg[1]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_i2s_transmitter/sample_right_reg_b3[22]_syn_6.b[0] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.545ns (cell 0.428ns (78%), net 0.117ns (22%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 53
+Slack               : 0.370ns
+Begin Point         : u_wav_sample_builder/byte_lo_reg[5]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_volume_control/mult1_syn_3.a[6] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.450ns (cell 0.109ns (24%), net 0.341ns (76%))
+Logic Level         : 1 ( MULT18=1 )
+Max Fanout          : 2
+Slack               : 0.381ns
+Begin Point         : fade_zero_frames_reg[0]_syn_17.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : fade_zero_frames_reg[0]_syn_17.d[1] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.442ns (cell 0.325ns (73%), net 0.117ns (27%))
+Logic Level         : 1 ( LUT4=1 )
+Max Fanout          : 3
+Slack               : 0.392ns
+Begin Point         : u_async_fifo/rd_ptr_reg[12]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_async_fifo/ramread0_syn_12.addrb[12] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.737ns (cell 0.109ns (14%), net 0.628ns (86%))
+Logic Level         : 1 ( EMB=1 )
+Max Fanout          : 9
+Slack               : 0.399ns
+Begin Point         : u_wav_sample_builder/byte_lo_reg[7]_syn_4.clk (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+End Point           : u_volume_control/mult0_syn_3.a[4] (rising edge triggered by clock audio_mclk  { rise@0.000000ns  fall@40.667000ns  period=81.334000 })
+Data Path Delay     : 0.479ns (cell 0.109ns (22%), net 0.370ns (78%))
+Logic Level         : 1 ( MULT18=1 )
+Max Fanout          : 2
+Slack               : 0.826ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u0_hdmi_tmds_encode/S_cnt_t_1_b[2]_syn_18.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.587ns (cell 0.517ns (32%), net 1.070ns (68%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 0.956ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[3]_syn_4.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.485ns (cell 0.460ns (30%), net 1.025ns (70%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 0.956ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[3]_syn_4.d[1] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.485ns (cell 0.460ns (30%), net 1.025ns (70%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 1.009ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/O_tmds_code_data_b[5]_syn_9.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.404ns (cell 0.517ns (36%), net 0.887ns (64%))
+Logic Level         : 1 ( LUT2=1 )
+Max Fanout          : 33
+Slack               : 1.040ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/O_tmds_code_data_b[5]_syn_9.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u0_hdmi_tmds_encode/O_tmds_code_data_b[9]_syn_7.b[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.373ns (cell 0.695ns (50%), net 0.678ns (50%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 1
+Slack               : 1.062ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[6]_syn_4.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.379ns (cell 0.460ns (33%), net 0.919ns (67%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 1.062ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[6]_syn_4.d[1] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.379ns (cell 0.460ns (33%), net 0.919ns (67%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 1.144ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/add10_syn_256.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.269ns (cell 0.460ns (36%), net 0.809ns (64%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 1.144ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/add10_syn_266.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[2]_syn_4.b[1] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.297ns (cell 0.695ns (53%), net 0.602ns (47%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 1
+Slack               : 1.147ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/add10_syn_266.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 1.294ns (cell 0.460ns (35%), net 0.834ns (65%))
+Logic Level         : 1 ( LUT2=1 )
+Max Fanout          : 33
+Slack               : 0.230ns
+Begin Point         : u_hdmi2phy_wrapper/u2_lane_lvds_8_1/S_shift_data_reg[8]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u0_hdmi_tmds_encode/O_tmds_code_data_b[5]_syn_7.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.420ns (cell 0.204ns (48%), net 0.216ns (52%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.320ns
+Begin Point         : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[6]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_oddr_data_reg[0]_syn_4.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.526ns (cell 0.204ns (38%), net 0.322ns (62%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.329ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u0_hdmi_tmds_encode/S_cnt_t_1_b[2]_syn_18.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : sd_card_top_m0/sd_card_cmd_m0/mux42_syn_843.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.535ns (cell 0.204ns (38%), net 0.331ns (62%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.339ns
+Begin Point         : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/add18_syn_65.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_load_en_reg_syn_5.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.545ns (cell 0.204ns (37%), net 0.341ns (63%))
+Logic Level         : 0
+Max Fanout          : 2
+Slack               : 0.339ns
+Begin Point         : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_load_en_reg_syn_5.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u2_hdmi_tmds_encode/O_tmds_code_data_b[6]_syn_16.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.545ns (cell 0.204ns (37%), net 0.341ns (63%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.391ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi_1_4b_transmitter_core_wrapper/u_hdmi_tx_controller_wrapper/u1_hdmi_tmds_encode/add10_syn_262.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.581ns (cell 0.325ns (55%), net 0.256ns (45%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 0.391ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u2_lane_lvds_8_1/S_shift_data_reg[1]_syn_4.d[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.581ns (cell 0.325ns (55%), net 0.256ns (45%))
+Logic Level         : 1 ( LUT3=1 )
+Max Fanout          : 33
+Slack               : 0.391ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u2_lane_lvds_8_1/S_shift_data_reg[1]_syn_4.d[1] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.581ns (cell 0.325ns (55%), net 0.256ns (45%))
+Logic Level         : 1 ( LUT2=1 )
+Max Fanout          : 33
+Slack               : 0.421ns
+Begin Point         : u_hdmi2phy_wrapper/u0_lane_lvds_8_1/S_shift_data_reg[1]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.mi[1] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.611ns (cell 0.204ns (33%), net 0.407ns (67%))
+Logic Level         : 0
+Max Fanout          : 1
+Slack               : 0.426ns
+Begin Point         : u_hdmi2phy_wrapper/u3_lane_lvds_8_1/S_shift_data_reg[7]_syn_4.clk (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+End Point           : u_hdmi2phy_wrapper/u2_lane_lvds_8_1/S_oddr_data_reg[1]_syn_4.mi[0] (rising edge triggered by clock hdmi_5x_clk  { rise@0.000000ns  fall@1.346000ns  period=2.693000 })
+Data Path Delay     : 0.632ns (cell 0.204ns (32%), net 0.428ns (68%))
+Logic Level         : 0
+Max Fanout          : 2
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[6]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[6]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[6]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[6]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/secondary_addr_o_reg[0]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[1]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[1]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_sync_reg[0]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[4]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[4]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/empty_flag_reg_syn_5.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_sync_reg[1]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[8]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[5]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[4]_syn_4.clk(triggered by clock video_clk)
+End Point           : frame_read_write_m0/read_buf/rd_to_wr_cross_inst/sync_r1_reg[5]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[3]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[1]_syn_4.mi[0](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[1]_syn_4.mi[1](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[5]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : g_spec$u_spectrum_display/add6_syn_75.mi[0](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_sync_reg[8]_syn_4.mi[0](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[8]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : g_spec$u_spectrum_display/add6_syn_75.mi[1](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[7]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[4]_syn_4.mi[0](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[3]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[4]_syn_4.mi[1](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[5]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[7]_syn_4.mi[0](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[7]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/read_buf/wr_to_rd_cross_inst/sync_r1_reg[7]_syn_4.mi[1](triggered by clock video_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[2]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[3]_syn_4.mi[1](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[6]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[6]_syn_4.mi[0](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[4]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_sync_reg[6]_syn_4.mi[0](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[6]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[6]_syn_4.mi[1](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_sync_reg[2]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[0]_syn_4.mi[0](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/secondary_addr_o_reg[0]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[0]_syn_4.mi[1](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/secondary_addr_o_reg[3]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[2]_syn_4.mi[0](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[2]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[2]_syn_4.mi[1](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/primary_addr_gray_reg_reg[4]_syn_4.clk(triggered by clock ext_mem_clk)
+End Point           : frame_read_write_m0/write_buf/rd_to_wr_cross_inst/sync_r1_reg[3]_syn_4.mi[0](triggered by clock sd_card_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[5]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[8]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : sd_card_bmp_m0/bmp_read_m0/sd_sec_read_addr_b[11]_syn_8.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[8]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[2]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[2]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[2]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[2]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[3]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[5]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[4]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[1]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[4]_syn_4.mi[1](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[7]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[0]_syn_4.mi[0](triggered by clock ext_mem_clk)
+Begin Point         : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/primary_addr_gray_reg_reg[7]_syn_4.clk(triggered by clock sd_card_clk)
+End Point           : frame_read_write_m0/write_buf/wr_to_rd_cross_inst/sync_r1_reg[0]_syn_4.mi[1](triggered by clock ext_mem_clk)

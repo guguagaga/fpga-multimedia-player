@@ -1,0 +1,417 @@
+{
+  "passed": true,
+  "seconds": 32.520124435424805,
+  "scope": "Re-encoded directly from original RGB565 reference,12 frames at4 temporal locations; no palette refinement applied. C9-style budgets BEFORE Codec10 run packing; software rate-distortion evidence only. Codec11 unsupported by production. No whole-decoder throughput/resource/timing claim.",
+  "aggregate": [
+    {
+      "budget": 145000,
+      "format": "codec9",
+      "psnr": 34.0238868040526,
+      "grid8": 7.78262696966089,
+      "grid4": 7.188861337057068,
+      "mean_frame_bytes": 144998.6666666667
+    },
+    {
+      "budget": 145000,
+      "format": "gradient11",
+      "psnr": 34.71970534548632,
+      "grid8": 7.073018798410466,
+      "grid4": 6.339979912056699,
+      "mean_frame_bytes": 144998.16666666666
+    },
+    {
+      "budget": 155000,
+      "format": "codec9",
+      "psnr": 34.25362011526652,
+      "grid8": 7.600155490178274,
+      "grid4": 7.028220352103263,
+      "mean_frame_bytes": 154998.0
+    },
+    {
+      "budget": 155000,
+      "format": "gradient11",
+      "psnr": 34.95796639483402,
+      "grid8": 6.89354314777169,
+      "grid4": 6.188713322890013,
+      "mean_frame_bytes": 154998.33333333334
+    },
+    {
+      "budget": 165000,
+      "format": "codec9",
+      "psnr": 34.47446544112223,
+      "grid8": 7.425090020782564,
+      "grid4": 6.870650810587516,
+      "mean_frame_bytes": 164998.0
+    },
+    {
+      "budget": 165000,
+      "format": "gradient11",
+      "psnr": 35.185014757281635,
+      "grid8": 6.730161748089484,
+      "grid4": 6.0501829350206355,
+      "mean_frame_bytes": 164998.33333333334
+    }
+  ],
+  "results": [
+    {
+      "scene": 35,
+      "budget": 145000,
+      "format": "codec9",
+      "declared_bytes": 435509,
+      "sha256": "dc2d3b3ad45b9be7d9d65cb0a8b04c3e155ef4d8b7564cc3cf63082fa913454d",
+      "token_counts": null,
+      "mse": 26.951810016396603,
+      "psnr": 33.82492424230607,
+      "grid4_gradient_rmse": 7.831546894183042,
+      "grid8_gradient_rmse": 8.427960234755638
+    },
+    {
+      "scene": 35,
+      "budget": 145000,
+      "format": "gradient11",
+      "declared_bytes": 435505,
+      "sha256": "faea490751036b57bdcd114c232efaef336cde03ecdf78d04c71ee231ae6ff4c",
+      "token_counts": {
+        "128": 24031,
+        "131": 1425,
+        "134": 11730,
+        "132": 1170,
+        "129": 4844
+      },
+      "mse": 19.793743610146606,
+      "psnr": 35.16552420351659,
+      "grid4_gradient_rmse": 6.2703038217033855,
+      "grid8_gradient_rmse": 6.938569158922214
+    },
+    {
+      "scene": 35,
+      "budget": 155000,
+      "format": "codec9",
+      "declared_bytes": 465505,
+      "sha256": "9dafe054cfa1ee40483ed81c9f1fe990b0b4d43db336b76ce74582fa0ecc32ad",
+      "token_counts": null,
+      "mse": 25.647623456790125,
+      "psnr": 34.04033231865275,
+      "grid4_gradient_rmse": 7.661404762142579,
+      "grid8_gradient_rmse": 8.22503605680997
+    },
+    {
+      "scene": 35,
+      "budget": 155000,
+      "format": "gradient11",
+      "declared_bytes": 465509,
+      "sha256": "4f57296d89a40651165fa7c5984f4e92025a339223986fc5857210bd45127042",
+      "token_counts": {
+        "128": 22613,
+        "131": 1573,
+        "134": 11883,
+        "132": 1353,
+        "129": 5778
+      },
+      "mse": 18.83449351369599,
+      "psnr": 35.381264149675694,
+      "grid4_gradient_rmse": 6.127844566192464,
+      "grid8_gradient_rmse": 6.760009155241235
+    },
+    {
+      "scene": 35,
+      "budget": 165000,
+      "format": "codec9",
+      "declared_bytes": 495503,
+      "sha256": "47684ada36a432010ac3380856736c1074e8a67141961e70aece5189685489ad",
+      "token_counts": null,
+      "mse": 24.46540569540895,
+      "psnr": 34.24527939062712,
+      "grid4_gradient_rmse": 7.494630791465167,
+      "grid8_gradient_rmse": 8.034351991815566
+    },
+    {
+      "scene": 35,
+      "budget": 165000,
+      "format": "gradient11",
+      "declared_bytes": 495505,
+      "sha256": "84a90a2c4828e9c24fe4773f0e1b3bbf53265e08125cf11e6432c78ee78fd148",
+      "token_counts": {
+        "128": 20987,
+        "131": 1698,
+        "134": 11969,
+        "132": 1458,
+        "129": 7088
+      },
+      "mse": 17.96580367476852,
+      "psnr": 35.58633711344476,
+      "grid4_gradient_rmse": 5.992433776773894,
+      "grid8_gradient_rmse": 6.597433266459779
+    },
+    {
+      "scene": 110,
+      "budget": 145000,
+      "format": "codec9",
+      "declared_bytes": 435507,
+      "sha256": "c93c5e240fba47783f89fe1b3d549292689ebbce9b5579a12253a44652fed966",
+      "token_counts": null,
+      "mse": 38.77315634645062,
+      "psnr": 32.24549204481533,
+      "grid4_gradient_rmse": 8.570030136795193,
+      "grid8_gradient_rmse": 9.459254058942747
+    },
+    {
+      "scene": 110,
+      "budget": 145000,
+      "format": "gradient11",
+      "declared_bytes": 435507,
+      "sha256": "a940c0812562317335a4f5aa8a2a66f3628d3281ce91c69563c1aa8b693f0e4c",
+      "token_counts": {
+        "128": 28090,
+        "134": 7340,
+        "129": 5293,
+        "132": 864,
+        "131": 1613
+      },
+      "mse": 35.351681737075616,
+      "psnr": 32.64670282147743,
+      "grid4_gradient_rmse": 7.945907545454733,
+      "grid8_gradient_rmse": 9.027168862964876
+    },
+    {
+      "scene": 110,
+      "budget": 155000,
+      "format": "codec9",
+      "declared_bytes": 465505,
+      "sha256": "c8eed7151d9e1bc1884a1676dbba9b1ed624325b97db09a71f7be18fcad57972",
+      "token_counts": null,
+      "mse": 36.45933702256944,
+      "psnr": 32.5127159369809,
+      "grid4_gradient_rmse": 8.357886003769158,
+      "grid8_gradient_rmse": 9.221439739320928
+    },
+    {
+      "scene": 110,
+      "budget": 155000,
+      "format": "gradient11",
+      "declared_bytes": 465509,
+      "sha256": "5cda4d2e4f5c549c000137b843fa6ffb866fcdb977cbabeb6bca9a10fdc7ae4e",
+      "token_counts": {
+        "128": 27559,
+        "134": 7530,
+        "129": 5337,
+        "132": 939,
+        "131": 1835
+      },
+      "mse": 33.147178337191356,
+      "psnr": 32.92633795992692,
+      "grid4_gradient_rmse": 7.730425668310338,
+      "grid8_gradient_rmse": 8.775536777242804
+    },
+    {
+      "scene": 110,
+      "budget": 165000,
+      "format": "codec9",
+      "declared_bytes": 495509,
+      "sha256": "2cd9fa2c354a4919a57cf3e3591967c971ad870c371eac48451f2d119428b49e",
+      "token_counts": null,
+      "mse": 34.34410927854938,
+      "psnr": 32.77228103525008,
+      "grid4_gradient_rmse": 8.147050663593562,
+      "grid8_gradient_rmse": 8.986530238353911
+    },
+    {
+      "scene": 110,
+      "budget": 165000,
+      "format": "gradient11",
+      "declared_bytes": 495507,
+      "sha256": "0b04c50f8e36d63fbfe8d37d0c56f6ad4bc09e8aae8d53d26f7ea4f0688aa260",
+      "token_counts": {
+        "128": 26976,
+        "134": 7717,
+        "129": 5422,
+        "132": 1032,
+        "131": 2053
+      },
+      "mse": 31.15850043402778,
+      "psnr": 33.195038126664265,
+      "grid4_gradient_rmse": 7.540602967433526,
+      "grid8_gradient_rmse": 8.554674495893279
+    },
+    {
+      "scene": 210,
+      "budget": 145000,
+      "format": "codec9",
+      "declared_bytes": 435507,
+      "sha256": "5ce53636ed7485df504f0153d97aa632b4851725f36f5a7d62d9d3c62922c6a2",
+      "token_counts": null,
+      "mse": 11.380400752314815,
+      "psnr": 37.569228051836845,
+      "grid4_gradient_rmse": 5.054917768397242,
+      "grid8_gradient_rmse": 5.353238086186195
+    },
+    {
+      "scene": 210,
+      "budget": 145000,
+      "format": "gradient11",
+      "declared_bytes": 435505,
+      "sha256": "654ae0505e8604ce56bfa8931d1beb631bac6de49207fba1e92c432972c92886",
+      "token_counts": {
+        "128": 15975,
+        "129": 19460,
+        "134": 6399,
+        "131": 535,
+        "132": 831
+      },
+      "mse": 9.655178071952161,
+      "psnr": 38.283200729178986,
+      "grid4_gradient_rmse": 4.458306315730482,
+      "grid8_gradient_rmse": 4.828783312375393
+    },
+    {
+      "scene": 210,
+      "budget": 155000,
+      "format": "codec9",
+      "declared_bytes": 465507,
+      "sha256": "795f184c822df78bc64c26477b196c6c04c132ab0e47f0f2afd9232e975db1eb",
+      "token_counts": null,
+      "mse": 10.799296875,
+      "psnr": 37.79684880681722,
+      "grid4_gradient_rmse": 4.925790032035243,
+      "grid8_gradient_rmse": 5.22013554796541
+    },
+    {
+      "scene": 210,
+      "budget": 155000,
+      "format": "gradient11",
+      "declared_bytes": 465503,
+      "sha256": "e2361889a8808e832a874c2000faf526edc91c7e3963596b578b58f892f75c84",
+      "token_counts": {
+        "128": 13734,
+        "129": 21828,
+        "134": 6280,
+        "131": 594,
+        "132": 764
+      },
+      "mse": 9.142775125385802,
+      "psnr": 38.52002322824295,
+      "grid4_gradient_rmse": 4.336216849615512,
+      "grid8_gradient_rmse": 4.700140403147699
+    },
+    {
+      "scene": 210,
+      "budget": 165000,
+      "format": "codec9",
+      "declared_bytes": 495505,
+      "sha256": "755f61952885598845ba749df8019f681680d2b1bf44882f1a2c1916da9f493a",
+      "token_counts": null,
+      "mse": 10.270044367283951,
+      "psnr": 38.015080410851425,
+      "grid4_gradient_rmse": 4.796777223618307,
+      "grid8_gradient_rmse": 5.089893463515301
+    },
+    {
+      "scene": 210,
+      "budget": 165000,
+      "format": "gradient11",
+      "declared_bytes": 495507,
+      "sha256": "901075c461f54a11874c41f5a5cb84110abaa8239648e826bba5fb7fdbcf3b89",
+      "token_counts": {
+        "128": 11834,
+        "129": 23869,
+        "134": 6122,
+        "131": 681,
+        "132": 694
+      },
+      "mse": 8.68162639853395,
+      "psnr": 38.74479268209534,
+      "grid4_gradient_rmse": 4.226062818470087,
+      "grid8_gradient_rmse": 4.583550703331396
+    },
+    {
+      "scene": 335,
+      "budget": 145000,
+      "format": "codec9",
+      "declared_bytes": 435509,
+      "sha256": "d14eae8a5b8eb3bb032abefe7d1c38603bb01dc87d4cb82dc59cd2e556e4bcd8",
+      "token_counts": null,
+      "mse": 25.874344618055556,
+      "psnr": 34.0021100268764,
+      "grid4_gradient_rmse": 7.298950548852792,
+      "grid8_gradient_rmse": 7.890055498758978
+    },
+    {
+      "scene": 335,
+      "budget": 145000,
+      "format": "gradient11",
+      "declared_bytes": 435509,
+      "sha256": "eb9dc6a4c9cc5c0f1eac8c89adfcee8d84d4f9ab356448a8f7fa0bb8b6fa630a",
+      "token_counts": {
+        "128": 23895,
+        "129": 4311,
+        "134": 11573,
+        "132": 1985,
+        "131": 1436
+      },
+      "mse": 22.933777850115742,
+      "psnr": 34.52604759504033,
+      "grid4_gradient_rmse": 6.685401965338197,
+      "grid8_gradient_rmse": 7.497553859379378
+    },
+    {
+      "scene": 335,
+      "budget": 155000,
+      "format": "codec9",
+      "declared_bytes": 465507,
+      "sha256": "7fb7b77e330bf8a43c63d2f4f189ea8371e97e3d83ce76f95b8182027c7ff2a3",
+      "token_counts": null,
+      "mse": 24.767600308641974,
+      "psnr": 34.19196430309551,
+      "grid4_gradient_rmse": 7.167800610466076,
+      "grid8_gradient_rmse": 7.734010616616791
+    },
+    {
+      "scene": 335,
+      "budget": 155000,
+      "format": "gradient11",
+      "declared_bytes": 465507,
+      "sha256": "a0ca572d572cbe373b32153c41909adf6d77728b4bd7b65736cd8342141a82bd",
+      "token_counts": {
+        "128": 22682,
+        "129": 4921,
+        "134": 11749,
+        "132": 2243,
+        "131": 1605
+      },
+      "mse": 21.926332465277778,
+      "psnr": 34.721143659115285,
+      "grid4_gradient_rmse": 6.560366207441738,
+      "grid8_gradient_rmse": 7.338486255455019
+    },
+    {
+      "scene": 335,
+      "budget": 165000,
+      "format": "codec9",
+      "declared_bytes": 495507,
+      "sha256": "8f30dbfefa8eac117c09e04c79778fcd616550b0eeea93b4b4a8530f83ceacff",
+      "token_counts": null,
+      "mse": 23.751607228973764,
+      "psnr": 34.37387357978294,
+      "grid4_gradient_rmse": 7.044144563673026,
+      "grid8_gradient_rmse": 7.589584389445479
+    },
+    {
+      "scene": 335,
+      "budget": 165000,
+      "format": "gradient11",
+      "declared_bytes": 495509,
+      "sha256": "e607aca8014a8efc8d524f884be30c425fe91dfe743d533b5b0cdbd38c6c3870",
+      "token_counts": {
+        "128": 21283,
+        "129": 5853,
+        "134": 11844,
+        "132": 2466,
+        "131": 1754
+      },
+      "mse": 21.014513406635803,
+      "psnr": 34.905610225464216,
+      "grid4_gradient_rmse": 6.441632177405036,
+      "grid8_gradient_rmse": 7.184988526673488
+    }
+  ]
+}

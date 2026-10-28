@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "scope": "Same-weight integer objective check on training samples; C10 size comparison on all27 sampled frames. No full-film or transport guarantee.",
+  "objective_checks": [
+    {
+      "scene": 18,
+      "weight": 1,
+      "rounded_continuous_objective": 11409026.0,
+      "discrete_objective": 11379386.0,
+      "decrease_percent": 0.25979430671820847
+    },
+    {
+      "scene": 67,
+      "weight": 1,
+      "rounded_continuous_objective": 6647172.0,
+      "discrete_objective": 6633211.0,
+      "decrease_percent": 0.21002916729099264
+    },
+    {
+      "scene": 154,
+      "weight": 1,
+      "rounded_continuous_objective": 27284234.0,
+      "discrete_objective": 27193766.0,
+      "decrease_percent": 0.33157610362086753
+    },
+    {
+      "scene": 276,
+      "weight": 1,
+      "rounded_continuous_objective": 30841003.0,
+      "discrete_objective": 30756224.0,
+      "decrease_percent": 0.2748905410112634
+    },
+    {
+      "scene": 401,
+      "weight": 1,
+      "rounded_continuous_objective": 68689331.0,
+      "discrete_objective": 68603074.0,
+      "decrease_percent": 0.12557554243758373
+    }
+  ],
+  "c10_sizes": [
+    {
+      "scene": 18,
+      "current_declared_bytes": 453886,
+      "candidate_declared_bytes": 452618,
+      "delta_bytes": -1268
+    },
+    {
+      "scene": 67,
+      "current_declared_bytes": 413617,
+      "candidate_declared_bytes": 412176,
+      "delta_bytes": -1441
+    },
+    {
+      "scene": 154,
+      "current_declared_bytes": 478909,
+      "candidate_declared_bytes": 477344,
+      "delta_bytes": -1565
+    },
+    {
+      "scene": 276,
+      "current_declared_bytes": 448694,
+      "candidate_declared_bytes": 445405,
+      "delta_bytes": -3289
+    },
+    {
+      "scene": 401,
+      "current_declared_bytes": 473473,
+      "candidate_declared_bytes": 471167,
+      "delta_bytes": -2306
+    },
+    {
+      "scene": 35,
+      "current_declared_bytes": 469585,
+      "candidate_declared_bytes": 467345,
+      "delta_bytes": -2240
+    },
+    {
+      "scene": 110,
+      "current_declared_bytes": 473450,
+      "candidate_declared_bytes": 471473,
+      "delta_bytes": -1977
+    },
+    {
+      "scene": 210,
+      "current_declared_bytes": 469425,
+      "candidate_declared_bytes": 468976,
+      "delta_bytes": -449
+    },
+    {
+      "scene": 335,
+      "current_declared_bytes": 479330,
+      "candidate_declared_bytes": 477923,
+      "delta_bytes": -1407
+    }
+  ]
+}

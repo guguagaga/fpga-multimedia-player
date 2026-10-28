@@ -1,0 +1,10 @@
+{
+  "build_pid": 4244,
+  "final_timing": false,
+  "last_observed_failed_endpoints": 549,
+  "stopped": true,
+  "last_observed_setup_tns_ns": -434.94,
+  "reason": "Stopped own v115 candidate after persistent reroute congestion and worsening intermediate timing; no final routed timing or bitstream accepted.",
+  "last_observed_setup_wns_ns": -2.567,
+  "source_and_logs_preserved": true
+}
