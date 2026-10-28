@@ -1,0 +1,215 @@
+--- a/rtl/image/img_scaler.v
++++ b/rtl/image/img_scaler.v
+@@ -581,7 +581,8 @@
+  reg qvalid;
+  reg [2:0] state;
+  localparam LIVE=0, DUP=1, FETCH=2, REPLAY=3, REPDUP=4, DONE=5;
+- reg [9:0] x, y, rx;
++ reg [9:0] x, rx;
++ reg [8:0] y;
+  reg [23:0] held;
+  reg [23:0] linebuf [0:639];
+  reg [23:0] lineq;
+@@ -619,9 +620,18 @@
+      else if (take) qvalid<=0;
+    end
+  end
++ // Keep the row counter's enable local and independent of the state's
++ // priority mux. No added cycle: all predicates use pre-edge state/data.
++ wire advance_live_row = (state == LIVE) && qvalid && !out_blocked &&
++                         (x == 10'd639) && (y[1:0] != 0) && (y != 9'd479);
++ wire advance_replay_row = (state == REPLAY) && !out_blocked && (rx == 10'd639);
++ always @(posedge clk) begin
++   if (rst || frame_start) y <= 0;
++   else if (advance_live_row || advance_replay_row) y <= y + 1'b1;
++ end
+  always @(posedge clk) begin
+    if (rst || frame_start) begin
+-     state<=LIVE; x<=0; y<=0; rx<=0; held<=0;
++     state<=LIVE; x<=0; rx<=0; held<=0;
+      out_valid<=0; out_pixel<=0;
+    end else begin
+      out_valid<=0;
+@@ -632,7 +642,7 @@
+            x<=0;
+            if (y[1:0] == 0) begin rx<=0; state<=FETCH; end
+            else if (y == 479) state<=DONE;
+-           else y<=y+1'b1;
++           
+          end else begin
+            x<=x+1'b1;
+            if (x[1:0] == 0) state<=DUP;
+@@ -645,7 +655,7 @@
+        REPLAY: if (!out_blocked) begin
+          out_valid<=1; out_pixel<=lineq;
+          if (rx[1:0] == 0) state<=REPDUP;
+-         else if (rx == 639) begin y<=y+1'b1; state<=LIVE; end
++         else if (rx == 639) begin state<=LIVE; end
+          else begin rx<=rx+1'b1; state<=FETCH; end
+        end
+        REPDUP: if (!out_blocked) begin
+--- a/rtl/spectrum/spectrum_display.v
++++ b/rtl/spectrum/spectrum_display.v
+@@ -445,6 +445,143 @@
+     // 【2026-10-20 32 柱】渐变表仍是 48 项（蓝→红），柱数变成 32，
+     //   所以下标按 1.5 倍展开（i + i/2 = 0..46），让整条彩虹仍然铺满全屏。
+     //   不做这一步会只用到表的前 32 项 —— 右端看不到红色。
++    // Fold fixed palette resampling and 3/4 foreground arithmetic into a LUT.
++    // Leaves one 10-bit background add and >>2; no pipeline/latency change.
++    function [59:0] grad_terms;
++      input [6:0] idx;
++      begin case (idx)
++        7'd0: grad_terms = 60'h00000bf580602fd;
++        7'd1: grad_terms = 60'h00042bf580686fd;
++        7'd2: grad_terms = 60'h000c3bf580782fd;
++        7'd3: grad_terms = 60'h00105bf580806fd;
++        7'd4: grad_terms = 60'h00186bf58090efd;
++        7'd5: grad_terms = 60'h001c8bf580992fd;
++        7'd6: grad_terms = 60'h0024cbf580a9afd;
++        7'd7: grad_terms = 60'h0028bbf580b12fd;
++        7'd8: grad_terms = 60'h002fdbb980bf6f7;
++        7'd9: grad_terms = 60'h002fdab180bf6d6;
++        7'd10: grad_terms = 60'h002fd8ad80bf694;
++        7'd11: grad_terms = 60'h002fd7a580bf673;
++        7'd12: grad_terms = 60'h002fd5a180bf634;
++        7'd13: grad_terms = 60'h002fd49980bf613;
++        7'd14: grad_terms = 60'h002fd28980bf5d1;
++        7'd15: grad_terms = 60'h002fd18d80bf5b0;
++        7'd16: grad_terms = 60'h086fd0018fbf580;
++        7'd17: grad_terms = 60'h18efd001b0bf580;
++        7'd18: grad_terms = 60'h392fd001f2bf580;
++        7'd19: grad_terms = 60'h49afd00213bf580;
++        7'd20: grad_terms = 60'h69efd00252bf580;
++        7'd21: grad_terms = 60'h7a6fd00273bf580;
++        7'd22: grad_terms = 60'h9b6fd002b5bf580;
++        7'd23: grad_terms = 60'hab2fd002d6bf580;
++        7'd24: grad_terms = 60'hbf6cd002fdb9580;
++        7'd25: grad_terms = 60'hbf68b002fdb1180;
++        7'd26: grad_terms = 60'hbf60a002fda1580;
++        7'd27: grad_terms = 60'hbf5c8002fd99180;
++        7'd28: grad_terms = 60'hbf547002fd88980;
++        7'd29: grad_terms = 60'hbf505002fd80580;
++        7'd30: grad_terms = 60'hbf481002fd6fd80;
++        7'd31: grad_terms = 60'hbf442002fd68580;
++        7'd32: grad_terms = 60'hbf400002fd60180;
++        7'd33: grad_terms = 60'hbf400002fd60180;
++        7'd34: grad_terms = 60'hbf400002fd60180;
++        7'd35: grad_terms = 60'hbf400002fd60180;
++        7'd36: grad_terms = 60'hbf400002fd60180;
++        7'd37: grad_terms = 60'hbf400002fd60180;
++        7'd38: grad_terms = 60'hbf400002fd60180;
++        7'd39: grad_terms = 60'hbf400002fd60180;
++        7'd40: grad_terms = 60'hbf400002fd60180;
++        7'd41: grad_terms = 60'hbf400002fd60180;
++        7'd42: grad_terms = 60'hbf400002fd60180;
++        7'd43: grad_terms = 60'h00000bf580602fd;
++        7'd44: grad_terms = 60'h00081bf5806fefd;
++        7'd45: grad_terms = 60'h000c3bf580782fd;
++        7'd46: grad_terms = 60'h00147bf58088afd;
++        7'd47: grad_terms = 60'h00186bf58090efd;
++        7'd48: grad_terms = 60'h0020abf580a16fd;
++        7'd49: grad_terms = 60'h0024cbf580a9afd;
++        7'd50: grad_terms = 60'h002cdbf580b96fd;
++        7'd51: grad_terms = 60'h002fdbb980bf6f7;
++        7'd52: grad_terms = 60'h002fd9b580bf6b5;
++        7'd53: grad_terms = 60'h002fd8ad80bf694;
++        7'd54: grad_terms = 60'h002fd69d80bf652;
++        7'd55: grad_terms = 60'h002fd5a180bf634;
++        7'd56: grad_terms = 60'h002fd39180bf5f2;
++        7'd57: grad_terms = 60'h002fd28980bf5d1;
++        7'd58: grad_terms = 60'h002fd08580bf58f;
++        7'd59: grad_terms = 60'h086fd0018fbf580;
++        7'd60: grad_terms = 60'h28afd001d1bf580;
++        7'd61: grad_terms = 60'h392fd001f2bf580;
++        7'd62: grad_terms = 60'h5a2fd00234bf580;
++        7'd63: grad_terms = 60'h69efd00252bf580;
++        7'd64: grad_terms = 60'h8aefd00294bf580;
++        7'd65: grad_terms = 60'h9b6fd002b5bf580;
++        7'd66: grad_terms = 60'hbbafd002f7bf580;
++        7'd67: grad_terms = 60'hbf6cd002fdb9580;
++        7'd68: grad_terms = 60'hbf64c002fda9980;
++        7'd69: grad_terms = 60'hbf60a002fda1580;
++        7'd70: grad_terms = 60'hbf586002fd90d80;
++        7'd71: grad_terms = 60'hbf547002fd88980;
++        7'd72: grad_terms = 60'hbf4c3002fd78180;
++        7'd73: grad_terms = 60'hbf481002fd6fd80;
++        7'd74: grad_terms = 60'hbf400002fd60180;
++        7'd75: grad_terms = 60'hbf400002fd60180;
++        7'd76: grad_terms = 60'hbf400002fd60180;
++        7'd77: grad_terms = 60'hbf400002fd60180;
++        7'd78: grad_terms = 60'hbf400002fd60180;
++        7'd79: grad_terms = 60'hbf400002fd60180;
++        7'd80: grad_terms = 60'hbf400002fd60180;
++        7'd81: grad_terms = 60'hbf400002fd60180;
++        7'd82: grad_terms = 60'hbf400002fd60180;
++        7'd83: grad_terms = 60'hbf400002fd60180;
++        7'd84: grad_terms = 60'hbf400002fd60180;
++        7'd85: grad_terms = 60'hbf400002fd60180;
++        7'd86: grad_terms = 60'h00042bf580686fd;
++        7'd87: grad_terms = 60'h00081bf5806fefd;
++        7'd88: grad_terms = 60'h00105bf580806fd;
++        7'd89: grad_terms = 60'h00147bf58088afd;
++        7'd90: grad_terms = 60'h001c8bf580992fd;
++        7'd91: grad_terms = 60'h0020abf580a16fd;
++        7'd92: grad_terms = 60'h0028bbf580b12fd;
++        7'd93: grad_terms = 60'h002cdbf580b96fd;
++        7'd94: grad_terms = 60'h002fdab180bf6d6;
++        7'd95: grad_terms = 60'h002fd9b580bf6b5;
++        7'd96: grad_terms = 60'h002fd7a580bf673;
++        7'd97: grad_terms = 60'h002fd69d80bf652;
++        7'd98: grad_terms = 60'h002fd49980bf613;
++        7'd99: grad_terms = 60'h002fd39180bf5f2;
++        7'd100: grad_terms = 60'h002fd18d80bf5b0;
++        7'd101: grad_terms = 60'h002fd08580bf58f;
++        7'd102: grad_terms = 60'h18efd001b0bf580;
++        7'd103: grad_terms = 60'h28afd001d1bf580;
++        7'd104: grad_terms = 60'h49afd00213bf580;
++        7'd105: grad_terms = 60'h5a2fd00234bf580;
++        7'd106: grad_terms = 60'h7a6fd00273bf580;
++        7'd107: grad_terms = 60'h8aefd00294bf580;
++        7'd108: grad_terms = 60'hab2fd002d6bf580;
++        7'd109: grad_terms = 60'hbbafd002f7bf580;
++        7'd110: grad_terms = 60'hbf68b002fdb1180;
++        7'd111: grad_terms = 60'hbf64c002fda9980;
++        7'd112: grad_terms = 60'hbf5c8002fd99180;
++        7'd113: grad_terms = 60'hbf586002fd90d80;
++        7'd114: grad_terms = 60'hbf505002fd80580;
++        7'd115: grad_terms = 60'hbf4c3002fd78180;
++        7'd116: grad_terms = 60'hbf442002fd68580;
++        7'd117: grad_terms = 60'hbf400002fd60180;
++        7'd118: grad_terms = 60'hbf400002fd60180;
++        7'd119: grad_terms = 60'hbf400002fd60180;
++        7'd120: grad_terms = 60'hbf400002fd60180;
++        7'd121: grad_terms = 60'hbf400002fd60180;
++        7'd122: grad_terms = 60'hbf400002fd60180;
++        7'd123: grad_terms = 60'hbf400002fd60180;
++        7'd124: grad_terms = 60'hbf400002fd60180;
++        7'd125: grad_terms = 60'hbf400002fd60180;
++        7'd126: grad_terms = 60'hbf400002fd60180;
++        7'd127: grad_terms = 60'hbf400002fd60180;
++        default: grad_terms = 60'd0;
++      endcase end
++    endfunction
++    wire [59:0] color_terms = grad_terms(bar_index_q);
+     wire [23:0] grad  = grad_lut(bar_index_q + (bar_index_q >> 1));
+     wire [7:0]  gr    = grad[23:16];
+     wire [7:0]  gg    = grad[15:8];
+@@ -494,12 +631,12 @@
+ 
+     // ---- alpha blend : spectrum over background (translucent / glass) ----
+     // out = (spectrum*ALPHA + bg*(16-ALPHA)) >> 4
+-    wire [7:0] fill_r  = alpha_blend(gr,     bg_r, ALPHA);
+-    wire [7:0] fill_g  = alpha_blend(gg,     bg_g, ALPHA);
+-    wire [7:0] fill_b  = alpha_blend(gb,     bg_b, ALPHA);
+-    wire [7:0] edge_r2 = alpha_blend(edge_r, bg_r, ALPHA);
+-    wire [7:0] edge_g2 = alpha_blend(edge_g, bg_g, ALPHA);
+-    wire [7:0] edge_b2 = alpha_blend(edge_b, bg_b, ALPHA);
++    wire [7:0] fill_r  = (color_terms[59:50] + {2'b0, bg_r}) >> 2;
++    wire [7:0] fill_g  = (color_terms[49:40] + {2'b0, bg_g}) >> 2;
++    wire [7:0] fill_b  = (color_terms[39:30] + {2'b0, bg_b}) >> 2;
++    wire [7:0] edge_r2 = (color_terms[29:20] + {2'b0, bg_r}) >> 2;
++    wire [7:0] edge_g2 = (color_terms[19:10] + {2'b0, bg_g}) >> 2;
++    wire [7:0] edge_b2 = (color_terms[9:0] + {2'b0, bg_b}) >> 2;
+ 
+     // ---- ★2026-10-17 峰值保持白点配色★ ----
+     //   用"柱色提亮到接近白"而不是纯白 255：

@@ -1,0 +1,238 @@
+{
+  "updated": "2026-10-28T12:36:00.649232",
+  "baseline": {
+    "version": "v114",
+    "setup_wns_ns": -1.98,
+    "setup_tns_ns": -168.622,
+    "setup_failed_endpoints": 338,
+    "hold_wns_ns": 0.027,
+    "hold_failed_endpoints": 0,
+    "slices": 9337,
+    "slices_percent": 95.28,
+    "dsps": 24,
+    "ram_blocks": 65
+  },
+  "variants": [
+    {
+      "version": "v115",
+      "finished": false,
+      "board_passed": false,
+      "termination": {
+        "build_pid": 4244,
+        "final_timing": false,
+        "last_observed_failed_endpoints": 549,
+        "stopped": true,
+        "last_observed_setup_tns_ns": -434.94,
+        "reason": "Stopped own v115 candidate after persistent reroute congestion and worsening intermediate timing; no final routed timing or bitstream accepted.",
+        "last_observed_setup_wns_ns": -2.567,
+        "source_and_logs_preserved": true
+      },
+      "source_matches_synthesis": true,
+      "sdc_unchanged": true,
+      "tests": {
+        "expanded_bmp_native": true,
+        "expanded_qoi_native": true,
+        "expanded_sd": true,
+        "expand_equivalence": true,
+        "spectrum_equivalence": true
+      }
+    },
+    {
+      "version": "v116",
+      "finished": true,
+      "board_passed": false,
+      "setup_wns_ns": -5.278,
+      "setup_tns_ns": -159.92,
+      "setup_failed_endpoints": 259,
+      "hold_wns_ns": 0.024,
+      "hold_failed_endpoints": 0,
+      "slices": 9392,
+      "slices_percent": 95.84,
+      "dsps": 21,
+      "ram_blocks": 65,
+      "timing_passed": false,
+      "improves_all_timing_metrics": false,
+      "bit_sha256": "f5a43f04380a80f4c9fa8fb9d22219600c3c03357582246ce973cecebe58e1e4",
+      "source_matches_synthesis": true,
+      "sdc_unchanged": true,
+      "tests": {
+        "image_evidence_reuse": true,
+        "spectrum_equivalence": true
+      }
+    },
+    {
+      "version": "v117",
+      "finished": false,
+      "board_passed": false,
+      "termination": {
+        "last_observed_setup_wns_ns": -3.751,
+        "reason": "Stopped own v117 candidate after phase2 congestion rose from188 to784 and intermediate timing worsened. Matched route PID, executable name and start time to this build; no recursive process termination.",
+        "source_and_logs_preserved": true,
+        "last_observed_setup_tns_ns": -809.971,
+        "final_timing": false,
+        "build_pid": 25048,
+        "last_observed_failed_endpoints": 827,
+        "stopped": true
+      },
+      "source_matches_synthesis": true,
+      "sdc_unchanged": true,
+      "tests": {
+        "spectrum_equivalence": true
+      }
+    },
+    {
+      "version": "v118",
+      "finished": true,
+      "board_passed": false,
+      "setup_wns_ns": -2.817,
+      "setup_tns_ns": -483.174,
+      "setup_failed_endpoints": 678,
+      "hold_wns_ns": 0.022,
+      "hold_failed_endpoints": 0,
+      "slices": 9342,
+      "slices_percent": 95.33,
+      "dsps": 24,
+      "ram_blocks": 65,
+      "timing_passed": false,
+      "improves_all_timing_metrics": false,
+      "bit_sha256": "efd66da98dafce0147a2eccf829f115127a7034d4a0f29b211632971357cd6f6",
+      "source_matches_synthesis": true,
+      "sdc_unchanged": true,
+      "tests": {
+        "comparator": true,
+        "expanded_bmp_native": true,
+        "expanded_qoi_native": true,
+        "expanded_sd": true,
+        "fast_rows": true,
+        "fast_rows_bmp_native": true
+      }
+    }
+  ],
+  "quality_training": [
+    {
+      "config": "baseline",
+      "weight": 0,
+      "edge_scale": 0,
+      "psnr": 33.11906093078579,
+      "grid4": 7.1006616638613,
+      "grid8": 7.603148799250275,
+      "psnr_delta_baseline": 0.0,
+      "grid8_reduction_percent": 0.0
+    },
+    {
+      "config": "joint1",
+      "weight": 1,
+      "edge_scale": 0,
+      "psnr": 32.95537705328881,
+      "grid4": 6.7548913922217455,
+      "grid8": 7.19049900097705,
+      "psnr_delta_baseline": -0.16368387749698599,
+      "grid8_reduction_percent": 5.42735397094839
+    },
+    {
+      "config": "discrete09",
+      "weight": 0.9,
+      "edge_scale": 1,
+      "psnr": 32.97113789259815,
+      "grid4": 6.752731792615523,
+      "grid8": 7.1789869788071385,
+      "psnr_delta_baseline": -0.14792303818764196,
+      "grid8_reduction_percent": 5.578765214814185
+    },
+    {
+      "config": "discrete095",
+      "weight": 0.95,
+      "edge_scale": 1,
+      "psnr": 32.96055437048522,
+      "grid4": 6.742580478591078,
+      "grid8": 7.165881939705491,
+      "psnr_delta_baseline": -0.15850656030057308,
+      "grid8_reduction_percent": 5.751128527011096
+    },
+    {
+      "config": "discrete1",
+      "weight": 1,
+      "edge_scale": 1,
+      "psnr": 32.946476845919015,
+      "grid4": 6.728940749781719,
+      "grid8": 7.149469160530563,
+      "psnr_delta_baseline": -0.17258408486677723,
+      "grid8_reduction_percent": 5.966996710158401
+    }
+  ],
+  "quality_holdout": [
+    {
+      "config": "baseline",
+      "psnr": 34.47446544112223,
+      "grid4": 6.870650810587516,
+      "grid8": 7.425090020782564
+    },
+    {
+      "config": "joint1",
+      "psnr": 34.29785716292808,
+      "grid4": 6.546376893743932,
+      "grid8": 7.073005227138666
+    },
+    {
+      "config": "discrete09",
+      "psnr": 34.31261453609264,
+      "grid4": 6.537071875795803,
+      "grid8": 7.052685716103881
+    }
+  ],
+  "quality_holdout_dominates_joint1": true,
+  "quality_format": true,
+  "architecture_restart": [
+    {
+      "budget": 145000,
+      "format": "codec9",
+      "psnr": 34.0238868040526,
+      "grid8": 7.78262696966089,
+      "grid4": 7.188861337057068,
+      "mean_frame_bytes": 144998.6666666667
+    },
+    {
+      "budget": 145000,
+      "format": "gradient11",
+      "psnr": 34.71970534548632,
+      "grid8": 7.073018798410466,
+      "grid4": 6.339979912056699,
+      "mean_frame_bytes": 144998.16666666666
+    },
+    {
+      "budget": 155000,
+      "format": "codec9",
+      "psnr": 34.25362011526652,
+      "grid8": 7.600155490178274,
+      "grid4": 7.028220352103263,
+      "mean_frame_bytes": 154998.0
+    },
+    {
+      "budget": 155000,
+      "format": "gradient11",
+      "psnr": 34.95796639483402,
+      "grid8": 6.89354314777169,
+      "grid4": 6.188713322890013,
+      "mean_frame_bytes": 154998.33333333334
+    },
+    {
+      "budget": 165000,
+      "format": "codec9",
+      "psnr": 34.47446544112223,
+      "grid8": 7.425090020782564,
+      "grid4": 6.870650810587516,
+      "mean_frame_bytes": 164998.0
+    },
+    {
+      "budget": 165000,
+      "format": "gradient11",
+      "psnr": 35.185014757281635,
+      "grid8": 6.730161748089484,
+      "grid4": 6.0501829350206355,
+      "mean_frame_bytes": 164998.33333333334
+    }
+  ],
+  "sd_modified": false,
+  "github_uploaded": false,
+  "scope": "One controlled optimization round. Functional equivalence and sampled quality do not certify physical timing or full-film playback."
+}

@@ -1,0 +1,13 @@
+{
+  "selected": "discrete09",
+  "selection": "five existing training scenes",
+  "heldout_seconds": [
+    35,
+    110,
+    210,
+    335
+  ],
+  "frames_per_scene": 3,
+  "weights_frozen": true,
+  "scope": "Same source film, unseen temporal samples; not generalization to other videos."
+}

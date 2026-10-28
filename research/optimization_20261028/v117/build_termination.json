@@ -1,0 +1,10 @@
+{
+  "last_observed_setup_wns_ns": -3.751,
+  "reason": "Stopped own v117 candidate after phase2 congestion rose from188 to784 and intermediate timing worsened. Matched route PID, executable name and start time to this build; no recursive process termination.",
+  "source_and_logs_preserved": true,
+  "last_observed_setup_tns_ns": -809.971,
+  "final_timing": false,
+  "build_pid": 25048,
+  "last_observed_failed_endpoints": 827,
+  "stopped": true
+}

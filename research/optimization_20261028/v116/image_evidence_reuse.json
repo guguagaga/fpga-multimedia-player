@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "origin": "v115 expanded_sd.json",
+  "scope": "Dependency hash reuse, not a rerun; spectrum display is outside this image-write fixture.",
+  "checks": [
+    {
+      "case": "bmp_native",
+      "source_dependencies_unchanged": [
+        "user_source/hdl_source/SD/sd_card_bmp.v",
+        "user_source/hdl_source/SD/bmp_read.v",
+        "user_source/hdl_source/qoi_stream.v",
+        "rtl/img_scaler.v",
+        "rtl/pixel_fifo_24x8.v",
+        "user_source/hdl_source/sd_arbiter.v",
+        "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "user_source/hdl_source/SD/frame_fifo_write.v",
+        "rtl/fat32_sector_mapper.v"
+      ]
+    },
+    {
+      "case": "qoi_native",
+      "source_dependencies_unchanged": [
+        "user_source/hdl_source/SD/sd_card_bmp.v",
+        "user_source/hdl_source/SD/bmp_read.v",
+        "user_source/hdl_source/qoi_stream.v",
+        "rtl/img_scaler.v",
+        "rtl/pixel_fifo_24x8.v",
+        "user_source/hdl_source/sd_arbiter.v",
+        "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "user_source/hdl_source/SD/frame_fifo_write.v",
+        "rtl/fat32_sector_mapper.v"
+      ]
+    }
+  ]
+}

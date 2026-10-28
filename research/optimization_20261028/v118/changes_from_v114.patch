@@ -1,0 +1,60 @@
+--- a/rtl/image/bmp_read.v
++++ b/rtl/image/bmp_read.v
+@@ -300,6 +300,20 @@
+                      {9'd0,pixel_offset[31:9]} : {16'd0,fast_next[24:9]});
+ end
+ reg [8:0] fast_row;
++// Parallel byte comparisons and a four-term lexicographic reduction.
++// Same unsigned comparison, no new registers or byte/valid latency.
++function lt_u32;
++ input [31:0] a,b;
++ reg [3:0] less,equal;
++ begin
++  less[3]=a[31:24]<b[31:24]; equal[3]=a[31:24]==b[31:24];
++  less[2]=a[23:16]<b[23:16]; equal[2]=a[23:16]==b[23:16];
++  less[1]=a[15:8]<b[15:8]; equal[1]=a[15:8]==b[15:8];
++  less[0]=a[7:0]<b[7:0]; equal[0]=a[7:0]==b[7:0];
++  lt_u32=less[3] | (equal[3]&less[2]) |
++         ((&equal[3:2])&less[1]) | ((&equal[3:1])&less[0]);
++ end
++endfunction
+ reg [31:0] bmp_len_cnt;
+ reg [1:0] bmp_retire_pipe;
+ reg bmp_retire_q,bmp_retire_fast_q,bmp_retire_last_q;
+@@ -311,9 +325,9 @@
+ reg q_limit_hit_q;
+ always @(posedge clk or posedge rst)begin
+  if(rst)q_limit_hit_q<=0;
+- else q_limit_hit_q<=bmp_len_cnt>=q_byte_limit;
+-end
+-wire fast_row_done = fast_rows && (bmp_len_cnt >= fast_end);
++ else q_limit_hit_q<=!lt_u32(bmp_len_cnt,q_byte_limit);
++end
++wire fast_row_done = fast_rows && (!lt_u32(bmp_len_cnt,{7'd0,fast_end}));
+ // Header classification settles hundreds of byte clocks before payload.
+ // Keep each wide predicate in its own stage, rather than sharing its
+ // reduction with fast_rows and stride mux enables in one clock.
+@@ -372,7 +386,7 @@
+   bmp_retire_q<=bmp_retire_pipe[1];
+   bmp_retire_fast_q<=fast_row_done;
+   bmp_retire_last_q<=fast_row==479;
+-  bmp_retire_eof_q<=bmp_len_cnt>=file_len;
++  bmp_retire_eof_q<=!lt_u32(bmp_len_cnt,file_len);
+   bmp_retire_full_q<=wr_total>=FRAME_WORDS;
+  end
+ end
+@@ -495,10 +509,10 @@
+  end else begin
+   bmp_input_byte_q<=sd_sec_read_data;
+   bmp_input_valid_q<=(state==ST_LOAD_DATA)&&!is_qoi&&sd_sec_read_data_valid;
+-  bmp_after_offset_q<=bmp_len_cnt>=pixel_offset;
+-  bmp_before_end_q<=bmp_len_cnt<image_end;
+-  bmp_after_fast_q<=bmp_len_cnt>=fast_start;
+-  bmp_before_fast_q<=bmp_len_cnt<fast_end;
++  bmp_after_offset_q<=!lt_u32(bmp_len_cnt,pixel_offset);
++  bmp_before_end_q<=lt_u32(bmp_len_cnt,image_end);
++  bmp_after_fast_q<=!lt_u32(bmp_len_cnt,{7'd0,fast_start});
++  bmp_before_fast_q<=lt_u32(bmp_len_cnt,{7'd0,fast_end});
+   bmp_fast_q<=fast_rows;
+  end
+ end

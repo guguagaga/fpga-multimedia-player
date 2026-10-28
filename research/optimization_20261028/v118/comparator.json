@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "seconds": 6.457469940185547,
+  "scope": "1,262,146 two-state comparisons: all byte value pairs at each position, random, equal, adjacent/wrap. No latency change.",
+  "source_sha256": {
+    "bmp_read.v": "3250a1baabbedbccb4c5070b37d001c43c2efca5962465161dbdf4c685508205",
+    "tb.v": "68125a613e716a82ca90e2ac3188e32d07f2339e94bce03f30af2c843fe894fd"
+  },
+  "summary": "PASS COMPARATOR checks=1262146"
+}

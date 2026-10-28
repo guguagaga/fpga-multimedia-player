@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "frames": 27,
+  "scope": "Sampled C9 unchanged modes/masks/raw and C9/C10 canonical equality; not full-film or physical throughput.",
+  "results": [
+    {
+      "scene": 18,
+      "heldout": false,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 6750,
+        "raw_blocks_identical": 1779,
+        "pal_masks_identical": 12431,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 452618,
+        "max_frame_bytes": 150857
+      },
+      "c9_sha256": "5f70a6d39c48e7ffaaa4b0a5695793d65a4ebfe62ce8ab52ecfc8cb57f18b682",
+      "c10_sha256": "76cac468b69b082e4e5db411cbb3cbbcc77572339f656b2cf2c99425e253a962"
+    },
+    {
+      "scene": 67,
+      "heldout": false,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 4149,
+        "raw_blocks_identical": 2132,
+        "pal_masks_identical": 9163,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 412176,
+        "max_frame_bytes": 137530
+      },
+      "c9_sha256": "0834abef25c2f3e07daae99d46897875c6bdffee4faaa02a340eb6d28d693621",
+      "c10_sha256": "2fb53cd1fbaf7ec8f72d9331e19760fc99ae5f2a9ebe01c002b7306daf6e3ce6"
+    },
+    {
+      "scene": 154,
+      "heldout": false,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 17009,
+        "raw_blocks_identical": 1942,
+        "pal_masks_identical": 6728,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 477344,
+        "max_frame_bytes": 159138
+      },
+      "c9_sha256": "87f47ab2fc90269801a6400ff0f8c1d0be1e42b210d6f97fbb592ba8b71d185c",
+      "c10_sha256": "15380aed903fb54e9e396e9478f6fa52d28bd27e802b31bf97a2c3702efe29b8"
+    },
+    {
+      "scene": 276,
+      "heldout": false,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 13983,
+        "raw_blocks_identical": 2001,
+        "pal_masks_identical": 10279,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 445405,
+        "max_frame_bytes": 148315
+      },
+      "c9_sha256": "54da6c69790f7221028c166e1392dfc7674722a679d61c4d2e953fddce65086f",
+      "c10_sha256": "540420d56de048fc5f40914f119502cddb8487462e8edc7897c242c442d694c3"
+    },
+    {
+      "scene": 401,
+      "heldout": false,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 20105,
+        "raw_blocks_identical": 1730,
+        "pal_masks_identical": 12639,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 471167,
+        "max_frame_bytes": 156945
+      },
+      "c9_sha256": "dd9eca170a8e0596fcf3f0333dfe04b9071e24f8af44ad5370064d65b9343c89",
+      "c10_sha256": "adce1c17605939c05ea90e5ea7d3824f2e7226937da81e774bba3a988d3eebb4"
+    },
+    {
+      "scene": 35,
+      "heldout": true,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 15986,
+        "raw_blocks_identical": 1924,
+        "pal_masks_identical": 6798,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 467345,
+        "max_frame_bytes": 155829
+      },
+      "c9_sha256": "87f4837bb03bbab0e18256fdd3deef7c078e0d633995f47c6a6ff993df85f24e",
+      "c10_sha256": "5a509668b6861d50201fe21357cb7a187f96eaa8fd2234847f3e5b3a2725fbfb"
+    },
+    {
+      "scene": 110,
+      "heldout": true,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 16744,
+        "raw_blocks_identical": 2039,
+        "pal_masks_identical": 7305,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 471473,
+        "max_frame_bytes": 157114
+      },
+      "c9_sha256": "17e4f843a7f478fdd4d2f9c8441473401c1463a10fe52b8c02c967192fa64457",
+      "c10_sha256": "7ea7bdd851def3ff2a02b3916674832335fa17f3660e666ae2c2b351f78a6646"
+    },
+    {
+      "scene": 210,
+      "heldout": true,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 8273,
+        "raw_blocks_identical": 869,
+        "pal_masks_identical": 22901,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 468976,
+        "max_frame_bytes": 156444
+      },
+      "c9_sha256": "43759d014d5a8d6f81c72e890b9479f2e2df568d44a09b9804af10ac14176c8c",
+      "c10_sha256": "6cb380637088488bc622e9481c91fcaa277190cf9908e46def4812220772dedd"
+    },
+    {
+      "scene": 335,
+      "heldout": true,
+      "invariants": {
+        "passed": true,
+        "frames": 3,
+        "blocks_checked": 43200,
+        "changed_color_blocks": 16470,
+        "raw_blocks_identical": 1799,
+        "pal_masks_identical": 7927,
+        "scope": "Identical headers,token modes,frame boundaries,RAW payloads,PAL masks and padding; only representative colors changed."
+      },
+      "c10": {
+        "passed": true,
+        "operation": "verify",
+        "frames": 3,
+        "canonical_blocks_checked": 43200,
+        "declared_bytes": 477923,
+        "max_frame_bytes": 159156
+      },
+      "c9_sha256": "cd69ceab130e9eac0242a1fde5ea430b562e58eecd8435328d8304bbd700b5d7",
+      "c10_sha256": "85e97b0acf0a681f044a2987bd49163b1034b0284746fa20c73425fb41ef7170"
+    }
+  ]
+}
