@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "frames": 3,
+  "canonical_blocks_checked": 43200,
+  "stream_sha256": "8c22a8e5de2618925938bb7c95e54f0ec75d297e9cb4498226df7f4f80439f3a",
+  "reference_sha256": "8c22a8e5de2618925938bb7c95e54f0ec75d297e9cb4498226df7f4f80439f3a",
+  "idempotent_sha256": "8c22a8e5de2618925938bb7c95e54f0ec75d297e9cb4498226df7f4f80439f3a",
+  "refuses_overwrite": true,
+  "tool_sha256": "8763049e79378a91b59602c562cca2637a98900a42744c56c98818e70c47d23d",
+  "scope": "Exact match to previous independent whole-buffer packer for three actual film frames; idempotent already-packed input; overwrite refusal. Separate full-film media proof remains authoritative."
+}

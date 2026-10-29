@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "second": 73,
+      "frame": 1095,
+      "old_frame_bytes": 158640,
+      "actual_card": {
+        "mse": 31.560320095486112,
+        "psnr": 33.13938961546043,
+        "grid4_gradient_rmse": 7.256486691168054,
+        "grid8_gradient_rmse": 7.908894731792528
+      },
+      "codec12_q125": {
+        "mse": 24.510838396990742,
+        "psnr": 34.23722194252331,
+        "grid4_gradient_rmse": 6.993645920453797,
+        "grid8_gradient_rmse": 7.605410055562527
+      },
+      "psnr_change_db": 1.097832327062882
+    },
+    {
+      "second": 191,
+      "frame": 2865,
+      "old_frame_bytes": 157648,
+      "actual_card": {
+        "mse": 77.55767216435186,
+        "psnr": 29.23455595290385,
+        "grid4_gradient_rmse": 10.461514279632679,
+        "grid8_gradient_rmse": 11.092430745703103
+      },
+      "codec12_q125": {
+        "mse": 49.99663122106482,
+        "psnr": 31.14139618359715,
+        "grid4_gradient_rmse": 9.506737924713976,
+        "grid8_gradient_rmse": 10.412622565818388
+      },
+      "psnr_change_db": 1.906840230693298
+    },
+    {
+      "second": 317,
+      "frame": 4755,
+      "old_frame_bytes": 160722,
+      "actual_card": {
+        "mse": 20.413171657986112,
+        "psnr": 35.031698732244394,
+        "grid4_gradient_rmse": 6.242984787151174,
+        "grid8_gradient_rmse": 6.70354481859047
+      },
+      "codec12_q125": {
+        "mse": 18.529397063078704,
+        "psnr": 35.452190730351475,
+        "grid4_gradient_rmse": 6.186039360533267,
+        "grid8_gradient_rmse": 6.726695191261984
+      },
+      "psnr_change_db": 0.4204919981070816
+    }
+  ],
+  "source": "D:\\codexworks\\audio_video_recovery_20261028\\media\\full_q165_joint1\\VIDEO720.VID",
+  "source_sha256": "a120cca4600df0cc76d601b6065b2e2a4f04e00ab8447efb388105773959582e",
+  "scope": "Exact movie frame indices versus newly extracted source and C12 Q125 software reconstruction. Three held-out frames; individual quality only, not full-film subjective or playback certification."
+}

@@ -1,57 +1,54 @@
 {
-  "version": "v114",
-  "updated": "2026-10-28T02:45:04.389268",
-  "status": "TEST_ONLY_NOT_TIMING_CLOSED",
-  "board_passed": false,
-  "baseline": "v113: user confirmed picture/video visible; reported audio restarts from beginning near displayed3min while video continues.",
-  "setup_wns_ns": -1.98,
-  "hold_wns_ns": 0.027,
-  "setup_failed_endpoints": 338.0,
-  "hold_failed_endpoints": 0.0,
-  "slices_percent": 95.28,
-  "ram_blocks": 65.0,
-  "dsps": 24.0,
-  "timing_passed": false,
-  "bit_sha256": "764fce083906ed5bc6b19e986dce8da7d801ddc2db3e5fa5bcbef6de8ac1ee1c",
+  "release": "v182-board-confirmed-20261029",
+  "date": "2026-10-29",
+  "board_feedback": {
+    "source": "Project owner report in conversation",
+    "quote": "一切正常！",
+    "classification": "USER_REPORTED_NORMAL",
+    "scope": "User confirmed current paired version behaves normally. Duration, repeat count, temperature and power-cycle coverage were not individually recorded."
+  },
+  "timing": {
+    "independent_fresh_process": true,
+    "setup_wns_ns": 0.0,
+    "hold_wns_ns": 0.023,
+    "violating_endpoints": 0,
+    "setup_margin": "Zero reported margin",
+    "external_io_and_cdc_signoff_complete": false
+  },
+  "video": {
+    "codec": 12,
+    "width": 1280,
+    "height": 720,
+    "fps": 15,
+    "frames": 6330,
+    "seconds": 422,
+    "bytes": 738020352,
+    "sha256": "3120e9a10489267a338f235e1ebd56f3d167441bbc18f45f5ea2b6972053cf10",
+    "active_card_name": "M1_C10.VID"
+  },
+  "bit": {
+    "name": "codec12_v182_spi_stream_seed24_INTERNAL_TIMING_PASS_BOARD_TEST.bit",
+    "sha256": "e7fd72a92ae4cfa3ceff2ac8de04f7cab2031618ed7bd1e840cfff7d8fa7eb65"
+  },
+  "audio": {
+    "name": "V1_AMIYA.VAU",
+    "sha256": "96e8cee408199263fe0572d2e8b399177535b676b071bfc725794b846e8d01cc",
+    "sample_rate": 48000,
+    "channels": 1
+  },
   "tests": {
-    "sector_recovery": true,
-    "restart_policy": true,
-    "fragmented_audio": true,
-    "audio_fault": true,
-    "top_source_switch": true,
-    "source_audit": true,
-    "fullfilm_audio": true,
-    "joint165_pcm": true,
-    "q185_pcm": true
+    "joint_18_frames": "PASS",
+    "joint_fragmented_fat": "PASS",
+    "joint_slower_card": "PASS",
+    "real_spi_pin_model": "PASS",
+    "i2s_cadence": "PASS",
+    "full_movie_format_and_lossless_repack": "PASS",
+    "image_and_music_return": "Earlier passing results reused by source hashes"
   },
-  "root_cause": "Board trigger unconfirmed. Reproduced unsafe standalone audio reselection after ready loss; reproduced sector robustness defects. No claim that all board failures are fixed.",
-  "sd_card_updated": true,
-  "github_uploaded": false,
-  "video_cadence": {
-    "joint165_pcm": {
-      "cadence_15fps_passed": false,
-      "effective_fps_between_presentations": 14.9999970000006,
-      "present_cycles": [
-        8333335,
-        13333336,
-        21666671
-      ]
-    },
-    "q185_pcm": {
-      "cadence_15fps_passed": false,
-      "effective_fps_between_presentations": 12.631576421053136,
-      "present_cycles": [
-        8333335,
-        16666670,
-        23333338,
-        31666673,
-        40000008,
-        46666676,
-        55000011,
-        63333346,
-        71666681
-      ]
-    }
-  },
-  "release": "v114-20261028-final-test"
+  "remaining": [
+    "Quantified long-duration and repeated power-cycle board acceptance",
+    "Positive setup margin without relaxing original constraints",
+    "External IO/CDC review",
+    "No-card/missing-file/read-error behavior and recovery audit"
+  ]
 }

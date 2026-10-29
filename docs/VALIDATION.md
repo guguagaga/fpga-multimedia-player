@@ -1,24 +1,16 @@
-# v114 验证状态
+# v182验证范围
 
-最终综合/布线完成不等于时序通过：setup −1.980ns、338违例端点；hold +0.027ns、0违例。正常时序门禁保持拒收。用户尚未完成v114板测；v113出图通过但音频反馈有问题。
+用户于2026-10-29反馈当前配套版本“一切正常”，记录见releases/v182/BOARD_FEEDBACK.json。没有逐项上板测试时间/次数，不能将这条反馈扩展为耐久性认证。
 
-- sector_recovery: `True`
-- restart_policy: `True`
-- fragmented_audio: `True`
-- audio_fault: `True`
-- top_source_switch: `True`
-- source_audit: `True`
-- fullfilm_audio: `True`
-- joint165_pcm: `True`
-- q185_pcm: `True`
+独立内部STA：setup WNS 0.000ns、hold +0.023ns、TNS及违例端点为零。STA覆盖率96.48%，外部IO/CDC与SDRAM时钟local-wire警告仍待审查。
 
-## 像素/样本正确与显示节拍分别记录
+|检查|结论与边界|
+|---|---|
+|真实SD引脚RTL|初始化、CMD17/CMD18、CMD12、缓存、取消和错误恢复通过；卡为模型|
+|真实I2S链|稳定供帧48000采样无静音；迟帧对照符合预期|
+|联合18帧|3帧循环6次，57600PCM采样通过；最长预算等待77ns|
+|新片头、碎片FAT、较慢卡响应|数据与连续性均通过；传输/内存/采样消费部分为模型|
+|全片文件|6330帧、91152000块打包前后相等；不是全片RTL播放仿真|
+|图片及恢复音乐|已有通过报告与当前源码哈希一致，复用记录，不宣称本轮重跑|
 
-- joint165_pcm: 最大帧间隔门禁（每间隔不超过66.67ms）=`False`；首末显示间平均帧率=`14.9999970000006`。
-- q185_pcm: 最大帧间隔门禁（每间隔不超过66.67ms）=`False`；首末显示间平均帧率=`12.631576421053136`。
-
-短片测试包含起播过渡，平均值不能证明全片持续帧率。Q165也可能出现单个83.33ms间隔；Q185不作活动媒体。
-
-上述结果以release_status.json为准。pending/false不是通过；长片数据比对使用加速行为卡，视频并发使用32周期/字节的SD模型，均不代表物理卡、I2S、HDMI和电气时序已验证。旧verification中的历史测试不自动等同于本次重跑。
-
-公开快速回归：`python tools/verify_audio_recovery.py --iverilog PATH_TO_IVERILOG --vvp PATH_TO_VVP`。它直接编译本仓库的扇区源码，并从当前顶层提取选轨控制块；覆盖短读恢复、超时/取消与异常不单独重播，不依赖用户媒体。其通过不能代替整体时序和实板测试。
+原始结果在[证据目录](../releases/v182/evidence)。历史verification和research中的通过结果不能无条件转用到v182。后续每项修复需记录受影响模块、定向测试与整机回归的范围。

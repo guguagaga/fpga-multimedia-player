@@ -1,0 +1,10 @@
+{
+  "channels": 1,
+  "sample_bytes": 2,
+  "sample_rate": 48000,
+  "samples": 20259318,
+  "seconds": 422.069125,
+  "video_seconds": 422.0,
+  "tail_difference_seconds": 0.06912499999998545,
+  "note": "Original unchanged companion; approximately 69ms longer than the selected 6330-frame video. Header/hash validation, not an alignment measurement on board."
+}

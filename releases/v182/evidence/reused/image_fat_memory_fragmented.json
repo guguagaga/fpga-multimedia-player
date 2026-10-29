@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "expected_failure": false,
+  "version": "v180",
+  "case": "fragmented",
+  "tie_zero": false,
+  "seconds": 186.43778681755066,
+  "scope": "Exact on-card BMP bytes -> real FAT mapper/parser/fitter/packed async FIFO/writer.\n\nThe physical SD responder and SDRAM sink are models; the top-level image wiring\nis recreated explicitly. This is not a full-board or pin-level SDRAM simulation.\n",
+  "sample": "D:\\codexworks\\board_recovery_v170_20261028\\card_acceptance_20261029\\samples\\I1_LOW.BMP",
+  "sample_sha256": "6797320a2825fa509e1a36ecc9f0e122ed3507cdd71a3ceb09dda2159cef7b22",
+  "source_sha256": {
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\tests\\image_fat_memory_fragmented\\tb.v": "626cd72cc949f84a7de1a3849d199b2f312f0084768aeb0806dd3be55f9c8def",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\sd_arbiter.v": "fae6a21f747360c13c9d3e98afbdd125a437a0e6347eda007a70b204158f9974",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_bmp.v": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\SD\\bmp_read.v": "bf42f60b95841a92d7f94dffdfd4d43bdbd71b6e0218a05a005654ad85b77fde",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\qoi_stream.v": "24e0fa2dd27d2bac1db940a72a04f742c4c18bba8cda092db74289e11ad3550a",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\rtl\\img_scaler.v": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\rtl\\fat32_sector_mapper.v": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\rtl\\rgb565_pair_pack.v": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\SD\\frame_read_write.v": "b4b0853b58b77debe1d210271fb506aa934c441e84645a8164e87fd2306c77fb",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\SD\\frame_fifo_write.v": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\SD\\frame_fifo_read.v": "477e3d6b60936f9e3beb1c36563a8d7c3496969a972ed0d7c6a918e25727e96c",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\ip\\afifo_16_32_256.v": "79991b7aaa8ac66e3b100d72ca24116ee47ff8c18d8197563600671becf2815b",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v180\\candidate\\project\\user_source\\hdl_source\\ip\\afifo_32_16_256.v": "3400b062b9019e062f09beceb0981964b7db13994d861d89d7997aab9d81f1f1",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+  },
+  "summary": "Missing connection for port 'valid'.\n# ** Warning: (vsim-3722) D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/SD/frame_read_write.v(183): [TFMPC] - Missing connection for port 'afull'.\n# ** Warning: (vsim-3722) D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/SD/frame_read_write.v(183): [TFMPC] - Missing connection for port 'aempty'.\n# ** Warning: (vsim-3722) D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/SD/frame_read_write.v(183): [TFMPC] - Missing connection for port 'wr_rst_done'.\n# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'ram_inst'.  Expected 16, found 14.\n#    Time: 0 ps  Iteration: 0  Instance: /tb/memory_path/read_buf/ram_inst File: D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/ip/afifo_32_16_256.v Line: 325\n# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'ceb'. The port definition is at: D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/ip/afifo_32_16_256.v(442).\n#    Time: 0 ps  Iteration: 0  Instance: /tb/memory_path/read_buf/ram_inst File: D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/ip/afifo_32_16_256.v Line: 325\n# ** Warning: (vsim-3722) D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/ip/afifo_32_16_256.v(325): [TFMPC] - Missing connection for port 'doa'.\n# ** Warning: (vsim-3722) D:/codexworks/board_recovery_v170_20261028/variants/v180/candidate/project/user_source/hdl_source/ip/afifo_32_16_256.v(325): [TFMPC] - Missing connection for port 'dib'.\n# PROGRESS cycles=    1000000 pixels=     377947 words=     188925 requests=        143\n# PROGRESS cycles=    2000000 pixels=     756591 words=     378112 requests=        282\n# PASS EXACT BMP FAT MEMORY pixels=     921600 words=     460800 fatreads=          1 requests=        340 blocked_cycles=      16200 fragment=          1\n# ** Note: $finish    : D:/codexworks/board_recovery_v170_20261028/variants/v180/tests/image_fat_memory_fragmented/tb.v(96)\n#    Time: 26787222 ns  Iteration: 1  Instance: /tb\n# End time: 02:29:03 on Oct 29,2026, Elapsed time: 0:03:06\n# Errors: 0, Warnings: 51\n"
+}

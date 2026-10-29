@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "frames": 3,
+  "canonical_blocks_checked": 43200,
+  "output_sha256": "8c22a8e5de2618925938bb7c95e54f0ec75d297e9cb4498226df7f4f80439f3a",
+  "exact_production_opening": true,
+  "refuses_overwrite": true,
+  "source_sha256": {
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\tools\\encode_video_codec12.py": "eb349f665a782b58adce95c59f4d1a7a73d3fdb347984f8ef5745c2934253d25",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\tools\\repack_codec12_stream.py": "8763049e79378a91b59602c562cca2637a98900a42744c56c98818e70c47d23d"
+  },
+  "scope": "Three-frame CLI encode exactly matches the production opening after packing; overwrite rejected. Not a second full-film encode or board test.",
+  "filter_note": "Exact production scale/fps filter retained. A trial with added pad/setsar negotiated different colors and is not shipped."
+}

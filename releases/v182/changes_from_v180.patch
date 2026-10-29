@@ -1,0 +1,105 @@
+--- v180/user_source/hdl_source/SD/sd_card_cmd.v
++++ v182/user_source/hdl_source/SD/sd_card_cmd.v
+@@ -1,6 +1,7 @@
+ 
+ module sd_card_cmd (
+   input             sys_clk,
++  output wire       read_stream,
+   input             rst,
+   input      [15:0] spi_clk_div,          //SPI module clock division parameter
+   input             cmd_req,              //SD card command request
+@@ -65,6 +66,9 @@
+   reg         read_is_multi;
+   wire [15:0] nb_blk = (nb_blk_in == 16'd0) ? 16'd1 : nb_blk_in;
+ 
++  // The first 512 payload bytes are irrevocable once the token was accepted.
++  // Keep command, token, CRC and stop handling on the existing handshake.
++  assign read_stream = (state == S_READ) && (byte_cnt < 16'd511);
+   assign cmd_req_ack = (state == S_END);
+   assign block_read_req_ack = (state == S_READ_ACK);
+   assign block_write_req_ack = (state == S_WRITE_ACK);
+--- v180/user_source/hdl_source/SD/sd_card_top.v
++++ v182/user_source/hdl_source/SD/sd_card_top.v
+@@ -71,6 +71,7 @@
+   wire        block_write_req_ack;  //SD card sector data write response
+ 
+   wire        nCS_ctrl;  //SPI module chip select control
++  wire        read_stream;
+   wire        spi_wr_req;  //SPI module data sending request
+   wire        spi_wr_ack;  //SPI module data request response
+   wire [ 7:0] spi_data_in;  //SPI module send data
+@@ -117,6 +118,7 @@
+   );
+ 
+   sd_card_cmd sd_card_cmd_m0 (
++    .read_stream        (read_stream),
+     .sys_clk            (clk),
+     .rst                (rst),
+     .spi_clk_div        (spi_clk_div),
+@@ -145,6 +147,7 @@
+   );
+ 
+   spi_master spi_master_m0 (
++    .read_stream(read_stream),
+     .sys_clk (clk),
+     .rst     (rst),
+     .nCS     (SD_nCS),
+--- v180/user_source/hdl_source/SD/spi_master.v
++++ v182/user_source/hdl_source/SD/spi_master.v
+@@ -1,6 +1,7 @@
+ 
+ module spi_master (
+   input         sys_clk,
++  input         read_stream, // Assert only for an uninterrupted read payload (MOSI=FF).
+   input         rst,
+   output        nCS,       //chip select (SPI mode)
+   output        DCLK,      //spi clock
+@@ -31,7 +32,13 @@
+   assign MOSI = MOSI_shift[7];
+   assign DCLK = DCLK_reg;
+   assign data_out = MISO_shift;
+-  assign wr_ack = (state == ACK);
++  reg stream_ack;
++  wire stream_next = read_stream && wr_req && (clk_div == 0) && CPOL && CPHA;
++  assign wr_ack = (state == ACK) || stream_ack;
++  always @(posedge sys_clk or posedge rst) begin
++    if (rst) stream_ack <= 0;
++    else stream_ack <= state == DCLK_EDGE && clk_edge_cnt == 15 && stream_next;
++  end
+   assign nCS = nCS_ctrl;
+   always @(posedge sys_clk or posedge rst) begin
+     if (rst) state <= IDLE;
+@@ -51,12 +58,12 @@
+       DCLK_EDGE:
+       //a SPI byte with a total of 16 clock edges
+       if (clk_edge_cnt == 5'd15)
+-        next_state <= LAST_HALF_CYCLE;
++        next_state <= stream_next ? DCLK_IDLE : LAST_HALF_CYCLE;
+       else next_state <= DCLK_IDLE;
+       //this is the last data edge
+       LAST_HALF_CYCLE:
+       if (clk_cnt == clk_div) next_state <= ACK;
+-      else next_state <= LAST_HALF_CYCLE;
++      else next_state <= stream_next ? DCLK_IDLE : LAST_HALF_CYCLE;
+       //send one byte complete
+       ACK: next_state <= ACK_WAIT;
+       //wait for one clock cycle, to ensure that the cancel request signal
+@@ -79,13 +86,17 @@
+   //SPI clock edge counter
+   always @(posedge sys_clk or posedge rst) begin
+     if (rst) clk_edge_cnt <= 5'd0;
+-    else if (state == DCLK_EDGE) clk_edge_cnt <= clk_edge_cnt + 5'd1;
++    else if (state == DCLK_EDGE) begin
++      if (clk_edge_cnt == 15 && stream_next) clk_edge_cnt <= 0;
++      else clk_edge_cnt <= clk_edge_cnt + 5'd1;
++    end
+     else if (state == IDLE) clk_edge_cnt <= 5'd0;
+   end
+   //SPI data output
+   always @(posedge sys_clk or posedge rst) begin
+     if (rst) MOSI_shift <= 8'd0;
+     else if (state == IDLE && wr_req) MOSI_shift <= data_in;
++    else if (state == DCLK_EDGE && clk_edge_cnt == 15 && stream_next) MOSI_shift <= 8'hff;
+     else if (state == DCLK_EDGE)
+       if (CPHA == 1'b0 && clk_edge_cnt[0] == 1'b1) MOSI_shift <= {MOSI_shift[6:0], MOSI_shift[7]};
+       else if (CPHA == 1'b1 && (clk_edge_cnt != 5'd0 && clk_edge_cnt[0] == 1'b0))

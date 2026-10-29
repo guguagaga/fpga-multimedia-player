@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "seconds": 402.30150866508484,
+  "results": [
+    {
+      "delay": 0,
+      "passed": true,
+      "output": "PASS I2S cadence delay=0 good=48000 silence_frames=0 period=256\nD:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\tests\\i2s_cadence\\tb.v:31: $finish called at 24577552000 (1ps)\n"
+    },
+    {
+      "delay": 204800,
+      "passed": true,
+      "output": "PASS I2S cadence delay=204800 good=48000 silence_frames=800 period=256\nD:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\tests\\i2s_cadence\\tb.v:31: $finish called at 24987152000 (1ps)\n"
+    }
+  ],
+  "source_sha256": {
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\tests\\i2s_cadence\\tb.v": "97437f7edde1d3380e6d7c3d5ca88149d4d72b53e9870dd5c011a0d1e9da2068",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\candidate\\project\\rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\candidate\\project\\user_source\\hdl_source\\wav_sample_builder.v": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v182\\candidate\\project\\user_source\\hdl_source\\i2s_transmitter.v": "c70740ea27bbb9e4ba2f80ddcb03e261e3a810082b325a5dbd447545876b62f8"
+  },
+  "scope": "Real av_sample_sync/wav_sample_builder/i2s_transmitter; 48000 consecutive stereo output pairs from mono ramp per case. Ideal nonempty registered byte FIFO, fixed 15fps video grants or one 16.667ms late grant. Audio clocks scaled for simulation; full SD/HDMI not included."
+}

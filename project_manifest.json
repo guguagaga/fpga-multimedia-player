@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "release": "v114-20261028-final-test",
+  "release": "v182-board-confirmed-20261029",
   "files": [
     {
       "project_path": "build/_flow_run.cmd",
@@ -38,10 +38,17 @@
       "external": false
     },
     {
+      "project_path": "build/optimization_margin.sdc",
+      "public_path": "project_template/build/optimization_margin.sdc",
+      "external": false,
+      "sha256": "cc24655dce2492ed25dc806bb7695dfa028a5252b2e138e72cf28d5f124ed45f",
+      "bytes": 124
+    },
+    {
       "project_path": "build/phy_stage_flow.tcl",
       "public_path": "project_template/build/phy_stage_flow.tcl",
-      "sha256": "3b05bdda40c7bf3a09d0d66b497d620ebf47aa819a5c69eae08c2803317775a3",
-      "bytes": 12203,
+      "sha256": "26aa810a05de05929807f12757f1bd156bf6661232feb0977d3544fcde9427be",
+      "bytes": 12863,
       "external": false
     },
     {
@@ -68,169 +75,183 @@
     {
       "project_path": "rtl/av_sample_sync.v",
       "public_path": "rtl/video/av_sample_sync.v",
-      "sha256": "4dc4ae2a23e322020ab0c0d131ba5b2c9a443bfdd8036d97417129c8fb804679",
-      "bytes": 2419,
+      "sha256": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
+      "bytes": 3097,
       "external": false
     },
     {
       "project_path": "rtl/brightness_contrast.v",
       "public_path": "rtl/display/brightness_contrast.v",
-      "sha256": "8d6b5e1aab2cf3323730714cdab0fb2431e1198e11c89294ce7de4da2b23672d",
-      "bytes": 3729,
+      "sha256": "b1b4047779aaf2964fa9142638e91a9eddf4db75427a9fae5d4bf4599589efc5",
+      "bytes": 3427,
       "external": false
     },
     {
       "project_path": "rtl/button_ctrl.v",
       "public_path": "rtl/control/button_ctrl.v",
-      "sha256": "b0a4179df0b2d7a7d9e9221067fce2470b49e35b052d86376c3ead0f89a3b487",
-      "bytes": 9330,
+      "sha256": "deb292e097b7a21f30ee548bdaa36579e42086c913a43637c484320978f7c4f8",
+      "bytes": 8358,
       "external": false
     },
     {
       "project_path": "rtl/carousel_period_cfg.v",
       "public_path": "rtl/control/carousel_period_cfg.v",
-      "sha256": "3fedb7d00f85aad5c31818be466d33724d681c3a7c04fcf2122fd8b1f0ed14d2",
-      "bytes": 3362,
+      "sha256": "44a4cfdc4e0672b1257f16dc3937d8f48de8f9f30c97fe8730f48d70621ac767",
+      "bytes": 3080,
       "external": false
+    },
+    {
+      "project_path": "rtl/codec12_block_decoder_experimental.v",
+      "public_path": "rtl/video/codec12_block_decoder_experimental.v",
+      "external": false,
+      "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+      "bytes": 10461
     },
     {
       "project_path": "rtl/div_u32.v",
       "public_path": "rtl/control/div_u32.v",
-      "sha256": "719e37390b2366d9343ff059f9b1f86c3c88a6ea83796b6c6b2b0a4820c9fca5",
-      "bytes": 4541,
+      "sha256": "9c80ab39749dfb0c2e7644a1d9622b9699f0fe9a68d00c5a7a61f257875a0879",
+      "bytes": 3890,
       "external": false
     },
     {
       "project_path": "rtl/exp_input_sync.v",
       "public_path": "rtl/control/exp_input_sync.v",
-      "sha256": "2b7d8ab484c5a4d2278b82ac58ddb20a9dbe46d8393c8bb30433ed56ba8dd3a3",
-      "bytes": 5611,
+      "sha256": "15e3af894f2623776af3251c810bcdc73fc748d0ed2db4e0abc5b63a2b54ff1a",
+      "bytes": 5576,
       "external": false
     },
     {
       "project_path": "rtl/fat32_list.v",
       "public_path": "rtl/storage/fat32_list.v",
-      "sha256": "a52f77c3fe9e99cb44398454ad29185a26bc9f6c9e88a41a99745f5408267cde",
-      "bytes": 48472,
+      "sha256": "ec1168334264da2a126aa8a34d887d44e3c75b5f91539b7eeecce08033c07f44",
+      "bytes": 45738,
       "external": false
     },
     {
       "project_path": "rtl/fat32_sector_mapper.v",
       "public_path": "rtl/storage/fat32_sector_mapper.v",
       "external": false,
-      "sha256": "4e070de8aebbbfe1dbcaffa525072fb22c2d21a639681280a3f252bc8d49851a",
-      "bytes": 11152
+      "sha256": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
+      "bytes": 13833
+    },
+    {
+      "project_path": "rtl/gradient_block_experimental.v",
+      "public_path": "rtl/video/gradient_block_experimental.v",
+      "external": false,
+      "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+      "bytes": 2530
     },
     {
       "project_path": "rtl/image_center_720p.v",
       "public_path": "rtl/image/image_center_720p.v",
       "external": false,
-      "sha256": "8e595e574f9cac1be1b3fb9de5efd99363f4bf4a2828902668c07d0b88607e91",
-      "bytes": 2740
+      "sha256": "ed2913c9da306a45539556289bdd5c5b6ada13b344c4a3c3b6100b4cc5ccf8a8",
+      "bytes": 3681
     },
     {
       "project_path": "rtl/img_scaler.v",
       "public_path": "rtl/image/img_scaler.v",
-      "sha256": "a6517b983e7d91631d84786b4637b77d832c32bb437d0382b90aedc44060a9eb",
-      "bytes": 31682,
+      "sha256": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
+      "bytes": 38238,
       "external": false
     },
     {
       "project_path": "rtl/key_long.v",
       "public_path": "rtl/control/key_long.v",
-      "sha256": "75c8bc5ce8b3aa0d952e71e3e7f0e68388f8a4b4ad0dd75109929d828c7252e8",
-      "bytes": 5263,
+      "sha256": "3a93d8b8525018916ccf21983c4fa306ea96acf0a3861d6e6cb634b78fdf7f0d",
+      "bytes": 4871,
       "external": false
     },
     {
       "project_path": "rtl/keypad_scan.v",
       "public_path": "rtl/control/keypad_scan.v",
-      "sha256": "553be31a0e40a3e58b749b60d5c5ff36bda82e679519054607a3fbe0ec83fbcf",
-      "bytes": 13854,
+      "sha256": "77768c98d48295a98374ab5994a76483ffbb74aeec27ba1caf39f3f00af9209e",
+      "bytes": 12238,
       "external": false
     },
     {
       "project_path": "rtl/osd_player_ui.v",
       "public_path": "rtl/display/osd_player_ui.v",
-      "sha256": "d92197721c327f6fd4bfcc345b2fc0c3f471f3675a86df6281626bd899005d02",
-      "bytes": 51465,
+      "sha256": "33f1ed02960a5e6b1951ea5130118caa7d81fea4441a837e127bb91ba84e8d53",
+      "bytes": 45973,
       "external": false
     },
     {
       "project_path": "rtl/pixel_fifo_24x8.v",
       "public_path": "rtl/image/pixel_fifo_24x8.v",
-      "sha256": "f142c880df0de1ee13869bd1b4628dd5186abf83b982076517bdb2b6b6020910",
-      "bytes": 3221,
+      "sha256": "11b951b7954991ccf2ee2e7fd18ac7266b21dec77e2547d26b1e2a0c0cda200f",
+      "bytes": 3108,
       "external": false
     },
     {
       "project_path": "rtl/playback_status.v",
       "public_path": "rtl/control/playback_status.v",
-      "sha256": "c7ceab969e2d748e882a1c4ffa39e71077b3b2ed5baa8872d79373a26bd4a384",
-      "bytes": 7928,
+      "sha256": "965ae9bb4a43925c2fabf04b71818e49c0262db4b867386ece75248a0a0c796b",
+      "bytes": 7447,
       "external": false
     },
     {
       "project_path": "rtl/player_ctrl.v",
       "public_path": "rtl/control/player_ctrl.v",
-      "sha256": "00ffa66131352e608d81109775131b97741cbf9e32f63c584709f8adefd369e5",
-      "bytes": 3550,
+      "sha256": "995d10e1c15a814b083ac10159a58bdabd6130e6a9e0637d6b8b0bde8dacc690",
+      "bytes": 3240,
       "external": false
     },
     {
       "project_path": "rtl/rgb565_pair_pack.v",
       "public_path": "rtl/memory/rgb565_pair_pack.v",
       "external": false,
-      "sha256": "c5b28254b4ddd969d50d2a366be00b516cbba4c3bb9ff187330a5ed4752064e0",
-      "bytes": 1439
+      "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+      "bytes": 1851
     },
     {
       "project_path": "rtl/seg595_display.v",
       "public_path": "rtl/display/seg595_display.v",
-      "sha256": "939652e15234cfc9b16c5c5176d91f7577739a267882b911691932b34c60b062",
-      "bytes": 12267,
+      "sha256": "1fb98f96b0fcad76074fbf0ad56f060320e192458466da6bb83fe5bd9a34f1bb",
+      "bytes": 10745,
       "external": false
     },
     {
       "project_path": "rtl/track_ctrl.v",
       "public_path": "rtl/control/track_ctrl.v",
-      "sha256": "13f729bdb2b247e237cb614b196ba72d8de84d53bebc2ff405fa8ed0b0d9e609",
-      "bytes": 5983,
+      "sha256": "dfe1002d5bd947e470aaa8f8b1590256f419b6b8b30eadf9be858b2f17dec83d",
+      "bytes": 5235,
       "external": false
     },
     {
       "project_path": "rtl/video_byte_ram.v",
       "public_path": "rtl/video/video_byte_ram.v",
       "external": false,
-      "sha256": "c978c19b971d1b43193e26cb94a8b3bdb467fab15426e1fd524fbcab661e62d1",
-      "bytes": 1336
+      "sha256": "daa1165d9fd517e8d2f549b6148da59e49a88e89c3d9be99cce726c0df8abff2",
+      "bytes": 2183
     },
     {
       "project_path": "rtl/video_codec8_block_decoder.v",
       "public_path": "rtl/video/video_codec8_block_decoder.v",
-      "sha256": "b6b236e293cfb00ec6dff88cf4a1edec3fc57a4d893c768aed396e48c2f2e478",
-      "bytes": 8663,
+      "sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
+      "bytes": 8330,
       "external": false
     },
     {
       "project_path": "rtl/video_codec8_raster.v",
       "public_path": "rtl/video/video_codec8_raster.v",
-      "sha256": "b0b47c27c4ecb0e679ea8204ba0146bce4121e41c6cb09004ba5bf347587c791",
-      "bytes": 3509,
+      "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+      "bytes": 3362,
       "external": false
     },
     {
       "project_path": "rtl/video_player.v",
       "public_path": "rtl/video/video_player.v",
-      "sha256": "5d68b9b689e6d95c007e1113cec027c2c8510d7828af38a308bf99b7341d87c1",
-      "bytes": 47929,
+      "sha256": "0d1e8d80cb46e5b4c29cbfc69905097e96794ca30dbcea74b86d4566b04eae7f",
+      "bytes": 41302,
       "external": false
     },
     {
       "project_path": "rtl/volume_control.v",
       "public_path": "rtl/audio/volume_control.v",
-      "sha256": "14d3012348455eeeb770e69dc2363b7b399f595fdec8d4c5495eb4d3bf9d014b",
-      "bytes": 965,
+      "sha256": "49689f75a1f530285e9439bca710af0069680a77f54f128a1ef2a92100f6c233",
+      "bytes": 1010,
       "external": false
     },
     {
@@ -250,8 +271,8 @@
     {
       "project_path": "td_project/HDMI1.4b_Transmitter_v1.0.al",
       "public_path": "project_template/td_project/HDMI1.4b_Transmitter_v1.0.al",
-      "sha256": "287d32d154ca63d28cd87cf8ce481f2a728dcf2300a8ffac812153b9e3b4e8c3",
-      "bytes": 37787,
+      "sha256": "6ce4cefe0be0e96d9b54fbe28912bcdd784d74534e6081e5ede63543d10d31ed",
+      "bytes": 38546,
       "external": false
     },
     {
@@ -271,7 +292,7 @@
     {
       "project_path": "user_source/constraints_source/timing.sdc",
       "public_path": "constraints/timing.sdc",
-      "sha256": "fea59e2e1e76660fa224bb8c664e995e38ca1a2942b90f02bd6b4bac8021fdca",
+      "sha256": "ec6f64b886ac7402adbc9184a245be11f0ec446295f0a50983288a1ee8c6a392",
       "bytes": 5908,
       "external": false
     },
@@ -283,45 +304,52 @@
       "external": true
     },
     {
+      "project_path": "user_source/hdl_source/anlogic_logo_preview.png",
+      "public_path": null,
+      "external": true,
+      "sha256": "e4bf10d9100c0cbbe52b0c60227ebc862ee53fb47f6819a5931cb294afe5a573",
+      "bytes": 3723
+    },
+    {
       "project_path": "user_source/hdl_source/async_fifo.v",
       "public_path": "rtl/memory/async_fifo.v",
-      "sha256": "bc6f9fb4164b93d8ac1b72ba6612ea17f65612bcb1051b3ed9b1d652f50f101f",
-      "bytes": 6571,
+      "sha256": "1b4f01572715de759ad8f27a64d17f7ed053ac27c20f16b9e96c1c438258d05f",
+      "bytes": 6533,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/audio_arc_calculate.v",
       "public_path": "rtl/spectrum/audio_arc_calculate.v",
-      "sha256": "552d8d86afd237666b30ae08f31247808e89eb024efde5efc670b82eb617a7dc",
-      "bytes": 1702,
+      "sha256": "308e3a70a338cae6505c52fd0ee4c6f855d0ac76aea9dd738f37aead9d4a2831",
+      "bytes": 1240,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/audio_frame.v",
       "public_path": "rtl/spectrum/audio_frame.v",
-      "sha256": "3e9b958547d49f8b5d24647acb16cfed8d7e586b95e23fc3509867681a0b1d19",
-      "bytes": 8293,
+      "sha256": "d8dbaf42a5031c30e23cf339ea61e533b6b300140043c3aaa4f6dd4248fb69a1",
+      "bytes": 10971,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/audio_transition.v",
       "public_path": "rtl/audio/audio_transition.v",
-      "sha256": "205f32a013dee53ce16c25f300d0ade77e782a30ef519ecb41672f14691d16e0",
-      "bytes": 2489,
+      "sha256": "e9531714e9d69c5ba140751c6880361b5f15cefde0ea084592ceb9327e2044f2",
+      "bytes": 3433,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/butterfly.v",
       "public_path": "rtl/spectrum/butterfly.v",
-      "sha256": "d379a1bec4a211bc90c5bb49ee519b8a133567f5ceae2b0752e35aa3165f2ba1",
-      "bytes": 1748,
+      "sha256": "4ee3cada6d100bda20f81a67249a0f4641404b86578ed080d56e4abf2da7726b",
+      "bytes": 2282,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/char_rom.v",
       "public_path": "rtl/display/char_rom.v",
-      "sha256": "3342dc02654f7cb4787e60186415342b7d802fc6a1b0eb1c7dea1389e8dfed7b",
-      "bytes": 1041,
+      "sha256": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+      "bytes": 1024,
       "external": false
     },
     {
@@ -334,36 +362,36 @@
     {
       "project_path": "user_source/hdl_source/compressed_audio_reader.v",
       "public_path": "rtl/audio/compressed_audio_reader.v",
-      "sha256": "5f83bd67eae3f31264a83d668c9c4b1669b0f37939f789139365a9ac0ce9c888",
-      "bytes": 8207,
+      "sha256": "d3ec4623ea9c11495fff4030103d64a61f6ada77767527b053ee6d3127242ab6",
+      "bytes": 12200,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/cordic_atan.v",
       "public_path": "rtl/spectrum/cordic_atan.v",
-      "sha256": "55b520decbb4d6a701f72d751073b36ccc7063e681856c69bb139767ddf07f95",
-      "bytes": 6005,
+      "sha256": "221cdd4cd7e1c5e5386ca7704aefabfd1d2f60e54ea92715955b5aef30a5c88f",
+      "bytes": 5805,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/dp_ram.v",
       "public_path": "rtl/memory/dp_ram.v",
-      "sha256": "836d8a6e70ad0678c52c4a4bacb47ac6fb6de88ed22c8073a8c6d86c561a79f4",
-      "bytes": 1485,
+      "sha256": "f1e8098d619d2a0819a991d835d33ba4240a1b9593c1a8e1e52792be2cf3a109",
+      "bytes": 1441,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/fade_in.v",
       "public_path": "rtl/audio/fade_in.v",
-      "sha256": "49083b8e6ed4b00317c6b074c898e123b21d8e1776bd69a9a15a48574eb267b2",
-      "bytes": 9409,
+      "sha256": "feadc591d25d3a75619ef6b4f5c980ddba945b685b1e86c935af6f5ec9794f8a",
+      "bytes": 8502,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/fft_256.v",
       "public_path": "rtl/spectrum/fft_256.v",
-      "sha256": "88077d51ebc12c68fd11f098f415b07b26b89af02d97d22a2e7039294969c90e",
-      "bytes": 11418,
+      "sha256": "2fecdb30c1caf3de690be503005d409158ba8d5e7e821cf64bd57cd473023cec",
+      "bytes": 10132,
       "external": false
     },
     {
@@ -383,43 +411,43 @@
     {
       "project_path": "user_source/hdl_source/hdmi_audio_tone_i2s_64fs.v",
       "public_path": "rtl/audio/hdmi_audio_tone_i2s_64fs.v",
-      "sha256": "729cb1635091b7630e5b68306e9f51fff4e3e06bae8ce08cc3d7323b3fb9d5cf",
-      "bytes": 3589,
+      "sha256": "b8ba5ef35cf8c85bc871fa29b8320ad659f87d2a744566e8a4a7d4d0859a7b91",
+      "bytes": 3094,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/hdmi_audio_tone_pcm_scale.v",
       "public_path": "rtl/audio/hdmi_audio_tone_pcm_scale.v",
-      "sha256": "0ff1ab2b39e1294c3aae814bf5a252c47c284c2cdb9568adf02d3c6cfd8ddd0b",
-      "bytes": 2900,
+      "sha256": "e78188241795a0c4085acb01ad835e8c65c3c668d75fdb28a504cba88e7d3ec3",
+      "bytes": 2732,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/hdmi_phy_warpper.v",
       "public_path": "rtl/display/hdmi_phy_warpper.v",
-      "sha256": "416b082b0987001bdbc0a7e20a557cb8fb1dca34e25dc881e6d28a8cb3cf4300",
-      "bytes": 4017,
+      "sha256": "1f4e8053d3db9fea748ba8b732bcd12c63d1fcb39b91c51880e8a96fa3b4a9a4",
+      "bytes": 2612,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/I2S_receiver.v",
       "public_path": "rtl/audio/I2S_receiver.v",
-      "sha256": "08904598b42c2e1a4836cd9fb3293bc6c791ea2f79e35c7663a33127dc97f47b",
-      "bytes": 4205,
+      "sha256": "1bd088932c0a6fded9cd6c310289dfb840cc1db77a2fe289096740322a24bcf0",
+      "bytes": 3493,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/i2s_transmitter.v",
       "public_path": "rtl/audio/i2s_transmitter.v",
-      "sha256": "b03bdbfedf566cc44ee69276336e33317864acd0992bac6b71c06a490f683364",
-      "bytes": 20570,
+      "sha256": "c70740ea27bbb9e4ba2f80ddcb03e261e3a810082b325a5dbd447545876b62f8",
+      "bytes": 18218,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/ima_stream.v",
       "public_path": "rtl/audio/ima_stream.v",
-      "sha256": "8dc2b78bbfe8deb63b133a0437aa65e60752f83467ea6e037fea39a043812cd7",
-      "bytes": 13186,
+      "sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+      "bytes": 19533,
       "external": false
     },
     {
@@ -495,15 +523,15 @@
     {
       "project_path": "user_source/hdl_source/ip/sys_pll.ipc",
       "public_path": null,
-      "sha256": "ebdc7748af0ff50b64307a4fd844274dae421533d03cf5b53c44f4bb8e9be2d9",
-      "bytes": 1794,
+      "sha256": "c6ce70f4ce1a0965863a090e5be7c377bd662113b5488e4db221219b6fbe9ed2",
+      "bytes": 1825,
       "external": true
     },
     {
       "project_path": "user_source/hdl_source/ip/sys_pll.v",
       "public_path": null,
-      "sha256": "b41c8abc3bf8314c6e22db6f2118fcd1b1ca299c93eb37ae06182c7d96b713e6",
-      "bytes": 2589,
+      "sha256": "b39691fb9a40aba2a3465486403ab8287938a9a42de5360d394bbb7f715b7e71",
+      "bytes": 3005,
       "external": true
     },
     {
@@ -512,6 +540,13 @@
       "sha256": "1c02b8ba62776f3c24a4fa0f8e73700179bba76ffa4f7ebe390a3835591e1adc",
       "bytes": 1490,
       "external": true
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/video_pll.ipc.v19_reference",
+      "public_path": null,
+      "external": true,
+      "sha256": "ed1c7c6feb52b647b7b73cb23375db46aea510215b79a5e6497bac42fe143904",
+      "bytes": 1437
     },
     {
       "project_path": "user_source/hdl_source/ip/video_pll.v",
@@ -523,57 +558,57 @@
     {
       "project_path": "user_source/hdl_source/key_remove_shakes.v",
       "public_path": "rtl/control/key_remove_shakes.v",
-      "sha256": "8832f59e7ba94bfb8cf31e4f5a772ef7177d5257a5a2532d53cbfa1d9b7f5cd9",
-      "bytes": 1762,
+      "sha256": "901aa61b08fb622d3495baa435818a424bfb859603b6d3c047fd9d76899605a3",
+      "bytes": 1591,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/lane_lvds_10_1.v",
       "public_path": "rtl/display/lane_lvds_10_1.v",
-      "sha256": "de9529321354f04837e051d0ec1681cf44783d4be3284703a788e081147500bc",
-      "bytes": 4421,
+      "sha256": "21de9e828d2b0dead56b27fa5c3772f5aafb35a77afbd63bd6bc1004fb74ad49",
+      "bytes": 2863,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/media_player.v",
       "public_path": "rtl/audio/media_player.v",
-      "sha256": "4bfee446091c2102feb5518ba164038b4cc088cd4dedf093095cd9b8d18120f9",
-      "bytes": 3437,
+      "sha256": "2875f38ec047979acb2b1dc1a2d68eaf56f8ffedd20e31cec83a7ad6271ce1e2",
+      "bytes": 4383,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/media_player_shim.v",
       "public_path": "rtl/audio/media_player_shim.v",
-      "sha256": "45293cf49d06a026b7642725d8fee1aa63e8119a6a4117136b323f191301662b",
-      "bytes": 4368,
+      "sha256": "ea386e58ef348f9ea26443438107266d88e8493e2ac9a255396b740b0da43ca4",
+      "bytes": 4018,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/osd_brand_rom.v",
       "public_path": "rtl/display/osd_brand_rom.v",
-      "sha256": "b763b5a42d657edf860759e9a0fb0452a8546b343b388505442272f9f5c86099",
-      "bytes": 2039,
+      "sha256": "a47c288c079726ac6e9e836a8cfcea2ab8d98d394be4f426779a269fbc7c3798",
+      "bytes": 1992,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/osd_core.v",
       "public_path": "rtl/display/osd_core.v",
-      "sha256": "7f90150f0709473889a4f1a1fd2945f2a547a90f52a25dccbc8a87b15bc9c58d",
-      "bytes": 4290,
+      "sha256": "d97488100842f9d97b60cdf243032dc26e84132f5b06649ea5d031b8ab9043bc",
+      "bytes": 3966,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/qoa_stream.v",
       "public_path": "rtl/audio/qoa_stream.v",
-      "sha256": "426a45eee9a50066e01b70b2466f49437543d33650b1569d6f8738c04787fdc5",
-      "bytes": 12650,
+      "sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+      "bytes": 17427,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/qoi_stream.v",
       "public_path": "rtl/image/qoi_stream.v",
-      "sha256": "5bcd6640c5b5e65874c87f70943f7004c290e5f38c7103c57db3d7506fbc723c",
-      "bytes": 6184,
+      "sha256": "24e0fa2dd27d2bac1db940a72a04f742c4c18bba8cda092db74289e11ad3550a",
+      "bytes": 8651,
       "external": false
     },
     {
@@ -586,106 +621,106 @@
     {
       "project_path": "user_source/hdl_source/SD/ax_debounce.v",
       "public_path": "rtl/display/ax_debounce.v",
-      "sha256": "93aa6dd38051250cc7f777c88466ac180afe9bcdce7838b9ea506455d8cbc9b8",
-      "bytes": 2201,
+      "sha256": "c420ceac08eb440dfc5dbfacf9caaf43352886652640f5302a598cf23aee1549",
+      "bytes": 2110,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/bmp_read.v",
       "public_path": "rtl/image/bmp_read.v",
-      "sha256": "f0ca6bdb4a863bb27475e07effda916f54ffa680a0700b60a77b0ad976ab8841",
-      "bytes": 43501,
+      "sha256": "bf42f60b95841a92d7f94dffdfd4d43bdbd71b6e0218a05a005654ad85b77fde",
+      "bytes": 47417,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/color_bar.v",
       "public_path": "rtl/display/color_bar.v",
-      "sha256": "afe1f56714ec58d2477ba1717e5a36c5a0da5fe5c07d70d11aa5ace710c4b152",
-      "bytes": 9141,
+      "sha256": "aded3d70e687d50d31c88838cd5bd85aa724d3802c36fe633faeac053e07a2ca",
+      "bytes": 9032,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/frame_fifo_read.v",
       "public_path": "rtl/memory/frame_fifo_read.v",
-      "sha256": "5952075b213ec638f5c9bb238d4d4162685f9e9b5e752674f0e68a92dbec83ac",
-      "bytes": 10172,
+      "sha256": "477e3d6b60936f9e3beb1c36563a8d7c3496969a972ed0d7c6a918e25727e96c",
+      "bytes": 10063,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/frame_fifo_write.v",
       "public_path": "rtl/memory/frame_fifo_write.v",
-      "sha256": "ed47cbe16f1962f495f945a94335af334dc199a6c72c362059fa74558a52221c",
-      "bytes": 16527,
+      "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+      "bytes": 16303,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/frame_read_write.v",
       "public_path": "rtl/memory/frame_read_write.v",
-      "sha256": "ea567a2db4518f85923c2194ac46bbd2543f3467af008bfafc09e488b81c43a5",
-      "bytes": 12729,
+      "sha256": "b4b0853b58b77debe1d210271fb506aa934c441e84645a8164e87fd2306c77fb",
+      "bytes": 10420,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sd_card_bmp.v",
       "public_path": "rtl/image/sd_card_bmp.v",
-      "sha256": "be2dfb0a7cc799de5a4475ac628eb78d487c08dc43372dde8e43ac53da2e41e2",
-      "bytes": 62302,
+      "sha256": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+      "bytes": 54041,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sd_card_cmd.v",
       "public_path": "rtl/storage/sd_card_cmd.v",
-      "sha256": "92bb58891aa1faed9c6b9ad0760e22f0fdcf3500f2e5e7d7553e0b51628ef3de",
-      "bytes": 14513,
+      "sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+      "bytes": 16086,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
       "public_path": "rtl/storage/sd_card_sec_read_write.v",
-      "sha256": "426cd26095538776b66e76047da2c7e1f0f67601c7013a8240b24bccd7eda407",
-      "bytes": 19896,
+      "sha256": "c30be71620ce5625dcefbd2d8a634e076759d03e437f92f5478f8f5073f884b2",
+      "bytes": 20215,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sd_card_top.v",
       "public_path": "rtl/storage/sd_card_top.v",
-      "sha256": "bec7f17d0b10e5bb93ba06adf20399e67e81d11fb1c6e16243457e958060242f",
-      "bytes": 10496,
+      "sha256": "8e1925545a976c13fd652c09f982331627928633c4b0ede1b6e289e5d4d62f27",
+      "bytes": 8600,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sdram.v",
       "public_path": "rtl/memory/sdram.v",
-      "sha256": "dbff0b333b06ae1a2808e3f70362da3fd20026c2fc82f9f645463a3b051b12a2",
-      "bytes": 2943,
+      "sha256": "7ac3be0a02213aa7871650bd5ef061c92809f309ea66726d55d09952f615896c",
+      "bytes": 3158,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/seg_decoder.v",
       "public_path": "rtl/display/seg_decoder.v",
-      "sha256": "4592b6e4d2e9e8b7e4ab5266d850d30e43537ab9c4157d4221e3f8dfd342decd",
-      "bytes": 766,
+      "sha256": "294a5ea59abd3602223025ce13aa1991495b1fad95ea2d8071415e7f141ba334",
+      "bytes": 833,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/seg_scan.v",
       "public_path": "rtl/display/seg_scan.v",
-      "sha256": "94642643372bbcb1ebdee2f2f6e6cf4b908b1803b63d9c5df5204792d199223b",
-      "bytes": 3071,
+      "sha256": "730be25c4f46e01d695d27c5b401f04352f89c93ea56f5c296a6a8ec12543241",
+      "bytes": 3642,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/spi_master.v",
       "public_path": "rtl/storage/spi_master.v",
-      "sha256": "37f7a21144fa5cca3cc5c3b5f68a5ad40b3108336b600e45a1367734ac61403c",
-      "bytes": 3655,
+      "sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+      "bytes": 4142,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/spi_sniffer.v",
       "public_path": "rtl/storage/spi_sniffer.v",
-      "sha256": "1d50f6ea5644ee1e17769266f30df86918cab5f093f20ca2021ba4b20585a678",
-      "bytes": 3500,
+      "sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+      "bytes": 3514,
       "external": false
     },
     {
@@ -698,57 +733,57 @@
     {
       "project_path": "user_source/hdl_source/SD/video_delay.v",
       "public_path": "rtl/display/video_delay.v",
-      "sha256": "f47c4b63f8baa6d8874c87dca5b72dfdadd19f4a107403da98752bce98936433",
-      "bytes": 1595,
+      "sha256": "1c78e575a9ef86cbf5a44a08aca5dd4c5abd3f21fda5d6d4774016772d313fb3",
+      "bytes": 1454,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/video_timing_data.v",
       "public_path": "rtl/display/video_timing_data.v",
-      "sha256": "023775115796cbe59f65be900b7aea45d827571d256a1c64d1c1cbe35c0f0867",
-      "bytes": 2410,
+      "sha256": "9b02e0732a26488693a816a9c9bbc471c6d4d1af952d39ae33e664884caf49c9",
+      "bytes": 2170,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/video_timing_gen.v",
       "public_path": "rtl/display/video_timing_gen.v",
-      "sha256": "bca1b0ecaf4239e1143c95c02c8ea93ba8c18abaf9e51946528c8a21828f0c24",
-      "bytes": 5454,
+      "sha256": "01f17d004b13e1886b128b1eee5212cf585347393de378ef08c3e838d8b3690a",
+      "bytes": 4421,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/sd_arbiter.v",
       "public_path": "rtl/storage/sd_arbiter.v",
-      "sha256": "05d515e40d75848564e938f35ed6d3bf3c2ff3eea5b8c4403f8e498996d33341",
-      "bytes": 12983,
+      "sha256": "fae6a21f747360c13c9d3e98afbdd125a437a0e6347eda007a70b204158f9974",
+      "bytes": 12387,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/sector_byte_source.v",
       "public_path": "rtl/storage/sector_byte_source.v",
-      "sha256": "d4741d0895c46d7af8c7630d1cd4dc0b75974f9c8327b4944c811117eca39791",
-      "bytes": 2737,
+      "sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+      "bytes": 3832,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/spectrum_capture.v",
       "public_path": "rtl/spectrum/spectrum_capture.v",
-      "sha256": "95075bae093fc3ffd0b012f790bfc4bb6765de1d938d6f7c0633fbb76b8bf9f8",
-      "bytes": 37431,
+      "sha256": "3b317d9fa0debb61fdfbbb06ca2c50780e3fe8f1f3069916a2b61420cc74d551",
+      "bytes": 35364,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/spectrum_display.v",
       "public_path": "rtl/spectrum/spectrum_display.v",
-      "sha256": "e6f9bdea7fbd04eb914ff4aae901c640ac6beac4301510b9fd9d24953e8c3861",
-      "bytes": 34688,
+      "sha256": "fb53fff2c86a3e90b47083635b69f26f8f5389aadc03216280c9005bbda7834b",
+      "bytes": 33432,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/startup_pulse.v",
       "public_path": "rtl/control/startup_pulse.v",
-      "sha256": "396e1e56febb8028339e646bc2f06b83e07ab11ef840e447422fb941956741c9",
-      "bytes": 713,
+      "sha256": "25558834de12e2285b779a79f9244a8cf1fa6bdee6b63897374e48e582757f88",
+      "bytes": 615,
       "external": false
     },
     {
@@ -761,8 +796,8 @@
     {
       "project_path": "user_source/hdl_source/top_tf_hdmi_audio.v",
       "public_path": "rtl/top/top_tf_hdmi_audio.v",
-      "sha256": "32764affb3d3f9073ff8b08016e99a4734008a7cc579db557e6c536c0a5cb8d9",
-      "bytes": 220589,
+      "sha256": "c88148f2416d79c4c6c295505297330941f7e3b4b256f9e4978c288daff82bda",
+      "bytes": 213104,
       "external": false
     },
     {
@@ -775,45 +810,45 @@
     {
       "project_path": "user_source/hdl_source/twiddle_rom.v",
       "public_path": "rtl/spectrum/twiddle_rom.v",
-      "sha256": "b613144824b06aa0d44acaf5815e77305bf8bc717008862d7a7d425235b04728",
-      "bytes": 1265,
+      "sha256": "2d8aec654be7c74659694f61c182758cf7cb2a00da1a49bbb3db36438b6ab225",
+      "bytes": 1234,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/video_coord.v",
       "public_path": "rtl/display/video_coord.v",
-      "sha256": "4d2118060155f031a3a11f37261bfa0661e9f20182ec5febc49ae6516038d342",
-      "bytes": 1973,
+      "sha256": "a7ca80dc5b2013dc9a7f107ccbddc557d1f601ae1b679a277dccd812993160c7",
+      "bytes": 1776,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/video_rgb_to_axis_640x480.v",
       "public_path": "rtl/display/video_rgb_to_axis_640x480.v",
-      "sha256": "1ecc01472a4340d32b0f2803a907ab3adc1ee84c7880f11e49cdf19eec75cc9d",
-      "bytes": 1746,
+      "sha256": "6b73392154b2975abf6cd2cb9fe5069bf43ce103b5dab6ad6508cfc9f9d1d26e",
+      "bytes": 1577,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/video_source_test.v",
       "public_path": "rtl/display/video_source_test.v",
-      "sha256": "39cc05c9684a594d4254d11e66e97344053ab75bdb00f3f5a301643fd7aadbfc",
-      "bytes": 2983,
+      "sha256": "71e8702932e7ca4d80b2a66842967573a72eb4c9d246bfbb6c1767ba3516e9f8",
+      "bytes": 2231,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/wav_player.v",
       "public_path": "rtl/audio/wav_player.v",
-      "sha256": "6e0f895a5493a17027bc6062c13aa07be733c9f8ee0136768ba17a7f51aa230f",
-      "bytes": 33680,
+      "sha256": "03235e99ea1bf9cbb7008fb1ab93893ab9bee4c57ba7d4b4a685aa53053a98e3",
+      "bytes": 33362,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/wav_sample_builder.v",
       "public_path": "rtl/audio/wav_sample_builder.v",
-      "sha256": "94196dfe0589b65348e168ee95d6a742606623a3e346b2f006dc6385b4a8f0c9",
-      "bytes": 22915,
+      "sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+      "bytes": 20363,
       "external": false
     }
   ],
-  "scope": "Exact frozen v114 production source, not timing closed."
+  "scope": "Exact v182 production file mapping. Imported vendor dependencies are verified by hash; research directories are not production."
 }

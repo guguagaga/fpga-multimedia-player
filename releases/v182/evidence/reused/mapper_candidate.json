@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "summary": "PASS real FAT mapper completes old video-audio sector, then selects playlist base without error\nD:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\tests\\mapper_candidate\\tb.v:38: $finish called at 6226000 (1ps)\n",
+  "source_sha256": {
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\user_source\\hdl_source\\media_player.v": "2875f38ec047979acb2b1dc1a2d68eaf56f8ffedd20e31cec83a7ad6271ce1e2",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\user_source\\hdl_source\\compressed_audio_reader.v": "d3ec4623ea9c11495fff4030103d64a61f6ada77767527b053ee6d3127242ab6",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\user_source\\hdl_source\\sector_byte_source.v": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\user_source\\hdl_source\\ima_stream.v": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\user_source\\hdl_source\\qoa_stream.v": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\candidate\\project\\rtl\\fat32_sector_mapper.v": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
+    "D:\\codexworks\\board_recovery_v170_20261028\\variants\\v172\\tests\\mapper_candidate\\tb.v": "0780f16040852bd4640899be3df182baadbeb284723f4a46fff4240878b30713"
+  }
+}

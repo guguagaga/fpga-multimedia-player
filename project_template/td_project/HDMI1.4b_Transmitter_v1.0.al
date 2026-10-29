@@ -10,6 +10,22 @@
     </HardWare>
     <Source_Files>
         <Verilog>
+            <File Path="../rtl/codec12_block_decoder_experimental.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="1100"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/gradient_block_experimental.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="1101"/>
+                </FileInfo>
+            </File>
             <File Path="../rtl/fat32_sector_mapper.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>

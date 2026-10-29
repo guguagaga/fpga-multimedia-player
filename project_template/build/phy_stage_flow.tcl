@@ -169,6 +169,13 @@ proc opt_place_fun {} {
   }
 
 ### Editable zone for opt_place ###
+  # TD interprets clock objects correctly through its SDC parser.
+  # This separate file tightens optimization, not the signoff requirement.
+  upvar SDCList SDCList
+  clear_sdc -user
+  foreach sdc $SDCList { read_sdc $sdc }
+  read_sdc ../../../build/optimization_margin.sdc
+
   # [CHG 2026-10-11 routefix] 拥塞对策：移植 10-09 18:16 成功构建的参数（逐字来自
   # D:/fpga_work/build_run2_ok.log）。fix13 网表在 (x26y58_local4) 出现确定性
   # route 违例 PHY-8023 / RUN-8102（裸 place/route 全量重跑两次均在同一坐标复现）。
@@ -197,10 +204,10 @@ proc opt_place_fun {} {
   set_param place aggr_neighbor_dist 5
   set_param place enhanced_beeline_opt 3
   # TD official CongestionHigh strategy, for the 99%-packed FAT candidate.
-  set_param place ofv 70
-  set_param place opt_max_density 50
-  set_param place target_density 0.6
-  set_param place target_density_pp 0.7
+  # v133: use default ofv; retain other timing/routing settings.
+  # v133: use default opt_max_density; retain other timing/routing settings.
+  # v133: use default target_density; retain other timing/routing settings.
+  # v133: use default target_density_pp; retain other timing/routing settings.
   set_param place dram_area_factor 12
   set_param place enhanced_gp on
   set_param place macro_performance macro_congestion
@@ -263,10 +270,15 @@ proc opt_route_fun {} {
     fix_hold
     set_param route fix_hold on
     set_param flow qor_monitor on
-    report_qor -step route -file route.qor
+    # Final QoR follows restoration of the production SDC.
   }
   report_area -io_info -file ${prj_name}_phy.area
+  # Remove optimization-only constraints before final reports, DB and bit.
+  upvar SDCList SDCList
+  clear_sdc -user
+  foreach sdc $SDCList { read_sdc $sdc }
   update_timing -mode final
+  report_qor -step route -file route.qor
   report_timing_status -file ${prj_name}_phy.ts
   report_timing_summary -file ${prj_name}_pr.timing
   report_timing_exception -file ${prj_name}_exception.timing
