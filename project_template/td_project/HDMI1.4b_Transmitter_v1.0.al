@@ -592,6 +592,30 @@
                     <Attr Name="CompileOrder" Val="75"/>
                 </FileInfo>
             </File>
+            <File Path="../rtl/video_playlist_ctrl.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="75"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/video_eof_guard.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="75"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/video_catalog.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="75"/>
+                </FileInfo>
+            </File>
             <File Path="../rtl/video_codec8_block_decoder.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>

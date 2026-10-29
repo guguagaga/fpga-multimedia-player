@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "release": "v182-board-confirmed-20261029",
+  "release": "v183-playlist-timing-pass-board-pending",
   "files": [
     {
       "project_path": "build/_flow_run.cmd",
@@ -124,8 +124,8 @@
     {
       "project_path": "rtl/fat32_list.v",
       "public_path": "rtl/storage/fat32_list.v",
-      "sha256": "ec1168334264da2a126aa8a34d887d44e3c75b5f91539b7eeecce08033c07f44",
-      "bytes": 45738,
+      "sha256": "6456bd21e18a72193d1786cebbc6e08723c51168dad3f7545b855732c4920b44",
+      "bytes": 47358,
       "external": false
     },
     {
@@ -173,8 +173,8 @@
     {
       "project_path": "rtl/osd_player_ui.v",
       "public_path": "rtl/display/osd_player_ui.v",
-      "sha256": "33f1ed02960a5e6b1951ea5130118caa7d81fea4441a837e127bb91ba84e8d53",
-      "bytes": 45973,
+      "sha256": "cd2ee1d9bf5ec17c24737553700dab1dd813c28ebc13870f43ab237bf535c477",
+      "bytes": 47508,
       "external": false
     },
     {
@@ -227,6 +227,13 @@
       "bytes": 2183
     },
     {
+      "project_path": "rtl/video_catalog.v",
+      "public_path": "rtl/video/video_catalog.v",
+      "external": false,
+      "sha256": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+      "bytes": 2725
+    },
+    {
       "project_path": "rtl/video_codec8_block_decoder.v",
       "public_path": "rtl/video/video_codec8_block_decoder.v",
       "sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
@@ -241,11 +248,25 @@
       "external": false
     },
     {
+      "project_path": "rtl/video_eof_guard.v",
+      "public_path": "rtl/video/video_eof_guard.v",
+      "external": false,
+      "sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+      "bytes": 1732
+    },
+    {
       "project_path": "rtl/video_player.v",
       "public_path": "rtl/video/video_player.v",
-      "sha256": "0d1e8d80cb46e5b4c29cbfc69905097e96794ca30dbcea74b86d4566b04eae7f",
-      "bytes": 41302,
+      "sha256": "abdad718a7a159b28a251c22c92c2baff4583e6f8bdf12ffa7788120360426b4",
+      "bytes": 43929,
       "external": false
+    },
+    {
+      "project_path": "rtl/video_playlist_ctrl.v",
+      "public_path": "rtl/video/video_playlist_ctrl.v",
+      "external": false,
+      "sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+      "bytes": 3437
     },
     {
       "project_path": "rtl/volume_control.v",
@@ -271,8 +292,8 @@
     {
       "project_path": "td_project/HDMI1.4b_Transmitter_v1.0.al",
       "public_path": "project_template/td_project/HDMI1.4b_Transmitter_v1.0.al",
-      "sha256": "6ce4cefe0be0e96d9b54fbe28912bcdd784d74534e6081e5ede63543d10d31ed",
-      "bytes": 38546,
+      "sha256": "9302321108f00afe7a1bb88a6f99eb0f74f241b82e1273926595272e7105e02f",
+      "bytes": 39634,
       "external": false
     },
     {
@@ -796,8 +817,8 @@
     {
       "project_path": "user_source/hdl_source/top_tf_hdmi_audio.v",
       "public_path": "rtl/top/top_tf_hdmi_audio.v",
-      "sha256": "c88148f2416d79c4c6c295505297330941f7e3b4b256f9e4978c288daff82bda",
-      "bytes": 213104,
+      "sha256": "4ea9a835b3b3a44535c63ea9eb8911b7cd90d413aa6aaf43eaaca0d5a1a0355b",
+      "bytes": 215824,
       "external": false
     },
     {
@@ -850,5 +871,5 @@
       "external": false
     }
   ],
-  "scope": "Exact v182 production file mapping. Imported vendor dependencies are verified by hash; research directories are not production."
+  "scope": "Feature branch candidate; v182 remains the board-confirmed stable tag. Vendor IP imported by exact hash."
 }

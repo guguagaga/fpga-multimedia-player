@@ -1,5 +1,9 @@
 # FPGA 多媒体播放器 / FPGA Multimedia Player
 
+> 当前分支为 **v183 多视频候选版**：支持四组视频/音轨、上一部/下一部及播完自动循环。功能仿真与独立内部时序检查通过，**待上板验收**。已上板确认的稳定版本仍为 v182；下载稳定版请使用下方 v182 Release。
+>
+> [v183 操作、编号规则与验收](docs/VIDEO_PLAYLIST_V183.md) · [v183 验证与时序证据](releases/v183/evidence)
+
 基于安路 EG4S20BG256 的纯 RTL 多媒体播放器：SD/FAT32 簇链读取、BMP/QOI 图片自适应与轮播、Codec8/9/10/12 视频、PCM/IMA/QOA 音频、HDMI、频谱和中文 OSD。
 
 **当前稳定基线：v182，2026-10-29。用户使用配套 bit 与新影片上板后反馈“一切正常”。** 内部独立时序检查通过：setup WNS 0.000 ns、hold WNS +0.023 ns、违例端点为零。setup 无正余量，外部 IO/CDC 与量化耐久性验证仍需完善。

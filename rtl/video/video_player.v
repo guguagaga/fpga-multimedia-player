@@ -12,6 +12,7 @@
 // SPI upper-bound throughput is SD_CORE_HZ/32 bytes/s at divider0, before overhead.
 // See docs/ARCHITECTURE.md and encoder/README.md for profiles and file layout.
 module video_player #(
+  parameter PLAYLIST_SUPPORT = 0,
   // Default keeps historical RLE/COPY_UP formats available to other projects.
   // Top selects zero for the720P Codec8/9/10/12 block-codec implementation.
   parameter                LEGACY_CODECS = 1,
@@ -85,6 +86,7 @@ module video_player #(
   output reg [1:0] wr_buf_idx,
   output reg [1:0] dp_buf_idx,
   // ---- status ----
+  output wire movie_last_shown,
   output reg active,  // 1 = video owns the write path and the display
   output reg disp_ok,  // 1 = at least one video frame is on screen
   output wire [3:0] dbg_state
@@ -220,11 +222,43 @@ module video_player #(
   wire bf_empty = (bf_wp == bf_rp);
   wire bf_full = bf_usedw[BF_AW];
   wire wrfin_pulse = wrfin_s2 ^ wrfin_s1;
-  wire            frame_commit = (state == V_FIN) &&
+  wire            frame_commit = (state == V_FIN) && !movie_last_shown &&
                                    (wrfin_pulse || wrfin_seen) &&
                                    (!AV_SYNC || disp_ok || present_enable) &&
                                    (deficit >= ACC_ONE) && !pause && (!AV_SYNC || !disp_ok || timeline_run_q);
   wire use_audio_clock = AUDIO_MASTER && audio_clock_active;
+  // Read the declared frame count, not the prefetch/file wrap position.
+  // A last frame is held until its PCM budget is consumed in the top level.
+  wire playlist_header_valid;
+  generate if (PLAYLIST_SUPPORT) begin : g_playlist_end
+    reg [31:0] remaining;
+    reg one_left, low_zero, finished;
+    assign movie_last_shown = finished;
+    assign playlist_header_valid = remaining != 0;
+    always @(posedge clk or posedge rst) begin
+      if (rst) begin remaining<=0;one_left<=0;low_zero<=0;finished<=0;end
+      else if (!play) begin remaining<=0;one_left<=0;low_zero<=0;finished<=0;end
+      else begin
+        one_left <= remaining == 1;
+        low_zero <= remaining[15:0] == 0;
+        if (state==V_HDR && sd_sec_read_data_valid_q) begin
+          case(hdr_idx)
+            16: remaining[7:0] <= sd_sec_read_data_q;
+            17: remaining[15:8] <= sd_sec_read_data_q;
+            18: remaining[23:16] <= sd_sec_read_data_q;
+            19: remaining[31:24] <= sd_sec_read_data_q;
+          endcase
+        end else if(frame_commit) begin
+          remaining[15:0] <= remaining[15:0] - 16'd1;
+          if(low_zero) remaining[31:16] <= remaining[31:16] - 16'd1;
+          if(one_left) finished<=1;
+        end
+      end
+    end
+  end else begin : g_legacy_loop
+    assign movie_last_shown = 1'b0;
+    assign playlist_header_valid = 1'b1;
+  end endgenerate
   wire pacing_tick = use_audio_clock ? audio_frame_tick : vsync_tick;
   wire [19:0] pacing_credit = use_audio_clock ? ACC_ONE : {4'd0, fps_inc};
   wire frame_full = (pcnt >= FRAME_PIXELS);
@@ -729,7 +763,7 @@ module video_player #(
               if (hdr_idx != 5'd31) hdr_idx <= hdr_idx + 5'd1;
             end
             if (sector_done) begin
-              if (hdr_magic && !codec_bad && (file_bytes > 32'd512)) begin
+              if (hdr_magic && !codec_bad && playlist_header_valid && (file_bytes > 32'd512)) begin
                 end_sec  <= base_sec + ((file_bytes + 32'd511) >> 9);
                 sec_addr <= base_sec + 32'd1;
                 active   <= 1'b1;
@@ -750,7 +784,10 @@ module video_player #(
           // ------------------------------------------------ ask for a frame
           V_REQ: begin
             wrfin_seen <= 1'b0;  // only look at pulses from now on
-            if (write_req_ack) begin
+            // Keep the final displayed buffer intact until its PCM finishes.
+            if (movie_last_shown) begin
+              write_req <= 1'b0;
+            end else if (write_req_ack) begin
               write_req  <= 1'b0;
               settle_cnt <= 5'd20;
               state      <= V_SETTLE;

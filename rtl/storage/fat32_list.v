@@ -87,6 +87,11 @@ module fat32_list #(
   // [Design note 视频]第一个 .VID 文件的起始扇区（0 = 卡上没有视频文件）。
   //   顶层接给 video_player 的 start_sector；为 0 时顶层直接把视频功能关掉。
   output wire [31:0] video_sector_o,
+  output reg media_entry_valid,
+  output reg media_entry_audio,
+  output reg [15:0] media_entry_prefix,
+  output wire [31:0] media_entry_sector,
+
   // [Design note 视频音轨]第一个 .VAU 文件的起始扇区（0 = 没配专属音轨）。
   //   只在"进入视频模式"时被顶层的一个 1 拍脉冲打进 wav_player 的 track_sel，
   //   平时完全不参与歌单（扩展名不是 WAV，所以不计入 song_count）。
@@ -270,8 +275,12 @@ module fat32_list #(
     else cluster_valid_q <= (cur_cluster >= 32'd2);
   end
   reg [31:0] entry_sector_q;
+  assign media_entry_sector = entry_sector_q;
   always @(posedge clk or posedge rst) begin
     if (rst) begin
+      media_entry_valid <= 0;
+      media_entry_audio <= 0;
+      media_entry_prefix <= 0;
       entry_commit_q  <= 0;
       entry_sector_q  <= 0;
       image_commit_q  <= 0;
@@ -279,6 +288,12 @@ module fat32_list #(
       video_commit_q  <= 0;
       vaudio_commit_q <= 0;
     end else begin
+      media_entry_valid <= state == ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off == 31 &&
+                           collecting && cluster_valid_q && (is_vid || is_vau);
+      if (state == ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off == 31) begin
+          media_entry_audio <= is_vau;
+          media_entry_prefix <= cur_name[63:48];
+      end
       entry_commit_q <= state == ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off == 31;
       image_commit_q <= state == ST_READ_ROOT && sd_sec_read_data_valid_q && entry_off == 31 &&
           collecting && (is_bmp || is_qoi) && cluster_valid_q && image_count_o < 4;

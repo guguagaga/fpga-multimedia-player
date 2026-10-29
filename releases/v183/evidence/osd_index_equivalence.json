@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "cases": 256,
+  "output": "PASS all 256 ASCII byte-to-font indices, no added pipeline stage\nD:\\codexworks\\video_playlist_v183_20261029\\timing_index\\tests\\tb.v:17: $finish called at 256 (1s)\n",
+  "source_sha256": "cd2ee1d9bf5ec17c24737553700dab1dd813c28ebc13870f43ab237bf535c477",
+  "scope": "Exhaustive combinational miter extracted from old/new actual source. All other OSD logic unchanged; no clock or pixel latency change."
+}
