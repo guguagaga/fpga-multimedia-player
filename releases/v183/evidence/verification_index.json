@@ -1,0 +1,116 @@
+{
+  "passed": true,
+  "candidate_root": "D:\\codexworks\\video_playlist_v183_20261029\\timing_index",
+  "tests": [
+    {
+      "name": "catalog_controller",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\tests\\controls\\playlist_result.json",
+      "sha256": "e023bf0c2fa13588fc34d9cdce0942563e5558ca2f66a481fb96293fccf05936",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\video_catalog.v": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+        "rtl\\video_playlist_ctrl.v": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc"
+      }
+    },
+    {
+      "name": "directory_catalog",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\result.json",
+      "sha256": "96751ce23669d8ec984b2a4be844bb1d888e9f177046336b633d87fb4310b66a",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\fat32_list.v": "6456bd21e18a72193d1786cebbc6e08723c51168dad3f7545b855732c4920b44",
+        "rtl\\video_catalog.v": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae"
+      }
+    },
+    {
+      "name": "actual_video_switch",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\tests\\video_switch\\result.json",
+      "sha256": "99ad955d8beac422724ba0ffd5ac9b32ec5124c60e17a3977742442fa69ae500",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\video_playlist_ctrl.v": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+        "rtl\\video_eof_guard.v": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+        "rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
+        "rtl\\video_player.v": "abdad718a7a159b28a251c22c92c2baff4583e6f8bdf12ffa7788120360426b4",
+        "rtl\\video_byte_ram.v": "daa1165d9fd517e8d2f549b6148da59e49a88e89c3d9be99cce726c0df8abff2",
+        "rtl\\video_codec8_raster.v": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+        "rtl\\codec12_block_decoder_experimental.v": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+        "rtl\\gradient_block_experimental.v": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+        "rtl\\fat32_sector_mapper.v": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
+        "rtl\\rgb565_pair_pack.v": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+        "user_source\\hdl_source\\sd_arbiter.v": "fae6a21f747360c13c9d3e98afbdd125a437a0e6347eda007a70b204158f9974",
+        "user_source\\hdl_source\\SD\\frame_fifo_write.v": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15"
+      }
+    },
+    {
+      "name": "eof_cdc",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\tests\\eof_cdc\\result.json",
+      "sha256": "58c689d8a3844f7cfc5c1711695ecab665bbc386b05b2da5b76aee9134e8b40c",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\video_eof_guard.v": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+        "rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a"
+      }
+    },
+    {
+      "name": "actual_audio_switch",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\tests\\audio_playlist\\result.json",
+      "sha256": "b27e38f4dc20385a5939b8314f6e98ce4b2722ac102fe4e7cc2716d4e79c4246",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\video_playlist_ctrl.v": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+        "user_source\\hdl_source\\media_player.v": "2875f38ec047979acb2b1dc1a2d68eaf56f8ffedd20e31cec83a7ad6271ce1e2",
+        "user_source\\hdl_source\\compressed_audio_reader.v": "d3ec4623ea9c11495fff4030103d64a61f6ada77767527b053ee6d3127242ab6",
+        "user_source\\hdl_source\\sector_byte_source.v": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+        "user_source\\hdl_source\\qoa_stream.v": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+        "user_source\\hdl_source\\ima_stream.v": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+        "user_source\\hdl_source\\audio_transition.v": "e9531714e9d69c5ba140751c6880361b5f15cefde0ea084592ceb9327e2044f2",
+        "user_source\\hdl_source\\async_fifo.v": "1b4f01572715de759ad8f27a64d17f7ed053ac27c20f16b9e96c1c438258d05f",
+        "user_source\\hdl_source\\wav_sample_builder.v": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+        "user_source\\hdl_source\\i2s_transmitter.v": "c70740ea27bbb9e4ba2f80ddcb03e261e3a810082b325a5dbd447545876b62f8",
+        "rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
+        "rtl\\volume_control.v": "49689f75a1f530285e9439bca710af0069680a77f54f128a1ef2a92100f6c233",
+        "  reg         sel_pending;": "2168a04c73b71009ad6a28e1f1037b7fa0e73fb036b0503d897e88db8657f070",
+        "  wire av_drain_old_stream =": "70fda0e1382d94d6c4199aca05e93e37d20dcf6e862fd52bf5c9dd0251174911"
+      }
+    },
+    {
+      "name": "actual_720p",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\tests\\av_v183_continuous_3_final_frame\\result.json",
+      "sha256": "2fb2d8099c56737cad1ba8f6f109843cd2077a018b96de6185533228617b15d4",
+      "passed": true,
+      "final_source_checks": {
+        "rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
+        "rtl\\video_byte_ram.v": "daa1165d9fd517e8d2f549b6148da59e49a88e89c3d9be99cce726c0df8abff2",
+        "rtl\\video_player.v": "abdad718a7a159b28a251c22c92c2baff4583e6f8bdf12ffa7788120360426b4",
+        "rtl\\video_codec8_block_decoder.v": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
+        "rtl\\video_codec8_raster.v": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+        "rtl\\rgb565_pair_pack.v": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+        "user_source\\hdl_source\\sd_arbiter.v": "fae6a21f747360c13c9d3e98afbdd125a437a0e6347eda007a70b204158f9974",
+        "user_source\\hdl_source\\SD\\sd_card_sec_read_write.v": "c30be71620ce5625dcefbd2d8a634e076759d03e437f92f5478f8f5073f884b2",
+        "user_source\\hdl_source\\SD\\frame_fifo_write.v": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+        "rtl\\fat32_sector_mapper.v": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
+        "user_source\\hdl_source\\compressed_audio_reader.v": "d3ec4623ea9c11495fff4030103d64a61f6ada77767527b053ee6d3127242ab6",
+        "user_source\\hdl_source\\sector_byte_source.v": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+        "user_source\\hdl_source\\ima_stream.v": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+        "user_source\\hdl_source\\qoa_stream.v": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+        "rtl\\codec12_block_decoder_experimental.v": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+        "rtl\\gradient_block_experimental.v": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08"
+      }
+    },
+    {
+      "name": "demo_media",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\reports\\demo_media_validation.json",
+      "sha256": "43d0e935e8adb3d2f00676d5d0dcec3f10c05d4bccfdfa5ff435c99c85855186",
+      "passed": true,
+      "final_source_checks": {}
+    },
+    {
+      "name": "osd_index_equivalence",
+      "result": "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\reports\\osd_index_equivalence.json",
+      "sha256": "1577c32d6bfb6a1919a61ba09166fda4d72440cc537cf2fd49577778b32dcca5",
+      "passed": true
+    }
+  ],
+  "scope": "Layered module/integration regressions; reused RTL bytes and extracted audio wiring checked against final candidate. No full-board simulation or physical board acceptance claimed."
+}

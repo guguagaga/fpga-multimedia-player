@@ -141,6 +141,17 @@ module top (
   wire        vid_sd_sec_read_data_valid;
   wire        vid_sd_sec_read_end;
   wire [ 3:0] vid_dbg_state;
+  wire [31:0] legacy_video_sector, legacy_vau_sector;
+  wire media_entry_valid, media_entry_audio;
+  wire [15:0] media_entry_prefix;
+  wire [31:0] media_entry_sector;
+  wire [3:0] video_available;
+  wire [1:0] video_index;
+  wire video_engine_play, video_switching, video_audio_select;
+  wire video_playlist_ended;
+  wire video_auto_enabled, video_selection_failed, video_duplicate_seen;
+  wire video_last_shown;
+  reg [1:0] video_budget_empty_sync;
   wire [31:0] fat_video_sector;  // fat32_list 找到的 .VID 起始扇区（0 = 卡上没有）
   wire [31:0] vau_sector;  // fat32_list 找到的 .VAU 起始扇区（0 = 没配视频音轨）
   wire [31:0] song5_sector;  // 【超时恢复】无 .VAU 时使用歌单第 5 首
@@ -160,7 +171,7 @@ module top (
   //   现在：KEY3 的手势先由 key_long 分类（长按根本不发 tap ⇒ 不会触发切图），
   //     万一还是碰上装载中，就把意图挂起，等 img_loading 落下立刻执行。
   reg         vid_toggle_pending;
-  wire        video_seq_present = (fat_video_sector != 32'd0);
+  wire        video_seq_present = |video_available;
 
   // 视频只要求"首图已提交"（否则屏幕是黑的、交给视频也没意义）与卡上有 .VID。
   // 不再要求 !img_loading：那个条件正是把长按吃掉的原因。
@@ -802,7 +813,8 @@ module top (
   //   是【低电平 + 内部 20 ms 消抖】输入，1 拍脉冲会被那条消抖整条滤掉。
   //   这里直接用本模块已经消抖好的电平取反（= 低有效按键），效果等同真按键，
   //   比"脉冲展宽 50 ms"省掉一个 26 位计数器（面积：约 26 个 FF）。
-  wire exp_nextimg_key_n = ~exp_key_down[2];  // KEY2 按下 = 0
+  // In video mode KEY2 selects the previous movie, without queuing an image.
+  wire exp_nextimg_key_n = video_play || ~exp_key_down[2];
   wire exp_auto_key_n = ~exp_key_down[4];  // KEY4 按下 = 0
 
   // ===================== 【面积开关】新功能开关 =====================
@@ -940,9 +952,9 @@ module top (
     //     本模块是电平式消费、无一次性门控；若接 long_b 电平，按住期间会每拍推一次索引 。
     //   · prev_req 原接 btn_long_b（电平，同隐患）——"上一首"入口按用户需求撤销，绑 0。
     // [Design note exp-io]扩展板 KEY1 也接进"下一首"（单拍脉冲，与键盘 C 或起来）
-    .next_req(kp_next_song || exp_next_song_evt),
+    .next_req((kp_next_song || exp_next_song_evt) && !video_play),
     .prev_req(1'b0),  // [Design note] 撤销（原 btn_long_b = 长按上一首）
-    .auto_togg(btn_dbl_a),  // key1 双击   = 自动续播 开/关
+    .auto_togg(btn_dbl_a && !video_play),  // key1 双击   = 自动续播 开/关
                             //（key2 已被图片轮播占用，key1 单击已用于
                             //  播放/暂停、长按已用于快进，所以用双击）
     // wav_reader 反馈
@@ -951,8 +963,8 @@ module top (
     //   （或被 track_bad 打断）就把歌单索引推进一首 —— 实测表现就是
     //   "退出视频后放的变成了另一首歌"。视频期间歌单索引应当冻结，
     //   视频音轨不会自动从头重选；用户重新进入视频时才会重选。
-    .track_end(wav_track_end && !vau_tgt),
-    .track_bad(wav_track_bad),
+    .track_end(wav_track_end && !vau_tgt && !video_play),
+    .track_bad(wav_track_bad && !video_play),
     // 输出
     .song_idx(play_song_idx),
     .track_sel_valid(track_sel_valid),
@@ -1826,7 +1838,7 @@ module top (
       vau_fire <= 1'b0;
     end else begin
       vau_fire <= 1'b0;
-      if (VAU_ON && (vau_tgt != video_play)) begin
+      if (VAU_ON && ((!video_play && vau_tgt != video_play) || video_audio_select)) begin
         // 模式刚变 -> 立刻请求，等确认
         vau_tgt  <= video_play;
         vau_sent <= 1'b0;
@@ -1900,7 +1912,7 @@ module top (
     if (rst_all) begin
       av_wait <= 0;
       av_audio_failed <= 0;
-    end else if (!video_play) begin
+    end else if (!video_engine_play) begin
       av_wait <= 0;
       av_audio_failed <= 0;
     end else if (!av_started && !video_audio_ready) begin
@@ -2344,7 +2356,7 @@ module top (
   ) u_av_sample_sync (
     .clk                 (audio_mclk),
     .rst                 (audio_rst),
-    .enable_sd           (VAU_ON && video_play && !av_audio_failed),
+    .enable_sd           (VAU_ON && video_engine_play && !av_audio_failed),
     .started_sd          (av_started),
     .paused_sd           (video_paused),
     .draining_sd         (av_drain_old_stream),
@@ -2815,7 +2827,7 @@ module top (
       // [Design note exp-io]扩展板 KEY0 只做"视频暂停/恢复"，
       //   不并进 btn_pause_evt —— 那条还会在非视频模式下暂停音乐，
       //   而 KEY0 的需求就是纯视频控制。
-      if (!video_play) video_paused <= 1'b0;
+      if (!video_play || video_switching) video_paused <= 1'b0;
       else if (btn_pause_evt || exp_video_pause_evt) video_paused <= ~video_paused;
       // [Design note exp-io]扩展板 KEY3 一次按下 = 进入/退出视频
       //   （板载 B1 仍然要长按 0.8 s；两者都产生单拍事件，共用同一条边沿）
@@ -2886,7 +2898,7 @@ module top (
           av_display_toggle <= 0;
           av_last_buf <= 0;
           av_have_buf <= 0;
-        end else if (!video_play) av_have_buf <= 0;
+        end else if (!video_engine_play) av_have_buf <= 0;
         else if(vid_disp_ok && vid_vsync_tick &&
          (!av_have_buf || av_last_buf!=vid_disp_buf_idx))begin
           av_display_toggle <= ~av_display_toggle;
@@ -2894,15 +2906,23 @@ module top (
           av_have_buf <= 1;
         end
       end
+      video_eof_guard u_video_eof_guard (
+        .clk(sd_card_clk), .rst(rst_all), .enable(video_engine_play),
+        .paused(video_paused), .last_committed(video_last_shown),
+        .frame_presented(vid_disp_ok && vid_vsync_tick &&
+                         (!av_have_buf || av_last_buf != vid_disp_buf_idx)),
+        .budget_empty(video_budget_empty_sync[1]), .ended(video_playlist_ended));
+
       // Audio starts only after the first committed video buffer reaches a display boundary.
       always @(posedge sd_card_clk or posedge rst_all) begin
         if (rst_all) av_started <= 0;
-        else if (!video_play) av_started <= 0;
+        else if (!video_engine_play) av_started <= 0;
         else if (vid_disp_ok && vid_vsync_tick) av_started <= 1;
       end
 
 
       video_player #(
+        .PLAYLIST_SUPPORT(1),
         .LEGACY_CODECS(0),
         .BF_AW        (13),
         .BF_HI        (16'd7648),
@@ -2923,9 +2943,10 @@ module top (
         // 视频必须等 FAT 目录扫完（fat_video_sector 才有效），和 bmp_read 一样
         //  用 sd_init_done & list_ready 做门控
         .sd_init_done          (sd_init_done & list_ready),
-        .play                  (video_play),
+        .play                  (video_engine_play),
         .pause                 (video_paused),
         .start_sector          (fat_video_sector),
+        .movie_last_shown      (video_last_shown),
         .img_disp_buf          (img_disp_buf_idx),
         .sd_sec_read           (vid_sd_sec_read),
         .sd_sec_read_addr      (vid_sd_sec_read_addr),
@@ -3008,9 +3029,13 @@ module top (
     // [Design note]把数据区首扇区引出来给图片扫描做起点（list_ready 后有效）
     .data_start_o          (fat_data_start),
     // [Design note 视频]根目录里第一个 .VID 文件的起始扇区（0 = 卡上没有视频）
-    .video_sector_o        (fat_video_sector),
+    .video_sector_o        (legacy_video_sector),
     // [Design note 视频配音轨]根目录里第一个 .VAU 文件（0 = 没配专属音轨）
-    .vaudio_sector_o       (vau_sector),
+    .vaudio_sector_o       (legacy_vau_sector),
+    .media_entry_valid     (media_entry_valid),
+    .media_entry_audio     (media_entry_audio),
+    .media_entry_prefix    (media_entry_prefix),
+    .media_entry_sector    (media_entry_sector),
     .song5_sector_o        (song5_sector),
     .image_count_o         (directory_image_count),
     .image0_o              (directory_image0),
@@ -3020,6 +3045,28 @@ module top (
     // [Design note 字节级探针]扇区0 的 byte0（只读观测，不参与任何内部判断）
     .mbr_b0_o              (fat_mbr_b0)
   );
+
+  // Multi-video control remains in the SD/control clock domain.
+  always @(posedge sd_card_clk or posedge rst_all) begin
+    if(rst_all) video_budget_empty_sync<=0;
+    else video_budget_empty_sync<={video_budget_empty_sync[0],av_buffering};
+  end
+  video_catalog u_video_catalog (
+    .clk(sd_card_clk),.rst(rst_all),.clear(!sd_init_done),
+    .entry_valid(media_entry_valid),.entry_audio(media_entry_audio),
+    .entry_prefix(media_entry_prefix),.entry_sector(media_entry_sector),
+    .index(video_index),.legacy_video(legacy_video_sector),.legacy_audio(legacy_vau_sector),
+    .available(video_available),.selected_video(fat_video_sector),.selected_audio(vau_sector),
+    .duplicate_seen(video_duplicate_seen));
+  video_playlist_ctrl u_video_playlist (
+    .clk(sd_card_clk),.rst(rst_all),.mode_video(video_play),.list_ready(list_ready),
+    .next_req(kp_next_song || exp_next_song_evt),.prev_req(exp_key_press[2]),
+    .auto_toggle(btn_dbl_a),
+    .ended(video_playlist_ended),
+    .io_idle(!vid_sd_sec_read && !vid_sd_grant),.audio_ready(wav_ready),.audio_busy(audio_transition_busy),
+    .available(video_available),.index(video_index),.engine_play(video_engine_play),
+    .audio_select(video_audio_select),.switching(video_switching),
+    .auto_enabled(video_auto_enabled),.selection_failed(video_selection_failed));
 
   // ===================== 共享 sd_card_top（接物理 SPI 引脚） =====================
   fat32_sector_mapper u_fat_mapper (

@@ -1,0 +1,39 @@
+{
+  "release": "v183-playlist-timing-pass-board-pending",
+  "baseline": "v182-board-confirmed-20261029",
+  "board_confirmed": false,
+  "seed": 26,
+  "features": [
+    "four numbered VID/VAU pairs",
+    "manual previous/next",
+    "automatic loop after final raster and PCM",
+    "music return"
+  ],
+  "video": {
+    "codec": 12,
+    "width": 1280,
+    "height": 720,
+    "fps": 15
+  },
+  "numbered_files_required": false,
+  "timing": {
+    "Setup WNS": 45.0,
+    "Setup TNS": 0.0,
+    "Num of violated S-EP": 0.0,
+    "Hold WNS": 43.0,
+    "Hold TNS": 0.0,
+    "Num of violated H-EP": 0.0,
+    "#slices": 9463.0,
+    "#RAMs": 68.0,
+    "#DSPs": 26.0
+  },
+  "bit_sha256": "7c98849ec759be74cc3b00be997a79911b9d09a5abd7353376e35edbf0e3949f",
+  "tests": "Layered regressions passed; exact reused source/extracted top wiring audited",
+  "limitations": [
+    "Not seamless switching",
+    "Busy key presses ignored",
+    "Complete VID/VAU pairs required",
+    "External IO/CDC signoff remains separate",
+    "Board validation pending"
+  ]
+}

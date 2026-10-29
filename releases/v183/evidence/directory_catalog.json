@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "spc": 1,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=          1 partition=          0 active_fat=          0 bad=          0 transactions=          5\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 37190000 (1ps)\n"
+    },
+    {
+      "spc": 2,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=          2 partition=          0 active_fat=          0 bad=          0 transactions=          6\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 44490000 (1ps)\n"
+    },
+    {
+      "spc": 4,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=          4 partition=          0 active_fat=          0 bad=          0 transactions=          8\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 59090000 (1ps)\n"
+    },
+    {
+      "spc": 8,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=          8 partition=          0 active_fat=          0 bad=          0 transactions=         12\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 88270000 (1ps)\n"
+    },
+    {
+      "spc": 16,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=         16 partition=          0 active_fat=          0 bad=          0 transactions=         20\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 146610000 (1ps)\n"
+    },
+    {
+      "spc": 32,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=         32 partition=          0 active_fat=          0 bad=          0 transactions=         36\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 263270000 (1ps)\n"
+    },
+    {
+      "spc": 64,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=         64 partition=          0 active_fat=          0 bad=          0 transactions=         68\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 496570000 (1ps)\n"
+    },
+    {
+      "spc": 128,
+      "partition": 0,
+      "active_fat": 0,
+      "passed": true,
+      "output": "PASS fragmented root spc=        128 partition=          0 active_fat=          0 bad=          0 transactions=        132\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 963150000 (1ps)\n"
+    },
+    {
+      "spc": 16,
+      "partition": 7,
+      "active_fat": 1,
+      "passed": true,
+      "output": "PASS fragmented root spc=         16 partition=          7 active_fat=          1 bad=          0 transactions=         20\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v:27: $finish called at 146610000 (1ps)\n"
+    }
+  ],
+  "source_sha256": {
+    "D:\\codexworks\\video_playlist_v183_20261029\\tests\\directory_catalog\\tb.v": "2c444a4658c6ae3c44e2ff475257377041ac8e66a86c7b0b376e5de78e48fb37",
+    "D:\\codexworks\\video_playlist_v183_20261029\\final\\candidate\\project\\rtl\\fat32_list.v": "6456bd21e18a72193d1786cebbc6e08723c51168dad3f7545b855732c4920b44",
+    "D:\\codexworks\\video_playlist_v183_20261029\\final\\candidate\\project\\rtl\\video_catalog.v": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae"
+  }
+}

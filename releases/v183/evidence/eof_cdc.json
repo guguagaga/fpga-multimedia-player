@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "seconds": 22.443284273147583,
+  "output": "PASS actual 90.9MHz/12.288MHz EOF CDC, 6400 PCM samples, starved previous budget and final pause/resume\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\tb_eof_cdc.sv:27: $finish called at 133333139500 (1ps)\n",
+  "source_sha256": {
+    "D:\\codexworks\\video_playlist_v183_20261029\\tests\\tb_eof_cdc.sv": "39fff8dc6dce424e03b9d3388b24d5bfaa47cca289eca3e1220c77f9de0c55e4",
+    "D:\\codexworks\\video_playlist_v183_20261029\\final\\candidate\\project\\rtl\\video_eof_guard.v": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+    "D:\\codexworks\\video_playlist_v183_20261029\\final\\candidate\\project\\rtl\\av_sample_sync.v": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a"
+  }
+}

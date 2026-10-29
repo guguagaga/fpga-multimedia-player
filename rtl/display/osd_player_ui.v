@@ -812,8 +812,14 @@ module osd_player_ui #(
   //     · TD      : HDL-5373 WARNING "identifier 'char_code_safe' is used before its declaration ... (468)"
   //   ⇒ 隐式 1 位网 ⇒ 后被真实 8 位声明取代 ⇒ 改为先声明再使用（不动任何逻辑 ）
   // guard: non-printable bytes (e.g. 0x00 in a short name) -> space
-  wire [7:0] char_code_safe = ((char_code < 8'h20) || (char_code > 8'h7E)) ? 8'h20 : char_code;
-  wire [6:0] char_index = char_code_safe[6:0] - 7'd32;
+  // The printable range maps to 0..94; invalid bytes map to space (0).
+  // Subtracting 32 modulo 128 leaves the low five bits unchanged. Compute
+  // its high two bits directly and gate the final index, avoiding a guarded
+  // byte mux followed by arithmetic on the coordinate-to-font-ROM path.
+  wire char_printable = !char_code[7] && (|char_code[6:5]) &&
+                        (char_code[6:0] != 7'h7f);
+  wire [6:0] char_index = {7{char_printable}} &
+                         {~(char_code[6] ^ char_code[5]), ~char_code[5], char_code[4:0]};
   wire [10:0] rom_addr = {char_index, row};
   wire [7:0] rom_data;
   char_rom u_char_rom (

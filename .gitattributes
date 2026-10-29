@@ -107,3 +107,10 @@ rtl/audio/wav_sample_builder.v -text -whitespace
 host/video/codec12/* -text -whitespace
 releases/v182/changes_from_v180.patch -whitespace
 releases/v182/evidence/timing/* -text -whitespace
+
+# v183 exact candidate bytes and generated verification evidence
+rtl/video/video_catalog.v -text -whitespace
+rtl/video/video_eof_guard.v -text -whitespace
+rtl/video/video_playlist_ctrl.v -text -whitespace
+verification/playlist/* -text -whitespace
+releases/v183/evidence/timing/* -text -whitespace

@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$VendorProject,[Parameter(Mandatory=$true)][string]$TdCommand,[int]$Seed=24)
+param([Parameter(Mandatory=$true)][string]$VendorProject,[Parameter(Mandatory=$true)][string]$TdCommand,[int]$Seed=26)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 $workspace=Join-Path $repo 'build_workspace'

@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "seconds": 0.10795021057128906,
+  "output": "PASS catalog pairing, partial/duplicate files, 32 manual switches, multi/single-file auto EOF, disabled auto, audio timeout, exit/rescan; selections=37\nD:\\codexworks\\video_playlist_v183_20261029\\tests\\tb_playlist.sv:72: $finish called at 12830000 (1ps)\n",
+  "source_sha256": {
+    "D:\\codexworks\\video_playlist_v183_20261029\\tests\\tb_playlist.sv": "3dc1cb757146fd672dbf80e4da2650e4f0ac6f495dfc615ba6f547fc854c7f5f",
+    "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\candidate\\project\\rtl\\video_catalog.v": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+    "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\candidate\\project\\rtl\\video_playlist_ctrl.v": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc"
+  },
+  "scope": "Catalog and switch-controller unit test; no real decoder, audio reader, SD or FPGA timing."
+}

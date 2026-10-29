@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "clips": [
+    {
+      "slot": 1,
+      "frames": 30,
+      "blocks": 432000,
+      "passed": true
+    },
+    {
+      "slot": 2,
+      "frames": 30,
+      "blocks": 432000,
+      "passed": true
+    },
+    {
+      "slot": 3,
+      "frames": 30,
+      "blocks": 432000,
+      "passed": true
+    },
+    {
+      "slot": 4,
+      "frames": 30,
+      "blocks": 432000,
+      "passed": true
+    }
+  ],
+  "duplicate_copy_refused_without_changes": true
+}
