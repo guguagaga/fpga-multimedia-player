@@ -1,24 +1,23 @@
 # FPGA 多媒体播放器 / FPGA Multimedia Player
 
-> **2026-10-30 上板故障：v185 已撤回。** 用户确认本版上电即 HDMI 无信号、数码管 `402124.`；同一接线恢复 v183 后立即正常显示。内部时序和仿真通过不能替代上板验收。请暂用 v182/v183，并保留其配套媒体；本分支正在定位，不可作为稳定版。见 [故障记录](docs/V185_BOARD_FAILURE.md)。
-
 基于安路 EG4S20BG256 的纯 RTL 多媒体播放器，支持 SD/FAT32 簇链、BMP/QOI 自适应图片、音乐、视频播放列表、频谱与中文 OSD。
 
-**本分支为 v185：真实1280×720、30fps 的待上板验收候选。HDMI扫描保持720P60。** 独立原约束内部时序通过：setup +0.386ns、hold +0.030ns，零违例端点。v182 保持 GitHub 最新稳定发布，v183 可用于已验证的四视频切换回退。
+**当前 v186：1280×720、30fps 视频内容，HDMI 输出 720P60。** 用户已确认本位流启动显示、完整 CS 影片播放、片尾音画同步和自动切换正常。独立重开布线数据库检查：setup **+0.265ns**、hold **+0.030ns**、零违例；像素时钟到 HDMI 串行时钟路径已纳入同步分析。
 
-An RTL multimedia player with a 720p30 content candidate and 720p60 HDMI scanout. Internal timing and layered simulation pass; physical board qualification remains pending.
+Board-confirmed 720p30 video playback with 720p60 HDMI output. This release repairs omitted synchronous HDMI timing constraints and pipelines the image-fit control comparison. Physical feedback covers startup, a full 271.2-second CS clip, end A/V sync, and automatic next-video switching.
 
-- [v185候选下载](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v185-720p30-board-test-20261030)
-- [v182稳定发布](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v182-board-confirmed-20261029)
-- [架构与算法](docs/ARCHITECTURE_720P30.md) · [相对v183改动](docs/CHANGES_FROM_V183.md)
-- [性能与验证边界](docs/PERFORMANCE_RESULTS_720P30.md) · [原始证据](releases/v185/evidence)
-- [模块源码导航](docs/MODULES.md) · [构建](docs/BUILD.md) · [编码工具](host/video/codec14/README.md)
-- [播放列表按键与编号](docs/VIDEO_PLAYLIST_V183.md) · [协作](docs/COLLABORATION.md)
+- [v186 下载：位流、测试媒体、源码与工具](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v186-720p30-board-confirmed-20261031)
+- [本版修改与上板记录](docs/RELEASE_V186.md) · [验证范围](docs/PERFORMANCE_RESULTS_720P30.md)
+- [架构与算法](docs/ARCHITECTURE_720P30.md) · [分模块源码](docs/MODULES.md) · [构建](docs/BUILD.md)
+- [高画质编码工具](host/video/codec14/README.md) · [视频切换与编号](docs/VIDEO_PLAYLIST_V183.md)
+- [协作方式](docs/COLLABORATION.md) · [原 v185 故障记录](docs/V185_BOARD_FAILURE.md)
 
-视频保留Codec12空间配置，用可逆预测与六上下文Huffman降低存储量，不额外加重块量化。最高码率原载荷重复10次，两档卡首响应模型均检查300张完整720P画面、480000个PCM样本及299个均匀显示间隔；另有厂商模型30帧复核和8136帧小尺寸控制长测。它们不等于全片整板RTL测试，最终观感和稳定性需上板确认。
+第二部 CS 是 720P30 / H6D1，M2_VIDEO.VID 与 V2_AUDIO.VAU 配对；第一部沿用 720P15 的 M1_C10.VID / V1_AMIYA.VAU。文件名 C10 不代表其实际格式。视频保留 Codec12 空间画质设置，再用可逆预测与六上下文 Huffman 减少存储字节；并非原视频逐像素无损。IMA 伴音有损。
 
-64扇区物理缓存与16KiB压缩字节FIFO并存；QOI索引转移至LUT存储，释放大块RAM。综合LUT17695/19600，BRAM9K63/64，BRAM32K16/16。没有放宽原约束或通过继续扩大启动缓冲隐藏持续欠供。
+本版修正两处错误的 HDMI 时钟分组，并把图片纵向缩放比较与状态跳转拆开。没有降低分辨率、帧率、PLL 频率或画质。六组完整图片逐像素对照、两种格式的读取/缩放/写帧集成测试通过；视频和音频源码与原持续吞吐测试完全匹配。
 
-新视频必须配套格式14/H6D1位流。第二组文件为M2_VIDEO.VID、V2_AUDIO.VAU，配套片长271.2秒；伴音为有损48kHz单声道IMA-XQ。实验顶层关闭QOA音频，PCM/IMA、BMP/QOI保留。完整编码器exe、复现数据和媒体位于Release附件，不放普通Git。
+LUT 18207/19600，BRAM9K 63/64，BRAM32K 16/16，slice 占用 95.83%。剩余 LUT 不等同于无成本的可布线空间。OSD 自动切图间隔显示与新的频谱改进尚未合入这个冻结版本。
 
-厂商生成/加密IP只记录路径与哈希，从合法持有的匹配工程本地导入；没有为混合来源工程新增统一许可证。源文件原有版权与工具许可保留。
+原 v185 存在启动无 HDMI 信号，保留撤回和失败记录。v186 的上板反馈不代表所有显示器、SD 卡或多小时老化均已验证。内部 STA 不替代外部接口电气与完整 CDC 审计。
+
+厂商生成/加密 IP 只记录路径与哈希，需从合法持有的匹配工程本地导入。源文件原有版权与工具许可保留，不为混合来源工程新增统一许可证。

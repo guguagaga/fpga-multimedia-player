@@ -126,3 +126,11 @@ releases/v185/** -text -whitespace
 verification/codec14/** -text -whitespace
 host/video/codec14/** -text -whitespace
 tools/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# v186 frozen evidence and regression inputs retain exact recorded bytes.
+releases/v186/evidence/** -text -whitespace
+tests/v186_image_pipeline/** -text
+tests/v186_image_pipeline/**/*.log -whitespace
+tests/v186_image_pipeline/*.log -whitespace
+tests/v186_image_pipeline/**/*.hex -whitespace
+tests/v186_image_pipeline/**/*.v whitespace=cr-at-eol

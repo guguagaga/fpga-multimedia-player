@@ -1,0 +1,2 @@
+{"kind": 1, "w": 320, "h": 240, "passed": true, "returncode": 0, "seconds": 88.53193426132202, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind1_320x240\\console.log"}
+{"kind": 0, "w": 1280, "h": 960, "passed": true, "returncode": 0, "seconds": 242.33777332305908, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind0_1280x960\\console.log"}

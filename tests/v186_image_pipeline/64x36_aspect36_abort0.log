@@ -1,0 +1,2 @@
+PASS          64x         36 aspect=         36 reference=     921600 candidate=     921600 cycles=    2456753/    2456753 restart=          0
+D:\codexworks\framerate_v185_20261029\hdmi_no_signal_v185\scaler_compare_pipeline\tests\tb.v:67: $finish called at 24567586000 (1ps)

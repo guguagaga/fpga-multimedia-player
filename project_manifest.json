@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "release": "v185-720p30-board-test-20261030",
+  "release": "v186-720p30-board-confirmed-20261031",
   "files": [
     {
       "project_path": "build/_flow_run.cmd",
@@ -173,8 +173,8 @@
     {
       "project_path": "rtl/img_scaler.v",
       "public_path": "rtl/image/img_scaler.v",
-      "sha256": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
-      "bytes": 38238,
+      "sha256": "a9e62b51d68a79de5bba960062216e7dae731e433fcf7c412bc19be1d2a340e1",
+      "bytes": 38580,
       "external": false
     },
     {
@@ -355,8 +355,8 @@
     {
       "project_path": "user_source/constraints_source/timing.sdc",
       "public_path": "constraints/timing.sdc",
-      "sha256": "ec6f64b886ac7402adbc9184a245be11f0ec446295f0a50983288a1ee8c6a392",
-      "bytes": 5908,
+      "sha256": "84bb7994433162f6fdc8675df42bf3a65185b916025b9472cf9f3f8a4cd6c319",
+      "bytes": 5412,
       "external": false
     },
     {
@@ -912,6 +912,5 @@
       "bytes": 20363,
       "external": false
     }
-  ],
-  "scope": "Exact v185 candidate mapping. Vendor IP imported locally by hash. Board acceptance pending."
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "release": "v185-720p30-board-test-20261030",
-  "board_confirmed": false,
-  "stable_release": "v182-board-confirmed-20261029",
+  "release": "v186-720p30-board-confirmed-20261031",
+  "board_confirmed": true,
+  "stable_release": "v186-720p30-board-confirmed-20261031",
   "seed": 26,
-  "bit_sha256": "393522c8f1dd8a908cbeb2b2841546fcc35ee672c4481cb54736829e301981c9",
+  "bit_sha256": "016341c80951ce1d6d8fefe87817cf7b6c0ff8a1900fee5fbfc5f66023d612ae",
   "video": {
     "width": 1280,
     "height": 720,
@@ -13,44 +13,45 @@
   },
   "hdmi_scanout": "1280x720@60Hz",
   "timing": {
-    "Setup WNS": 386.0,
+    "Setup WNS": 265.0,
     "Setup TNS": 0.0,
     "Num of violated S-EP": 0.0,
     "Hold WNS": 30.0,
     "Hold TNS": 0.0,
     "Num of violated H-EP": 0.0,
-    "#slices": 9342.0,
+    "#slices": 9391.0,
     "#RAMs": 79.0,
     "#DSPs": 22.0
   },
   "resources": {
-    "lut": 17695,
+    "lut": 18207,
     "lut_total": 19600,
     "bram9k": 63,
     "bram9k_total": 64,
     "bram32k": 16,
-    "bram32k_total": 16
+    "bram32k_total": 16,
+    "slices_percent": 95.83
   },
   "gates": {
     "timing": {
-      "path": "releases/v185/evidence/timing.json",
-      "sha256": "499a36b84e78aaaac2a807e98fd7cf82fe12355f8fd0dbc508bdbae4188283bf"
+      "path": "releases/v186/evidence/timing.json",
+      "sha256": "7c13c0fe99dc53c4072b6b40ca2fde097c329790ac0dfafb38a721e1d7d76f00"
     },
-    "coverage": {
-      "path": "releases/v185/evidence/coverage.json",
-      "sha256": "194e9961f497b18234e9faacc68fe2b0868271ce689d74ff64623afcc396b8fd"
+    "board": {
+      "path": "releases/v186/evidence/board.json",
+      "sha256": "919f91149d772703d0ed6bd7696ffcb69c36b35a258cb3b4864aa4b6b06bf92f"
     },
-    "source_evidence": {
-      "path": "releases/v185/evidence/source_evidence.json",
-      "sha256": "920efb78421f695064f2049c5537aeb0e8718480316c677c063069c75350bcf8"
+    "image_pixels": {
+      "path": "releases/v186/evidence/image_pixels.json",
+      "sha256": "ec6e2de174e8ba3cf76f41e197787f6ef07bdb7d93817a22dac7da32fa3f1656"
     },
-    "av_cadence": {
-      "path": "releases/v185/evidence/av_cadence.json",
-      "sha256": "155011b779fd7e28dd08f4bff97c2ef670d82eaa214d86f9ff8a0d49d2cfbc12"
+    "image_integration": {
+      "path": "releases/v186/evidence/image_integration.json",
+      "sha256": "e740e311073168906b0b37ebc4bf520aa67384c23eadef3c169ec06193aebb3e"
     },
-    "sustained_peak": {
-      "path": "releases/v185/evidence/sustained_peak.json",
-      "sha256": "4bfa0e86482d3cf2d58bd123d737908f9e5c6380e4ad72a0f9f08f336a566b15"
+    "media_reuse": {
+      "path": "releases/v186/evidence/media_reuse.json",
+      "sha256": "77b27dfeb41920800540b42b8273fd92e66576a0b256cf91424498d55960dfdd"
     },
     "full_film": {
       "path": "releases/v185/evidence/full_film.json",
@@ -68,9 +69,17 @@
       "path": "releases/v185/evidence/frame_assembly.json",
       "sha256": "0ed24d8e0f996774dae7ab0110e5fc2b618007e8694d1f9e2ad451ff8665f338"
     },
+    "av_cadence": {
+      "path": "releases/v185/evidence/av_cadence.json",
+      "sha256": "155011b779fd7e28dd08f4bff97c2ef670d82eaa214d86f9ff8a0d49d2cfbc12"
+    },
+    "sustained_peak": {
+      "path": "releases/v185/evidence/sustained_peak.json",
+      "sha256": "4bfa0e86482d3cf2d58bd123d737908f9e5c6380e4ad72a0f9f08f336a566b15"
+    },
     "source_export": {
-      "path": "releases/v185/evidence/source_export.json",
-      "sha256": "9d37c564495283c7924d4eff98f2484a3ef0a57b74f6011f7ea6101759b8dd17"
+      "path": "releases/v186/evidence/source_export.json",
+      "sha256": "0d4a256446d1a2d4fc8ea15fceb251dad84943e32798d3f93415e9e7be873cf1"
     }
   },
   "media": {
@@ -83,10 +92,10 @@
       "sha256": "317733fb49a1e39fbd70061ee5f427ec7e332b51b6ce4a7a3d31d49f4e5a58dd"
     }
   },
-  "limits": [
-    "Board acceptance pending",
-    "External IO/CDC scope retained",
-    "Repeated peak300 is not full-film RTL",
-    "IMA audio is lossy; QOA disabled in candidate top"
+  "board_scope": "User confirmed this exact repair candidate: startup, full ~4m31s CS playback, end AV sync and automatic switch. Not an instrumented capture of unique frames; no claim of every card/display or multi-hour soak.",
+  "withdrawn_previous_release": "v185-720p30-board-test-20261030",
+  "pending_enhancements": [
+    "OSD auto-image interval display",
+    "Spectrum improvements: review and resource/timing measurement before integration"
   ]
 }

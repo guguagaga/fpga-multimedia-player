@@ -1,0 +1,22 @@
+{
+  "updated": "2026-10-31T02:09:06.920132+08:00",
+  "seed": 26,
+  "metrics_ps": {
+    "Setup WNS": 265.0,
+    "Setup TNS": 0.0,
+    "Num of violated S-EP": 0.0,
+    "Hold WNS": 30.0,
+    "Num of violated H-EP": 0.0,
+    "slices percentage": 95.83
+  },
+  "timing_pass": true,
+  "pixel_serial_setup_ns": 0.889,
+  "pixel_serial_hold_ns": 0.213,
+  "negative_paths": [],
+  "lut": 18207,
+  "lut_remaining": 1393,
+  "bit_sha256": "016341c80951ce1d6d8fefe87817cf7b6c0ff8a1900fee5fbfc5f66023d612ae",
+  "fresh_report_sha256": "cfbd6582afdc50d109dbffc3ab671891b051c348a522b4d843303f3416cee217",
+  "board_tested": false,
+  "limitation": "This summary does not override full independent STA/coverage/DRC gates. Spare LUT count is not guaranteed routing capacity."
+}

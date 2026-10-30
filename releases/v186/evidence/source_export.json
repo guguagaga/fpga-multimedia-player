@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "total_files": 130,
+  "public_files": 111,
+  "external_files": 19,
+  "project_manifest_sha256": "5453a260fd3277a1d21fd8391d78ddcb77f185f6c4af7ba45654041f9eaed165",
+  "scope": "Restored exact modular source plus locally held vendor dependencies; all synthesis/timing source hashes and TD project references verified."
+}

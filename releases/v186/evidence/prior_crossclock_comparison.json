@@ -1,0 +1,86 @@
+{
+  "recorded_at": "2026-10-30T22:36:05.822193+08:00",
+  "root_cause_confirmed": false,
+  "comparisons": [
+    {
+      "variant": "v185",
+      "label": "原 v185",
+      "board": "启动无信号，复位和重插 HDMI 均无效",
+      "pixel_serial_setup_ns": -0.433,
+      "pixel_serial_hold_ns": 0.213,
+      "global_metrics_ps": {
+        "Setup WNS": -433.0,
+        "Hold WNS": 30.0,
+        "Num of violated S-EP": 1.0,
+        "Num of violated H-EP": 0.0
+      },
+      "timing_report": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\crossclock\\v185\\timing.txt",
+      "timing_report_sha256": "cc27293401c8e9e1d075daed0ef05b14529f00c3c18b200cd6a2cf59388a3eb7",
+      "original_hashes": {
+        "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0_pr.db": "0df2aa593e474fc4a55a7e3da7bf7ca48595f06435199b3147e456897c1e12e2",
+        "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0.bit": "393522c8f1dd8a908cbeb2b2841546fcc35ee672c4481cb54736829e301981c9",
+        "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\constraints_source\\timing.sdc": "ec6f64b886ac7402adbc9184a245be11f0ec446295f0a50983288a1ee8c6a392"
+      }
+    },
+    {
+      "variant": "probe26",
+      "label": "R3 seed26 诊断版",
+      "board": "图片、色条、CS 视频和声音均有正向反馈",
+      "pixel_serial_setup_ns": 0.709,
+      "pixel_serial_hold_ns": 0.19,
+      "global_metrics_ps": {
+        "Setup WNS": -15.0,
+        "Hold WNS": 24.0,
+        "Num of violated S-EP": 1.0,
+        "Num of violated H-EP": 0.0
+      },
+      "timing_report": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\crossclock\\probe26\\timing.txt",
+      "timing_report_sha256": "4c0c8ef886e941277cb4dcd460e1732cccb6cb640d23267c737449fb8acbb239",
+      "original_hashes": {
+        "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\full_player_probe_r3\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0_pr.db": "716952367fd35b5c550ab32be827e08432d402e1d359389a410aa827f04e1aa4",
+        "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\full_player_probe_r3\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0.bit": "cfb1da011eb47afc0929d52fc9303b0905b0067c85610392fca666a499f17919",
+        "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\full_player_probe_r3\\candidate\\project\\user_source\\constraints_source\\timing.sdc": "ec6f64b886ac7402adbc9184a245be11f0ec446295f0a50983288a1ee8c6a392"
+      }
+    },
+    {
+      "variant": "v183_shipped",
+      "label": "实际交付的 v183",
+      "board": "相同线缆和接口立即恢复显示",
+      "pixel_serial_setup_ns": 0.147,
+      "pixel_serial_hold_ns": 0.335,
+      "global_metrics_ps": {
+        "Setup WNS": 45.0,
+        "Hold WNS": 43.0,
+        "Num of violated S-EP": 0.0,
+        "Num of violated H-EP": 0.0
+      },
+      "timing_report": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\crossclock\\v183_shipped\\timing.txt",
+      "timing_report_sha256": "9000c6f854ad5bec4f48eb441d77f77ee03a0a20a4d34f279fd29e680af95139",
+      "original_hashes": {
+        "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0_pr.db": "8d3cdd0e3c198db3545176ddeee153d19042fe9722c5188ede1ba50318faef34",
+        "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\candidate\\project\\td_project\\HDMI1.4b_Transmitter_v1.0_Runs\\phy_cjk_align_seed26\\HDMI1.4b_Transmitter_v1.0.bit": "7c98849ec759be74cc3b00be997a79911b9d09a5abd7353376e35edbf0e3949f",
+        "D:\\codexworks\\video_playlist_v183_20261029\\timing_index\\candidate\\project\\user_source\\constraints_source\\timing.sdc": "ec6f64b886ac7402adbc9184a245be11f0ec446295f0a50983288a1ee8c6a392"
+      }
+    }
+  ],
+  "observation": {
+    "recorded_at": "2026-10-30T22:36:05.822193+08:00",
+    "reported_by": "user",
+    "normal_sd_images": true,
+    "raw_color_bars": true,
+    "live_switching": true,
+    "physical_switch": "SW1",
+    "rtl_port": "sw[0]",
+    "pin": "C8",
+    "second_cs_video_played": true,
+    "user_reports_smooth_playback": true,
+    "user_reports_audio_normal": true,
+    "exact_fps_measured": false,
+    "full_duration_av_sync_verified": false,
+    "diagnostic_only": true,
+    "clarification": "Audio absence referred to an earlier version, not this diagnostic. User reports current frame rate high and normal."
+  },
+  "production_repair": "production_clock_repair",
+  "method": "Reopened routed DBs without changing original source, bit or DB. Removed pixel/serial exclusions from both exclusive and asynchronous groups; other executable constraints unchanged.",
+  "limitation": "Timing/board correlation supports a candidate cause. A rebuild under strengthened constraints and physical acceptance are still required. Diagnostic global OSD setup violation remains -0.015ns."
+}
