@@ -26,7 +26,9 @@
 //   注意：锁存用的是帧边界那一拍之前总线上的值，所以"哪个样本对配哪一
 //   帧"与原来完全一致 —— 只是请求提前了一拍，不改变音画配对。
 //===================================================================
-module i2s_transmitter (
+module i2s_transmitter #(
+  parameter integer MAX_BUDGET_HOLD = 0
+) (
   input wire clk,  // 12.288 MHz audio master clock
   input wire rst,  // active-high reset
   //=== [Design note] ===============================================
@@ -45,6 +47,7 @@ module i2s_transmitter (
   // [Design note]请求-接受握手：把 sample_req 【保持】到消费方给出 sample_valid 
   //   （原来是 1 拍脉冲  => 构造器不在 IDLE 时就被丢掉 = 板级 C2 ）
   input wire mute,  // Keep I2S clocks running while outputting silence.
+  input wire hold_budget_gap,  // Audio-domain AV budget wait; never ordinary SD starvation.
   input wire flush,  // Drop the old stream staging pair without resetting clocks.
   input wire sample_valid,  // 1 = 消费方(wav_sample_builder)已产出一个样本
   input wire [23:0] sample_left,  // left channel sample (24-bit signed)
@@ -145,6 +148,15 @@ module i2s_transmitter (
 
   reg [23:0] pending_left, pending_right;
   reg pair_ready;
+  localparam integer HOLD_W = (MAX_BUDGET_HOLD < 2) ? 1 : $clog2(MAX_BUDGET_HOLD+1);
+  reg [HOLD_W-1:0] budget_hold_count;
+  reg complete_pair_seen;
+  // PLL ratios differ slightly from the nominal48k/60Hz ratio. A bounded
+  // zero-order hold avoids inserting a zero for a single sample while the
+  // next displayed frame replenishes the AV budget. No PCM is consumed,
+  // skipped or acknowledged by this path. Real underruns still become silence.
+  wire can_hold_budget = (MAX_BUDGET_HOLD != 0) && hold_budget_gap &&
+                         complete_pair_seen && (budget_hold_count < MAX_BUDGET_HOLD);
   wire [23:0] next_left = sample_valid ? sample_left : pending_left;
   wire [23:0] next_right = sample_valid ? sample_right : pending_right;
   wire next_pair_ready = sample_valid || pair_ready;
@@ -162,6 +174,8 @@ module i2s_transmitter (
       pending_left <= 0;
       pending_right <= 0;
       pair_ready <= 0;
+      budget_hold_count <= 0;
+      complete_pair_seen <= 0;
     end else begin
       i2s_bclk   <= ~i2s_bclk;
       sample_req <= req_held;
@@ -187,15 +201,24 @@ module i2s_transmitter (
             // The builder updates L and R on different clocks.
             // Only publish a pair after its sample_valid ACK.
             if (mute) begin
+              budget_hold_count <= 0;
+              complete_pair_seen <= 0;
               sample_left_reg <= 0;
               sample_right_reg <= 0;
               shift_reg <= 0;
             end else if (next_pair_ready) begin
+              budget_hold_count <= 0;
+              complete_pair_seen <= 1;
               sample_left_reg <= next_left;
               sample_right_reg <= next_right;
               shift_reg <= {next_left, 40'd0};
               pair_ready <= 0;
+            end else if (can_hold_budget) begin
+              budget_hold_count <= budget_hold_count + 1'b1;
+              shift_reg <= {sample_left_reg, 40'd0};
             end else begin
+              complete_pair_seen <= 0;
+              budget_hold_count <= 0;
               // An underrun is silence, never a stale partial sample.
               sample_left_reg <= 0;
               sample_right_reg <= 0;
@@ -205,6 +228,8 @@ module i2s_transmitter (
         end else bit_cnt <= bit_cnt + 1'b1;
       end
       if (flush) begin
+        complete_pair_seen <= 0;
+        budget_hold_count <= 0;
         pending_left <= 0;
         pending_right <= 0;
         pair_ready <= 0;

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\TD3\\sim_release\\eg4\\eg_logic_dram.v": "b620cebfe67f8829df3b737d1f75072b5f42bae7a2396b36616e85aa3cc9ea1e",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\qoi_stream.v": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\qoi_lut_index\\tb.v": "ffc381ca23cb53577598cc48a99a832050f3fe8f3ad49846ed6bb4452e617daa"
+  },
+  "opcounts": [
+    472,
+    477,
+    463,
+    448,
+    467,
+    436
+  ],
+  "scope": "Three starts without reset, all6QOIopcodes,stalls,exact49152RGBpixels to independent software expected; cycle-for-cycle controls against vendor32Kreference."
+}

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "checked_codewords": 1536,
+  "contexts": 6,
+  "lengths_sha256": "ece82124b785f5e644722e9cf95c7d1226645a36b67fc272692eb86bfc6b080a",
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\context_huffman_decoder.v": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+  },
+  "tool_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\ADPCM-XQ-LICENSE.txt": "b52db0ee16654a0eaca8bc7b9af059354f812dbd23803ba722295214993e5a2a",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\adpcm-xq.exe": "67325094696eb2fb86f95e2dffb1bb27e364afee012b3e19c1c4a8cf52118a5a",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\codec14_transforms.py": "159f84cd9b7a55b67e7c4ea91f6b6b415e94dca2b6f070c101d0ceb3913a711c",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\decode_blocks.py": "d95abdcbe114f49ac0488ae42a810c40e54f8771184cb7e340f99c551d7979af",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\encode_blocks_experimental.cpp": "6b34649c61a26ec0a21c4f7acee9a3463f06dc453678d72ac5b248ae00215a48",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\encode_blocks_experimental.exe": "452b0d25c6728ebd861b86b9c24895f1396e713e2123d3d889409dac0cb22123",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\encode_h6d1_video.py": "32b09fd5ad5f90025b1184d5e825f1f3392e0bf907a255de1f88fe6a61508c18",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\encode_ima_audio.py": "3c48741a53efd4bc9a8f065a02c800f273df4a33129c9428a478945e2a7f900e",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\index_residual.json": "441f51614fe76ab30296b5f326d71e357f7d14655aaac4619f287d3915638584",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\lossless_codec12.py": "c7e7aed71a64c87eb1ce56322f0c785cd4e401ee2cb10c9cb6793746d7a87f7b",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\pack_h6d1.py": "c2425fe1972c391507279db06915e96099f3faeabcedd47af10e1c92fc526d46",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\README.md": "c5cb796b1a8ce60482af0a2f15a959e0fd4ca65e81e7793872e46cb44f3f8da6",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\repack_codec12_stream.py": "8763049e79378a91b59602c562cca2637a98900a42744c56c98818e70c47d23d"
+  },
+  "evidence_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\tool_manifest.json": "8bf2c777079b50d525cfacf41b50ff8ac47a44c43321f23f92b062aca33b2a4b",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\EXPERIMENTAL_720P30.json": "31c0e0ba866c1809bb29994d04e1f54a6353afbfee4367586704b0d984617ef0",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\EXPERIMENTAL_AUDIO_IMA.json": "78e083e343b174a58d53c4d84d3f486c8571616d48d9c12674abcca230a385c6",
+    "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\preparation.json": "2bec2d3ee282ae66991f56af8adc7eb4cb81e52f7e5a0259eb306abe754be2e7",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\EXPERIMENTAL_720P30.json": "b4db473e8d10fcfe4679aa93758b6d0348ec95f4be7d9aa7eca2531813b16ad2"
+  },
+  "scope": "All1536 encoder canonical codewords resolve to their exact symbol/context in final hardware tree ROM. Tool files match frozen manifest; completed portable3frame video+IMA smoke hashes and full-film codebook match. Not board acceptance."
+}

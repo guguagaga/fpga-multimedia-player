@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\tb.v": "0ba3f770bd5aabf1c867ca26121c31223534a9b7e053f7259655225103b2d666",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\reference.v": "f72378a659c3dedcb9b916780b432fc959fafb928c5d4dab40594adb049cedab",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\sd_arbiter.v": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+  },
+  "scope": "Actual1.4M timeout boundary; defaultlegacy comparison; low-reserve release,ownership cancellation,reset; top wiring separately verified."
+}

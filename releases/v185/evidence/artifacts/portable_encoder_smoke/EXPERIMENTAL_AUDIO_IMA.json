@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "video_sha256": "cdfb51a375c8b95464290ee220ae13ebdc9e4e128b1a2b7cb8ef0445cdb01ac6",
+  "pcm_sha256": "b95c34ca91d91a8a950d5d66a1481dd65f7997e07949c5125d157fc51f1554a6",
+  "audio_sha256": "7cb45c967d4bea693c2fb8c64176603c34111113ebfe9465cdd05df1ee1a3a9b",
+  "frames": 3,
+  "fps": 30,
+  "samples": 4800,
+  "seconds": 0.1,
+  "ima_bytes": 2472,
+  "scope": "Lossy IMA-XQ; independent decoded sample count checked. Listen against PCM. No SD modification."
+}

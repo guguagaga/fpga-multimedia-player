@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "case": "ideal",
+      "passed": true,
+      "grant_period_audio_cycles": 409600,
+      "delay_cycles": 0,
+      "silence_frames": 0,
+      "repeated_pairs": 0,
+      "summary": "ng: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_held_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_vld_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=48000 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(36)\n#    Time: 24577552 ns  Iteration: 1  Instance: /tb\n# End time: 09:24:56 on Oct 30,2026, Elapsed time: 0:00:57\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "case": "board_ratio",
+      "passed": true,
+      "grant_period_audio_cycles": 409804,
+      "delay_cycles": 0,
+      "silence_frames": 0,
+      "repeated_pairs": 24,
+      "summary": "g: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_held_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_vld_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=24\n# PASS I2S cadence delay=0 good=48000 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(36)\n#    Time: 24589840 ns  Iteration: 1  Instance: /tb\n# End time: 09:25:53 on Oct 30,2026, Elapsed time: 0:00:57\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "case": "delayed_control",
+      "passed": true,
+      "grant_period_audio_cycles": 409600,
+      "delay_cycles": 204800,
+      "silence_frames": 798,
+      "repeated_pairs": 2,
+      "summary": "im-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_held_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_vld_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_req_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=2\n# PASS I2S cadence delay=204800 good=48000 silence_frames=798 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s30/tb.v(36)\n#    Time: 24987152 ns  Iteration: 1  Instance: /tb\n# End time: 09:26:48 on Oct 30,2026, Elapsed time: 0:00:54\n# Errors: 0, Warnings: 38\n"
+    }
+  ],
+  "seconds": 170.429368019104,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s30\\tb.v": "d9e5eb45db1cd14b2d8ecfc1d55b0dd8cceed277b5cdfd2fa16117329f573413",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\rtl\\av_sample_sync.v": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\user_source\\hdl_source\\wav_sample_builder.v": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\user_source\\hdl_source\\i2s_transmitter.v": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67"
+  },
+  "scope": "48000 exact ordered source sample pairs each case, with explicitly bounded duplicate complete pairs for AV-budget gaps. No source sample loss,nominal and board-ratio no inserted zero;delayed-frame negative control retains silence after bounded hold. Ideal byte FIFO,not complete SD/HDMI."
+}

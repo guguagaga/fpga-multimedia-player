@@ -1,0 +1,791 @@
+CHECKED720 frame=1 pixels=921600 bank=1 cycles=3350063
+PROGRESS video cycles=5000000 frames=1 pixels=297216 cmd18=5
+CHECKED720 frame=2 pixels=921600 bank=2 cycles=6231142
+PRESENT720 n=1 cycle=7575760 consumed=0
+CHECKED720 frame=3 pixels=921600 bank=0 cycles=9705516
+PROGRESS video cycles=10000000 frames=3 pixels=0 cmd18=9
+PRESENT720 n=2 cycle=10606064 consumed=1600
+CHECKED720 frame=4 pixels=921600 bank=1 cycles=12863355
+PRESENT720 n=3 cycle=13636368 consumed=3200
+PROGRESS video cycles=15000000 frames=4 pixels=322816 cmd18=14
+CHECKED720 frame=5 pixels=921600 bank=2 cycles=15999586
+PRESENT720 n=4 cycle=16666672 consumed=4800
+CHECKED720 frame=6 pixels=921600 bank=0 cycles=19518434
+PRESENT720 n=5 cycle=19696976 consumed=6400
+PROGRESS video cycles=20000000 frames=6 pixels=75264 cmd18=18
+CHECKED720 frame=7 pixels=921600 bank=1 cycles=22320481
+PRESENT720 n=6 cycle=22727280 consumed=8000
+PROGRESS video cycles=25000000 frames=7 pixels=445440 cmd18=23
+CHECKED720 frame=8 pixels=921600 bank=2 cycles=25122047
+PRESENT720 n=7 cycle=25757584 consumed=9600
+PRESENT720 n=8 cycle=28787888 consumed=11200
+CHECKED720 frame=9 pixels=921600 bank=0 cycles=28835293
+PROGRESS video cycles=30000000 frames=9 pixels=289280 cmd18=28
+CHECKED720 frame=10 pixels=921600 bank=1 cycles=31260902
+PRESENT720 n=9 cycle=31818192 consumed=12800
+CHECKED720 frame=11 pixels=921600 bank=2 cycles=34436094
+PRESENT720 n=10 cycle=34848496 consumed=14400
+PROGRESS video cycles=35000000 frames=11 pixels=36096 cmd18=32
+PRESENT720 n=11 cycle=37878800 consumed=16000
+CHECKED720 frame=12 pixels=921600 bank=0 cycles=38298561
+PROGRESS video cycles=40000000 frames=12 pixels=353280 cmd18=37
+PRESENT720 n=12 cycle=40909104 consumed=17600
+CHECKED720 frame=13 pixels=921600 bank=1 cycles=41128728
+PRESENT720 n=13 cycle=43939408 consumed=19200
+CHECKED720 frame=14 pixels=921600 bank=2 cycles=44229365
+PROGRESS video cycles=45000000 frames=14 pixels=189952 cmd18=42
+PRESENT720 n=14 cycle=46969712 consumed=20800
+CHECKED720 frame=15 pixels=921600 bank=0 cycles=47124171
+PROGRESS video cycles=50000000 frames=15 pixels=430592 cmd18=46
+PRESENT720 n=15 cycle=50000016 consumed=22400
+CHECKED720 frame=16 pixels=921600 bank=1 cycles=50115769
+PRESENT720 n=16 cycle=53030320 consumed=24000
+CHECKED720 frame=17 pixels=921600 bank=2 cycles=53997069
+PROGRESS video cycles=55000000 frames=17 pixels=248576 cmd18=50
+PRESENT720 n=17 cycle=56060624 consumed=25600
+CHECKED720 frame=18 pixels=921600 bank=0 cycles=56348197
+PRESENT720 n=18 cycle=59090928 consumed=27200
+CHECKED720 frame=19 pixels=921600 bank=1 cycles=59690888
+PROGRESS video cycles=60000000 frames=19 pixels=76800 cmd18=55
+PRESENT720 n=19 cycle=62121232 consumed=28800
+CHECKED720 frame=20 pixels=921600 bank=2 cycles=62514358
+PROGRESS video cycles=65000000 frames=20 pixels=372992 cmd18=60
+PRESENT720 n=20 cycle=65151536 consumed=30400
+CHECKED720 frame=21 pixels=921600 bank=0 cycles=65539330
+PRESENT720 n=21 cycle=68181840 consumed=32000
+CHECKED720 frame=22 pixels=921600 bank=1 cycles=69101542
+PROGRESS video cycles=70000000 frames=22 pixels=221440 cmd18=64
+PRESENT720 n=22 cycle=71212144 consumed=33600
+CHECKED720 frame=23 pixels=921600 bank=2 cycles=71854453
+PRESENT720 n=23 cycle=74242448 consumed=35200
+CHECKED720 frame=24 pixels=921600 bank=0 cycles=74741304
+PROGRESS video cycles=75000000 frames=24 pixels=60928 cmd18=69
+PRESENT720 n=24 cycle=77272752 consumed=36800
+CHECKED720 frame=25 pixels=921600 bank=1 cycles=77701748
+PROGRESS video cycles=80000000 frames=25 pixels=338432 cmd18=74
+PRESENT720 n=25 cycle=80303056 consumed=38400
+CHECKED720 frame=26 pixels=921600 bank=2 cycles=80767383
+PRESENT720 n=26 cycle=83333360 consumed=40000
+CHECKED720 frame=27 pixels=921600 bank=0 cycles=83714803
+PROGRESS video cycles=85000000 frames=27 pixels=209920 cmd18=79
+PRESENT720 n=27 cycle=86363664 consumed=41600
+CHECKED720 frame=28 pixels=921600 bank=1 cycles=86745917
+PRESENT720 n=28 cycle=89393968 consumed=43200
+PROGRESS video cycles=90000000 frames=28 pixels=435200 cmd18=83
+CHECKED720 frame=29 pixels=921600 bank=2 cycles=90359966
+PRESENT720 n=29 cycle=92424272 consumed=44800
+CHECKED720 frame=30 pixels=921600 bank=0 cycles=93111952
+PROGRESS video cycles=95000000 frames=30 pixels=338176 cmd18=88
+PRESENT720 n=30 cycle=95454576 consumed=46400
+CHECKED720 frame=31 pixels=921600 bank=1 cycles=96007424
+PRESENT720 n=31 cycle=98484880 consumed=48000
+CHECKED720 frame=32 pixels=921600 bank=2 cycles=98919139
+PROGRESS video cycles=100000000 frames=32 pixels=89344 cmd18=93
+PRESENT720 n=32 cycle=101515184 consumed=49600
+CHECKED720 frame=33 pixels=921600 bank=0 cycles=102536074
+PRESENT720 n=33 cycle=104545488 consumed=51200
+PROGRESS video cycles=105000000 frames=33 pixels=450816 cmd18=97
+CHECKED720 frame=34 pixels=921600 bank=1 cycles=105395434
+PRESENT720 n=34 cycle=107575792 consumed=52800
+CHECKED720 frame=35 pixels=921600 bank=2 cycles=108071977
+PROGRESS video cycles=110000000 frames=35 pixels=243200 cmd18=102
+PRESENT720 n=35 cycle=110606096 consumed=54400
+CHECKED720 frame=36 pixels=921600 bank=0 cycles=111894262
+PRESENT720 n=36 cycle=113636400 consumed=56000
+CHECKED720 frame=37 pixels=921600 bank=1 cycles=114256379
+PROGRESS video cycles=115000000 frames=37 pixels=87040 cmd18=106
+PRESENT720 n=37 cycle=116666704 consumed=57600
+CHECKED720 frame=38 pixels=921600 bank=2 cycles=117486812
+PRESENT720 n=38 cycle=119697008 consumed=59200
+PROGRESS video cycles=120000000 frames=38 pixels=404736 cmd18=111
+CHECKED720 frame=39 pixels=921600 bank=0 cycles=120263107
+PRESENT720 n=39 cycle=122727312 consumed=60800
+CHECKED720 frame=40 pixels=921600 bank=1 cycles=123502235
+PROGRESS video cycles=125000000 frames=40 pixels=189910 cmd18=116
+PRESENT720 n=40 cycle=125757616 consumed=62400
+CHECKED720 frame=41 pixels=921600 bank=2 cycles=127008429
+PRESENT720 n=41 cycle=128787920 consumed=64000
+CHECKED720 frame=42 pixels=921600 bank=0 cycles=129684306
+PROGRESS video cycles=130000000 frames=42 pixels=76800 cmd18=120
+PRESENT720 n=42 cycle=131818224 consumed=65600
+CHECKED720 frame=43 pixels=921600 bank=1 cycles=132617518
+PRESENT720 n=43 cycle=134848528 consumed=67200
+PROGRESS video cycles=135000000 frames=43 pixels=378368 cmd18=125
+CHECKED720 frame=44 pixels=921600 bank=2 cycles=135576556
+PRESENT720 n=44 cycle=137878832 consumed=68800
+CHECKED720 frame=45 pixels=921600 bank=0 cycles=138962241
+PROGRESS video cycles=140000000 frames=45 pixels=194560 cmd18=130
+PRESENT720 n=45 cycle=140909136 consumed=70400
+CHECKED720 frame=46 pixels=921600 bank=1 cycles=141825264
+PRESENT720 n=46 cycle=143939440 consumed=72000
+CHECKED720 frame=47 pixels=921600 bank=2 cycles=144790740
+PROGRESS video cycles=145000000 frames=47 pixels=46080 cmd18=134
+PRESENT720 n=47 cycle=146969744 consumed=73600
+CHECKED720 frame=48 pixels=921600 bank=0 cycles=148409784
+PROGRESS video cycles=150000000 frames=48 pixels=271872 cmd18=139
+PRESENT720 n=48 cycle=150000048 consumed=75200
+CHECKED720 frame=49 pixels=921600 bank=1 cycles=151203765
+PRESENT720 n=49 cycle=153030352 consumed=76800
+CHECKED720 frame=50 pixels=921600 bank=2 cycles=154156217
+PROGRESS video cycles=155000000 frames=50 pixels=163840 cmd18=144
+PRESENT720 n=50 cycle=156060656 consumed=78400
+CHECKED720 frame=51 pixels=921600 bank=0 cycles=157031228
+PRESENT720 n=51 cycle=159090960 consumed=80000
+PROGRESS video cycles=160000000 frames=51 pixels=430080 cmd18=148
+CHECKED720 frame=52 pixels=921600 bank=1 cycles=160239942
+PRESENT720 n=52 cycle=162121264 consumed=81600
+CHECKED720 frame=53 pixels=921600 bank=2 cycles=163615452
+PROGRESS video cycles=165000000 frames=53 pixels=292096 cmd18=153
+PRESENT720 n=53 cycle=165151568 consumed=83200
+CHECKED720 frame=54 pixels=921600 bank=0 cycles=166277306
+PRESENT720 n=54 cycle=168181872 consumed=84800
+CHECKED720 frame=55 pixels=921600 bank=1 cycles=169432037
+PROGRESS video cycles=170000000 frames=55 pixels=105728 cmd18=158
+PRESENT720 n=55 cycle=171212176 consumed=86400
+CHECKED720 frame=56 pixels=921600 bank=2 cycles=172389151
+PRESENT720 n=56 cycle=174242480 consumed=88000
+PROGRESS video cycles=175000000 frames=56 pixels=343296 cmd18=162
+CHECKED720 frame=57 pixels=921600 bank=0 cycles=175685481
+PRESENT720 n=57 cycle=177272784 consumed=89600
+CHECKED720 frame=58 pixels=921600 bank=1 cycles=178492153
+PROGRESS video cycles=180000000 frames=58 pixels=261632 cmd18=167
+PRESENT720 n=58 cycle=180303088 consumed=91200
+CHECKED720 frame=59 pixels=921600 bank=2 cycles=181452967
+PRESENT720 n=59 cycle=183333392 consumed=92800
+CHECKED720 frame=60 pixels=921600 bank=0 cycles=184895669
+PROGRESS video cycles=185000000 frames=60 pixels=25600 cmd18=172
+PRESENT720 n=60 cycle=186363696 consumed=94400
+CHECKED720 frame=61 pixels=921600 bank=1 cycles=187560705
+PRESENT720 n=61 cycle=189394000 consumed=96000
+PROGRESS video cycles=190000000 frames=61 pixels=338176 cmd18=176
+CHECKED720 frame=62 pixels=921600 bank=2 cycles=190701006
+PRESENT720 n=62 cycle=192424304 consumed=97600
+CHECKED720 frame=63 pixels=921600 bank=0 cycles=193663485
+PROGRESS video cycles=195000000 frames=63 pixels=184832 cmd18=181
+PRESENT720 n=63 cycle=195454608 consumed=99200
+CHECKED720 frame=64 pixels=921600 bank=1 cycles=197051982
+PRESENT720 n=64 cycle=198484912 consumed=100800
+CHECKED720 frame=65 pixels=921600 bank=2 cycles=199947121
+PROGRESS video cycles=200000000 frames=65 pixels=11520 cmd18=186
+PRESENT720 n=65 cycle=201515216 consumed=102400
+CHECKED720 frame=66 pixels=921600 bank=0 cycles=202770036
+PRESENT720 n=66 cycle=204545520 consumed=104000
+PROGRESS video cycles=205000000 frames=66 pixels=353280 cmd18=190
+CHECKED720 frame=67 pixels=921600 bank=1 cycles=206349231
+PRESENT720 n=67 cycle=207575824 consumed=105600
+CHECKED720 frame=68 pixels=921600 bank=2 cycles=209096518
+PROGRESS video cycles=210000000 frames=68 pixels=174080 cmd18=195
+PRESENT720 n=68 cycle=210606128 consumed=107200
+CHECKED720 frame=69 pixels=921600 bank=0 cycles=211994469
+PRESENT720 n=69 cycle=213636432 consumed=108800
+CHECKED720 frame=70 pixels=921600 bank=1 cycles=214931270
+PROGRESS video cycles=215000000 frames=70 pixels=15616 cmd18=200
+PRESENT720 n=70 cycle=216666736 consumed=110400
+CHECKED720 frame=71 pixels=921600 bank=2 cycles=218488746
+PRESENT720 n=71 cycle=219697040 consumed=112000
+PROGRESS video cycles=220000000 frames=71 pixels=323072 cmd18=204
+CHECKED720 frame=72 pixels=921600 bank=0 cycles=221299451
+PRESENT720 n=72 cycle=222727344 consumed=113600
+CHECKED720 frame=73 pixels=921600 bank=1 cycles=224037932
+PROGRESS video cycles=225000000 frames=73 pixels=133120 cmd18=209
+PRESENT720 n=73 cycle=225757648 consumed=115200
+CHECKED720 frame=74 pixels=921600 bank=2 cycles=227723132
+PRESENT720 n=74 cycle=228787952 consumed=116800
+PROGRESS video cycles=230000000 frames=74 pixels=445440 cmd18=214
+CHECKED720 frame=75 pixels=921600 bank=0 cycles=230113406
+PRESENT720 n=75 cycle=231818256 consumed=118400
+CHECKED720 frame=76 pixels=921600 bank=1 cycles=233209196
+PRESENT720 n=76 cycle=234848560 consumed=120000
+PROGRESS video cycles=235000000 frames=76 pixels=240640 cmd18=218
+CHECKED720 frame=77 pixels=921600 bank=2 cycles=236100339
+PRESENT720 n=77 cycle=237878864 consumed=121600
+CHECKED720 frame=78 pixels=921600 bank=0 cycles=239286853
+PROGRESS video cycles=240000000 frames=78 pixels=126888 cmd18=223
+PRESENT720 n=78 cycle=240909168 consumed=123200
+CHECKED720 frame=79 pixels=921600 bank=1 cycles=242606863
+PRESENT720 n=79 cycle=243939472 consumed=124800
+PROGRESS video cycles=245000000 frames=79 pixels=391424 cmd18=228
+CHECKED720 frame=80 pixels=921600 bank=2 cycles=245284294
+PRESENT720 n=80 cycle=246969776 consumed=126400
+CHECKED720 frame=81 pixels=921600 bank=0 cycles=249109872
+PROGRESS video cycles=250000000 frames=81 pixels=220416 cmd18=232
+PRESENT720 n=81 cycle=250000080 consumed=128000
+CHECKED720 frame=82 pixels=921600 bank=1 cycles=251476244
+PRESENT720 n=82 cycle=253030384 consumed=129600
+CHECKED720 frame=83 pixels=921600 bank=2 cycles=254718998
+PROGRESS video cycles=255000000 frames=83 pixels=69376 cmd18=237
+PRESENT720 n=83 cycle=256060688 consumed=131200
+CHECKED720 frame=84 pixels=921600 bank=0 cycles=257503026
+PRESENT720 n=84 cycle=259090992 consumed=132800
+PROGRESS video cycles=260000000 frames=84 pixels=343296 cmd18=242
+CHECKED720 frame=85 pixels=921600 bank=1 cycles=260761616
+PRESENT720 n=85 cycle=262121296 consumed=134400
+CHECKED720 frame=86 pixels=921600 bank=2 cycles=264297299
+PROGRESS video cycles=265000000 frames=86 pixels=174080 cmd18=246
+PRESENT720 n=86 cycle=265151600 consumed=136000
+CHECKED720 frame=87 pixels=921600 bank=0 cycles=267018834
+PRESENT720 n=87 cycle=268181904 consumed=137600
+CHECKED720 frame=88 pixels=921600 bank=1 cycles=269899284
+PROGRESS video cycles=270000000 frames=88 pixels=20736 cmd18=251
+PRESENT720 n=88 cycle=271212208 consumed=139200
+CHECKED720 frame=89 pixels=921600 bank=2 cycles=272867017
+PRESENT720 n=89 cycle=274242512 consumed=140800
+PROGRESS video cycles=275000000 frames=89 pixels=343040 cmd18=256
+CHECKED720 frame=90 pixels=921600 bank=0 cycles=276291404
+PRESENT720 n=90 cycle=277272816 consumed=142400
+CHECKED720 frame=91 pixels=921600 bank=1 cycles=279210852
+PROGRESS video cycles=280000000 frames=91 pixels=138240 cmd18=260
+PRESENT720 n=91 cycle=280303120 consumed=144000
+CHECKED720 frame=92 pixels=921600 bank=2 cycles=282251068
+PRESENT720 n=92 cycle=283333424 consumed=145600
+PROGRESS video cycles=285000000 frames=92 pixels=409600 cmd18=265
+CHECKED720 frame=93 pixels=921600 bank=0 cycles=285350854
+PRESENT720 n=93 cycle=286363728 consumed=147200
+CHECKED720 frame=94 pixels=921600 bank=1 cycles=288304564
+PRESENT720 n=94 cycle=289394032 consumed=148800
+PROGRESS video cycles=290000000 frames=94 pixels=302080 cmd18=270
+CHECKED720 frame=95 pixels=921600 bank=2 cycles=291496813
+PRESENT720 n=95 cycle=292424336 consumed=150400
+CHECKED720 frame=96 pixels=921600 bank=0 cycles=294369271
+PROGRESS video cycles=295000000 frames=96 pixels=5376 cmd18=274
+PRESENT720 n=96 cycle=295454640 consumed=152000
+CHECKED720 frame=97 pixels=921600 bank=1 cycles=297533622
+PRESENT720 n=97 cycle=298484944 consumed=153600
+PROGRESS video cycles=300000000 frames=97 pixels=379392 cmd18=279
+CHECKED720 frame=98 pixels=921600 bank=2 cycles=300965927
+PRESENT720 n=98 cycle=301515248 consumed=155200
+CHECKED720 frame=99 pixels=921600 bank=0 cycles=303655790
+PRESENT720 n=99 cycle=304545552 consumed=156800
+PROGRESS video cycles=305000000 frames=99 pixels=87040 cmd18=283
+CHECKED720 frame=100 pixels=921600 bank=1 cycles=306855217
+PRESENT720 n=100 cycle=307575856 consumed=158400
+CHECKED720 frame=101 pixels=921600 bank=2 cycles=309821322
+PROGRESS video cycles=310000000 frames=101 pixels=10240 cmd18=288
+PRESENT720 n=101 cycle=310606160 consumed=160000
+CHECKED720 frame=102 pixels=921600 bank=0 cycles=313309164
+PRESENT720 n=102 cycle=313636464 consumed=161600
+PROGRESS video cycles=315000000 frames=102 pixels=327936 cmd18=293
+CHECKED720 frame=103 pixels=921600 bank=1 cycles=316460935
+PRESENT720 n=103 cycle=316666768 consumed=163200
+CHECKED720 frame=104 pixels=921600 bank=2 cycles=319086344
+PRESENT720 n=104 cycle=319697072 consumed=164800
+PROGRESS video cycles=320000000 frames=104 pixels=81920 cmd18=297
+CHECKED720 frame=105 pixels=921600 bank=0 cycles=322181135
+PRESENT720 n=105 cycle=322727376 consumed=166400
+PROGRESS video cycles=325000000 frames=105 pixels=440832 cmd18=302
+CHECKED720 frame=106 pixels=921600 bank=1 cycles=325132366
+PRESENT720 n=106 cycle=325757680 consumed=168000
+CHECKED720 frame=107 pixels=921600 bank=2 cycles=328260753
+PRESENT720 n=107 cycle=328787984 consumed=169600
+PROGRESS video cycles=330000000 frames=107 pixels=204800 cmd18=307
+CHECKED720 frame=108 pixels=921600 bank=0 cycles=332087256
+PRESENT720 n=108 cycle=333333440 consumed=171200
+CHECKED720 frame=109 pixels=921600 bank=1 cycles=334430725
+PROGRESS video cycles=335000000 frames=109 pixels=25600 cmd18=311
+PRESENT720 n=109 cycle=336363744 consumed=172800
+CHECKED720 frame=110 pixels=921600 bank=2 cycles=337533434
+PRESENT720 n=110 cycle=339394048 consumed=174400
+PROGRESS video cycles=340000000 frames=110 pixels=379136 cmd18=316
+CHECKED720 frame=111 pixels=921600 bank=0 cycles=340905281
+PRESENT720 n=111 cycle=342424352 consumed=176000
+CHECKED720 frame=112 pixels=921600 bank=1 cycles=343567468
+PROGRESS video cycles=345000000 frames=112 pixels=118016 cmd18=320
+PRESENT720 n=112 cycle=345454656 consumed=177600
+CHECKED720 frame=113 pixels=921600 bank=2 cycles=346666958
+PRESENT720 n=113 cycle=348484960 consumed=179200
+CHECKED720 frame=114 pixels=921600 bank=0 cycles=349617893
+PROGRESS video cycles=350000000 frames=114 pixels=83456 cmd18=325
+PRESENT720 n=114 cycle=351515264 consumed=180800
+CHECKED720 frame=115 pixels=921600 bank=1 cycles=352845699
+PRESENT720 n=115 cycle=354545568 consumed=182400
+PROGRESS video cycles=355000000 frames=115 pixels=316928 cmd18=330
+CHECKED720 frame=116 pixels=921600 bank=2 cycles=355628136
+PRESENT720 n=116 cycle=357575872 consumed=184000
+CHECKED720 frame=117 pixels=921600 bank=0 cycles=358851835
+PROGRESS video cycles=360000000 frames=117 pixels=148480 cmd18=334
+PRESENT720 n=117 cycle=360606176 consumed=185600
+CHECKED720 frame=118 pixels=921600 bank=1 cycles=362340787
+PRESENT720 n=118 cycle=363636480 consumed=187200
+PROGRESS video cycles=365000000 frames=118 pixels=456192 cmd18=339
+CHECKED720 frame=119 pixels=921600 bank=2 cycles=365009634
+PRESENT720 n=119 cycle=366666784 consumed=188800
+CHECKED720 frame=120 pixels=921600 bank=0 cycles=368162663
+PRESENT720 n=120 cycle=369697088 consumed=190400
+PROGRESS video cycles=370000000 frames=120 pixels=236544 cmd18=344
+CHECKED720 frame=121 pixels=921600 bank=1 cycles=371135539
+PRESENT720 n=121 cycle=372727392 consumed=192000
+CHECKED720 frame=122 pixels=921600 bank=2 cycles=374749736
+PROGRESS video cycles=375000000 frames=122 pixels=61696 cmd18=348
+PRESENT720 n=122 cycle=375757696 consumed=193600
+CHECKED720 frame=123 pixels=921600 bank=0 cycles=377589338
+PRESENT720 n=123 cycle=378788000 consumed=195200
+PROGRESS video cycles=380000000 frames=123 pixels=399360 cmd18=353
+CHECKED720 frame=124 pixels=921600 bank=1 cycles=380321122
+PRESENT720 n=124 cycle=381818304 consumed=196800
+CHECKED720 frame=125 pixels=921600 bank=2 cycles=384169085
+PRESENT720 n=125 cycle=384848608 consumed=198400
+PROGRESS video cycles=385000000 frames=125 pixels=205056 cmd18=357
+CHECKED720 frame=126 pixels=921600 bank=0 cycles=386562097
+PRESENT720 n=126 cycle=387878912 consumed=200000
+CHECKED720 frame=127 pixels=921600 bank=1 cycles=389806072
+PROGRESS video cycles=390000000 frames=127 pixels=46592 cmd18=362
+PRESENT720 n=127 cycle=390909216 consumed=201600
+CHECKED720 frame=128 pixels=921600 bank=2 cycles=392725853
+PRESENT720 n=128 cycle=393939520 consumed=203200
+PROGRESS video cycles=395000000 frames=128 pixels=308351 cmd18=367
+CHECKED720 frame=129 pixels=921600 bank=0 cycles=395694807
+PRESENT720 n=129 cycle=396969824 consumed=204800
+CHECKED720 frame=130 pixels=921600 bank=1 cycles=399121303
+PROGRESS video cycles=400000000 frames=130 pixels=215040 cmd18=372
+PRESENT720 n=130 cycle=400000128 consumed=206400
+CHECKED720 frame=131 pixels=921600 bank=2 cycles=401883982
+PRESENT720 n=131 cycle=403030432 consumed=208000
+CHECKED720 frame=132 pixels=921600 bank=0 cycles=404835361
+PROGRESS video cycles=405000000 frames=132 pixels=34560 cmd18=376
+PRESENT720 n=132 cycle=406060736 consumed=209600
+CHECKED720 frame=133 pixels=921600 bank=1 cycles=407793585
+PRESENT720 n=133 cycle=409091040 consumed=211200
+PROGRESS video cycles=410000000 frames=133 pixels=343040 cmd18=381
+CHECKED720 frame=134 pixels=921600 bank=2 cycles=411115334
+PRESENT720 n=134 cycle=412121344 consumed=212800
+CHECKED720 frame=135 pixels=921600 bank=0 cycles=413971993
+PROGRESS video cycles=415000000 frames=135 pixels=179456 cmd18=385
+PRESENT720 n=135 cycle=415151648 consumed=214400
+CHECKED720 frame=136 pixels=921600 bank=1 cycles=416928367
+PRESENT720 n=136 cycle=418181952 consumed=216000
+PROGRESS video cycles=420000000 frames=136 pixels=419840 cmd18=390
+CHECKED720 frame=137 pixels=921600 bank=2 cycles=420450212
+PRESENT720 n=137 cycle=421212256 consumed=217600
+CHECKED720 frame=138 pixels=921600 bank=0 cycles=423189951
+PRESENT720 n=138 cycle=424242560 consumed=219200
+PROGRESS video cycles=425000000 frames=138 pixels=320784 cmd18=395
+CHECKED720 frame=139 pixels=921600 bank=1 cycles=426102591
+PRESENT720 n=139 cycle=427272864 consumed=220800
+CHECKED720 frame=140 pixels=921600 bank=2 cycles=429063664
+PROGRESS video cycles=430000000 frames=140 pixels=77056 cmd18=400
+PRESENT720 n=140 cycle=430303168 consumed=222400
+CHECKED720 frame=141 pixels=921600 bank=0 cycles=432484795
+PRESENT720 n=141 cycle=433333472 consumed=224000
+PROGRESS video cycles=435000000 frames=141 pixels=354816 cmd18=404
+CHECKED720 frame=142 pixels=921600 bank=1 cycles=435477281
+PRESENT720 n=142 cycle=436363776 consumed=225600
+CHECKED720 frame=143 pixels=921600 bank=2 cycles=438561897
+PRESENT720 n=143 cycle=439394080 consumed=227200
+PROGRESS video cycles=440000000 frames=143 pixels=97280 cmd18=408
+CHECKED720 frame=144 pixels=921600 bank=0 cycles=441745007
+PRESENT720 n=144 cycle=442424384 consumed=228800
+CHECKED720 frame=145 pixels=921600 bank=1 cycles=444706080
+PROGRESS video cycles=445000000 frames=145 pixels=10240 cmd18=413
+PRESENT720 n=145 cycle=445454688 consumed=230400
+CHECKED720 frame=146 pixels=921600 bank=2 cycles=447986648
+PRESENT720 n=146 cycle=448484992 consumed=232000
+PROGRESS video cycles=450000000 frames=146 pixels=237056 cmd18=418
+CHECKED720 frame=147 pixels=921600 bank=0 cycles=451041479
+PRESENT720 n=147 cycle=451515296 consumed=233600
+CHECKED720 frame=148 pixels=921600 bank=1 cycles=453930291
+PRESENT720 n=148 cycle=454545600 consumed=235200
+PROGRESS video cycles=455000000 frames=148 pixels=82176 cmd18=422
+CHECKED720 frame=149 pixels=921600 bank=2 cycles=457579009
+PRESENT720 n=149 cycle=459091056 consumed=236800
+PROGRESS video cycles=460000000 frames=149 pixels=450816 cmd18=427
+CHECKED720 frame=150 pixels=921600 bank=0 cycles=460063152
+PRESENT720 n=150 cycle=462121360 consumed=238400
+CHECKED720 frame=151 pixels=921600 bank=1 cycles=463169746
+PROGRESS video cycles=465000000 frames=151 pixels=184320 cmd18=432
+PRESENT720 n=151 cycle=465151664 consumed=240000
+CHECKED720 frame=152 pixels=921600 bank=2 cycles=466321147
+PRESENT720 n=152 cycle=468181968 consumed=241600
+CHECKED720 frame=153 pixels=921600 bank=0 cycles=469284662
+PROGRESS video cycles=470000000 frames=153 pixels=30976 cmd18=436
+PRESENT720 n=153 cycle=471212272 consumed=243200
+CHECKED720 frame=154 pixels=921600 bank=1 cycles=472855310
+PRESENT720 n=154 cycle=474242576 consumed=244800
+PROGRESS video cycles=475000000 frames=154 pixels=384512 cmd18=441
+CHECKED720 frame=155 pixels=921600 bank=2 cycles=475796181
+PRESENT720 n=155 cycle=477272880 consumed=246400
+CHECKED720 frame=156 pixels=921600 bank=0 cycles=478516458
+PROGRESS video cycles=480000000 frames=156 pixels=138240 cmd18=446
+PRESENT720 n=156 cycle=480303184 consumed=248000
+CHECKED720 frame=157 pixels=921600 bank=1 cycles=482388323
+PRESENT720 n=157 cycle=483333488 consumed=249600
+CHECKED720 frame=158 pixels=921600 bank=2 cycles=484783962
+PROGRESS video cycles=485000000 frames=158 pixels=25600 cmd18=450
+PRESENT720 n=158 cycle=486363792 consumed=251200
+CHECKED720 frame=159 pixels=921600 bank=0 cycles=488056094
+PRESENT720 n=159 cycle=489394096 consumed=252800
+PROGRESS video cycles=490000000 frames=159 pixels=235776 cmd18=455
+CHECKED720 frame=160 pixels=921600 bank=1 cycles=491054759
+PRESENT720 n=160 cycle=492424400 consumed=254400
+CHECKED720 frame=161 pixels=921600 bank=2 cycles=493940278
+PROGRESS video cycles=495000000 frames=161 pixels=108032 cmd18=459
+PRESENT720 n=161 cycle=495454704 consumed=256000
+CHECKED720 frame=162 pixels=921600 bank=0 cycles=497443956
+PRESENT720 n=162 cycle=498485008 consumed=257600
+PROGRESS video cycles=500000000 frames=162 pixels=394496 cmd18=464
+CHECKED720 frame=163 pixels=921600 bank=1 cycles=500263504
+PRESENT720 n=163 cycle=501515312 consumed=259200
+CHECKED720 frame=164 pixels=921600 bank=2 cycles=503233272
+PRESENT720 n=164 cycle=504545616 consumed=260800
+PROGRESS video cycles=505000000 frames=164 pixels=220160 cmd18=469
+CHECKED720 frame=165 pixels=921600 bank=0 cycles=506959542
+PRESENT720 n=165 cycle=507575920 consumed=262400
+CHECKED720 frame=166 pixels=921600 bank=1 cycles=509769507
+PROGRESS video cycles=510000000 frames=166 pixels=56576 cmd18=473
+PRESENT720 n=166 cycle=510606224 consumed=264000
+CHECKED720 frame=167 pixels=921600 bank=2 cycles=512677152
+PRESENT720 n=167 cycle=513636528 consumed=265600
+PROGRESS video cycles=515000000 frames=167 pixels=353280 cmd18=478
+CHECKED720 frame=168 pixels=921600 bank=0 cycles=515673301
+PRESENT720 n=168 cycle=516666832 consumed=267200
+CHECKED720 frame=169 pixels=921600 bank=1 cycles=518694055
+PRESENT720 n=169 cycle=519697136 consumed=268800
+PROGRESS video cycles=520000000 frames=169 pixels=174336 cmd18=482
+CHECKED720 frame=170 pixels=921600 bank=2 cycles=522201433
+PRESENT720 n=170 cycle=522727440 consumed=270400
+CHECKED720 frame=171 pixels=921600 bank=0 cycles=524869836
+PROGRESS video cycles=525000000 frames=171 pixels=30976 cmd18=487
+PRESENT720 n=171 cycle=525757744 consumed=272000
+CHECKED720 frame=172 pixels=921600 bank=1 cycles=527948125
+PRESENT720 n=172 cycle=528788048 consumed=273600
+PROGRESS video cycles=530000000 frames=172 pixels=319232 cmd18=492
+CHECKED720 frame=173 pixels=921600 bank=2 cycles=530910752
+PRESENT720 n=173 cycle=531818352 consumed=275200
+CHECKED720 frame=174 pixels=921600 bank=0 cycles=534455130
+PRESENT720 n=174 cycle=534848656 consumed=276800
+PROGRESS video cycles=535000000 frames=174 pixels=133632 cmd18=496
+CHECKED720 frame=175 pixels=921600 bank=1 cycles=536984894
+PRESENT720 n=175 cycle=537878960 consumed=278400
+PROGRESS video cycles=540000000 frames=175 pixels=455936 cmd18=501
+CHECKED720 frame=176 pixels=921600 bank=2 cycles=540015416
+PRESENT720 n=176 cycle=540909264 consumed=280000
+CHECKED720 frame=177 pixels=921600 bank=0 cycles=543644376
+PRESENT720 n=177 cycle=543939568 consumed=281600
+PROGRESS video cycles=545000000 frames=177 pixels=302336 cmd18=506
+CHECKED720 frame=178 pixels=921600 bank=1 cycles=546381895
+PRESENT720 n=178 cycle=546969872 consumed=283200
+CHECKED720 frame=179 pixels=921600 bank=2 cycles=549212062
+PROGRESS video cycles=550000000 frames=179 pixels=153856 cmd18=510
+PRESENT720 n=179 cycle=550000176 consumed=284800
+CHECKED720 frame=180 pixels=921600 bank=0 cycles=552363574
+PRESENT720 n=180 cycle=553030480 consumed=286400
+PROGRESS video cycles=555000000 frames=180 pixels=358400 cmd18=515
+CHECKED720 frame=181 pixels=921600 bank=1 cycles=555760211
+PRESENT720 n=181 cycle=556060784 consumed=288000
+CHECKED720 frame=182 pixels=921600 bank=2 cycles=558246278
+PRESENT720 n=182 cycle=559091088 consumed=289600
+PROGRESS video cycles=560000000 frames=182 pixels=302080 cmd18=520
+CHECKED720 frame=183 pixels=921600 bank=0 cycles=561282091
+PRESENT720 n=183 cycle=562121392 consumed=291200
+PROGRESS video cycles=565000000 frames=183 pixels=457984 cmd18=524
+CHECKED720 frame=184 pixels=921600 bank=1 cycles=565005401
+PRESENT720 n=184 cycle=565151696 consumed=292800
+CHECKED720 frame=185 pixels=921600 bank=2 cycles=567387128
+PRESENT720 n=185 cycle=568182000 consumed=294400
+PROGRESS video cycles=570000000 frames=185 pixels=414720 cmd18=529
+CHECKED720 frame=186 pixels=921600 bank=0 cycles=570492575
+PRESENT720 n=186 cycle=571212304 consumed=296000
+CHECKED720 frame=187 pixels=921600 bank=1 cycles=573309015
+PRESENT720 n=187 cycle=574242608 consumed=297600
+PROGRESS video cycles=575000000 frames=187 pixels=210176 cmd18=534
+CHECKED720 frame=188 pixels=921600 bank=2 cycles=577066365
+PRESENT720 n=188 cycle=577272912 consumed=299200
+CHECKED720 frame=189 pixels=921600 bank=0 cycles=579543219
+PROGRESS video cycles=580000000 frames=189 pixels=15360 cmd18=538
+PRESENT720 n=189 cycle=580303216 consumed=300800
+CHECKED720 frame=190 pixels=921600 bank=1 cycles=582657768
+PRESENT720 n=190 cycle=583333520 consumed=302400
+PROGRESS video cycles=585000000 frames=190 pixels=343504 cmd18=543
+CHECKED720 frame=191 pixels=921600 bank=2 cycles=586542250
+PRESENT720 n=191 cycle=587878976 consumed=304000
+CHECKED720 frame=192 pixels=921600 bank=0 cycles=588864814
+PROGRESS video cycles=590000000 frames=192 pixels=199680 cmd18=548
+PRESENT720 n=192 cycle=590909280 consumed=305600
+CHECKED720 frame=193 pixels=921600 bank=1 cycles=592346329
+PRESENT720 n=193 cycle=593939584 consumed=307200
+PROGRESS video cycles=595000000 frames=193 pixels=430336 cmd18=552
+CHECKED720 frame=194 pixels=921600 bank=2 cycles=595316985
+PRESENT720 n=194 cycle=596969888 consumed=308800
+CHECKED720 frame=195 pixels=921600 bank=0 cycles=598025459
+PROGRESS video cycles=600000000 frames=195 pixels=221696 cmd18=557
+PRESENT720 n=195 cycle=600000192 consumed=310400
+CHECKED720 frame=196 pixels=921600 bank=1 cycles=601196174
+PRESENT720 n=196 cycle=603030496 consumed=312000
+CHECKED720 frame=197 pixels=921600 bank=2 cycles=604167718
+PROGRESS video cycles=605000000 frames=197 pixels=56832 cmd18=562
+PRESENT720 n=197 cycle=606060800 consumed=313600
+CHECKED720 frame=198 pixels=921600 bank=0 cycles=607491354
+PRESENT720 n=198 cycle=609091104 consumed=315200
+PROGRESS video cycles=610000000 frames=198 pixels=370499 cmd18=566
+CHECKED720 frame=199 pixels=921600 bank=1 cycles=610393597
+PRESENT720 n=199 cycle=612121408 consumed=316800
+CHECKED720 frame=200 pixels=921600 bank=2 cycles=613354633
+PROGRESS video cycles=615000000 frames=200 pixels=213504 cmd18=571
+PRESENT720 n=200 cycle=615151712 consumed=318400
+CHECKED720 frame=201 pixels=921600 bank=0 cycles=616962318
+PRESENT720 n=201 cycle=618182016 consumed=320000
+CHECKED720 frame=202 pixels=921600 bank=1 cycles=619483461
+PROGRESS video cycles=620000000 frames=202 pixels=71680 cmd18=576
+PRESENT720 n=202 cycle=621212320 consumed=321600
+CHECKED720 frame=203 pixels=921600 bank=2 cycles=622516758
+PRESENT720 n=203 cycle=624242624 consumed=323200
+PROGRESS video cycles=625000000 frames=203 pixels=396288 cmd18=580
+CHECKED720 frame=204 pixels=921600 bank=0 cycles=625478978
+PRESENT720 n=204 cycle=627272928 consumed=324800
+CHECKED720 frame=205 pixels=921600 bank=1 cycles=629027796
+PROGRESS video cycles=630000000 frames=205 pixels=215296 cmd18=585
+PRESENT720 n=205 cycle=630303232 consumed=326400
+CHECKED720 frame=206 pixels=921600 bank=2 cycles=631717511
+PRESENT720 n=206 cycle=633333536 consumed=328000
+CHECKED720 frame=207 pixels=921600 bank=0 cycles=634681729
+PROGRESS video cycles=635000000 frames=207 pixels=59648 cmd18=590
+PRESENT720 n=207 cycle=636363840 consumed=329600
+CHECKED720 frame=208 pixels=921600 bank=1 cycles=638536907
+PRESENT720 n=208 cycle=639394144 consumed=331200
+PROGRESS video cycles=640000000 frames=208 pixels=327680 cmd18=594
+CHECKED720 frame=209 pixels=921600 bank=2 cycles=640962479
+PRESENT720 n=209 cycle=642424448 consumed=332800
+CHECKED720 frame=210 pixels=921600 bank=0 cycles=644198647
+PROGRESS video cycles=645000000 frames=210 pixels=148480 cmd18=599
+PRESENT720 n=210 cycle=645454752 consumed=334400
+CHECKED720 frame=211 pixels=921600 bank=1 cycles=647210632
+PRESENT720 n=211 cycle=648485056 consumed=336000
+PROGRESS video cycles=650000000 frames=211 pixels=445952 cmd18=603
+CHECKED720 frame=212 pixels=921600 bank=2 cycles=650095929
+PRESENT720 n=212 cycle=651515360 consumed=337600
+CHECKED720 frame=213 pixels=921600 bank=0 cycles=653565123
+PRESENT720 n=213 cycle=654545664 consumed=339200
+PROGRESS video cycles=655000000 frames=213 pixels=230912 cmd18=608
+CHECKED720 frame=214 pixels=921600 bank=1 cycles=656384930
+PRESENT720 n=214 cycle=657575968 consumed=340800
+CHECKED720 frame=215 pixels=921600 bank=2 cycles=659342340
+PROGRESS video cycles=660000000 frames=215 pixels=117760 cmd18=613
+PRESENT720 n=215 cycle=660606272 consumed=342400
+CHECKED720 frame=216 pixels=921600 bank=0 cycles=662996090
+PRESENT720 n=216 cycle=663636576 consumed=344000
+PROGRESS video cycles=665000000 frames=216 pixels=312320 cmd18=617
+CHECKED720 frame=217 pixels=921600 bank=1 cycles=665767760
+PRESENT720 n=217 cycle=666666880 consumed=345600
+CHECKED720 frame=218 pixels=921600 bank=2 cycles=668552676
+PRESENT720 n=218 cycle=669697184 consumed=347200
+PROGRESS video cycles=670000000 frames=218 pixels=250880 cmd18=622
+CHECKED720 frame=219 pixels=921600 bank=0 cycles=671487072
+PRESENT720 n=219 cycle=672727488 consumed=348800
+PROGRESS video cycles=675000000 frames=219 pixels=401152 cmd18=626
+CHECKED720 frame=220 pixels=921600 bank=1 cycles=675235209
+PRESENT720 n=220 cycle=675757792 consumed=350400
+CHECKED720 frame=221 pixels=921600 bank=2 cycles=677702776
+PRESENT720 n=221 cycle=678788096 consumed=352000
+PROGRESS video cycles=680000000 frames=221 pixels=327680 cmd18=631
+CHECKED720 frame=222 pixels=921600 bank=0 cycles=680824873
+PRESENT720 n=222 cycle=681818400 consumed=353600
+CHECKED720 frame=223 pixels=921600 bank=1 cycles=684709207
+PRESENT720 n=223 cycle=684848704 consumed=355200
+PROGRESS video cycles=685000000 frames=223 pixels=71936 cmd18=636
+CHECKED720 frame=224 pixels=921600 bank=2 cycles=687039615
+PRESENT720 n=224 cycle=687879008 consumed=356800
+PROGRESS video cycles=690000000 frames=224 pixels=363520 cmd18=640
+CHECKED720 frame=225 pixels=921600 bank=0 cycles=690443726
+PRESENT720 n=225 cycle=690909312 consumed=358400
+CHECKED720 frame=226 pixels=921600 bank=1 cycles=693315629
+PRESENT720 n=226 cycle=693939616 consumed=360000
+PROGRESS video cycles=695000000 frames=226 pixels=302080 cmd18=645
+CHECKED720 frame=227 pixels=921600 bank=2 cycles=696288912
+PRESENT720 n=227 cycle=696969920 consumed=361600
+CHECKED720 frame=228 pixels=921600 bank=0 cycles=699940072
+PROGRESS video cycles=700000000 frames=228 pixels=14848 cmd18=650
+PRESENT720 n=228 cycle=700000224 consumed=363200
+CHECKED720 frame=229 pixels=921600 bank=1 cycles=702708560
+PRESENT720 n=229 cycle=703030528 consumed=364800
+PROGRESS video cycles=705000000 frames=229 pixels=363776 cmd18=654
+CHECKED720 frame=230 pixels=921600 bank=2 cycles=705675516
+PRESENT720 n=230 cycle=706060832 consumed=366400
+CHECKED720 frame=231 pixels=921600 bank=0 cycles=708497432
+PRESENT720 n=231 cycle=709091136 consumed=368000
+PROGRESS video cycles=710000000 frames=231 pixels=158976 cmd18=659
+CHECKED720 frame=232 pixels=921600 bank=1 cycles=711647982
+PRESENT720 n=232 cycle=712121440 consumed=369600
+PROGRESS video cycles=715000000 frames=232 pixels=455424 cmd18=664
+CHECKED720 frame=233 pixels=921600 bank=2 cycles=715021309
+PRESENT720 n=233 cycle=715151744 consumed=371200
+CHECKED720 frame=234 pixels=921600 bank=0 cycles=717682016
+PRESENT720 n=234 cycle=718182048 consumed=372800
+PROGRESS video cycles=720000000 frames=234 pixels=330663 cmd18=668
+CHECKED720 frame=235 pixels=921600 bank=1 cycles=720763598
+PRESENT720 n=235 cycle=721212352 consumed=374400
+CHECKED720 frame=236 pixels=921600 bank=2 cycles=723723080
+PRESENT720 n=236 cycle=724242656 consumed=376000
+PROGRESS video cycles=725000000 frames=236 pixels=210176 cmd18=673
+CHECKED720 frame=237 pixels=921600 bank=0 cycles=726955363
+PRESENT720 n=237 cycle=727272960 consumed=377600
+CHECKED720 frame=238 pixels=921600 bank=1 cycles=729743276
+PROGRESS video cycles=730000000 frames=238 pixels=25600 cmd18=678
+PRESENT720 n=238 cycle=730303264 consumed=379200
+CHECKED720 frame=239 pixels=921600 bank=2 cycles=732982959
+PRESENT720 n=239 cycle=733333568 consumed=380800
+PROGRESS video cycles=735000000 frames=239 pixels=322560 cmd18=682
+CHECKED720 frame=240 pixels=921600 bank=0 cycles=736492298
+PRESENT720 n=240 cycle=737879024 consumed=382400
+CHECKED720 frame=241 pixels=921600 bank=1 cycles=738926713
+PROGRESS video cycles=740000000 frames=241 pixels=174592 cmd18=687
+PRESENT720 n=241 cycle=740909328 consumed=384000
+CHECKED720 frame=242 pixels=921600 bank=2 cycles=742053361
+PRESENT720 n=242 cycle=743939632 consumed=385600
+CHECKED720 frame=243 pixels=921600 bank=0 cycles=744942728
+PROGRESS video cycles=745000000 frames=243 pixels=13568 cmd18=692
+PRESENT720 n=243 cycle=746969936 consumed=387200
+CHECKED720 frame=244 pixels=921600 bank=1 cycles=748013617
+PROGRESS video cycles=750000000 frames=244 pixels=317696 cmd18=696
+PRESENT720 n=244 cycle=750000240 consumed=388800
+CHECKED720 frame=245 pixels=921600 bank=2 cycles=751466383
+PRESENT720 n=245 cycle=753030544 consumed=390400
+CHECKED720 frame=246 pixels=921600 bank=0 cycles=754231541
+PROGRESS video cycles=755000000 frames=246 pixels=77312 cmd18=701
+PRESENT720 n=246 cycle=756060848 consumed=392000
+CHECKED720 frame=247 pixels=921600 bank=1 cycles=757416464
+PRESENT720 n=247 cycle=759091152 consumed=393600
+PROGRESS video cycles=760000000 frames=247 pixels=410112 cmd18=706
+CHECKED720 frame=248 pixels=921600 bank=2 cycles=760376094
+PRESENT720 n=248 cycle=762121456 consumed=395200
+CHECKED720 frame=249 pixels=921600 bank=0 cycles=763684930
+PROGRESS video cycles=765000000 frames=249 pixels=143616 cmd18=710
+PRESENT720 n=249 cycle=765151760 consumed=396800
+CHECKED720 frame=250 pixels=921600 bank=1 cycles=766718375
+PRESENT720 n=250 cycle=768182064 consumed=398400
+CHECKED720 frame=251 pixels=921600 bank=2 cycles=769608963
+PROGRESS video cycles=770000000 frames=251 pixels=71680 cmd18=715
+PRESENT720 n=251 cycle=771212368 consumed=400000
+CHECKED720 frame=252 pixels=921600 bank=0 cycles=773309111
+PRESENT720 n=252 cycle=774242672 consumed=401600
+PROGRESS video cycles=775000000 frames=252 pixels=348160 cmd18=719
+CHECKED720 frame=253 pixels=921600 bank=1 cycles=775783634
+PRESENT720 n=253 cycle=777272976 consumed=403200
+CHECKED720 frame=254 pixels=921600 bank=2 cycles=778861553
+PROGRESS video cycles=780000000 frames=254 pixels=164352 cmd18=724
+PRESENT720 n=254 cycle=780303280 consumed=404800
+CHECKED720 frame=255 pixels=921600 bank=0 cycles=782650760
+PRESENT720 n=255 cycle=783333584 consumed=406400
+CHECKED720 frame=256 pixels=921600 bank=1 cycles=784966664
+PROGRESS video cycles=785000000 frames=256 pixels=6912 cmd18=729
+PRESENT720 n=256 cycle=786363888 consumed=408000
+CHECKED720 frame=257 pixels=921600 bank=2 cycles=788188772
+PRESENT720 n=257 cycle=789394192 consumed=409600
+PROGRESS video cycles=790000000 frames=257 pixels=261632 cmd18=733
+CHECKED720 frame=258 pixels=921600 bank=0 cycles=791143592
+PRESENT720 n=258 cycle=792424496 consumed=411200
+CHECKED720 frame=259 pixels=921600 bank=1 cycles=794361778
+PROGRESS video cycles=795000000 frames=259 pixels=112896 cmd18=738
+PRESENT720 n=259 cycle=795454800 consumed=412800
+CHECKED720 frame=260 pixels=921600 bank=2 cycles=797965134
+PRESENT720 n=260 cycle=798485104 consumed=414400
+PROGRESS video cycles=800000000 frames=260 pixels=296960 cmd18=742
+CHECKED720 frame=261 pixels=921600 bank=0 cycles=800691886
+PRESENT720 n=261 cycle=801515408 consumed=416000
+CHECKED720 frame=262 pixels=921600 bank=1 cycles=803533042
+PRESENT720 n=262 cycle=804545712 consumed=417600
+PROGRESS video cycles=805000000 frames=262 pixels=246272 cmd18=747
+CHECKED720 frame=263 pixels=921600 bank=2 cycles=806491858
+PRESENT720 n=263 cycle=807576016 consumed=419200
+CHECKED720 frame=264 pixels=921600 bank=0 cycles=809990615
+PROGRESS video cycles=810000000 frames=264 pixels=512 cmd18=752
+PRESENT720 n=264 cycle=810606320 consumed=420800
+CHECKED720 frame=265 pixels=921600 bank=1 cycles=812504136
+PRESENT720 n=265 cycle=813636624 consumed=422400
+PROGRESS video cycles=815000000 frames=265 pixels=327680 cmd18=756
+CHECKED720 frame=266 pixels=921600 bank=2 cycles=815606068
+PRESENT720 n=266 cycle=816666928 consumed=424000
+CHECKED720 frame=267 pixels=921600 bank=0 cycles=819279169
+PRESENT720 n=267 cycle=819697232 consumed=425600
+PROGRESS video cycles=820000000 frames=267 pixels=179200 cmd18=761
+CHECKED720 frame=268 pixels=921600 bank=1 cycles=822069672
+PRESENT720 n=268 cycle=822727536 consumed=427200
+CHECKED720 frame=269 pixels=921600 bank=2 cycles=824998111
+PROGRESS video cycles=825000000 frames=269 pixels=0 cmd18=766
+PRESENT720 n=269 cycle=825757840 consumed=428800
+CHECKED720 frame=270 pixels=921600 bank=0 cycles=828054903
+PRESENT720 n=270 cycle=828788144 consumed=430400
+PROGRESS video cycles=830000000 frames=270 pixels=343296 cmd18=771
+CHECKED720 frame=271 pixels=921600 bank=1 cycles=831518177
+PRESENT720 n=271 cycle=831818448 consumed=432000
+CHECKED720 frame=272 pixels=921600 bank=2 cycles=834493014
+PRESENT720 n=272 cycle=834848752 consumed=433600
+PROGRESS video cycles=835000000 frames=272 pixels=124672 cmd18=775
+CHECKED720 frame=273 pixels=921600 bank=0 cycles=837159900
+PRESENT720 n=273 cycle=837879056 consumed=435200
+PROGRESS video cycles=840000000 frames=273 pixels=425100 cmd18=780
+CHECKED720 frame=274 pixels=921600 bank=1 cycles=840264052
+PRESENT720 n=274 cycle=840909360 consumed=436800
+CHECKED720 frame=275 pixels=921600 bank=2 cycles=843221980
+PRESENT720 n=275 cycle=843939664 consumed=438400
+PROGRESS video cycles=845000000 frames=275 pixels=303616 cmd18=784
+CHECKED720 frame=276 pixels=921600 bank=0 cycles=846591755
+PRESENT720 n=276 cycle=846969968 consumed=440000
+CHECKED720 frame=277 pixels=921600 bank=1 cycles=849436130
+PROGRESS video cycles=850000000 frames=277 pixels=102656 cmd18=789
+PRESENT720 n=277 cycle=850000272 consumed=441600
+CHECKED720 frame=278 pixels=921600 bank=2 cycles=852396389
+PRESENT720 n=278 cycle=853030576 consumed=443200
+PROGRESS video cycles=855000000 frames=278 pixels=404992 cmd18=794
+CHECKED720 frame=279 pixels=921600 bank=0 cycles=855977138
+PRESENT720 n=279 cycle=856060880 consumed=444800
+CHECKED720 frame=280 pixels=921600 bank=1 cycles=858703335
+PRESENT720 n=280 cycle=859091184 consumed=446400
+PROGRESS video cycles=860000000 frames=280 pixels=256256 cmd18=798
+CHECKED720 frame=281 pixels=921600 bank=2 cycles=861559180
+PRESENT720 n=281 cycle=862121488 consumed=448000
+CHECKED720 frame=282 pixels=921600 bank=0 cycles=864512742
+PROGRESS video cycles=865000000 frames=282 pixels=66816 cmd18=803
+PRESENT720 n=282 cycle=865151792 consumed=449600
+CHECKED720 frame=283 pixels=921600 bank=1 cycles=868099411
+PRESENT720 n=283 cycle=868182096 consumed=451200
+PROGRESS video cycles=870000000 frames=283 pixels=363520 cmd18=808
+CHECKED720 frame=284 pixels=921600 bank=2 cycles=870601388
+PRESENT720 n=284 cycle=871212400 consumed=452800
+CHECKED720 frame=285 pixels=921600 bank=0 cycles=873637053
+PRESENT720 n=285 cycle=874242704 consumed=454400
+PROGRESS video cycles=875000000 frames=285 pixels=148480 cmd18=812
+CHECKED720 frame=286 pixels=921600 bank=1 cycles=877310672
+PRESENT720 n=286 cycle=878788160 consumed=456000
+CHECKED720 frame=287 pixels=921600 bank=2 cycles=879674010
+PROGRESS video cycles=880000000 frames=287 pixels=41472 cmd18=817
+PRESENT720 n=287 cycle=881818464 consumed=457600
+CHECKED720 frame=288 pixels=921600 bank=0 cycles=883007414
+PRESENT720 n=288 cycle=884848768 consumed=459200
+PROGRESS video cycles=885000000 frames=288 pixels=250880 cmd18=822
+CHECKED720 frame=289 pixels=921600 bank=1 cycles=885886458
+PRESENT720 n=289 cycle=887879072 consumed=460800
+CHECKED720 frame=290 pixels=921600 bank=2 cycles=888848493
+PROGRESS video cycles=890000000 frames=290 pixels=118272 cmd18=826
+PRESENT720 n=290 cycle=890909376 consumed=462400
+CHECKED720 frame=291 pixels=921600 bank=0 cycles=892412148
+PRESENT720 n=291 cycle=893939680 consumed=464000
+PROGRESS video cycles=895000000 frames=291 pixels=394240 cmd18=831
+CHECKED720 frame=292 pixels=921600 bank=1 cycles=895267068
+PRESENT720 n=292 cycle=896969984 consumed=465600
+CHECKED720 frame=293 pixels=921600 bank=2 cycles=898268582
+PROGRESS video cycles=900000000 frames=293 pixels=204800 cmd18=836
+PRESENT720 n=293 cycle=900000288 consumed=467200
+CHECKED720 frame=294 pixels=921600 bank=0 cycles=902077436
+PRESENT720 n=294 cycle=903030592 consumed=468800
+CHECKED720 frame=295 pixels=921600 bank=1 cycles=904418574
+PROGRESS video cycles=905000000 frames=295 pixels=112896 cmd18=840
+PRESENT720 n=295 cycle=906060896 consumed=470400
+CHECKED720 frame=296 pixels=921600 bank=2 cycles=907514401
+PRESENT720 n=296 cycle=909091200 consumed=472000
+PROGRESS video cycles=910000000 frames=296 pixels=292608 cmd18=845
+CHECKED720 frame=297 pixels=921600 bank=0 cycles=910723781
+PRESENT720 n=297 cycle=912121504 consumed=473600
+CHECKED720 frame=298 pixels=921600 bank=1 cycles=913680266
+PROGRESS video cycles=915000000 frames=298 pixels=174080 cmd18=849
+PRESENT720 n=298 cycle=915151808 consumed=475200
+CHECKED720 frame=299 pixels=921600 bank=2 cycles=917310669
+PRESENT720 n=299 cycle=918182112 consumed=476800
+PROGRESS video cycles=920000000 frames=299 pixels=445952 cmd18=854
+CHECKED720 frame=300 pixels=921600 bank=0 cycles=920052369
+PRESENT720 n=300 cycle=921212416 consumed=478400
+FINITE_EOF_PASS
+CONTINUITY first=7575760 last=921212416 stalls=7621155 maxstall=1515435 empty=426397839 decode_busy=244245670 wait_fin=217051
+PASS720 real IMA video decoded=300 presented=300 PCM_samples=480000 cycles=924442425 audio_sectors=475 buffering=7621155
+- D:/codexworks/framerate_v185_20261029/simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2\tb.v:301: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
+- Verilator: $finish at 10s; walltime 1583.880 s; speed 6.420 ms/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 33 MB

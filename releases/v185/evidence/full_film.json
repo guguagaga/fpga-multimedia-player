@@ -1,0 +1,158 @@
+{
+  "passed": true,
+  "video": "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\EXPERIMENTAL_720P30.VID",
+  "audio": "D:\\codexworks\\framerate_v185_20261029\\full_cs_audio_ima\\EXPERIMENTAL_AUDIO_IMA.VAU",
+  "video_sha256": "6499cfe047820a1e8634b9592030a8d1609eaf0d86fb79d8b85328a3a22b6f4e",
+  "audio_sha256": "317733fb49a1e39fbd70061ee5f427ec7e332b51b6ce4a7a3d31d49f4e5a58dd",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "frames": 8136,
+  "samples": 13017600,
+  "seconds": 271.2,
+  "video_bytes": 601860608,
+  "audio_bytes": 6531188,
+  "mean_frame_bytes": 73974.91470009832,
+  "max_frame_bytes": 81745,
+  "codec12_payload_bytes": 954604632,
+  "h6d1_payload_bytes": 601859906,
+  "lossless_payload_reduction_fraction": 0.36951918540449735,
+  "worst_rolling_windows": [
+    {
+      "frames": 1,
+      "seconds": 0.03333333333333333,
+      "start_frame": 6771,
+      "start_seconds": 225.7,
+      "video_bytes": 81745,
+      "video_bytes_per_second": 2452350.0,
+      "estimates": [
+        {
+          "first_token_cycles": 29000,
+          "optimistic_transport_utilization": 0.9903460057545466
+        },
+        {
+          "first_token_cycles": 40000,
+          "optimistic_transport_utilization": 1.0141486174178782
+        },
+        {
+          "first_token_cycles": 50000,
+          "optimistic_transport_utilization": 1.035787355293634
+        },
+        {
+          "first_token_cycles": 60000,
+          "optimistic_transport_utilization": 1.05742609316939
+        }
+      ]
+    },
+    {
+      "frames": 12,
+      "seconds": 0.4,
+      "start_frame": 6763,
+      "start_seconds": 225.43333333333334,
+      "video_bytes": 978851,
+      "video_bytes_per_second": 2447127.5,
+      "estimates": [
+        {
+          "first_token_cycles": 29000,
+          "optimistic_transport_utilization": 0.9882878536972785
+        },
+        {
+          "first_token_cycles": 40000,
+          "optimistic_transport_utilization": 1.0120518958721232
+        },
+        {
+          "first_token_cycles": 50000,
+          "optimistic_transport_utilization": 1.0336555705765276
+        },
+        {
+          "first_token_cycles": 60000,
+          "optimistic_transport_utilization": 1.055259245280932
+        }
+      ]
+    },
+    {
+      "frames": 30,
+      "seconds": 1.0,
+      "start_frame": 6750,
+      "start_seconds": 225.0,
+      "video_bytes": 2446393,
+      "video_bytes_per_second": 2446393.0,
+      "estimates": [
+        {
+          "first_token_cycles": 29000,
+          "optimistic_transport_utilization": 0.9879983921968355
+        },
+        {
+          "first_token_cycles": 40000,
+          "optimistic_transport_utilization": 1.0117570099026916
+        },
+        {
+          "first_token_cycles": 50000,
+          "optimistic_transport_utilization": 1.0333557532716515
+        },
+        {
+          "first_token_cycles": 60000,
+          "optimistic_transport_utilization": 1.0549544966406115
+        }
+      ]
+    },
+    {
+      "frames": 150,
+      "seconds": 5.0,
+      "start_frame": 6732,
+      "start_seconds": 224.4,
+      "video_bytes": 11975688,
+      "video_bytes_per_second": 2395137.6,
+      "estimates": [
+        {
+          "first_token_cycles": 29000,
+          "optimistic_transport_utilization": 0.9677989844503357
+        },
+        {
+          "first_token_cycles": 40000,
+          "optimistic_transport_utilization": 0.9911790680135039
+        },
+        {
+          "first_token_cycles": 50000,
+          "optimistic_transport_utilization": 1.0124336894345658
+        },
+        {
+          "first_token_cycles": 60000,
+          "optimistic_transport_utilization": 1.0336883108556276
+        }
+      ]
+    },
+    {
+      "frames": 300,
+      "seconds": 10.0,
+      "start_frame": 6675,
+      "start_seconds": 222.5,
+      "video_bytes": 23340270,
+      "video_bytes_per_second": 2334027.0,
+      "estimates": [
+        {
+          "first_token_cycles": 29000,
+          "optimistic_transport_utilization": 0.9437157087948291
+        },
+        {
+          "first_token_cycles": 40000,
+          "optimistic_transport_utilization": 0.9666444750610853
+        },
+        {
+          "first_token_cycles": 50000,
+          "optimistic_transport_utilization": 0.9874888080304091
+        },
+        {
+          "first_token_cycles": 60000,
+          "optimistic_transport_utilization": 1.008333140999733
+        }
+      ]
+    }
+  ],
+  "scope": [
+    "All8136 Codec12 token streams match after H6D1 disk roundtrip, as recorded by packer; hashes and manifests independently rechecked.",
+    "The video has original Codec12 spatial quantization; H6D1 adds no quantization. IMA audio is lossy.",
+    "Rolling transport estimates omit FAT/cache/decoder/arbitration stalls and card variation. They are not measured frame rate or a full-film RTL simulation.",
+    "Compatible experimental bitstream and physical board acceptance are required. No SD or GitHub changes made."
+  ]
+}

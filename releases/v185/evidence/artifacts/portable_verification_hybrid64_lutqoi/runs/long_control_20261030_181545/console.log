@@ -1,0 +1,97 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:15:46 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_playlist_ctrl.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_eof_guard.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/av_sample_sync.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_player.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_codec8_raster.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec12_block_decoder_experimental.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/gradient_block_experimental.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/fat32_sector_mapper.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/rgb565_pair_pack.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/context_huffman_decoder.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec12_lossless_restore.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec_byte_queue.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/sd_arbiter.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/frame_fifo_write.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb
+# -- Compiling module video_playlist_ctrl
+# -- Compiling module video_eof_guard
+# -- Compiling module av_sample_sync
+# -- Compiling module video_player
+# -- Compiling module video_byte_ram
+# -- Compiling module video_codec8_raster
+# -- Compiling module codec12_block_decoder_experimental
+# -- Compiling module gradient_block_experimental
+# -- Compiling module fat32_sector_mapper
+# -- Compiling module rgb565_pair_pack
+# -- Compiling module rgb565_pair_unpack
+# -- Compiling module context_huffman_decoder
+# -- Compiling module codec12_lossless_restore
+# -- Compiling module codec_byte_queue
+# -- Compiling module sd_arbiter
+# -- Compiling module frame_fifo_write
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb
+# 	rgb565_pair_unpack
+# 	glbl
+# End time: 18:15:46 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl 
+# Start time: 18:15:46 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.video_playlist_ctrl
+# Loading work.sd_arbiter
+# Loading work.fat32_sector_mapper
+# Loading work.rgb565_pair_pack
+# Loading work.frame_fifo_write
+# Loading work.av_sample_sync
+# Loading work.video_eof_guard
+# Loading work.video_player
+# Loading work.codec_byte_queue
+# Loading work.codec12_lossless_restore
+# Loading work.context_huffman_decoder
+# Loading work.codec12_block_decoder_experimental
+# Loading work.video_codec8_raster
+# Loading work.video_byte_ram
+# Loading work.glbl
+# Loading work.EG_PHY_BRAM32K
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'arb'.  Expected 32, found 20.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/arb File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv Line: 29
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'defer_audio'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'img_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'img_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'img_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'wav_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'wav_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'wav_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'fat_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'wav_grant'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(29): [TFMPC] - Missing connection for port 'img_grant'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'mapper'.  Expected 27, found 23.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/mapper File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv Line: 35
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(35): [TFMPC] - Missing connection for port 'error_code'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(35): [TFMPC] - Missing connection for port 'error_owner'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(35): [TFMPC] - Missing connection for port 'sd_multi'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(35): [TFMPC] - Missing connection for port 'sd_pace'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'writer'.  Expected 22, found 21.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/writer File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv Line: 80
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(80): [TFMPC] - Missing connection for port 'O_wr_busy'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'decoder'.  Expected 35, found 32.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/decoder File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv Line: 107
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(107): [TFMPC] - Missing connection for port 'img_h_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(107): [TFMPC] - Missing connection for port 'active'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(107): [TFMPC] - Missing connection for port 'dbg_state'.
+# LONG_PROGRESS frame=0
+# LONG_PROGRESS frame=1000
+# LONG_PROGRESS frame=2000
+# LONG_PROGRESS frame=3000
+# LONG_PROGRESS frame=4000
+# LONG_PROGRESS frame=5000
+# LONG_PROGRESS frame=6000
+# LONG_PROGRESS frame=7000
+# LONG_PROGRESS frame=8000
+# LONG_GAP maximum_cycles=3
+# CADENCE_8136_PASS intervals=8135 frames=8136
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv(157)
+#    Time: 286444433 ns  Iteration: 1  Instance: /tb
+# End time: 18:26:15 on Oct 30,2026, Elapsed time: 0:10:29
+# Errors: 0, Warnings: 24

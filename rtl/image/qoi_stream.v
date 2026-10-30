@@ -55,7 +55,20 @@ module qoi_stream #(
   // the following OP edge supplies the same synchronous INDEX lookup as
   // the inferred32-bit reference. CLEAR initializes every entry each start.
   generate
-    if (BRAM32_INDEX) begin : g_bram32_index
+    if (BRAM32_INDEX == 2) begin : g_lut_index
+      // Only256bytes are needed here. Distributed RAM releases a32K block
+      // for sustained video prefetch without changing the QOI format.
+      wire wr = (state == CLEAR) || (state == EMIT && pixel_ready);
+      wire [5:0] wa = (state == CLEAR) ? clear_addr : hash_sum;
+      wire [31:0] wd = (state == CLEAR) ? 32'd0 : candidate;
+      wire [31:0] lookup;
+      reg [31:0] lookup_q;
+      EG_LOGIC_DRAM #(.DATA_WIDTH_W(32),.DATA_WIDTH_R(32),
+        .ADDR_WIDTH_W(6),.ADDR_WIDTH_R(6),.DATA_DEPTH_W(64),.DATA_DEPTH_R(64)) mem (
+        .di(wd),.waddr(wa),.we(wr),.wclk(clk),.raddr(din[5:0]),.do(lookup));
+      always @(posedge clk) lookup_q <= lookup;
+      assign index_q = lookup_q;
+    end else if (BRAM32_INDEX == 1) begin : g_bram32_index
       wire wr = (state == CLEAR) || (state == EMIT && pixel_ready);
       wire [5:0] wa = (state == CLEAR) ? clear_addr : hash_sum;
       wire [5:0] a = wr ? wa : din[5:0];

@@ -1,91 +1,97 @@
-# v182模块源码导航
+# v185 模块源码导航
 
-生产文件与原始目录映射以project_manifest.json为准。
+以 project_manifest.json 为精确构建映射。历史 research/verification 不自动算作本版生产证据。
 
 |工程路径|仓库源码|
 |---|---|
-| `rtl/av_sample_sync.v` | [av_sample_sync.v](../rtl/video/av_sample_sync.v) |
-| `rtl/brightness_contrast.v` | [brightness_contrast.v](../rtl/display/brightness_contrast.v) |
-| `rtl/button_ctrl.v` | [button_ctrl.v](../rtl/control/button_ctrl.v) |
-| `rtl/carousel_period_cfg.v` | [carousel_period_cfg.v](../rtl/control/carousel_period_cfg.v) |
-| `rtl/codec12_block_decoder_experimental.v` | [codec12_block_decoder_experimental.v](../rtl/video/codec12_block_decoder_experimental.v) |
-| `rtl/div_u32.v` | [div_u32.v](../rtl/control/div_u32.v) |
-| `rtl/exp_input_sync.v` | [exp_input_sync.v](../rtl/control/exp_input_sync.v) |
-| `rtl/fat32_list.v` | [fat32_list.v](../rtl/storage/fat32_list.v) |
-| `rtl/fat32_sector_mapper.v` | [fat32_sector_mapper.v](../rtl/storage/fat32_sector_mapper.v) |
-| `rtl/gradient_block_experimental.v` | [gradient_block_experimental.v](../rtl/video/gradient_block_experimental.v) |
-| `rtl/image_center_720p.v` | [image_center_720p.v](../rtl/image/image_center_720p.v) |
-| `rtl/img_scaler.v` | [img_scaler.v](../rtl/image/img_scaler.v) |
-| `rtl/key_long.v` | [key_long.v](../rtl/control/key_long.v) |
-| `rtl/keypad_scan.v` | [keypad_scan.v](../rtl/control/keypad_scan.v) |
-| `rtl/osd_player_ui.v` | [osd_player_ui.v](../rtl/display/osd_player_ui.v) |
-| `rtl/pixel_fifo_24x8.v` | [pixel_fifo_24x8.v](../rtl/image/pixel_fifo_24x8.v) |
-| `rtl/playback_status.v` | [playback_status.v](../rtl/control/playback_status.v) |
-| `rtl/player_ctrl.v` | [player_ctrl.v](../rtl/control/player_ctrl.v) |
-| `rtl/rgb565_pair_pack.v` | [rgb565_pair_pack.v](../rtl/memory/rgb565_pair_pack.v) |
-| `rtl/seg595_display.v` | [seg595_display.v](../rtl/display/seg595_display.v) |
-| `rtl/track_ctrl.v` | [track_ctrl.v](../rtl/control/track_ctrl.v) |
-| `rtl/video_byte_ram.v` | [video_byte_ram.v](../rtl/video/video_byte_ram.v) |
-| `rtl/video_codec8_block_decoder.v` | [video_codec8_block_decoder.v](../rtl/video/video_codec8_block_decoder.v) |
-| `rtl/video_codec8_raster.v` | [video_codec8_raster.v](../rtl/video/video_codec8_raster.v) |
-| `rtl/video_player.v` | [video_player.v](../rtl/video/video_player.v) |
-| `rtl/volume_control.v` | [volume_control.v](../rtl/audio/volume_control.v) |
-| `user_source/hdl_source/async_fifo.v` | [async_fifo.v](../rtl/memory/async_fifo.v) |
-| `user_source/hdl_source/audio_arc_calculate.v` | [audio_arc_calculate.v](../rtl/spectrum/audio_arc_calculate.v) |
-| `user_source/hdl_source/audio_frame.v` | [audio_frame.v](../rtl/spectrum/audio_frame.v) |
-| `user_source/hdl_source/audio_transition.v` | [audio_transition.v](../rtl/audio/audio_transition.v) |
-| `user_source/hdl_source/butterfly.v` | [butterfly.v](../rtl/spectrum/butterfly.v) |
-| `user_source/hdl_source/char_rom.v` | [char_rom.v](../rtl/display/char_rom.v) |
-| `user_source/hdl_source/compressed_audio_reader.v` | [compressed_audio_reader.v](../rtl/audio/compressed_audio_reader.v) |
-| `user_source/hdl_source/cordic_atan.v` | [cordic_atan.v](../rtl/spectrum/cordic_atan.v) |
-| `user_source/hdl_source/dp_ram.v` | [dp_ram.v](../rtl/memory/dp_ram.v) |
-| `user_source/hdl_source/fade_in.v` | [fade_in.v](../rtl/audio/fade_in.v) |
-| `user_source/hdl_source/fft_256.v` | [fft_256.v](../rtl/spectrum/fft_256.v) |
-| `user_source/hdl_source/hdmi_audio_tone_i2s_64fs.v` | [hdmi_audio_tone_i2s_64fs.v](../rtl/audio/hdmi_audio_tone_i2s_64fs.v) |
-| `user_source/hdl_source/hdmi_audio_tone_pcm_scale.v` | [hdmi_audio_tone_pcm_scale.v](../rtl/audio/hdmi_audio_tone_pcm_scale.v) |
-| `user_source/hdl_source/hdmi_phy_warpper.v` | [hdmi_phy_warpper.v](../rtl/display/hdmi_phy_warpper.v) |
-| `user_source/hdl_source/I2S_receiver.v` | [I2S_receiver.v](../rtl/audio/I2S_receiver.v) |
-| `user_source/hdl_source/i2s_transmitter.v` | [i2s_transmitter.v](../rtl/audio/i2s_transmitter.v) |
-| `user_source/hdl_source/ima_stream.v` | [ima_stream.v](../rtl/audio/ima_stream.v) |
-| `user_source/hdl_source/include/global_def.v` | [global_def.v](../rtl/control/global_def.v) |
-| `user_source/hdl_source/key_remove_shakes.v` | [key_remove_shakes.v](../rtl/control/key_remove_shakes.v) |
-| `user_source/hdl_source/lane_lvds_10_1.v` | [lane_lvds_10_1.v](../rtl/display/lane_lvds_10_1.v) |
-| `user_source/hdl_source/media_player.v` | [media_player.v](../rtl/audio/media_player.v) |
-| `user_source/hdl_source/media_player_shim.v` | [media_player_shim.v](../rtl/audio/media_player_shim.v) |
-| `user_source/hdl_source/osd_brand_rom.v` | [osd_brand_rom.v](../rtl/display/osd_brand_rom.v) |
-| `user_source/hdl_source/osd_core.v` | [osd_core.v](../rtl/display/osd_core.v) |
-| `user_source/hdl_source/qoa_stream.v` | [qoa_stream.v](../rtl/audio/qoa_stream.v) |
-| `user_source/hdl_source/qoi_stream.v` | [qoi_stream.v](../rtl/image/qoi_stream.v) |
-| `user_source/hdl_source/rom/i2s_rom_player_single_pll_fix64_rom_ip.v` | [i2s_rom_player_single_pll_fix64_rom_ip.v](../rtl/audio/i2s_rom_player_single_pll_fix64_rom_ip.v) |
-| `user_source/hdl_source/SD/ax_debounce.v` | [ax_debounce.v](../rtl/display/ax_debounce.v) |
-| `user_source/hdl_source/SD/bmp_read.v` | [bmp_read.v](../rtl/image/bmp_read.v) |
-| `user_source/hdl_source/SD/color_bar.v` | [color_bar.v](../rtl/display/color_bar.v) |
-| `user_source/hdl_source/SD/frame_fifo_read.v` | [frame_fifo_read.v](../rtl/memory/frame_fifo_read.v) |
-| `user_source/hdl_source/SD/frame_fifo_write.v` | [frame_fifo_write.v](../rtl/memory/frame_fifo_write.v) |
-| `user_source/hdl_source/SD/frame_read_write.v` | [frame_read_write.v](../rtl/memory/frame_read_write.v) |
-| `user_source/hdl_source/SD/sd_card_bmp.v` | [sd_card_bmp.v](../rtl/image/sd_card_bmp.v) |
-| `user_source/hdl_source/SD/sd_card_cmd.v` | [sd_card_cmd.v](../rtl/storage/sd_card_cmd.v) |
-| `user_source/hdl_source/SD/sd_card_sec_read_write.v` | [sd_card_sec_read_write.v](../rtl/storage/sd_card_sec_read_write.v) |
-| `user_source/hdl_source/SD/sd_card_top.v` | [sd_card_top.v](../rtl/storage/sd_card_top.v) |
-| `user_source/hdl_source/SD/sdram.v` | [sdram.v](../rtl/memory/sdram.v) |
-| `user_source/hdl_source/SD/seg_decoder.v` | [seg_decoder.v](../rtl/display/seg_decoder.v) |
-| `user_source/hdl_source/SD/seg_scan.v` | [seg_scan.v](../rtl/display/seg_scan.v) |
-| `user_source/hdl_source/SD/spi_master.v` | [spi_master.v](../rtl/storage/spi_master.v) |
-| `user_source/hdl_source/SD/spi_sniffer.v` | [spi_sniffer.v](../rtl/storage/spi_sniffer.v) |
-| `user_source/hdl_source/SD/video_define.v` | [video_define.v](../rtl/display/video_define.v) |
-| `user_source/hdl_source/SD/video_delay.v` | [video_delay.v](../rtl/display/video_delay.v) |
-| `user_source/hdl_source/SD/video_timing_data.v` | [video_timing_data.v](../rtl/display/video_timing_data.v) |
-| `user_source/hdl_source/SD/video_timing_gen.v` | [video_timing_gen.v](../rtl/display/video_timing_gen.v) |
-| `user_source/hdl_source/sd_arbiter.v` | [sd_arbiter.v](../rtl/storage/sd_arbiter.v) |
-| `user_source/hdl_source/sector_byte_source.v` | [sector_byte_source.v](../rtl/storage/sector_byte_source.v) |
-| `user_source/hdl_source/spectrum_capture.v` | [spectrum_capture.v](../rtl/spectrum/spectrum_capture.v) |
-| `user_source/hdl_source/spectrum_display.v` | [spectrum_display.v](../rtl/spectrum/spectrum_display.v) |
-| `user_source/hdl_source/startup_pulse.v` | [startup_pulse.v](../rtl/control/startup_pulse.v) |
-| `user_source/hdl_source/test/i2s_test_tone_gen_pll.v` | [i2s_test_tone_gen_pll.v](../rtl/audio/i2s_test_tone_gen_pll.v) |
-| `user_source/hdl_source/top_tf_hdmi_audio.v` | [top_tf_hdmi_audio.v](../rtl/top/top_tf_hdmi_audio.v) |
-| `user_source/hdl_source/twiddle_rom.v` | [twiddle_rom.v](../rtl/spectrum/twiddle_rom.v) |
-| `user_source/hdl_source/video_coord.v` | [video_coord.v](../rtl/display/video_coord.v) |
-| `user_source/hdl_source/video_rgb_to_axis_640x480.v` | [video_rgb_to_axis_640x480.v](../rtl/display/video_rgb_to_axis_640x480.v) |
-| `user_source/hdl_source/video_source_test.v` | [video_source_test.v](../rtl/display/video_source_test.v) |
-| `user_source/hdl_source/wav_player.v` | [wav_player.v](../rtl/audio/wav_player.v) |
-| `user_source/hdl_source/wav_sample_builder.v` | [wav_sample_builder.v](../rtl/audio/wav_sample_builder.v) |
+|`rtl/av_sample_sync.v`|[av_sample_sync.v](../rtl/video/av_sample_sync.v)|
+|`rtl/brightness_contrast.v`|[brightness_contrast.v](../rtl/display/brightness_contrast.v)|
+|`rtl/button_ctrl.v`|[button_ctrl.v](../rtl/control/button_ctrl.v)|
+|`rtl/carousel_period_cfg.v`|[carousel_period_cfg.v](../rtl/control/carousel_period_cfg.v)|
+|`rtl/codec12_block_decoder_experimental.v`|[codec12_block_decoder_experimental.v](../rtl/video/codec12_block_decoder_experimental.v)|
+|`rtl/codec12_lossless_restore.v`|[codec12_lossless_restore.v](../rtl/video/codec12_lossless_restore.v)|
+|`rtl/codec_byte_queue.v`|[codec_byte_queue.v](../rtl/video/codec_byte_queue.v)|
+|`rtl/context_huffman_decoder.v`|[context_huffman_decoder.v](../rtl/video/context_huffman_decoder.v)|
+|`rtl/div_u32.v`|[div_u32.v](../rtl/control/div_u32.v)|
+|`rtl/exp_input_sync.v`|[exp_input_sync.v](../rtl/control/exp_input_sync.v)|
+|`rtl/fat32_list.v`|[fat32_list.v](../rtl/storage/fat32_list.v)|
+|`rtl/fat32_sector_mapper.v`|[fat32_sector_mapper.v](../rtl/storage/fat32_sector_mapper.v)|
+|`rtl/gradient_block_experimental.v`|[gradient_block_experimental.v](../rtl/video/gradient_block_experimental.v)|
+|`rtl/image_center_720p.v`|[image_center_720p.v](../rtl/image/image_center_720p.v)|
+|`rtl/img_scaler.v`|[img_scaler.v](../rtl/image/img_scaler.v)|
+|`rtl/key_long.v`|[key_long.v](../rtl/control/key_long.v)|
+|`rtl/keypad_scan.v`|[keypad_scan.v](../rtl/control/keypad_scan.v)|
+|`rtl/osd_player_ui.v`|[osd_player_ui.v](../rtl/display/osd_player_ui.v)|
+|`rtl/pixel_fifo_24x8.v`|[pixel_fifo_24x8.v](../rtl/image/pixel_fifo_24x8.v)|
+|`rtl/playback_status.v`|[playback_status.v](../rtl/control/playback_status.v)|
+|`rtl/player_ctrl.v`|[player_ctrl.v](../rtl/control/player_ctrl.v)|
+|`rtl/rgb565_pair_pack.v`|[rgb565_pair_pack.v](../rtl/memory/rgb565_pair_pack.v)|
+|`rtl/seg595_display.v`|[seg595_display.v](../rtl/display/seg595_display.v)|
+|`rtl/track_ctrl.v`|[track_ctrl.v](../rtl/control/track_ctrl.v)|
+|`rtl/video_byte_ram.v`|[video_byte_ram.v](../rtl/video/video_byte_ram.v)|
+|`rtl/video_catalog.v`|[video_catalog.v](../rtl/video/video_catalog.v)|
+|`rtl/video_codec8_block_decoder.v`|[video_codec8_block_decoder.v](../rtl/video/video_codec8_block_decoder.v)|
+|`rtl/video_codec8_raster.v`|[video_codec8_raster.v](../rtl/video/video_codec8_raster.v)|
+|`rtl/video_eof_guard.v`|[video_eof_guard.v](../rtl/video/video_eof_guard.v)|
+|`rtl/video_player.v`|[video_player.v](../rtl/video/video_player.v)|
+|`rtl/video_playlist_ctrl.v`|[video_playlist_ctrl.v](../rtl/video/video_playlist_ctrl.v)|
+|`rtl/volume_control.v`|[volume_control.v](../rtl/audio/volume_control.v)|
+|`user_source/hdl_source/async_fifo.v`|[async_fifo.v](../rtl/memory/async_fifo.v)|
+|`user_source/hdl_source/audio_arc_calculate.v`|[audio_arc_calculate.v](../rtl/spectrum/audio_arc_calculate.v)|
+|`user_source/hdl_source/audio_frame.v`|[audio_frame.v](../rtl/spectrum/audio_frame.v)|
+|`user_source/hdl_source/audio_transition.v`|[audio_transition.v](../rtl/audio/audio_transition.v)|
+|`user_source/hdl_source/butterfly.v`|[butterfly.v](../rtl/spectrum/butterfly.v)|
+|`user_source/hdl_source/char_rom.v`|[char_rom.v](../rtl/display/char_rom.v)|
+|`user_source/hdl_source/compressed_audio_reader.v`|[compressed_audio_reader.v](../rtl/audio/compressed_audio_reader.v)|
+|`user_source/hdl_source/cordic_atan.v`|[cordic_atan.v](../rtl/spectrum/cordic_atan.v)|
+|`user_source/hdl_source/dp_ram.v`|[dp_ram.v](../rtl/memory/dp_ram.v)|
+|`user_source/hdl_source/fade_in.v`|[fade_in.v](../rtl/audio/fade_in.v)|
+|`user_source/hdl_source/fft_256.v`|[fft_256.v](../rtl/spectrum/fft_256.v)|
+|`user_source/hdl_source/hdmi_audio_tone_i2s_64fs.v`|[hdmi_audio_tone_i2s_64fs.v](../rtl/audio/hdmi_audio_tone_i2s_64fs.v)|
+|`user_source/hdl_source/hdmi_audio_tone_pcm_scale.v`|[hdmi_audio_tone_pcm_scale.v](../rtl/audio/hdmi_audio_tone_pcm_scale.v)|
+|`user_source/hdl_source/hdmi_phy_warpper.v`|[hdmi_phy_warpper.v](../rtl/display/hdmi_phy_warpper.v)|
+|`user_source/hdl_source/I2S_receiver.v`|[I2S_receiver.v](../rtl/audio/I2S_receiver.v)|
+|`user_source/hdl_source/i2s_transmitter.v`|[i2s_transmitter.v](../rtl/audio/i2s_transmitter.v)|
+|`user_source/hdl_source/ima_stream.v`|[ima_stream.v](../rtl/audio/ima_stream.v)|
+|`user_source/hdl_source/include/global_def.v`|[global_def.v](../rtl/control/global_def.v)|
+|`user_source/hdl_source/key_remove_shakes.v`|[key_remove_shakes.v](../rtl/control/key_remove_shakes.v)|
+|`user_source/hdl_source/lane_lvds_10_1.v`|[lane_lvds_10_1.v](../rtl/display/lane_lvds_10_1.v)|
+|`user_source/hdl_source/media_player.v`|[media_player.v](../rtl/audio/media_player.v)|
+|`user_source/hdl_source/media_player_shim.v`|[media_player_shim.v](../rtl/audio/media_player_shim.v)|
+|`user_source/hdl_source/osd_brand_rom.v`|[osd_brand_rom.v](../rtl/display/osd_brand_rom.v)|
+|`user_source/hdl_source/osd_core.v`|[osd_core.v](../rtl/display/osd_core.v)|
+|`user_source/hdl_source/qoa_stream.v`|[qoa_stream.v](../rtl/audio/qoa_stream.v)|
+|`user_source/hdl_source/qoi_stream.v`|[qoi_stream.v](../rtl/image/qoi_stream.v)|
+|`user_source/hdl_source/rom/i2s_rom_player_single_pll_fix64_rom_ip.v`|[i2s_rom_player_single_pll_fix64_rom_ip.v](../rtl/audio/i2s_rom_player_single_pll_fix64_rom_ip.v)|
+|`user_source/hdl_source/SD/ax_debounce.v`|[ax_debounce.v](../rtl/display/ax_debounce.v)|
+|`user_source/hdl_source/SD/bmp_read.v`|[bmp_read.v](../rtl/image/bmp_read.v)|
+|`user_source/hdl_source/SD/color_bar.v`|[color_bar.v](../rtl/display/color_bar.v)|
+|`user_source/hdl_source/SD/frame_fifo_read.v`|[frame_fifo_read.v](../rtl/memory/frame_fifo_read.v)|
+|`user_source/hdl_source/SD/frame_fifo_write.v`|[frame_fifo_write.v](../rtl/memory/frame_fifo_write.v)|
+|`user_source/hdl_source/SD/frame_read_write.v`|[frame_read_write.v](../rtl/memory/frame_read_write.v)|
+|`user_source/hdl_source/SD/sd_card_bmp.v`|[sd_card_bmp.v](../rtl/image/sd_card_bmp.v)|
+|`user_source/hdl_source/SD/sd_card_cmd.v`|[sd_card_cmd.v](../rtl/storage/sd_card_cmd.v)|
+|`user_source/hdl_source/SD/sd_card_sec_read_write.v`|[sd_card_sec_read_write.v](../rtl/storage/sd_card_sec_read_write.v)|
+|`user_source/hdl_source/SD/sd_card_top.v`|[sd_card_top.v](../rtl/storage/sd_card_top.v)|
+|`user_source/hdl_source/SD/sdram.v`|[sdram.v](../rtl/memory/sdram.v)|
+|`user_source/hdl_source/SD/seg_decoder.v`|[seg_decoder.v](../rtl/display/seg_decoder.v)|
+|`user_source/hdl_source/SD/seg_scan.v`|[seg_scan.v](../rtl/display/seg_scan.v)|
+|`user_source/hdl_source/SD/spi_master.v`|[spi_master.v](../rtl/storage/spi_master.v)|
+|`user_source/hdl_source/SD/spi_sniffer.v`|[spi_sniffer.v](../rtl/storage/spi_sniffer.v)|
+|`user_source/hdl_source/SD/video_define.v`|[video_define.v](../rtl/display/video_define.v)|
+|`user_source/hdl_source/SD/video_delay.v`|[video_delay.v](../rtl/display/video_delay.v)|
+|`user_source/hdl_source/SD/video_timing_data.v`|[video_timing_data.v](../rtl/display/video_timing_data.v)|
+|`user_source/hdl_source/SD/video_timing_gen.v`|[video_timing_gen.v](../rtl/display/video_timing_gen.v)|
+|`user_source/hdl_source/sd_arbiter.v`|[sd_arbiter.v](../rtl/storage/sd_arbiter.v)|
+|`user_source/hdl_source/sector_byte_source.v`|[sector_byte_source.v](../rtl/storage/sector_byte_source.v)|
+|`user_source/hdl_source/spectrum_capture.v`|[spectrum_capture.v](../rtl/spectrum/spectrum_capture.v)|
+|`user_source/hdl_source/spectrum_display.v`|[spectrum_display.v](../rtl/spectrum/spectrum_display.v)|
+|`user_source/hdl_source/startup_pulse.v`|[startup_pulse.v](../rtl/control/startup_pulse.v)|
+|`user_source/hdl_source/test/i2s_test_tone_gen_pll.v`|[i2s_test_tone_gen_pll.v](../rtl/audio/i2s_test_tone_gen_pll.v)|
+|`user_source/hdl_source/top_tf_hdmi_audio.v`|[top_tf_hdmi_audio.v](../rtl/top/top_tf_hdmi_audio.v)|
+|`user_source/hdl_source/twiddle_rom.v`|[twiddle_rom.v](../rtl/spectrum/twiddle_rom.v)|
+|`user_source/hdl_source/video_coord.v`|[video_coord.v](../rtl/display/video_coord.v)|
+|`user_source/hdl_source/video_rgb_to_axis_640x480.v`|[video_rgb_to_axis_640x480.v](../rtl/display/video_rgb_to_axis_640x480.v)|
+|`user_source/hdl_source/video_source_test.v`|[video_source_test.v](../rtl/display/video_source_test.v)|
+|`user_source/hdl_source/wav_player.v`|[wav_player.v](../rtl/audio/wav_player.v)|
+|`user_source/hdl_source/wav_sample_builder.v`|[wav_sample_builder.v](../rtl/audio/wav_sample_builder.v)|

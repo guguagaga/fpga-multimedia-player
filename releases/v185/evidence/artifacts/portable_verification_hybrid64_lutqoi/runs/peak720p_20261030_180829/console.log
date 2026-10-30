@@ -1,0 +1,172 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:08:30 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/av_sample_sync.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_player.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_codec8_block_decoder.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_codec8_raster.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/rgb565_pair_pack.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/sd_arbiter.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_sec_read_write.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/frame_fifo_write.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/fat32_sector_mapper.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/compressed_audio_reader.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/sector_byte_source.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/ima_stream.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/qoa_stream.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec12_block_decoder_experimental.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/gradient_block_experimental.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/context_huffman_decoder.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec12_lossless_restore.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/codec_byte_queue.v 
+# -- Compiling module tb_video_quality_sd_cache
+# -- Compiling module av_sample_sync
+# -- Compiling module video_byte_ram
+# -- Compiling module video_player
+# -- Compiling module video_codec8_block_decoder
+# -- Compiling module video_codec8_raster
+# -- Compiling module rgb565_pair_pack
+# -- Compiling module rgb565_pair_unpack
+# -- Compiling module sd_arbiter
+# -- Compiling module sd_card_sec_read_write
+# -- Compiling module frame_fifo_write
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# -- Compiling module fat32_sector_mapper
+# -- Compiling module compressed_audio_reader
+# -- Compiling module sector_byte_source
+# -- Compiling module ima_stream
+# -- Compiling module qoa_stream
+# -- Compiling module codec12_block_decoder_experimental
+# -- Compiling module gradient_block_experimental
+# -- Compiling module context_huffman_decoder
+# -- Compiling module codec12_lossless_restore
+# -- Compiling module codec_byte_queue
+# 
+# Top level modules:
+# 	tb_video_quality_sd_cache
+# 	video_codec8_block_decoder
+# 	rgb565_pair_unpack
+# 	glbl
+# End time: 18:08:30 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb_video_quality_sd_cache work.glbl "+FRAMES=30" "+BYTE_CYCLES=32" "+RATE=30" "+CARD_BYTES=2447872" "+CARD=card.hex" "+REFERENCE=reference.rgb565" 
+# Start time: 18:08:31 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb_video_quality_sd_cache
+# Loading work.rgb565_pair_pack
+# Loading work.sd_arbiter
+# Loading work.compressed_audio_reader
+# Loading work.sector_byte_source
+# Loading work.ima_stream
+# Loading work.av_sample_sync
+# Loading work.video_player
+# Loading work.codec_byte_queue
+# Loading work.codec12_lossless_restore
+# Loading work.context_huffman_decoder
+# Loading work.codec12_block_decoder_experimental
+# Loading work.video_codec8_raster
+# Loading work.video_byte_ram
+# Loading work.frame_fifo_write
+# Loading work.fat32_sector_mapper
+# Loading work.sd_card_sec_read_write
+# Loading work.glbl
+# Loading work.EG_PHY_BRAM32K
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'arb'.  Expected 32, found 25.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_video_quality_sd_cache/arb File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v Line: 47
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'img_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'img_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'img_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'fat_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(47): [TFMPC] - Missing connection for port 'img_grant'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'audio_reader'.  Expected 27, found 26.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_video_quality_sd_cache/audio_reader File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v Line: 59
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(59): [TFMPC] - Missing connection for port 'file_base_lba'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'mapper'.  Expected 27, found 26.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_video_quality_sd_cache/mapper File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v Line: 152
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(152): [TFMPC] - Missing connection for port 'error_owner'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'sd'.  Expected 33, found 25.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_video_quality_sd_cache/sd File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v Line: 160
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'sd_sec_write_data_req'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'sd_sec_write_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'spi_clk_div'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'cmd_r1'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'cmd_data_len'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'block_write_req'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'block_write_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(160): [TFMPC] - Missing connection for port 'dbg_cmd_err'.
+# CHECKED720 frame=1 pixels=921600 bank=1 cycles=3389283
+# PROGRESS video cycles=5000000 frames=1 pixels=302336 cmd18=4
+# CHECKED720 frame=2 pixels=921600 bank=2 cycles=6178158
+# PRESENT720 n=1 cycle=7575760 consumed=0
+# CHECKED720 frame=3 pixels=921600 bank=0 cycles=9736374
+# PROGRESS video cycles=10000000 frames=3 pixels=0 cmd18=8
+# PRESENT720 n=2 cycle=10606064 consumed=1600
+# CHECKED720 frame=4 pixels=921600 bank=1 cycles=13107111
+# PRESENT720 n=3 cycle=13636368 consumed=3200
+# PROGRESS video cycles=15000000 frames=4 pixels=292096 cmd18=12
+# CHECKED720 frame=5 pixels=921600 bank=2 cycles=15973871
+# PRESENT720 n=4 cycle=16666672 consumed=4800
+# CHECKED720 frame=6 pixels=921600 bank=0 cycles=19385049
+# PRESENT720 n=5 cycle=19696976 consumed=6400
+# PROGRESS video cycles=20000000 frames=6 pixels=75264 cmd18=16
+# CHECKED720 frame=7 pixels=921600 bank=1 cycles=21919549
+# PRESENT720 n=6 cycle=22727280 consumed=8000
+# PROGRESS video cycles=25000000 frames=7 pixels=455936 cmd18=20
+# CHECKED720 frame=8 pixels=921600 bank=2 cycles=25022406
+# PRESENT720 n=7 cycle=25757584 consumed=9600
+# CHECKED720 frame=9 pixels=921600 bank=0 cycles=27938302
+# PRESENT720 n=8 cycle=28787888 consumed=11200
+# PROGRESS video cycles=30000000 frames=9 pixels=302080 cmd18=24
+# CHECKED720 frame=10 pixels=921600 bank=1 cycles=31033611
+# PRESENT720 n=9 cycle=31818192 consumed=12800
+# CHECKED720 frame=11 pixels=921600 bank=2 cycles=34781933
+# PRESENT720 n=10 cycle=34848496 consumed=14400
+# PROGRESS video cycles=35000000 frames=11 pixels=36096 cmd18=29
+# CHECKED720 frame=12 pixels=921600 bank=0 cycles=37083962
+# PRESENT720 n=11 cycle=37878800 consumed=16000
+# PROGRESS video cycles=40000000 frames=12 pixels=430686 cmd18=33
+# CHECKED720 frame=13 pixels=921600 bank=1 cycles=40144602
+# PRESENT720 n=12 cycle=40909104 consumed=17600
+# CHECKED720 frame=14 pixels=921600 bank=2 cycles=43134202
+# PRESENT720 n=13 cycle=43939408 consumed=19200
+# PROGRESS video cycles=45000000 frames=14 pixels=204800 cmd18=37
+# CHECKED720 frame=15 pixels=921600 bank=0 cycles=46276131
+# PRESENT720 n=14 cycle=46969712 consumed=20800
+# CHECKED720 frame=16 pixels=921600 bank=1 cycles=49204459
+# PROGRESS video cycles=50000000 frames=16 pixels=0 cmd18=41
+# PRESENT720 n=15 cycle=50000016 consumed=22400
+# CHECKED720 frame=17 pixels=921600 bank=2 cycles=52268577
+# PRESENT720 n=16 cycle=53030320 consumed=24000
+# PROGRESS video cycles=55000000 frames=17 pixels=424960 cmd18=45
+# CHECKED720 frame=18 pixels=921600 bank=0 cycles=55610676
+# PRESENT720 n=17 cycle=56060624 consumed=25600
+# CHECKED720 frame=19 pixels=921600 bank=1 cycles=58488055
+# PRESENT720 n=18 cycle=59090928 consumed=27200
+# PROGRESS video cycles=60000000 frames=19 pixels=225280 cmd18=49
+# CHECKED720 frame=20 pixels=921600 bank=2 cycles=61889058
+# PRESENT720 n=19 cycle=62121232 consumed=28800
+# CHECKED720 frame=21 pixels=921600 bank=0 cycles=64338273
+# PROGRESS video cycles=65000000 frames=21 pixels=0 cmd18=53
+# PRESENT720 n=20 cycle=65151536 consumed=30400
+# CHECKED720 frame=22 pixels=921600 bank=1 cycles=67404056
+# PRESENT720 n=21 cycle=68181840 consumed=32000
+# PROGRESS video cycles=70000000 frames=22 pixels=424960 cmd18=58
+# CHECKED720 frame=23 pixels=921600 bank=2 cycles=70320396
+# PRESENT720 n=22 cycle=71212144 consumed=33600
+# CHECKED720 frame=24 pixels=921600 bank=0 cycles=73444676
+# PRESENT720 n=23 cycle=74242448 consumed=35200
+# PROGRESS video cycles=75000000 frames=24 pixels=164096 cmd18=62
+# PRESENT720 n=24 cycle=77272752 consumed=36800
+# CHECKED720 frame=25 pixels=921600 bank=1 cycles=77288236
+# CHECKED720 frame=26 pixels=921600 bank=2 cycles=79585566
+# PROGRESS video cycles=80000000 frames=26 pixels=0 cmd18=66
+# PRESENT720 n=25 cycle=80303056 consumed=38400
+# CHECKED720 frame=27 pixels=921600 bank=0 cycles=82685981
+# PRESENT720 n=26 cycle=83333360 consumed=40000
+# PROGRESS video cycles=85000000 frames=27 pixels=368896 cmd18=70
+# CHECKED720 frame=28 pixels=921600 bank=1 cycles=85553851
+# PRESENT720 n=27 cycle=86363664 consumed=41600
+# CHECKED720 frame=29 pixels=921600 bank=2 cycles=88739366
+# PRESENT720 n=28 cycle=89393968 consumed=43200
+# PROGRESS video cycles=90000000 frames=29 pixels=148992 cmd18=74
+# CHECKED720 frame=30 pixels=921600 bank=0 cycles=91609012
+# PRESENT720 n=29 cycle=92424272 consumed=44800
+# PROGRESS video cycles=95000000 frames=30 pixels=0 cmd18=76
+# PRESENT720 n=30 cycle=95454576 consumed=46400
+# FINITE_EOF_PASS
+# CONTINUITY first=7575760 last=95454576 stalls=594 maxstall=34 empty=20339839 decode_busy=24424582 wait_fin=781071
+# PASS720 real IMA video decoded=30 presented=30 PCM_samples=48000 cycles=98684849 audio_sectors=52 buffering=594
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/tb.v(301)
+#    Time: 1085533427 ns  Iteration: 1  Instance: /tb_video_quality_sd_cache
+# End time: 20:06:42 on Oct 30,2026, Elapsed time: 1:58:11
+# Errors: 0, Warnings: 21

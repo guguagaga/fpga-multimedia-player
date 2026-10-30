@@ -1,0 +1,50 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:09:58 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/fat32_sector_mapper.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_sec_read_write.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb
+# -- Compiling module fat32_sector_mapper
+# -- Compiling module sd_card_sec_read_write
+# -- Compiling module video_byte_ram
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb
+# 	glbl
+# End time: 18:09:59 on Oct 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl 
+# Start time: 18:09:59 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.fat32_sector_mapper
+# Loading work.sd_card_sec_read_write
+# Loading work.glbl
+# Loading work.video_byte_ram
+# Loading work.EG_PHY_BRAM32K
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'mapper'.  Expected 27, found 25.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/mapper File: D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v Line: 7
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(7): [TFMPC] - Missing connection for port 'error_owner'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(7): [TFMPC] - Missing connection for port 'sd_pace'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'sd'.  Expected 33, found 24.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/sd File: D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v Line: 14
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'sd_sec_write_data_req'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'sd_sec_write_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'spi_clk_div'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'cmd_r1'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'cmd_data_len'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'block_write_req'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'block_write_data'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'dbg_state'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(14): [TFMPC] - Missing connection for port 'dbg_cmd_err'.
+# COVERAGE multi=5 single=61 checks=54784 requests=107
+# CACHE64_PASS requests=107 bytes=54784 cmd18=5 cmd17=61
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v(86)
+#    Time: 4210360 ns  Iteration: 1  Instance: /tb
+# End time: 18:10:18 on Oct 30,2026, Elapsed time: 0:00:19
+# Errors: 0, Warnings: 13

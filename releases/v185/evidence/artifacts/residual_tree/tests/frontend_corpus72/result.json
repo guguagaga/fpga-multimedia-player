@@ -1,0 +1,594 @@
+{
+  "passed": true,
+  "checked_frames": 72,
+  "seconds": 559.3107271194458,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\tests\\frontend_corpus72\\tb.v": "5427ef6a826e09821e7639e161f180df792aedb886a682d32aaaf3b819956e93",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\candidate\\project\\rtl\\context_huffman_decoder.v": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\candidate\\project\\rtl\\codec12_lossless_restore.v": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\candidate\\project\\rtl\\residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\candidate\\project\\rtl\\residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\candidate\\project\\rtl\\residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+  },
+  "rows": [
+    {
+      "second": 10,
+      "frame": 0,
+      "compressed": 73186,
+      "original": 114257,
+      "original_sha256": "aa7416375be8e359222adccaf04185f132b7ae01c3a2ef4b855a4dfbe4615a5f"
+    },
+    {
+      "second": 10,
+      "frame": 1,
+      "compressed": 72996,
+      "original": 114178,
+      "original_sha256": "994f8f53997485ce3f987ff5aa624e9eb674d9941e1501c941dea37c3dea0704"
+    },
+    {
+      "second": 10,
+      "frame": 2,
+      "compressed": 72741,
+      "original": 113406,
+      "original_sha256": "c6f3e261307246bfffe4f61f4cac852e95faa26d36129537aeee6c85ca8447bf"
+    },
+    {
+      "second": 10,
+      "frame": 3,
+      "compressed": 73024,
+      "original": 113501,
+      "original_sha256": "40d4157e783461e6a97a49a906930940dd774bd0917b435b5c7ff9bb22b1009d"
+    },
+    {
+      "second": 10,
+      "frame": 4,
+      "compressed": 73533,
+      "original": 113907,
+      "original_sha256": "f4e9a572a9a6c9c22ab042ff5d0f65eeefe44021b58a95d486cb626f5614fc99"
+    },
+    {
+      "second": 10,
+      "frame": 5,
+      "compressed": 73232,
+      "original": 113763,
+      "original_sha256": "05cc4a3d291ff7996433d1b4a46dc85ed460fd2db462fe931f1099a60b029b9b"
+    },
+    {
+      "second": 10,
+      "frame": 6,
+      "compressed": 73417,
+      "original": 114622,
+      "original_sha256": "02e588fbd0041808e334e124039d924584e948357c4faaeb3c92a12b4385fbf4"
+    },
+    {
+      "second": 10,
+      "frame": 7,
+      "compressed": 73484,
+      "original": 115011,
+      "original_sha256": "f107e0a61b38655479e59ebe12d5704736768cb5ede4bc307f311450e1388bb0"
+    },
+    {
+      "second": 10,
+      "frame": 8,
+      "compressed": 73687,
+      "original": 115399,
+      "original_sha256": "3f148b01bcdceaac21bc3c7e75875148bcea10b94f0438db1ef3d59a9ca2edfb"
+    },
+    {
+      "second": 10,
+      "frame": 9,
+      "compressed": 73495,
+      "original": 115338,
+      "original_sha256": "255a456c94d23d95a29cc1d1aaf21b149a665047ee412fb7b43a26caff7edd80"
+    },
+    {
+      "second": 10,
+      "frame": 10,
+      "compressed": 73581,
+      "original": 115368,
+      "original_sha256": "95bdd587f81a60f89b9f84b48c2bd61a9fca18cda6938589b60bf5cf9b83b6db"
+    },
+    {
+      "second": 10,
+      "frame": 11,
+      "compressed": 73509,
+      "original": 114832,
+      "original_sha256": "775e4f97718a7079ceb4c977f962c6763f393fe067aa5514c7a09fa6bda912e9"
+    },
+    {
+      "second": 40,
+      "frame": 0,
+      "compressed": 74816,
+      "original": 119542,
+      "original_sha256": "72f37a59e2e0bc649a195fc52e310dd5847c0735581ac820abc2c215bb99e20d"
+    },
+    {
+      "second": 40,
+      "frame": 1,
+      "compressed": 74850,
+      "original": 119517,
+      "original_sha256": "49b3b4b8952e3cd69310749e8ef81a26ed972b70c2c63c5ff840c360b8f15d4e"
+    },
+    {
+      "second": 40,
+      "frame": 2,
+      "compressed": 74477,
+      "original": 119429,
+      "original_sha256": "a2494c473832a38470f9a75398ace1710d5d1634ec75f3e7441c90f4a3d67f75"
+    },
+    {
+      "second": 40,
+      "frame": 3,
+      "compressed": 74223,
+      "original": 118909,
+      "original_sha256": "b96aee2b74ce32e5b29fd9c51440b808af07fc74508bbd8b55202d556dca5c0e"
+    },
+    {
+      "second": 40,
+      "frame": 4,
+      "compressed": 74318,
+      "original": 119610,
+      "original_sha256": "91a15301c38a1321d692de979aeaaa098b993798fcf4a563f2794ab99bdb43ef"
+    },
+    {
+      "second": 40,
+      "frame": 5,
+      "compressed": 74192,
+      "original": 119739,
+      "original_sha256": "ae1f515eef0d6f95c1d8f60cebb861eae8c1d29c722e58f29cb7df51c0d0fc7c"
+    },
+    {
+      "second": 40,
+      "frame": 6,
+      "compressed": 74375,
+      "original": 120055,
+      "original_sha256": "cec9a2ce822b4df06ba61af5f33f95ec907dfa1295365da16a116869ac9c518f"
+    },
+    {
+      "second": 40,
+      "frame": 7,
+      "compressed": 74466,
+      "original": 120027,
+      "original_sha256": "a5011941f415249d69fb4c3b7897df65f7cf12995c3581e31bc65b95ede21265"
+    },
+    {
+      "second": 40,
+      "frame": 8,
+      "compressed": 74835,
+      "original": 120143,
+      "original_sha256": "94268bce5bfef547d1558936fb8b1352797b0d99244e126b9e45adde7b350132"
+    },
+    {
+      "second": 40,
+      "frame": 9,
+      "compressed": 74522,
+      "original": 119995,
+      "original_sha256": "5c5f5e9ad314f47a8372eb0b8f8f758dc1048cd7c93b7f66ceb704a8eced4f02"
+    },
+    {
+      "second": 40,
+      "frame": 10,
+      "compressed": 74816,
+      "original": 120313,
+      "original_sha256": "b6b70491e64470a0de297546aa84d8d5e9d1462afbb2ec7b91c75109dddca79a"
+    },
+    {
+      "second": 40,
+      "frame": 11,
+      "compressed": 74845,
+      "original": 120163,
+      "original_sha256": "8abcda14d088fab84af795fce27aefd9fa3b3d00790e4aca10df531fb7d56942"
+    },
+    {
+      "second": 90,
+      "frame": 0,
+      "compressed": 73382,
+      "original": 120782,
+      "original_sha256": "3da1b4a95164299288fbdb7029cb2677f94178fab1efb9eaed764e1e16044e2e"
+    },
+    {
+      "second": 90,
+      "frame": 1,
+      "compressed": 73279,
+      "original": 120844,
+      "original_sha256": "65fc032233e1bcb45b9137c6a92a7a3ee69bfe3af69e17373aa84f37861b9524"
+    },
+    {
+      "second": 90,
+      "frame": 2,
+      "compressed": 74317,
+      "original": 121136,
+      "original_sha256": "ebf7bb832ab0dd709160cec2ecc9f6b159baf34345db8d056c269ef4bc717eff"
+    },
+    {
+      "second": 90,
+      "frame": 3,
+      "compressed": 74199,
+      "original": 120884,
+      "original_sha256": "2880a9e2b33e13e83dc0fa55054a75f017f013f63c416bf8413bd32149c69968"
+    },
+    {
+      "second": 90,
+      "frame": 4,
+      "compressed": 74047,
+      "original": 120634,
+      "original_sha256": "21c6c2dcb4528777de99275f0f53b35a2407fc1589436b5d480179540d81a3df"
+    },
+    {
+      "second": 90,
+      "frame": 5,
+      "compressed": 74014,
+      "original": 120656,
+      "original_sha256": "cd6d4ef80db97b28723eaef9158869abde32badd16f8d53e51d233c495df922e"
+    },
+    {
+      "second": 90,
+      "frame": 6,
+      "compressed": 73643,
+      "original": 120612,
+      "original_sha256": "1e626ab9c3149d1b5aa11e46d3b222914717d54f0d659beb9786bd1fe9a5f50b"
+    },
+    {
+      "second": 90,
+      "frame": 7,
+      "compressed": 73705,
+      "original": 120603,
+      "original_sha256": "449bdef7d6ace67f638b9c1b4489f74a65a57235944557524e866935da9ae7da"
+    },
+    {
+      "second": 90,
+      "frame": 8,
+      "compressed": 73728,
+      "original": 120762,
+      "original_sha256": "962eb83432964b027ec584c52615c39b5c854b82c10acee55202f6b3727d6723"
+    },
+    {
+      "second": 90,
+      "frame": 9,
+      "compressed": 73344,
+      "original": 120548,
+      "original_sha256": "10bb32061c260a58b0431a8212de990015fb9da20110e9e6a8ef6505879cbc3a"
+    },
+    {
+      "second": 90,
+      "frame": 10,
+      "compressed": 73277,
+      "original": 120698,
+      "original_sha256": "fbb0729c9443d99cf93091cab1168d8e850742b8feda37d0e18ca7a8256daa7a"
+    },
+    {
+      "second": 90,
+      "frame": 11,
+      "compressed": 73125,
+      "original": 120519,
+      "original_sha256": "49d710d12119925ad8571a4b4e55e78b5c74b108aaa1eb8b8c9e65449b9780f7"
+    },
+    {
+      "second": 130,
+      "frame": 0,
+      "compressed": 72137,
+      "original": 114743,
+      "original_sha256": "c9ee2e0c854de77df9f47d63d1c52406c9403f890a3b6ade7712f956e7f26afe"
+    },
+    {
+      "second": 130,
+      "frame": 1,
+      "compressed": 72097,
+      "original": 114866,
+      "original_sha256": "753e74b893ae9bc68c311613a93d3523da00521f399e75158494b9c5f6daca3d"
+    },
+    {
+      "second": 130,
+      "frame": 2,
+      "compressed": 71992,
+      "original": 115063,
+      "original_sha256": "0538403c4944fdb859ed29eacf97ad1f847d73ef081616bcd95505709c237614"
+    },
+    {
+      "second": 130,
+      "frame": 3,
+      "compressed": 72317,
+      "original": 116004,
+      "original_sha256": "bc2c709765895395baf19d980f6c56bf7d72df6d42ab1989f8642c46b92c3e3f"
+    },
+    {
+      "second": 130,
+      "frame": 4,
+      "compressed": 73048,
+      "original": 117713,
+      "original_sha256": "eb75c8a1630b6208afdac4e5b9d4314d27dc9949ed2f69d554a86092bc83c416"
+    },
+    {
+      "second": 130,
+      "frame": 5,
+      "compressed": 73482,
+      "original": 118149,
+      "original_sha256": "55997abb6e66460a5c8c09f3ac829405911e59d73348643d2766cf8203289dc4"
+    },
+    {
+      "second": 130,
+      "frame": 6,
+      "compressed": 73628,
+      "original": 118195,
+      "original_sha256": "5940513cd1ce295143060cfdab37a195ec16cb1c45e109c55c46cd8784401fb1"
+    },
+    {
+      "second": 130,
+      "frame": 7,
+      "compressed": 73631,
+      "original": 117787,
+      "original_sha256": "fe3bd42164835f70ad179601d8a877c3a3f6e6507a907e837ce9283a800940a7"
+    },
+    {
+      "second": 130,
+      "frame": 8,
+      "compressed": 74020,
+      "original": 118163,
+      "original_sha256": "b1e11eb3b05b4a9f1d45cad7dd76506c53c7ee98e749e8d37630285206a172b6"
+    },
+    {
+      "second": 130,
+      "frame": 9,
+      "compressed": 73584,
+      "original": 117990,
+      "original_sha256": "df6b8c11e6a6a688bbbcaa1e180f5d1393d5c23cb763f2cb80e2d1b6cb5c7eac"
+    },
+    {
+      "second": 130,
+      "frame": 10,
+      "compressed": 73825,
+      "original": 118049,
+      "original_sha256": "9fc30a834794785f15577d2414b430960238ebfb6fbb6cc44eb530631840edaf"
+    },
+    {
+      "second": 130,
+      "frame": 11,
+      "compressed": 73759,
+      "original": 117756,
+      "original_sha256": "869c67bc1ebdef4e9f6150eecbd16bda128e86f5c9c451a5aec3626a28f4a49d"
+    },
+    {
+      "second": 190,
+      "frame": 0,
+      "compressed": 75860,
+      "original": 118856,
+      "original_sha256": "eb76e805c675a6ae8d2a83264602a1336d244abf18eebe30b63df87b8be1c0df"
+    },
+    {
+      "second": 190,
+      "frame": 1,
+      "compressed": 75685,
+      "original": 119706,
+      "original_sha256": "b8b839e9ca6b43ddfa827f614b162a4a18f09373935da21032b87ab3ee383172"
+    },
+    {
+      "second": 190,
+      "frame": 2,
+      "compressed": 75405,
+      "original": 119995,
+      "original_sha256": "3c9d6dfb09da14d14bd2e07989f8a2b55a9113d5c6cf68bdd908c301ae5b6385"
+    },
+    {
+      "second": 190,
+      "frame": 3,
+      "compressed": 74789,
+      "original": 120432,
+      "original_sha256": "4154d7f8fb935ece823697583f8c730599a6c62b4cef8eee6937ebd7a032736f"
+    },
+    {
+      "second": 190,
+      "frame": 4,
+      "compressed": 75352,
+      "original": 121036,
+      "original_sha256": "d44143d558f5e78521f746466e783bfc6b99e19336dc3e51543b07788c4c6b80"
+    },
+    {
+      "second": 190,
+      "frame": 5,
+      "compressed": 75278,
+      "original": 121018,
+      "original_sha256": "9134ae2987bc7e136ca308744b7be4403eef00a63954ff2ec114d809c967f38f"
+    },
+    {
+      "second": 190,
+      "frame": 6,
+      "compressed": 74982,
+      "original": 121153,
+      "original_sha256": "932211367311244687b26fe75c5b094e60b7783846fd6b75b6426bb19cb73f03"
+    },
+    {
+      "second": 190,
+      "frame": 7,
+      "compressed": 74689,
+      "original": 121259,
+      "original_sha256": "ab8caf1d2dacfcd44e4be3e0307b709a953bf0aa4c0bcdfae44b4c0f86fbdf9e"
+    },
+    {
+      "second": 190,
+      "frame": 8,
+      "compressed": 74701,
+      "original": 121219,
+      "original_sha256": "66469c9dd1ffc662b31629c3a5674a8bef9126aeafe7262a2d6a6af4ffba6887"
+    },
+    {
+      "second": 190,
+      "frame": 9,
+      "compressed": 74262,
+      "original": 120722,
+      "original_sha256": "019b0c235941191c8f0eced1f830d1a400790ddc3c0b3cea09a0679fbb8f7061"
+    },
+    {
+      "second": 190,
+      "frame": 10,
+      "compressed": 74641,
+      "original": 120520,
+      "original_sha256": "65decb0b4e2bd17849b544d6a4ddac397bd1762422c662919d27da88831f11f3"
+    },
+    {
+      "second": 190,
+      "frame": 11,
+      "compressed": 74536,
+      "original": 120178,
+      "original_sha256": "b6e1c60753ace4a106fea37544552d216edb4c58e0b992d129b2594c036e6a9b"
+    },
+    {
+      "second": 240,
+      "frame": 0,
+      "compressed": 76067,
+      "original": 121234,
+      "original_sha256": "93569a17e4c171a9f83cf52fdfde2221563572e6e361011ff2f7b08f760f4f19"
+    },
+    {
+      "second": 240,
+      "frame": 1,
+      "compressed": 75965,
+      "original": 121136,
+      "original_sha256": "4c6b1995b5f6995b68b32791bd71422f397c879b9dd933d95762949c96dfdc05"
+    },
+    {
+      "second": 240,
+      "frame": 2,
+      "compressed": 76050,
+      "original": 121205,
+      "original_sha256": "49158e684fd4cf7ff7e535a6b3437ff245fa0534a0cc2d1d5eb2d30c1f8c39e3"
+    },
+    {
+      "second": 240,
+      "frame": 3,
+      "compressed": 75956,
+      "original": 121211,
+      "original_sha256": "9f854cb3846a85535b76d8c09bea8d84408426ae31e1be4fe4b2b6851bf3f0a2"
+    },
+    {
+      "second": 240,
+      "frame": 4,
+      "compressed": 76021,
+      "original": 121220,
+      "original_sha256": "5e05d9128ea1c70339623c7df455cfa6df72f288a56fe4bc778a663eb1c77a47"
+    },
+    {
+      "second": 240,
+      "frame": 5,
+      "compressed": 76022,
+      "original": 121226,
+      "original_sha256": "1e88d3392e8ea4f3b392e39c9e2bdeb62d11d2c03511641028277cffb7efe74f"
+    },
+    {
+      "second": 240,
+      "frame": 6,
+      "compressed": 76008,
+      "original": 121219,
+      "original_sha256": "fc93773e0ce30156e0b6ebb525bfdea0ef70476bd76a14ca14b4a684c4e6eb38"
+    },
+    {
+      "second": 240,
+      "frame": 7,
+      "compressed": 76008,
+      "original": 121219,
+      "original_sha256": "fc93773e0ce30156e0b6ebb525bfdea0ef70476bd76a14ca14b4a684c4e6eb38"
+    },
+    {
+      "second": 240,
+      "frame": 8,
+      "compressed": 76003,
+      "original": 121220,
+      "original_sha256": "3a55f8ad1f996aa77d36d57ca4b3de7aa1561ad03eee7b09ca9611895a70e63d"
+    },
+    {
+      "second": 240,
+      "frame": 9,
+      "compressed": 75999,
+      "original": 121219,
+      "original_sha256": "fcc38939749fd0f09007583b1c912ee1bc22e6c6e3dddcc63135e48245fb21d7"
+    },
+    {
+      "second": 240,
+      "frame": 10,
+      "compressed": 76001,
+      "original": 121220,
+      "original_sha256": "f5f3fa894b67a314c764bb7d1e0a88704aea41e1e6e1010cbaee984d194c7f40"
+    },
+    {
+      "second": 240,
+      "frame": 11,
+      "compressed": 76004,
+      "original": 121219,
+      "original_sha256": "0f4aab8b0fd312d97b8f538e338463cf9b8780549dad991a56bc735a37ae2309"
+    }
+  ],
+  "cycle_counts": [
+    1011843,
+    1010150,
+    1005784,
+    1007649,
+    1014264,
+    1011143,
+    1014745,
+    1016435,
+    1019442,
+    1018581,
+    1018333,
+    1016291,
+    1040902,
+    1042231,
+    1037464,
+    1033808,
+    1037502,
+    1035825,
+    1038540,
+    1039757,
+    1044220,
+    1039410,
+    1043764,
+    1043502,
+    1030815,
+    1030289,
+    1041138,
+    1039268,
+    1036870,
+    1037283,
+    1033285,
+    1033747,
+    1034072,
+    1029513,
+    1029797,
+    1028003,
+    1003175,
+    1003258,
+    1002636,
+    1008381,
+    1019903,
+    1025418,
+    1026712,
+    1025814,
+    1030559,
+    1025844,
+    1028696,
+    1027004,
+    1050789,
+    1051739,
+    1049262,
+    1043518,
+    1051323,
+    1050839,
+    1047859,
+    1044643,
+    1044940,
+    1039243,
+    1042471,
+    1040426,
+    1059431,
+    1057636,
+    1058310,
+    1058310,
+    1058310,
+    1058310,
+    1058310,
+    1058310,
+    1058181,
+    1057808,
+    1058103,
+    1058505
+  ],
+  "scope": "72 held-out original token frames restored by RTL, exact bytes. Not throughput or board qualification."
+}

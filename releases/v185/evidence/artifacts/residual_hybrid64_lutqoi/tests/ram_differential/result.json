@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_byte_ram.v": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_differential\\tb.v": "e0c67beb1e71d5e9cf7197bcc77385dcb9a97bb1d2fde9199a6ff322016541c9"
+  },
+  "scope": "All32768initialized bytes,100000random operations,bankboundary,byte neighbor,sameaddress forwarding,and read-enable hold; actual vendor primitive reference plus independent byte scoreboard."
+}

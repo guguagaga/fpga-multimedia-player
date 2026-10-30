@@ -1,0 +1,2 @@
+ARBITER_POLICY_PASS legacy_checks=1420111 ownership reserve timeout cancel release
+D:\codexworks\framerate_v185_20261029\residual_hybrid64_lutqoi\tests\arbiter_timeout\tb.v:67: $finish called at 14201271000 (1ps)

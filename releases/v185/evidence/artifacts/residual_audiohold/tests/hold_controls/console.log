@@ -1,0 +1,2 @@
+HOLD_CONTROLS_PASS checks=17
+D:\codexworks\framerate_v185_20261029\residual_audiohold\tests\hold_controls\tb.v:33: $finish called at 43566000 (1ps)

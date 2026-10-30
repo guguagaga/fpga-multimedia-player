@@ -88,6 +88,23 @@ module top (
   wire        img_top_down;
   wire [15:0] img_h_used;
 
+  wire [1:0] scanout_bank_mem;
+  wire scanout_toggle_mem;
+  reg [1:0] scanout_bank_s0,scanout_bank_s1,scanout_bank_sd;
+  reg [2:0] scanout_toggle_sync;
+  wire scanout_event_sd=scanout_toggle_sync[2]^scanout_toggle_sync[1];
+  // Bundled bank data settles through two registers before the delayed
+  // event is consumed. Source bank remains stable for a complete refresh.
+  always @(posedge sd_card_clk or posedge rst_all)begin
+    if(rst_all)begin
+      scanout_bank_s0<=0;scanout_bank_s1<=0;scanout_bank_sd<=0;
+      scanout_toggle_sync<=0;
+    end else begin
+      scanout_bank_s0<=scanout_bank_mem;scanout_bank_s1<=scanout_bank_s0;
+      scanout_toggle_sync<={scanout_toggle_sync[1:0],scanout_toggle_mem};
+      if(scanout_event_sd)scanout_bank_sd<=scanout_bank_s1;
+    end
+  end
   wire        video_read_req;
   wire        video_read_req_ack;
   wire        video_read_en;
@@ -2004,7 +2021,8 @@ module top (
     .busy         (audio_transition_busy),
     .timeout_seen (fade_timeout)
   );
-  media_player_shim u_wav_reader (
+  // Optional 30fps resource experiment: WAV PCM/IMA only; QOA rejected.
+  media_player_shim #(.ENABLE_QOA(0)) u_wav_reader (
     .file_base_lba(fs_audio_base),
     .sd_error(fs_error && fs_error_owner == 1),
     .clk(sd_card_clk),
@@ -2377,7 +2395,8 @@ module top (
     else
       av_mute_sync <= {av_mute_sync[0], fade_audio_ack};
   end
-  i2s_transmitter u_i2s_transmitter (
+  i2s_transmitter #(.MAX_BUDGET_HOLD(2)) u_i2s_transmitter (
+    .hold_budget_gap(av_buffering && !av_drain_old_stream),
     .clk             (audio_mclk),
     .rst             (audio_rst),
     .mute            (av_mute_sync[1]),
@@ -2685,7 +2704,18 @@ module top (
     if (rst_all) image_priority_q <= 1'b1;
     else image_priority_q <= ~display_valid | (img_loading & fifo_usedw[13]);
   end
-  sd_arbiter u_sd_arbiter (
+  // wr_usedw and SD state are both in sd_card_clk. Reserve4096 PCM
+  // bytes covers21.3ms even for48k stereo; an ordinary48-sector burst is
+  // about9.5ms. Startup/low reserve retains immediate audio eligibility.
+  reg defer_audio_prefetch;
+  always @(posedge sd_card_clk or posedge rst_all) begin
+    if (rst_all) defer_audio_prefetch <= 0;
+    else defer_audio_prefetch <= video_engine_play && av_started &&
+        (fifo_usedw >= 14'd4096) &&
+        (wav_dbg_sd_state == 19 || wav_dbg_sd_state == 20 || wav_dbg_sd_state == 23);
+  end
+  sd_arbiter #(.PREFETCH_AWARE(1), .MAX_DEFER_CYCLES(1400000)) u_sd_arbiter (
+    .defer_audio(defer_audio_prefetch),
     .clk                       (sd_card_clk),
     .rst                       (rst_all),
     // ================================================================
@@ -2899,33 +2929,33 @@ module top (
           av_last_buf <= 0;
           av_have_buf <= 0;
         end else if (!video_engine_play) av_have_buf <= 0;
-        else if(vid_disp_ok && vid_vsync_tick &&
-         (!av_have_buf || av_last_buf!=vid_disp_buf_idx))begin
+        else if(vid_disp_ok && scanout_event_sd && scanout_bank_s1==vid_disp_buf_idx &&
+         (!av_have_buf || av_last_buf!=scanout_bank_s1))begin
           av_display_toggle <= ~av_display_toggle;
-          av_last_buf <= vid_disp_buf_idx;
+          av_last_buf <= scanout_bank_s1;
           av_have_buf <= 1;
         end
       end
       video_eof_guard u_video_eof_guard (
         .clk(sd_card_clk), .rst(rst_all), .enable(video_engine_play),
         .paused(video_paused), .last_committed(video_last_shown),
-        .frame_presented(vid_disp_ok && vid_vsync_tick &&
-                         (!av_have_buf || av_last_buf != vid_disp_buf_idx)),
+        .frame_presented(vid_disp_ok && scanout_event_sd && scanout_bank_s1==vid_disp_buf_idx &&
+                         (!av_have_buf || av_last_buf != scanout_bank_s1)),
         .budget_empty(video_budget_empty_sync[1]), .ended(video_playlist_ended));
 
       // Audio starts only after the first committed video buffer reaches a display boundary.
       always @(posedge sd_card_clk or posedge rst_all) begin
         if (rst_all) av_started <= 0;
         else if (!video_engine_play) av_started <= 0;
-        else if (vid_disp_ok && vid_vsync_tick) av_started <= 1;
+        else if (vid_disp_ok && scanout_event_sd && scanout_bank_s1==vid_disp_buf_idx) av_started <= 1;
       end
 
 
       video_player #(
         .PLAYLIST_SUPPORT(1),
         .LEGACY_CODECS(0),
-        .BF_AW        (13),
-        .BF_HI        (16'd7648),
+        .BF_AW        (14),
+        .BF_HI        (16'd15840),
         .AUDIO_MASTER (1),
         .AV_SYNC      (1),
         .FRAME_PIXELS (32'd921600),
@@ -2934,6 +2964,8 @@ module top (
         .clk                   (sd_card_clk),
         .rst                   (rst_all),
         .vsync_tick            (vid_vsync_tick),
+        .scanout_event         (scanout_event_sd),
+        .scanout_bank          (scanout_bank_s1),
         .present_enable        (video_audio_ready),
         .timeline_run          (av_started),
         .audio_frame_tick      (av_audio_frame_tick),
@@ -3069,7 +3101,7 @@ module top (
     .auto_enabled(video_auto_enabled),.selection_failed(video_selection_failed));
 
   // ===================== 共享 sd_card_top（接物理 SPI 引脚） =====================
-  fat32_sector_mapper u_fat_mapper (
+  fat32_sector_mapper #(.PHYSICAL_PREFETCH_BLOCKS(64)) u_fat_mapper (
     .clk           (sd_card_clk),
     .rst           (rst_all),
     .invalidate    (!sd_init_done),
@@ -3107,7 +3139,7 @@ module top (
   end
 
   sd_card_top #(
-    .PREFETCH_BRAM32(1)
+    .PREFETCH_BRAM32(1),.PREFETCH_BLOCKS(64)
   ) sd_card_top_m0 (
     .clk(sd_card_clk),
     .rst(rst_all | fs_transport_reset),
@@ -3524,6 +3556,8 @@ seg595_display #(
     // [Design note 视频]第三块帧缓冲（三缓冲轮转，见 rtl/video_player.v）
     .read_addr_2    (BUF2_ADDR),
     .read_addr_3    (24'd0),
+    .scanout_bank(scanout_bank_mem),
+    .scanout_toggle(scanout_toggle_mem),
     .read_addr_index(disp_buf_idx),
     .read_len       (FRAME_PIXELS),
     .read_en        (video_read_en),

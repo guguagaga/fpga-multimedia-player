@@ -1,39 +1,92 @@
 {
-  "release": "v183-playlist-timing-pass-board-pending",
-  "baseline": "v182-board-confirmed-20261029",
+  "release": "v185-720p30-board-test-20261030",
   "board_confirmed": false,
+  "stable_release": "v182-board-confirmed-20261029",
   "seed": 26,
-  "features": [
-    "four numbered VID/VAU pairs",
-    "manual previous/next",
-    "automatic loop after final raster and PCM",
-    "music return"
-  ],
+  "bit_sha256": "393522c8f1dd8a908cbeb2b2841546fcc35ee672c4481cb54736829e301981c9",
   "video": {
-    "codec": 12,
     "width": 1280,
     "height": 720,
-    "fps": 15
+    "fps": 30,
+    "frames": 8136,
+    "seconds": 271.2
   },
-  "numbered_files_required": false,
+  "hdmi_scanout": "1280x720@60Hz",
   "timing": {
-    "Setup WNS": 45.0,
+    "Setup WNS": 386.0,
     "Setup TNS": 0.0,
     "Num of violated S-EP": 0.0,
-    "Hold WNS": 43.0,
+    "Hold WNS": 30.0,
     "Hold TNS": 0.0,
     "Num of violated H-EP": 0.0,
-    "#slices": 9463.0,
-    "#RAMs": 68.0,
-    "#DSPs": 26.0
+    "#slices": 9342.0,
+    "#RAMs": 79.0,
+    "#DSPs": 22.0
   },
-  "bit_sha256": "7c98849ec759be74cc3b00be997a79911b9d09a5abd7353376e35edbf0e3949f",
-  "tests": "Layered regressions passed; exact reused source/extracted top wiring audited",
-  "limitations": [
-    "Not seamless switching",
-    "Busy key presses ignored",
-    "Complete VID/VAU pairs required",
-    "External IO/CDC signoff remains separate",
-    "Board validation pending"
+  "resources": {
+    "lut": 17695,
+    "lut_total": 19600,
+    "bram9k": 63,
+    "bram9k_total": 64,
+    "bram32k": 16,
+    "bram32k_total": 16
+  },
+  "gates": {
+    "timing": {
+      "path": "releases/v185/evidence/timing.json",
+      "sha256": "499a36b84e78aaaac2a807e98fd7cf82fe12355f8fd0dbc508bdbae4188283bf"
+    },
+    "coverage": {
+      "path": "releases/v185/evidence/coverage.json",
+      "sha256": "194e9961f497b18234e9faacc68fe2b0868271ce689d74ff64623afcc396b8fd"
+    },
+    "source_evidence": {
+      "path": "releases/v185/evidence/source_evidence.json",
+      "sha256": "920efb78421f695064f2049c5537aeb0e8718480316c677c063069c75350bcf8"
+    },
+    "av_cadence": {
+      "path": "releases/v185/evidence/av_cadence.json",
+      "sha256": "155011b779fd7e28dd08f4bff97c2ef670d82eaa214d86f9ff8a0d49d2cfbc12"
+    },
+    "sustained_peak": {
+      "path": "releases/v185/evidence/sustained_peak.json",
+      "sha256": "4bfa0e86482d3cf2d58bd123d737908f9e5c6380e4ad72a0f9f08f336a566b15"
+    },
+    "full_film": {
+      "path": "releases/v185/evidence/full_film.json",
+      "sha256": "7afd4089870e2b855348056d2f5ce55a4df4a39f279a8dd92c5c8fcd991af0b5"
+    },
+    "source_identity": {
+      "path": "releases/v185/evidence/source_identity.json",
+      "sha256": "e6d2c7a90aca95d76edf3c2b55216854ed1cc5f33fd43b17eb5623f0cd0f7474"
+    },
+    "encoder_pairing": {
+      "path": "releases/v185/evidence/encoder_pairing.json",
+      "sha256": "5c8a74b4bfbe433592b0a23fd87caa02445c9c4964101367e209eeb265bb32e0"
+    },
+    "frame_assembly": {
+      "path": "releases/v185/evidence/frame_assembly.json",
+      "sha256": "0ed24d8e0f996774dae7ab0110e5fc2b618007e8694d1f9e2ad451ff8665f338"
+    },
+    "source_export": {
+      "path": "releases/v185/evidence/source_export.json",
+      "sha256": "9d37c564495283c7924d4eff98f2484a3ef0a57b74f6011f7ea6101759b8dd17"
+    }
+  },
+  "media": {
+    "sd_ready/M2_VIDEO.VID": {
+      "bytes": 601860608,
+      "sha256": "6499cfe047820a1e8634b9592030a8d1609eaf0d86fb79d8b85328a3a22b6f4e"
+    },
+    "sd_ready/V2_AUDIO.VAU": {
+      "bytes": 6531188,
+      "sha256": "317733fb49a1e39fbd70061ee5f427ec7e332b51b6ce4a7a3d31d49f4e5a58dd"
+    }
+  },
+  "limits": [
+    "Board acceptance pending",
+    "External IO/CDC scope retained",
+    "Repeated peak300 is not full-film RTL",
+    "IMA audio is lossy; QOA disabled in candidate top"
   ]
 }

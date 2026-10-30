@@ -1,0 +1,754 @@
+{
+  "spi": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+      },
+      {
+        "kind": "local",
+        "path": "sd_spi_model.sv",
+        "sha256": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_top.v",
+        "sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_cmd.v",
+        "sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_master.v",
+        "sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_sniffer.v",
+        "sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      }
+    ],
+    "command": "vsim work.tb_sd_speed work.glbl",
+    "marker": "PASS SD speed regression",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/real_spi32",
+    "assets": {
+      "sd_spi_model.sv": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f",
+      "tb.v": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "spi_tail": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+      },
+      {
+        "kind": "local",
+        "path": "sd_spi_model.sv",
+        "sha256": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_top.v",
+        "sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_cmd.v",
+        "sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_master.v",
+        "sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_sniffer.v",
+        "sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      }
+    ],
+    "command": "vsim work.tb_sd_cmd_tail work.glbl",
+    "marker": "PASS command-tail regression",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/real_spi32",
+    "assets": {
+      "sd_spi_model.sv": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f",
+      "tb.v": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "sd_handoff": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "65ba721f522f678ac9d66ae113c6bc47b8221b894f896d6cbbbcf8165afbacb8"
+      },
+      {
+        "kind": "local",
+        "path": "sd_spi_model.sv",
+        "sha256": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_top.v",
+        "sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_cmd.v",
+        "sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_master.v",
+        "sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/spi_sniffer.v",
+        "sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      }
+    ],
+    "command": "vsim work.tb_sd_speed work.glbl",
+    "marker": "PASS SD speed regression",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/stream_handoff",
+    "assets": {
+      "sd_spi_model.sv": "68b348aac7e00da2fd517a6d903d3cc257cd9a4256c3d45ecd1bdbf6c501028f",
+      "tb.v": "65ba721f522f678ac9d66ae113c6bc47b8221b894f896d6cbbbcf8165afbacb8"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "fat_mapping": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "f31fd9ee901bacf3f9e9b7332fb2b64ac1777ec315d58dfa1dc48a709d1f2457"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/fat32_sector_mapper.v",
+        "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      }
+    ],
+    "command": "vsim work.tb work.glbl",
+    "marker": "CACHE64_PASS",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_streamcache/tests/mapping",
+    "assets": {
+      "tb.v": "f31fd9ee901bacf3f9e9b7332fb2b64ac1777ec315d58dfa1dc48a709d1f2457"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "scanout": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.sv",
+        "sha256": "dd87a3df5cf3f03e12c0acc7e62ae90e95d7e169f07efba886de8c777c801510"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_playlist_ctrl.v",
+        "sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_eof_guard.v",
+        "sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/av_sample_sync.v",
+        "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_player.v",
+        "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_raster.v",
+        "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_block_decoder_experimental.v",
+        "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/gradient_block_experimental.v",
+        "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/fat32_sector_mapper.v",
+        "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/rgb565_pair_pack.v",
+        "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/context_huffman_decoder.v",
+        "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_lossless_restore.v",
+        "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec_byte_queue.v",
+        "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+        "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/frame_fifo_read.v",
+        "sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781"
+      }
+    ],
+    "command": "vsim work.tb work.glbl",
+    "marker": "OWNERSHIP_CHECKS",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/scanack_integration",
+    "assets": {
+      "media.hex": "ad01150c47768aed45f6e6121bac6ad98486cd304fde773c862cb1c24599134c",
+      "tb.sv": "dd87a3df5cf3f03e12c0acc7e62ae90e95d7e169f07efba886de8c777c801510",
+      "top_cdc.vh": "493ef0d2a158c48134b790d0f0e38b003fb0251fcfe47927536421a74a52062a"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "long_control": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.sv",
+        "sha256": "e92448c9527174579e39cdb5ee6e2be1e19b58dbaeeefd8a2e4368ae6d947015"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_playlist_ctrl.v",
+        "sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_eof_guard.v",
+        "sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/av_sample_sync.v",
+        "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_player.v",
+        "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_raster.v",
+        "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_block_decoder_experimental.v",
+        "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/gradient_block_experimental.v",
+        "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/fat32_sector_mapper.v",
+        "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/rgb565_pair_pack.v",
+        "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/context_huffman_decoder.v",
+        "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_lossless_restore.v",
+        "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec_byte_queue.v",
+        "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+        "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      }
+    ],
+    "command": "vsim work.tb work.glbl",
+    "marker": "CADENCE_8136_PASS",
+    "full_cadence": false,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/cadence8136_fifo_guard",
+    "assets": {
+      "header.hex": "f38b7c3122979ef957305219bf50987b2c7c273b9ecfb88e86b267b2aa24ecc6",
+      "tb.sv": "e92448c9527174579e39cdb5ee6e2be1e19b58dbaeeefd8a2e4368ae6d947015"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "peak720p": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "1b36fc1c147f876976e917f7753f4ca13176e4f09c9874b3baa9efcc10ea6aa2"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/av_sample_sync.v",
+        "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_player.v",
+        "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_block_decoder.v",
+        "sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_raster.v",
+        "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/rgb565_pair_pack.v",
+        "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+        "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/fat32_sector_mapper.v",
+        "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/compressed_audio_reader.v",
+        "sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sector_byte_source.v",
+        "sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/ima_stream.v",
+        "sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/qoa_stream.v",
+        "sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_block_decoder_experimental.v",
+        "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/gradient_block_experimental.v",
+        "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/context_huffman_decoder.v",
+        "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_lossless_restore.v",
+        "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec_byte_queue.v",
+        "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+      }
+    ],
+    "command": "vsim work.tb_video_quality_sd_cache work.glbl +FRAMES=30 +BYTE_CYCLES=32 +RATE=30 +CARD_BYTES=2447872 +CARD=card.hex +REFERENCE=reference.rgb565",
+    "marker": "FINITE_EOF_PASS",
+    "full_cadence": true,
+    "expected_frames": 30,
+    "source_test": "residual_overlaparb/tests/av_peak225_1s40k_continuous_30",
+    "assets": {
+      "audio.hex": "00566a298801dd29fc21a199e99547ee6fa08cf641161e9746c5a41aaeaf77a7",
+      "card.hex": "1fb4da2c0b357e0261d1d03274ef0af4ad58321b0f7e9de8adfabd32e7d07ea3",
+      "codec8_full_fixture.vh": "1e1c194f2f9dd79e520db33238293d81070da048a6a091332d180dfdb5ac77e5",
+      "pcm.hex": "ace7e7dc501315ced6faeebb0fd54b98258ed6b029c4f7c877169c873b8f811e",
+      "reference.rgb565": "25fc85f58c0da29dba6c800a7128d1bf35484cc119ef8b8f42d70f607c836e59",
+      "tb.v": "1b36fc1c147f876976e917f7753f4ca13176e4f09c9874b3baa9efcc10ea6aa2"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  },
+  "sustained720p": {
+    "files": [
+      {
+        "kind": "local",
+        "path": "tb.v",
+        "sha256": "77d85ff624e157d830c64b3822e7617808484dd9a47993cd5a77f367cfdbabeb"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/av_sample_sync.v",
+        "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_byte_ram.v",
+        "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_player.v",
+        "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_block_decoder.v",
+        "sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/video_codec8_raster.v",
+        "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/rgb565_pair_pack.v",
+        "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sd_arbiter.v",
+        "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+        "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+        "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_bram32k.v",
+        "sha256": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa"
+      },
+      {
+        "kind": "td",
+        "path": "sim_release/eg4/eg_phy_glbl.v",
+        "sha256": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/fat32_sector_mapper.v",
+        "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/compressed_audio_reader.v",
+        "sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/sector_byte_source.v",
+        "sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/ima_stream.v",
+        "sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442"
+      },
+      {
+        "kind": "project",
+        "path": "user_source/hdl_source/qoa_stream.v",
+        "sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_block_decoder_experimental.v",
+        "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/gradient_block_experimental.v",
+        "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/context_huffman_decoder.v",
+        "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec12_lossless_restore.v",
+        "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+      },
+      {
+        "kind": "project",
+        "path": "rtl/codec_byte_queue.v",
+        "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+      }
+    ],
+    "command": "vsim work.tb_video_quality_sd_cache work.glbl +FRAMES=90 +BYTE_CYCLES=32 +RATE=30 +CARD_BYTES=7340544 +CARD=card.hex +REFERENCE=reference.rgb565",
+    "marker": "FINITE_EOF_PASS",
+    "full_cadence": true,
+    "expected_frames": 90,
+    "source_test": "residual_overlaparb/tests/av_sustained_peak90",
+    "assets": {
+      "audio.hex": "ca9c0e43527ae507321a136117a57bfdf93ff4b9c9d2ab787d5caf66b4864391",
+      "card.hex": "c216231095fb1174d3ae9624d224232f03126e2c3815e8a775a0dfe8495e1c3b",
+      "codec8_full_fixture.vh": "a1e3a6d16ef8582558fa81a236668b02ee54d00d1adce0c1b46597810bc85dc6",
+      "pcm.hex": "5f84ae38cdf3626a131766f0ebf0921a2d85a84eb4d4935f4aba441d85472443",
+      "reference.rgb565": "9f261190374ef9ea9490a4ecb09034fba11ad127599b796e590e0e7bab338bb6",
+      "tb.v": "77d85ff624e157d830c64b3822e7617808484dd9a47993cd5a77f367cfdbabeb"
+    },
+    "project_assets": {
+      "rtl/residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+      "rtl/residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+      "rtl/residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    }
+  }
+}

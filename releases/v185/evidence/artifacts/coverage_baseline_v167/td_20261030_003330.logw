@@ -1,0 +1,14 @@
+============================================================
+   Tang Dynasty, V6.2.168116
+   Copyright (c) 2012-2025 Anlogic Inc.
+   Executable = D:/TD3/bin/td_commands_prompt.exe
+   Built at =   16:32:07 Jun 12 2025
+   Run by =     Admin
+   Run Date =   Fri Oct 30 00:33:30 2026
+
+   Run on =     DESKTOP-DI3Q1ZY
+============================================================
+PRJ-5611 WARNING: ../../block_redesign_20261028/v167/candidate/project/rtl/video_byte_ram.v and ../../block_redesign_20261028/v167/candidate/project/rtl/fat32_sector_mapper.v have the same CompileOrder value.
+USR-6135 CRITICAL-WARNING: The feedback path of PLL sys_pll_m0/pll_inst is on local network, of which compensation delay is unpredictable.
+USR-6135 CRITICAL-WARNING: The feedback path of PLL u_audio_pll/pll_inst is on local network, of which compensation delay is unpredictable.
+USR-6135 CRITICAL-WARNING: The feedback path of PLL video_pll_m0/pll_inst is on local network, of which compensation delay is unpredictable.

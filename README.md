@@ -1,30 +1,22 @@
 # FPGA 多媒体播放器 / FPGA Multimedia Player
 
-> 当前分支为 **v183 多视频候选版**：支持四组视频/音轨、上一部/下一部及播完自动循环。功能仿真与独立内部时序检查通过，**待上板验收**。已上板确认的稳定版本仍为 v182；下载稳定版请使用下方 v182 Release。
->
-> [v183 操作、编号规则与验收](docs/VIDEO_PLAYLIST_V183.md) · [v183 验证与时序证据](releases/v183/evidence)
+基于安路 EG4S20BG256 的纯 RTL 多媒体播放器，支持 SD/FAT32 簇链、BMP/QOI 自适应图片、音乐、视频播放列表、频谱与中文 OSD。
 
-基于安路 EG4S20BG256 的纯 RTL 多媒体播放器：SD/FAT32 簇链读取、BMP/QOI 图片自适应与轮播、Codec8/9/10/12 视频、PCM/IMA/QOA 音频、HDMI、频谱和中文 OSD。
+**本分支为 v185：真实1280×720、30fps 的待上板验收候选。HDMI扫描保持720P60。** 独立原约束内部时序通过：setup +0.386ns、hold +0.030ns，零违例端点。v182 保持 GitHub 最新稳定发布，v183 可用于已验证的四视频切换回退。
 
-**当前稳定基线：v182，2026-10-29。用户使用配套 bit 与新影片上板后反馈“一切正常”。** 内部独立时序检查通过：setup WNS 0.000 ns、hold WNS +0.023 ns、违例端点为零。setup 无正余量，外部 IO/CDC 与量化耐久性验证仍需完善。
+An RTL multimedia player with a 720p30 content candidate and 720p60 HDMI scanout. Internal timing and layered simulation pass; physical board qualification remains pending.
 
-HDMI 输出为1280×720、60Hz；当前配套影片为真实1280×720、15fps、422秒。显示刷新率与视频帧率不同。
+- [v185候选下载](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v185-720p30-board-test-20261030)
+- [v182稳定发布](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v182-board-confirmed-20261029)
+- [架构与算法](docs/ARCHITECTURE_720P30.md) · [相对v183改动](docs/CHANGES_FROM_V183.md)
+- [性能与验证边界](docs/PERFORMANCE_RESULTS_720P30.md) · [原始证据](releases/v185/evidence)
+- [模块源码导航](docs/MODULES.md) · [构建](docs/BUILD.md) · [编码工具](host/video/codec14/README.md)
+- [播放列表按键与编号](docs/VIDEO_PLAYLIST_V183.md) · [协作](docs/COLLABORATION.md)
 
-An RTL multimedia player for the Anlogic EG4S20 FPGA. The v182 paired bitstream/media received a normal-operation report from the project owner. Internal timing passes with zero setup margin; this is not a claim of exhaustive board qualification.
+视频保留Codec12空间配置，用可逆预测与六上下文Huffman降低存储量，不额外加重块量化。最高码率原载荷重复10次，两档卡首响应模型均检查300张完整720P画面、480000个PCM样本及299个均匀显示间隔；另有厂商模型30帧复核和8136帧小尺寸控制长测。它们不等于全片整板RTL测试，最终观感和稳定性需上板确认。
 
-## 下载与阅读入口
+64扇区物理缓存与16KiB压缩字节FIFO并存；QOI索引转移至LUT存储，释放大块RAM。综合LUT17695/19600，BRAM9K63/64，BRAM32K16/16。没有放宽原约束或通过继续扩大启动缓冲隐藏持续欠供。
 
-- [v182 Release：源码、比特流与配套工具打包下载](https://github.com/guguagaga/fpga-multimedia-player/releases/tag/v182-board-confirmed-20261029)
-- [版本改动与上板验收](docs/RELEASE_V182.md)
-- [模块源码导航](docs/MODULES.md)
-- [构建、厂商依赖导入与独立时序复核](docs/BUILD.md)
-- [视频编码工具与媒体配对](docs/ENCODING_V182.md)
-- [验证范围和原始证据](docs/VALIDATION.md)
-- [后续稳定性路线](docs/STABILITY_ROADMAP.md)
-- [协作流程](docs/COLLABORATION.md) · [依赖与许可](docs/DEPENDENCIES.md)
+新视频必须配套格式14/H6D1位流。第二组文件为M2_VIDEO.VID、V2_AUDIO.VAU，配套片长271.2秒；伴音为有损48kHz单声道IMA-XQ。实验顶层关闭QOA音频，PCM/IMA、BMP/QOI保留。完整编码器exe、复现数据和媒体位于Release附件，不放普通Git。
 
-`rtl/`按功能分组；`project_manifest.json`映射回参与构建的准确目录。`research/`保留历史探索，不参与生产构建。文件名含experimental的Codec12模块已在本版工程清单中使用，不以文件名判断是否进入生产。
-
-打包附件包含本版bit、编码器可执行文件及源码。源码树保留现有许可证范围；厂商生成/加密IP从合法持有且哈希匹配的工程本地导入。原视频、歌曲和软件截图未加入GitHub包，媒体哈希与规格可在release_status.json核对。
-
-目前UI为根目录、最多4张图片/8首歌曲及首个视频和配套音轨。支持FAT链不代表任意SD卡延迟、任意码率均可无停顿播放。请使用配套编码配置，不能仅修改文件头把15fps改成30fps。
+厂商生成/加密IP只记录路径与哈希，从合法持有的匹配工程本地导入；没有为混合来源工程新增统一许可证。源文件原有版权与工具许可保留。

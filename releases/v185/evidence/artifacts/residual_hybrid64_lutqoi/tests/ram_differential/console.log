@@ -1,0 +1,30 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:04:03 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/ram_differential/tb.v 
+# -- Compiling module video_byte_ram
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# -- Compiling module tb
+# 
+# Top level modules:
+# 	glbl
+# 	tb
+# End time: 18:04:03 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl 
+# Start time: 18:04:03 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.video_byte_ram
+# Loading work.glbl
+# Loading work.EG_PHY_BRAM32K
+# HYBRID_RAM_PASS operations=132768
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/ram_differential/tb.v(25)
+#    Time: 1655370 ns  Iteration: 1  Instance: /tb
+# End time: 18:04:29 on Oct 30,2026, Elapsed time: 0:00:26
+# Errors: 0, Warnings: 0

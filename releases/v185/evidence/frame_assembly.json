@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "frames": 8136,
+  "counts": {
+    "old": 4077,
+    "prefix": 1152,
+    "new": 2907
+  },
+  "token_sha256": "2658fd34ca01051b6b68344d02d4b5b17925795ef8b4bc0b9290d35eeec95265",
+  "seconds": 37.8688383102417,
+  "source_identity_report_sha256": "e6d2c7a90aca95d76edf3c2b55216854ed1cc5f33fd43b17eb5623f0cd0f7474",
+  "evidence_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\frame_reuse_map.json": "21cfcbf13f06f8c32a924672a3d44011db1b0803d33e9a43ef29acb8048cbeff",
+    "D:\\codexworks\\framerate_v185_20261029\\encoded_reuse_audit.json": "085b4342f84eb8d5b15564bbd5af072eea6087ac01fa83cb611348b1eae36932",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\protocol.json": "eef0a2699f5be961877f7f6e2b002da9ebcfa0ba0c87e77074121bc77866da6a",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\canonical_merge.json": "a551be248ae1ada5889c1cd3c260bdc6edfa0bb4515448517eb548c9879fb87d",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\source_identity_30fps.json": "e6d2c7a90aca95d76edf3c2b55216854ed1cc5f33fd43b17eb5623f0cd0f7474",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing0.json": "6273e84735d5612678bcb25732828e62f0c4da3a75c13a5964c4c1f245da590b",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing1.json": "ec2a2e03cfcaef51d330c053248ed57bd003d6a3caa561ef6ab358896a58abce",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing2.json": "82b747a64ad932f056a900ac88622b022cf3562ecc73c750f3c7fca0081b256c",
+    "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing3.json": "2d67c116a79e8972aa8c9b1000cea5c3f370e576121d2c6e3181c0c9a9a188c0"
+  },
+  "scope": "Every final canonical frame byte sequence equals its declared original/prefix/new encoded source, in exact30fps order; all missing slots covered once. Original RGB565 source identities and H6D1 inverse are separate hash-bound gates. No claim that source itself has no static frames."
+}

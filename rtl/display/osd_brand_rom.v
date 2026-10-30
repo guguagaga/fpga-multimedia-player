@@ -28,7 +28,7 @@ module osd_brand_rom (
 );
 
   reg [15:0] cjk [ 0:143];
-  reg [ 7:0] logo[0:1691];
+  reg [ 7:0] logo[0:2047];
 
   initial begin
     $readmemh("cjk_brand_16x16.mem", cjk);
@@ -37,9 +37,10 @@ module osd_brand_rom (
 
   always @(posedge clk) cjk_dout <= cjk[cjk_addr];
 
-  // 地址上限保护：logo_rel 在区域外会算出越界值（x/y 比 LOGO_X/Y 小的时候
-  // 是 10 位无符号相减的回绕），这里夹到 0，避免读到数组外（仿真报错/TD 变黑盒）
-  wire [10:0] logo_a = (logo_addr <= 11'd1691) ? logo_addr : 11'd0;
+  // Entries1692..2047 repeat entry0, matching the former address clamp
+  // for every11-bit address. Remove the comparator/mux from the long
+  // coordinate-to-ROM path without changing pixels or synchronous latency.
+  wire [10:0] logo_a = logo_addr;
   always @(posedge clk) logo_dout <= logo[logo_a];
 
 endmodule

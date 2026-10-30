@@ -1,6 +1,7 @@
 
 module sd_card_sec_read_write #(
   parameter PREFETCH_BRAM32 = 0,
+  parameter integer PREFETCH_BLOCKS = 16,
   parameter SPI_LOW_SPEED_DIV = 248,  // spi clk speed = clk speed /((SPI_LOW_SPEED_DIV + 2) * 2 )
   parameter SPI_HIGH_SPEED_DIV = 0  // spi clk speed = clk speed /((SPI_HIGH_SPEED_DIV + 2) * 2 )
 ) (
@@ -74,6 +75,7 @@ module sd_card_sec_read_write #(
   localparam S_MEND = 23;
   localparam S_HIT = 24;
   localparam S_HIT_END = 25;
+  localparam S_CACHE_CHECK = 26;
 
   // =========================================================================
   // [Design note 取数带宽修复：CMD17 单块 -> CMD18 多块 + 预取缓冲]
@@ -90,8 +92,10 @@ module sd_card_sec_read_write #(
   //   pbuf 的地址语义：pbuf 里第 i 块对应 LBA = pbuf_lba + i，
   //   即一次批量读 sec_addr 之后，pbuf_lba = sec_addr + 1，有效块数 NB_BLK-1。
   // =========================================================================
-  localparam integer NB_BLK =
-      16;  // 每批 16 块 = 8 KB（必须是 8 KB 才能被推断成 ERAM；4 KB 会退化成寄存器 ）
+  localparam integer NB_BLK = PREFETCH_BLOCKS;
+  localparam integer COUNT_W = $clog2(NB_BLK);
+  localparam integer PBUF_AW = $clog2(NB_BLK*512);
+  localparam [PBUF_AW-1:0] PBUF_SKIP=512;  // 每批 16 块 = 8 KB（必须是 8 KB 才能被推断成 ERAM；4 KB 会退化成寄存器 ）
   // [Design note 面积]CMD18 多块读在真卡上三次失败，已停用。
   //   MULTI_ON=0 时把 S_CMD18/S_HIT 整条路变成不可达，综合器会剪掉
   //   pbuf(8KB ERAM) + hit 比较 + 那几个计数器 —— 面积紧张时这是白捡的。
@@ -104,10 +108,10 @@ module sd_card_sec_read_write #(
   // ---- 预取缓冲 ----
 
   reg  [31:0] pbuf_lba;
-  reg  [ 4:0] pbuf_n;  // 有效块数 0..NB_BLK-1
+  reg  [COUNT_W-1:0] pbuf_n;  // 有效块数 0..NB_BLK-1
   reg  [31:0] rd_cnt;  // 本批已收数据字节（不含令牌/CRC）
   reg  [ 9:0] hit_cnt;
-  reg  [12:0] hit_idx;  // 命中块在 pbuf 里的起始偏移
+  reg  [PBUF_AW-1:0] hit_idx;  // 命中块在 pbuf 里的起始偏移
   wire [ 7:0] hit_q;
   reg         hit_slow;
   reg  [ 1:0] hit_phase;
@@ -120,8 +124,18 @@ module sd_card_sec_read_write #(
   reg hit_qv;
   reg [5:0] c12w_cnt;
 
-  wire [31:0] blk_off = sd_sec_read_addr - pbuf_lba;
-  wire pbuf_hit = (pbuf_n != 5'd0) && (sd_sec_read_addr >= pbuf_lba) && (blk_off < {27'd0, pbuf_n});
+  // Capture cache lookup arithmetic when accepting the request. The next
+  // state consumes only registered offset/underflow and latched read mode.
+  // This adds one cycle per sector, not per byte. Keep the explicit unsigned
+  // underflow guard: subtraction alone would alias wrapped LBAs near 2^32.
+  reg [31:0] blk_off_q;
+  reg cache_ge_q, request_multi_q;
+  always @(posedge clk) if (state == S_WAIT_READ_WRITE && !sd_sec_write && sd_sec_read) begin
+    blk_off_q <= sd_sec_read_addr - pbuf_lba;
+    cache_ge_q <= sd_sec_read_addr >= pbuf_lba;
+    request_multi_q <= multi_en;
+  end
+  wire pbuf_hit = cache_ge_q && !(|blk_off_q[31:COUNT_W]) && (blk_off_q[COUNT_W-1:0] < pbuf_n);
   // [Design note 时序]原来写成 (rd_cnt < 32'd512)，综合器把它做成 32 位减法
   //   借位链：rd_cnt[12] 起的进位要走 12 级 ADDER 才出结果，而
   //   rd_client 又在 sd_sec_read_data_valid 的与项里，于是这一条 12 级链串在
@@ -131,6 +145,57 @@ module sd_card_sec_read_write #(
   //   改成 23 输入 NOR，折算成 2 级 LUT，省掉 10 级进位。
   //   逐位等价（不是近似）：32 位无符号数 x < 512 ⟺ x[31:9]==0。
   wire rd_client = ~(|rd_cnt[31:9]);
+
+  // Physical CMD18 ownership and logical512-byte client ownership are
+  // separate. After the first sector, serve only FULLY WRITTEN cache sectors
+  // while SPI continues. A miss (including audio) waits for physical stop.
+  localparam SF_IDLE=0,SF_CHECK=1,SF_READ=2,SF_END=3;
+  reg [1:0] sf_state;
+  reg sf_wait_low,sf_ge,sf_slow,sf_valid,first_end,first_returned;
+  reg [31:0] sf_offset;
+  reg [PBUF_AW-1:0] sf_base;
+  reg [9:0] sf_count;
+  reg [1:0] sf_phase;
+  wire sf_advance=!sf_slow || sf_phase==0;
+  wire sf_end=sf_state==SF_END;
+  wire [PBUF_AW-1:0] sf_ra=sf_base+sf_count[8:0];
+  wire sf_range=sf_ge && !(|sf_offset[31:COUNT_W]) && sf_offset[COUNT_W-1:0]<NB_BLK-1;
+  wire [COUNT_W:0] sf_sector_end={1'b0,sf_offset[COUNT_W-1:0]}+2;
+  wire sf_complete=rd_cnt[COUNT_W+9:9]>=sf_sector_end;
+  wire sf_idle=sf_state==SF_IDLE && !sf_valid;
+  always @(posedge clk or posedge rst)begin
+    if(rst)begin
+      sf_state<=SF_IDLE;sf_wait_low<=1;sf_ge<=0;sf_slow<=0;
+      sf_valid<=0;first_end<=0;first_returned<=0;
+      sf_offset<=0;sf_base<=0;sf_count<=0;sf_phase<=0;
+    end else begin
+      first_end<=0;
+      sf_valid<=sf_state==SF_READ && sf_count<512 && sf_advance;
+      if(sf_state==SF_READ)sf_phase<=sf_phase+1'b1;else sf_phase<=0;
+      if(!sd_sec_read)sf_wait_low<=0;
+      if(state==S_CMD18 && cmd_req_ack && !cmd_req_error)begin
+        sf_wait_low<=1;first_returned<=0;
+      end
+      if(state==S_READM && block_read_valid && rd_cnt==511)begin
+        first_end<=1;first_returned<=1;sf_wait_low<=1;
+      end
+      case(sf_state)
+        SF_IDLE:if(state==S_READM && first_returned && !sf_wait_low && sd_sec_read)begin
+          sf_offset<=sd_sec_read_addr-pbuf_lba;
+          sf_ge<=sd_sec_read_addr>=pbuf_lba;sf_slow<=multi_paced;
+          sf_state<=SF_CHECK;
+        end
+        SF_CHECK:begin
+          if(sf_range && sf_complete)begin
+            sf_base<={sf_offset[PBUF_AW-10:0],9'd0};sf_count<=0;sf_state<=SF_READ;
+          end else sf_state<=SF_IDLE;
+        end
+        SF_READ:if(sf_count==513)sf_state<=SF_END;
+                else if(sf_advance)sf_count<=sf_count+1'b1;
+        SF_END:begin sf_state<=SF_IDLE;sf_wait_low<=1;end
+      endcase
+    end
+  end
 
   // CMD18 期间告诉字节级模块要读 NB_BLK 块；其它时候 1 块（老行为）
   // [Design note D1]MULTI_ON=0 时该项恒假 ⇒ rd_nb_blk 恒为 1，寄存器与相关逻辑
@@ -161,9 +226,9 @@ module sd_card_sec_read_write #(
   // ====================================================================
   assign sd_sec_read_data_valid = ((state == S_READ) && block_read_valid)  // 旧单块路径
       || (MULTI_ON && (state == S_READM) && block_read_valid && rd_client) ||
-          (MULTI_ON && hit_qv);  // 预取命中
-  assign sd_sec_read_data = (MULTI_ON && hit_qv) ? hit_q : block_read_data;
-  assign sd_sec_read_end = (state == S_READ_END) || (state == S_MEND) ||
+          (MULTI_ON && hit_qv) || sf_valid;  // 预取命中
+  assign sd_sec_read_data = ((MULTI_ON && hit_qv) || sf_valid) ? hit_q : block_read_data;
+  assign sd_sec_read_end = (state == S_READ_END) || ((state == S_MEND) && !first_returned) || first_end || sf_end ||
       (MULTI_ON && (state == S_HIT_END));
   assign sd_sec_write_data_req = (state == S_WRITE) && block_write_data_rd;
   assign block_write_data = sd_sec_write_data;
@@ -174,14 +239,14 @@ module sd_card_sec_read_write #(
   //   读复用器、hit_idx/hit_cnt/rd_cnt 的扫描逻辑都会被综合器删掉，省 1 个 ERAM
   //   和一片 LUT。MULTI_ON=1 时行为与原来逐位相同。
   wire pbuf_we = MULTI_ON && state == S_READM && block_read_valid && !rd_client;
-  wire [12:0] pbuf_wa = rd_cnt[12:0] - 13'd512;
-  wire [12:0] pbuf_ra = hit_idx + {3'd0, hit_cnt[8:0]};
+  wire [PBUF_AW-1:0] pbuf_wa = rd_cnt[PBUF_AW-1:0] - PBUF_SKIP;
+  wire [PBUF_AW-1:0] pbuf_ra = (sf_state==SF_READ) ? sf_ra : hit_idx + {{(PBUF_AW-9){1'b0}}, hit_cnt[8:0]};
   generate
     if (PREFETCH_BRAM32) begin : g_prefetch32
       // Same byte-lane primitive used by the existing video FIFO. Two32K
       // blocks replace eight9K blocks; one synchronous read cycle unchanged.
       video_byte_ram #(
-        .AW(13)
+        .AW(PBUF_AW), .DEPTH_BYTES(NB_BLK*512), .HYBRID_TAIL_9K(NB_BLK==64)
       ) cache (
         .clk (clk),
         .we  (pbuf_we),
@@ -332,18 +397,20 @@ module sd_card_sec_read_write #(
           end else if (sd_sec_read == 1'b1) begin
             sec_addr <= sd_sec_read_addr;
             hit_slow <= multi_paced;
-            // Exact physical-LBA cache hits remain valid when the mapper
-            // disables NEW prefetch near a fragmented cluster boundary.
-            if (MULTI_ON && pbuf_hit) begin
-              // 命中预取缓冲：不发任何命令，直接吐 512 字节
-              hit_idx <= {blk_off[3:0], 9'd0};
-              hit_cnt <= 10'd0;
-              state   <= S_HIT;
-            end else if (MULTI_ON && multi_en) state <= S_CMD18;
-            else state <= S_CMD17;  // 旧路径：单块读，行为完全不变
+            state <= S_CACHE_CHECK;
           end
 
           spi_clk_div <= 16'd0;
+        end
+        S_CACHE_CHECK: begin
+          // A cached physical sector is valid even when new read-ahead is
+          // disabled at a fragmented-file or volume boundary.
+          if (MULTI_ON && pbuf_hit) begin
+            hit_idx <= {blk_off_q[PBUF_AW-10:0], 9'd0};
+            hit_cnt <= 10'd0;
+            state <= S_HIT;
+          end else if (MULTI_ON && request_multi_q) state <= S_CMD18;
+          else state <= S_CMD17;
         end
         // ============ CMD18 多块批读（仅视频顺序流）============
         S_CMD18: begin
@@ -351,6 +418,8 @@ module sd_card_sec_read_write #(
             state   <= S_READM;
             cmd_req <= 1'b0;
             rd_cnt  <= 32'd0;
+            pbuf_lba <= sec_addr+1;
+            pbuf_n <= 0;
           end else if (cmd_req_ack) begin
             // [Design note 死锁修复]命令出错：回 IDLE 重新开始，
             //   不能死等一个永远不来的"成功 ack"（原来就是这样整机卡死）
@@ -377,7 +446,7 @@ module sd_card_sec_read_write #(
             state          <= S_MEND;
             // 第 1 块已给客户端，第 2..NB_BLK 块在 pbuf[0..NB_BLK-2]
             pbuf_lba       <= sec_addr + 32'd1;
-            pbuf_n         <= NB_BLK[4:0] - 5'd1;
+            pbuf_n         <= NB_BLK - 1;
           end else block_read_req <= 1'b1;
         end
         S_CMD12: begin
@@ -405,8 +474,10 @@ module sd_card_sec_read_write #(
           else c12w_cnt <= c12w_cnt + 6'd1;
         end
         S_MEND: begin
-          // 这一拍 sd_sec_read_end 有效，仲裁器据此释放总线
-          state <= S_WAIT_READ_WRITE;
+          // Physical stop is complete. Never end an unrelated pending
+          // request, nor replace the cache port during a logical hit.
+          if(!first_returned || (sf_idle && !(sf_wait_low && sd_sec_read)))
+            state <= S_WAIT_READ_WRITE;
         end
         S_HIT: begin
           if (hit_cnt == 10'd513) begin

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "input": "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\original.VID",
+  "output": "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\EXPERIMENTAL_720P30.VID",
+  "fps": 30,
+  "frames": 3,
+  "duration_seconds": 0.1,
+  "original_payload": 357442,
+  "compressed_payload": 222098,
+  "mean_bytes_per_frame": 74032.66666666667,
+  "max_frame_bytes": 74435,
+  "mean_video_plus_pcm_bytes_s": 2316980.0,
+  "input_sha256": "5021989ff15cb48eb2ab275371bda375d009ad9063c491d90f4b98354da55e73",
+  "output_sha256": "cdfb51a375c8b95464290ee220ae13ebdc9e4e128b1a2b7cb8ef0445cdb01ac6",
+  "restored_tokens_sha256": "2f04d1aeb4386b558775e8641d5d0f2643d3dc088b5adea5bc0b4c4f84bde5d4",
+  "lengths_sha256": "ece82124b785f5e644722e9cf95c7d1226645a36b67fc272692eb86bfc6b080a",
+  "seconds": 0.8800549507141113,
+  "rows": [
+    {
+      "frame": 0,
+      "original": 119278,
+      "compressed": 74435
+    },
+    {
+      "frame": 1,
+      "original": 118984,
+      "compressed": 73567
+    },
+    {
+      "frame": 2,
+      "original": 119180,
+      "compressed": 74096
+    }
+  ],
+  "scope": "Exact original Codec12 token reconstruction, independent disk reread. No new spatial loss. Experimental H6D1 requires matching frozen-table RTL; not v183 compatible. No board qualification implied."
+}

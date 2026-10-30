@@ -58,6 +58,22 @@ for kind, wns, tns in [('Setup', 'SWNS', 'STNS'), ('Hold', 'HWNS', 'HTNS')]:
     assert abs(float(match[1]) * 1000 - metrics[kind + ' WNS']) < .01 and float(match[2]) == 0
 assert 'Confidence          : Routed' in t and 'Check Corner        : Both (Slow and Fast)' in t
 audit = audit_clock_scope(t, baseline['clock_audit']['clocks_mhz'])
+review_path = root / 'reports/coverage_review.json'
+if not audit['checks'].get('coverage_not_reduced') and review_path.exists():
+    # A smaller netlist changes the percentage denominator. Require a separate
+    # detailed, hashed baseline/candidate category audit; never lower the
+    # threshold silently or accept missing clocks on the strength of WNS.
+    review = json.loads(review_path.read_text())
+    assert review['passed'] and all(review['checks'].values())
+    assert review['source_sha256'] == syn['sources']
+    assert all(sha(Path(p)) == h for p, h in review['files_sha256'].items())
+    coverage = float(re.search(r'STA coverage\s*:\s*([\d.]+)%', t)[1])
+    assert coverage == review['candidate_coverage_percent']
+    audit['original_coverage_threshold_passed'] = audit['checks'].pop('coverage_not_reduced')
+    audit['checks']['coverage_scope_independently_reviewed'] = True
+    audit['coverage_review_sha256'] = sha(review_path)
+    audit['coverage_percent'] = coverage
+    audit['passed'] = all(audit['checks'].values())
 assert audit['passed'], audit
 assert all(sha(project / n) == h for n, h in syn['sources'].items())
 result = dict(passed=True, seed=args.seed, metrics_ps=metrics, clock_audit=audit,

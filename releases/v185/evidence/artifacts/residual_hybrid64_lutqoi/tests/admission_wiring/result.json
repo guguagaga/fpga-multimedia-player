@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "checks": {
+    "enabled": true,
+    "registered_defer": true,
+    "clock": true,
+    "reset": true,
+    "fifo_write_clock": true,
+    "fifo_write_used": true,
+    "behavior_768_cases": true
+  },
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\top_tf_hdmi_audio.v": "c2517c1d9bd6e8fdf9af37608c6aa2e1dfcc316d63a93f32f566100fcb45da58",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\sd_arbiter.v": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\admission_wiring\\tb.sv": "2f0a111f9bac02d39c4efa83f3411323db616320beec6978a554a61747179b65",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\admission_wiring\\policy.vh": "4a4415596fe656476d0428e0066d25b57ad9d8447af5895c92d0fb8e13700834"
+  },
+  "scope": "Actual top admission register across all32SDstates,4mode/start combinations and6reserve boundary values; async reset and exact arbiter/FIFO clock wiring. Complements full AV rather than substituting for it."
+}

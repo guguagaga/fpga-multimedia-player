@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "release": "v183-playlist-timing-pass-board-pending",
+  "release": "v185-720p30-board-test-20261030",
   "files": [
     {
       "project_path": "build/_flow_run.cmd",
@@ -75,8 +75,8 @@
     {
       "project_path": "rtl/av_sample_sync.v",
       "public_path": "rtl/video/av_sample_sync.v",
-      "sha256": "b7619ac937989419e6fb11617ea91274c17efa2e41593966e37c7f185b661c9a",
-      "bytes": 3097,
+      "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+      "bytes": 3581,
       "external": false
     },
     {
@@ -108,6 +108,27 @@
       "bytes": 10461
     },
     {
+      "project_path": "rtl/codec12_lossless_restore.v",
+      "public_path": "rtl/video/codec12_lossless_restore.v",
+      "external": false,
+      "bytes": 2277,
+      "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+    },
+    {
+      "project_path": "rtl/codec_byte_queue.v",
+      "public_path": "rtl/video/codec_byte_queue.v",
+      "external": false,
+      "bytes": 1462,
+      "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+    },
+    {
+      "project_path": "rtl/context_huffman_decoder.v",
+      "public_path": "rtl/video/context_huffman_decoder.v",
+      "external": false,
+      "bytes": 4530,
+      "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+    },
+    {
       "project_path": "rtl/div_u32.v",
       "public_path": "rtl/control/div_u32.v",
       "sha256": "9c80ab39749dfb0c2e7644a1d9622b9699f0fe9a68d00c5a7a61f257875a0879",
@@ -132,8 +153,8 @@
       "project_path": "rtl/fat32_sector_mapper.v",
       "public_path": "rtl/storage/fat32_sector_mapper.v",
       "external": false,
-      "sha256": "ca77fa0c0284b29158187a3495acccaba686a490b7772df129ee19e1df0221e3",
-      "bytes": 13833
+      "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+      "bytes": 16949
     },
     {
       "project_path": "rtl/gradient_block_experimental.v",
@@ -173,8 +194,8 @@
     {
       "project_path": "rtl/osd_player_ui.v",
       "public_path": "rtl/display/osd_player_ui.v",
-      "sha256": "cd2ee1d9bf5ec17c24737553700dab1dd813c28ebc13870f43ab237bf535c477",
-      "bytes": 47508,
+      "sha256": "77913578f460ad6f872ac58968d504a7f7fec009312c9b2c36c9ce65af5b4af9",
+      "bytes": 48589,
       "external": false
     },
     {
@@ -197,6 +218,27 @@
       "sha256": "995d10e1c15a814b083ac10159a58bdabd6130e6a9e0637d6b8b0bde8dacc690",
       "bytes": 3240,
       "external": false
+    },
+    {
+      "project_path": "rtl/residual_metadata.mem",
+      "public_path": "rtl/video/residual_metadata.mem",
+      "external": false,
+      "bytes": 2816,
+      "sha256": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e"
+    },
+    {
+      "project_path": "rtl/residual_symbols.mem",
+      "public_path": "rtl/video/residual_symbols.mem",
+      "external": false,
+      "bytes": 8192,
+      "sha256": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9"
+    },
+    {
+      "project_path": "rtl/residual_tree.mem",
+      "public_path": "rtl/video/residual_tree.mem",
+      "external": false,
+      "bytes": 14336,
+      "sha256": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
     },
     {
       "project_path": "rtl/rgb565_pair_pack.v",
@@ -223,8 +265,8 @@
       "project_path": "rtl/video_byte_ram.v",
       "public_path": "rtl/video/video_byte_ram.v",
       "external": false,
-      "sha256": "daa1165d9fd517e8d2f549b6148da59e49a88e89c3d9be99cce726c0df8abff2",
-      "bytes": 2183
+      "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+      "bytes": 3513
     },
     {
       "project_path": "rtl/video_catalog.v",
@@ -257,8 +299,8 @@
     {
       "project_path": "rtl/video_player.v",
       "public_path": "rtl/video/video_player.v",
-      "sha256": "abdad718a7a159b28a251c22c92c2baff4583e6f8bdf12ffa7788120360426b4",
-      "bytes": 43929,
+      "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+      "bytes": 49364,
       "external": false
     },
     {
@@ -292,8 +334,8 @@
     {
       "project_path": "td_project/HDMI1.4b_Transmitter_v1.0.al",
       "public_path": "project_template/td_project/HDMI1.4b_Transmitter_v1.0.al",
-      "sha256": "9302321108f00afe7a1bb88a6f99eb0f74f241b82e1273926595272e7105e02f",
-      "bytes": 39634,
+      "sha256": "28fc45c0a4813f03240e886868e069c1f346d80f73d87f920bb48aab708e0c79",
+      "bytes": 40744,
       "external": false
     },
     {
@@ -320,8 +362,8 @@
     {
       "project_path": "user_source/hdl_source/anlogic_logo.mem",
       "public_path": null,
-      "sha256": "ef53f42d7e6600fcc32a3a4a19f6021d41914b0a7d21c86282f24a1822cc72ae",
-      "bytes": 5182,
+      "sha256": "706a539b487f46f7d117a98a49eca0a6a5afab126117fe2a0bb3fd4d49ff32de",
+      "bytes": 6272,
       "external": true
     },
     {
@@ -383,8 +425,8 @@
     {
       "project_path": "user_source/hdl_source/compressed_audio_reader.v",
       "public_path": "rtl/audio/compressed_audio_reader.v",
-      "sha256": "d3ec4623ea9c11495fff4030103d64a61f6ada77767527b053ee6d3127242ab6",
-      "bytes": 12200,
+      "sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+      "bytes": 12643,
       "external": false
     },
     {
@@ -460,8 +502,8 @@
     {
       "project_path": "user_source/hdl_source/i2s_transmitter.v",
       "public_path": "rtl/audio/i2s_transmitter.v",
-      "sha256": "c70740ea27bbb9e4ba2f80ddcb03e261e3a810082b325a5dbd447545876b62f8",
-      "bytes": 18218,
+      "sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+      "bytes": 19861,
       "external": false
     },
     {
@@ -593,22 +635,22 @@
     {
       "project_path": "user_source/hdl_source/media_player.v",
       "public_path": "rtl/audio/media_player.v",
-      "sha256": "2875f38ec047979acb2b1dc1a2d68eaf56f8ffedd20e31cec83a7ad6271ce1e2",
-      "bytes": 4383,
+      "sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+      "bytes": 4439,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/media_player_shim.v",
       "public_path": "rtl/audio/media_player_shim.v",
-      "sha256": "ea386e58ef348f9ea26443438107266d88e8493e2ac9a255396b740b0da43ca4",
-      "bytes": 4018,
+      "sha256": "ee63db2d9b502a53685ecde7e18e9b08fa0e4221bc54f17ccb78841358d57899",
+      "bytes": 4188,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/osd_brand_rom.v",
       "public_path": "rtl/display/osd_brand_rom.v",
-      "sha256": "a47c288c079726ac6e9e836a8cfcea2ab8d98d394be4f426779a269fbc7c3798",
-      "bytes": 1992,
+      "sha256": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+      "bytes": 2009,
       "external": false
     },
     {
@@ -628,8 +670,8 @@
     {
       "project_path": "user_source/hdl_source/qoi_stream.v",
       "public_path": "rtl/image/qoi_stream.v",
-      "sha256": "24e0fa2dd27d2bac1db940a72a04f742c4c18bba8cda092db74289e11ad3550a",
-      "bytes": 8651,
+      "sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+      "bytes": 9675,
       "external": false
     },
     {
@@ -649,8 +691,8 @@
     {
       "project_path": "user_source/hdl_source/SD/bmp_read.v",
       "public_path": "rtl/image/bmp_read.v",
-      "sha256": "bf42f60b95841a92d7f94dffdfd4d43bdbd71b6e0218a05a005654ad85b77fde",
-      "bytes": 47417,
+      "sha256": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4",
+      "bytes": 48565,
       "external": false
     },
     {
@@ -663,8 +705,8 @@
     {
       "project_path": "user_source/hdl_source/SD/frame_fifo_read.v",
       "public_path": "rtl/memory/frame_fifo_read.v",
-      "sha256": "477e3d6b60936f9e3beb1c36563a8d7c3496969a972ed0d7c6a918e25727e96c",
-      "bytes": 10063,
+      "sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781",
+      "bytes": 10749,
       "external": false
     },
     {
@@ -677,8 +719,8 @@
     {
       "project_path": "user_source/hdl_source/SD/frame_read_write.v",
       "public_path": "rtl/memory/frame_read_write.v",
-      "sha256": "b4b0853b58b77debe1d210271fb506aa934c441e84645a8164e87fd2306c77fb",
-      "bytes": 10420,
+      "sha256": "2b07e7fd5cddd148824172c6c99eccaef116b4f930eddceb2f35bbcc92bcf31b",
+      "bytes": 10775,
       "external": false
     },
     {
@@ -698,15 +740,15 @@
     {
       "project_path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
       "public_path": "rtl/storage/sd_card_sec_read_write.v",
-      "sha256": "c30be71620ce5625dcefbd2d8a634e076759d03e437f92f5478f8f5073f884b2",
-      "bytes": 20215,
+      "sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+      "bytes": 24060,
       "external": false
     },
     {
       "project_path": "user_source/hdl_source/SD/sd_card_top.v",
       "public_path": "rtl/storage/sd_card_top.v",
-      "sha256": "8e1925545a976c13fd652c09f982331627928633c4b0ede1b6e289e5d4d62f27",
-      "bytes": 8600,
+      "sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+      "bytes": 8683,
       "external": false
     },
     {
@@ -775,8 +817,8 @@
     {
       "project_path": "user_source/hdl_source/sd_arbiter.v",
       "public_path": "rtl/storage/sd_arbiter.v",
-      "sha256": "fae6a21f747360c13c9d3e98afbdd125a437a0e6347eda007a70b204158f9974",
-      "bytes": 12387,
+      "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+      "bytes": 13598,
       "external": false
     },
     {
@@ -817,8 +859,8 @@
     {
       "project_path": "user_source/hdl_source/top_tf_hdmi_audio.v",
       "public_path": "rtl/top/top_tf_hdmi_audio.v",
-      "sha256": "4ea9a835b3b3a44535c63ea9eb8911b7cd90d413aa6aaf43eaaca0d5a1a0355b",
-      "bytes": 215824,
+      "sha256": "c2517c1d9bd6e8fdf9af37608c6aa2e1dfcc316d63a93f32f566100fcb45da58",
+      "bytes": 217793,
       "external": false
     },
     {
@@ -871,5 +913,5 @@
       "external": false
     }
   ],
-  "scope": "Feature branch candidate; v182 remains the board-confirmed stable tag. Vendor IP imported by exact hash."
+  "scope": "Exact v185 candidate mapping. Vendor IP imported locally by hash. Board acceptance pending."
 }

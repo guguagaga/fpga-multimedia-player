@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\fat64_cold\\tb.v": "8833213e68cd487e7081225e26aae2035d3a7ae1e8e90820928403155f5a8642",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\fat32_sector_mapper.v": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_sec_read_write.v": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_byte_ram.v": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+  },
+  "scope": "Original98requestfragment/volume test plus3coldboots with additional9requests; unchanged3CMD18/3CMD17minimum; exactbytes and64sectorboundary guard."
+}

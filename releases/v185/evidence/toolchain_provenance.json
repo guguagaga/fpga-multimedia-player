@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/YosysHQ/oss-cad-suite-build",
+  "tag": "2026-10-29",
+  "published_at": "2026-10-29T07:00:36Z",
+  "asset": "oss-cad-suite-windows-x64-20261029.tgz",
+  "size": 603500650,
+  "digest": "sha256:48812b87b01ed5fa4104430726037b1f6a322c0f1183fe85a7c5354ebaf72e0b",
+  "url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-29/oss-cad-suite-windows-x64-20261029.tgz",
+  "retrieved": "2026-10-30T15:08:04.0258826+08:00"
+}

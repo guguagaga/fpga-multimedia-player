@@ -1,4 +1,4 @@
-module media_player_shim (
+module media_player_shim #(parameter ENABLE_QOA = 1) (
   input  wire        clk,
   input  wire        rst,
   input  wire        scan_start,
@@ -50,6 +50,7 @@ module media_player_shim (
   // 内部 media_player 的观测输出（只连 dbg_state 的有效 3 位）
   wire [3:0] core_dbg_state;
   media_player #(
+    .ENABLE_QOA(ENABLE_QOA),
     .LOOP_ON_EOF(1'b0)
   ) u_core (
     .clk(clk),

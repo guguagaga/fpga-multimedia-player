@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "log": "LOGO_EQUIVALENCE_PASS addresses=2048\nD:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\tb.v:13: $finish called at 20486000 (1ps)\n",
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\tb.v": "57d81492a0d17eb5d9538eed47d9d6797acd1513237762c4f818946f4f9fd1b8",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\reference.v": "c2e2c54d6add497cb7e630f6166c1a164d968f2bfa6ef7c0bdd86f037a47d2da",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\candidate\\project\\user_source\\hdl_source\\osd_brand_rom.v": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\old_logo.mem": "ef53f42d7e6600fcc32a3a4a19f6021d41914b0a7d21c86282f24a1822cc72ae",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\anlogic_logo.mem": "706a539b487f46f7d117a98a49eca0a6a5afab126117fe2a0bb3fd4d49ff32de",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\cjk_brand_16x16.mem": "c05360036a15b28b90a8b4c9bde68ff27f8c4a13e0a3d8e062186f9a3eacffc8"
+  },
+  "scope": "All2048logo addresses including original out-of-range clamp,valid CJK range;exact synchronous output equivalence with no extra latency."
+}
