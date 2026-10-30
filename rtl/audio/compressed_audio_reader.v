@@ -4,7 +4,7 @@
 // -----------------------------------------------------------------------------
 // Autodetect QOA / shared PCM and IMA WAV decoding. Format is selected
 // by file bytes. Compressed seek discards decoded samples; past EOF restarts.
-module compressed_audio_reader (
+module compressed_audio_reader #(parameter ENABLE_QOA = 1) (
   input wire clk, rst, start, halt, pause, seek, fifo_drained,
   input wire [31:0] sector,
   output wire [31:0] file_base_lba,
@@ -106,6 +106,7 @@ module compressed_audio_reader (
     .busy       (source_busy),
     .error      (source_error)
   );
+  generate if (ENABLE_QOA) begin : g_qoa
   qoa_stream q (
     .clk          (clk),
     .rst          (rst),
@@ -123,6 +124,10 @@ module compressed_audio_reader (
     .stereo       (q_stereo),
     .total_samples(q_total)
   );
+  end else begin : g_no_qoa
+    assign q_ir=0, q_sv=0, q_done=0, q_error=1, q_ready=0, q_stereo=0;
+    assign ql=0, qr=0, q_total=0;
+  end endgenerate
   ima_stream i (
     .clk          (clk),
     .rst          (rst),
@@ -229,8 +234,13 @@ module compressed_audio_reader (
             probe_pos   <= probe_pos + 1'b1;
             probe_magic <= {probe_magic[23:0], byte_data};
             if (probe_pos == 3) begin
-              kind  <= ({probe_magic[23:0], byte_data} == 32'h716f6166) ? 1 : 2;
-              state <= STOP_PROBE;
+              if (!ENABLE_QOA && {probe_magic[23:0], byte_data} == 32'h716f6166) begin
+                state <= BAD;
+                track_bad <= 1;
+              end else begin
+                kind <= (ENABLE_QOA && {probe_magic[23:0], byte_data} == 32'h716f6166) ? 1 : 2;
+                state <= STOP_PROBE;
+              end
             end
           end
           STOP_PROBE:

@@ -2,7 +2,9 @@
     [ValidateSet('All','Synthesis','Physical')][string]$Stage='All',
     [int]$Seed=12,
     [string]$TdCommand=$env:CODEC9_TD_CMD,
-    [string]$Python='python'
+    [string]$Python='python',
+    [double]$SdSetupMargin=-1,
+    [double]$VideoSetupMargin=-1
 )
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path $PSScriptRoot -Parent
@@ -82,12 +84,22 @@ if ($Stage -in @('All','Physical')) {
     $flow=Get-Content -LiteralPath "$projectRoot\build\phy_stage_flow.tcl" -Raw
     if (-not $flow.Contains('set_param place effort high')) { throw 'Unexpected physical flow script' }
     $flow=$flow.Replace('set_param place effort high',"set_param place effort high`n  set_param flow enable_seed on`n  set_param place seed $Seed")
+    # Optimization-only margins never replace the original signoff SDC.
+    if ($SdSetupMargin -ge 0 -or $VideoSetupMargin -ge 0) {
+        if ($SdSetupMargin -lt 0 -or $VideoSetupMargin -lt 0) { throw 'Specify both optimization margins' }
+        $marginPath=Join-Path $reportDir 'optimization_margin.sdc'
+        $culture=[System.Globalization.CultureInfo]::InvariantCulture
+        $marginText='set_clock_uncertainty -setup '+$SdSetupMargin.ToString($culture)+' [get_clocks {sd_card_clk}]'+"`n"+
+            'set_clock_uncertainty -setup '+$VideoSetupMargin.ToString($culture)+' [get_clocks {video_clk}]'+"`n"
+        [System.IO.File]::WriteAllText($marginPath,$marginText,[System.Text.UTF8Encoding]::new($false))
+        $flow=$flow.Replace('read_sdc ../../../build/optimization_margin.sdc','read_sdc {'+$marginPath.Replace('\','/')+'}')
+    }
     $flowPath=Join-Path $reportDir 'physical_flow.tcl'
     # Windows PowerShell 5.1 adds a BOM with -Encoding utf8; TD's Tcl
     # interpreter treats those bytes as part of the first command.
     [System.IO.File]::WriteAllText($flowPath,$flow,[System.Text.UTF8Encoding]::new($false))
     $started=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
-    @{seed=$Seed;started_unix=$started;run_dir=$runDir;synthesis=$syn} |
+    @{seed=$Seed;started_unix=$started;run_dir=$runDir;synthesis=$syn;sd_setup_margin=$SdSetupMargin;video_setup_margin=$VideoSetupMargin} |
         ConvertTo-Json -Depth 6 | Set-Content -LiteralPath "$reportDir\run.json" -Encoding utf8
     Copy-Item -LiteralPath $flowPath -Destination "$runDir\local_flow.tcl" -Force
     & cmd.exe /d /c "`"$projectRoot\build\_flow_run.cmd`" `"$runDir`" `"local_flow.tcl`" `"$TdCommand`""

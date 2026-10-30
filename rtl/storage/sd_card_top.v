@@ -1,6 +1,7 @@
 
 module sd_card_top #(
   parameter PREFETCH_BRAM32 = 0,
+  parameter integer PREFETCH_BLOCKS = 16,
   parameter SPI_LOW_SPEED_DIV =
         248,  // SD card low speed mode frequency division parameter,spi clk speed = clk speed /((SPI_LOW_SPEED_DIV + 2) * 2 )
   // [Design note 对照 bit-3 / probeSlowSPI]SPI_HIGH_SPEED_DIV 由 0 改成 2。
@@ -79,6 +80,7 @@ module sd_card_top #(
   wire [15:0] clk_div;
   sd_card_sec_read_write #(
     .PREFETCH_BRAM32(PREFETCH_BRAM32),
+    .PREFETCH_BLOCKS(PREFETCH_BLOCKS),
     .SPI_LOW_SPEED_DIV(SPI_LOW_SPEED_DIV),
     .SPI_HIGH_SPEED_DIV(SPI_HIGH_SPEED_DIV)
   ) sd_card_sec_read_write_m0 (

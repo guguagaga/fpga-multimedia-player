@@ -1,0 +1,67 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:06:22 on Oct 30,2026
+# vlog D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/qoi_stream.v D:/TD3/sim_release/eg4/eg_logic_dram.v 
+# -- Compiling module qoi_stream
+# -- Compiling module EG_LOGIC_DRAM
+# 
+# Top level modules:
+# 	qoi_stream
+# End time: 18:06:22 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:06:23 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_bmp.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/bmp_read.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/img_scaler.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb
+# -- Compiling module sd_card_bmp
+# -- Compiling module key_press_debounce
+# -- Compiling module bmp_read
+# -- Compiling module img_scaler
+# -- Compiling module image_expand_5_4
+# -- Compiling module image_fit_720p
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb
+# 	img_scaler
+# 	image_expand_5_4
+# 	EG_PHY_BRAM32K
+# 	glbl
+# End time: 18:06:23 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl "+W=320" "+H=240" "+KIND=1" 
+# Start time: 18:06:23 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.sd_card_bmp
+# Loading work.image_fit_720p
+# Loading work.key_press_debounce
+# Loading work.bmp_read
+# Loading work.qoi_stream
+# Loading work.glbl
+# Loading work.EG_LOGIC_DRAM
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 52, found 39.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/dut File: D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v Line: 7
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'scan_sector'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'found_count_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'scan_done_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'auto_mode_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'cfg_boundary_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'auto_on_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'write_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'disp_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'fade_req_toggle'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'firstimg_fallback_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'firstimg_diag_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'source_top_down'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(7): [TFMPC] - Missing connection for port 'file_base_lba'.
+# PASS IMAGE CHAIN kind=          1         320x        240 fit=        960x        720 pixels=     921600 sectors=        602 faststep=          1
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/tests/image_integration/tb.v(78)
+#    Time: 33105479 ns  Iteration: 1  Instance: /tb
+# End time: 18:07:55 on Oct 30,2026, Elapsed time: 0:01:32
+# Errors: 0, Warnings: 14

@@ -1,0 +1,53 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:12:25 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/sd_spi_model.sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/sd_arbiter.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_top.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_cmd.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_sec_read_write.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/spi_master.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/spi_sniffer.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb_sd_speed
+# -- Compiling module tb_sd_cmd_tail
+# -- Compiling module sd_spi_model
+# -- Compiling module sd_arbiter
+# -- Compiling module sd_card_top
+# -- Compiling module sd_card_cmd
+# -- Compiling module sd_card_sec_read_write
+# -- Compiling module spi_master
+# -- Compiling module spi_sniffer
+# -- Compiling module video_byte_ram
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb_sd_speed
+# 	tb_sd_cmd_tail
+# 	glbl
+# End time: 18:12:25 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb_sd_cmd_tail work.glbl 
+# Start time: 18:12:26 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb_sd_cmd_tail
+# Loading work.sd_card_cmd
+# Loading work.spi_master
+# Loading work.sd_spi_model
+# Loading work.glbl
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'ctl'.  Expected 25, found 23.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sd_cmd_tail/ctl File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v Line: 109
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v(109): [TFMPC] - Missing connection for port 'block_write_data_rd'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v(109): [TFMPC] - Missing connection for port 'block_write_req_ack'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'spi'.  Expected 15, found 14.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sd_cmd_tail/spi File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v Line: 112
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v(112): [TFMPC] - Missing connection for port 'nCS'.
+# PASS command CMD17 blocks=1 exact bytes=512 stop_commands=0
+# PASS command CMD18 blocks=1 exact bytes=512 stop_commands=1
+# PASS command CMD17 blocks=1 exact bytes=512 stop_commands=0
+# PASS command CMD18 blocks=16 exact bytes=8192 stop_commands=1
+# PASS command CMD18 blocks=64 exact bytes=32768 stop_commands=1
+# PASS command CMD17 blocks=1 exact bytes=512 stop_commands=0
+# PASS command-tail regression legacy=0
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v(133)
+#    Time: 17169548 ns  Iteration: 1  Instance: /tb_sd_cmd_tail
+# End time: 18:12:31 on Oct 30,2026, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 5

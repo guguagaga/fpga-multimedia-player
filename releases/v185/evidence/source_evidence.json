@@ -1,0 +1,653 @@
+{
+  "passed": true,
+  "candidate": "residual_hybrid64_lutqoi",
+  "results": [
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\qoi_lut_index\\result.json",
+      "test_sha256": "8d3f7f2205c7f5be791b4b507681e9a0c67da65166d94e430c917fdd72564d26",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/qoi_stream.v",
+          "test_sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+          "candidate_sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+          "same": true
+        }
+      ],
+      "scope": "Three starts without reset, all6QOIopcodes,stalls,exact49152RGBpixels to independent software expected; cycle-for-cycle controls against vendor32Kreference."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\image_integration\\result.json",
+      "test_sha256": "365a7b1a1f03384d26d39e93e2aed273d052aa16ebf730ceda97dd878687b64f",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/SD/sd_card_bmp.v",
+          "test_sha256": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+          "candidate_sha256": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/bmp_read.v",
+          "test_sha256": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4",
+          "candidate_sha256": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4",
+          "same": true
+        },
+        {
+          "path": "rtl/img_scaler.v",
+          "test_sha256": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
+          "candidate_sha256": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/qoi_stream.v",
+          "test_sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+          "candidate_sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+          "same": true
+        }
+      ],
+      "scope": "ActualBMPreader->QOI distributedindex->imagefit->write handshake;320x240QOI scaled to960x720 with borders;921600RGB output check and stalls."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\ram_differential\\result.json",
+      "test_sha256": "7f36038738daadb9adf6ba88eaa7267c1408ddf110a319ea051dacfcda8112db",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        }
+      ],
+      "scope": "All32768initialized bytes,100000random operations,bankboundary,byte neighbor,sameaddress forwarding,and read-enable hold; actual vendor primitive reference plus independent byte scoreboard."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\result.json",
+      "test_sha256": "92c01515cb939e5f9029d57c4e783ea217cc4a902b5b42ffc1f5aa10e0123418",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        }
+      ],
+      "scope": "Vendor reference/default-depth byteRAM exhaustive address andrandomized concurrent/hold operations AW10,12,13,14,15. Newhybrid parameter defaults0; hybrid64 mode separately differential tested."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\fat64_cold\\result.json",
+      "test_sha256": "be90c48b339909a2e39495717127724fd3d54e50759f579cf1b5a49223ce0123",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/fat32_sector_mapper.v",
+          "test_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "candidate_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+          "test_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "candidate_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "same": true
+        },
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        }
+      ],
+      "scope": "Original98requestfragment/volume test plus3coldboots with additional9requests; unchanged3CMD18/3CMD17minimum; exactbytes and64sectorboundary guard."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\result.json",
+      "test_sha256": "a1123ba4772de585dad985d23bdfbfe0346d6997b03a4b9cdfb510ab43de2a2f",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        }
+      ],
+      "scope": "Actual1.4M timeout boundary; defaultlegacy comparison; low-reserve release,ownership cancellation,reset; top wiring separately verified."
+    },
+    {
+      "test": "residual_hybrid64_lutqoi\\tests\\admission_wiring\\result.json",
+      "test_sha256": "f7936c738375fd19979bf274eb9dc42cb39432ca2be19d19693b4f9db7ec44ca",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/top_tf_hdmi_audio.v",
+          "test_sha256": "c2517c1d9bd6e8fdf9af37608c6aa2e1dfcc316d63a93f32f566100fcb45da58",
+          "candidate_sha256": "c2517c1d9bd6e8fdf9af37608c6aa2e1dfcc316d63a93f32f566100fcb45da58",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        }
+      ],
+      "scope": "Actual top admission register across all32SDstates,4mode/start combinations and6reserve boundary values; async reset and exact arbiter/FIFO clock wiring. Complements full AV rather than substituting for it."
+    },
+    {
+      "test": "residual_tree\\tests\\frontend_corpus72\\result.json",
+      "test_sha256": "a9cfe24a23c70afd4a8c8e790041aee5bce134cc7f2f2e6c6efb94ce5996b051",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/context_huffman_decoder.v",
+          "test_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "candidate_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "same": true
+        },
+        {
+          "path": "rtl/codec12_lossless_restore.v",
+          "test_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "candidate_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "same": true
+        },
+        {
+          "path": "rtl/residual_metadata.mem",
+          "test_sha256": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+          "candidate_sha256": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+          "same": true
+        },
+        {
+          "path": "rtl/residual_symbols.mem",
+          "test_sha256": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+          "candidate_sha256": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+          "same": true
+        },
+        {
+          "path": "rtl/residual_tree.mem",
+          "test_sha256": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050",
+          "candidate_sha256": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050",
+          "same": true
+        }
+      ],
+      "scope": "72 held-out original token frames restored by RTL, exact bytes. Not throughput or board qualification."
+    },
+    {
+      "test": "residual_pcmima\\tests\\audio_profiles\\result.json",
+      "test_sha256": "2bce52a6935ffb7fe6da94baaebe95d0054752d90b796ef2099d0aaf79777f56",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/media_player.v",
+          "test_sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+          "candidate_sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/compressed_audio_reader.v",
+          "test_sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+          "candidate_sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/sector_byte_source.v",
+          "test_sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+          "candidate_sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/qoa_stream.v",
+          "test_sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+          "candidate_sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/ima_stream.v",
+          "test_sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+          "candidate_sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+          "same": true
+        }
+      ],
+      "scope": "Default QOA/IMA/PCM exact playback and repeated switches; optional PCM/IMA-only profile exact playback and repeated switches; disabled QOA rejects and next valid track recovers. Mono and stereo. Transaction-level SD model, not full AV or board."
+    },
+    {
+      "test": "residual_audiohold\\tests\\i2s30\\result.json",
+      "test_sha256": "8618a3ea88ba9c0789aebbe97ee60b799408fb3c67355409f2e0110037a14f99",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/av_sample_sync.v",
+          "test_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "candidate_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/wav_sample_builder.v",
+          "test_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "candidate_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/i2s_transmitter.v",
+          "test_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "candidate_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "same": true
+        }
+      ],
+      "scope": "48000 exact ordered source sample pairs each case, with explicitly bounded duplicate complete pairs for AV-budget gaps. No source sample loss,nominal and board-ratio no inserted zero;delayed-frame negative control retains silence after bounded hold. Ideal byte FIFO,not complete SD/HDMI."
+    },
+    {
+      "test": "residual_audiohold\\tests\\i2s_phase_sweep\\result.json",
+      "test_sha256": "9448c3255f1dcd2f799b087fdb97806f321d8029cb7871e2efa7d8cd83357729",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/av_sample_sync.v",
+          "test_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "candidate_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/wav_sample_builder.v",
+          "test_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "candidate_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/i2s_transmitter.v",
+          "test_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "candidate_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "same": true
+        }
+      ],
+      "scope": "16 frame-grant phases across the256audio-clock I2S frame;3200source pairs each,board-ratio timing;zero insertion forbidden,at most2complete-pair holds per source ACK."
+    },
+    {
+      "test": "residual_audiohold\\tests\\i2s_phase_sweep_409837\\result.json",
+      "test_sha256": "8e843cbc5838ec53c4a2c96152e97885bc6f91de25b1b89470a4d6d1479bee74",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/av_sample_sync.v",
+          "test_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "candidate_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/wav_sample_builder.v",
+          "test_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "candidate_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/i2s_transmitter.v",
+          "test_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "candidate_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "same": true
+        }
+      ],
+      "scope": "16 frame-grant phases across the256audio-clock I2S frame;3200source pairs each,board-ratio timing;zero insertion forbidden,at most2complete-pair holds per source ACK."
+    },
+    {
+      "test": "residual_audiohold\\tests\\hold_controls\\result.json",
+      "test_sha256": "5f2879aec626a635123420554bfeb92b4b835a17d26ead1907391cd56e120a44",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/i2s_transmitter.v",
+          "test_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "candidate_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+          "same": true
+        }
+      ],
+      "scope": "Actual I2S publication boundaries, distinctL/R pairs,maximum two holds,startup,mute,flush,ordinary starvation,recovery."
+    },
+    {
+      "test": "residual_logopad\\tests\\logo_equivalence\\result.json",
+      "test_sha256": "07f7048f49f655d13f01d121c1c4e3cff44dfb8cea179c876db7fe5b7958afdb",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/osd_brand_rom.v",
+          "test_sha256": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+          "candidate_sha256": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+          "same": true
+        }
+      ],
+      "scope": "All2048logo addresses including original out-of-range clamp,valid CJK range;exact synchronous output equivalence with no extra latency."
+    },
+    {
+      "test": "portable_verification_hybrid64_lutqoi\\runs\\spi_20261030_180719\\result.json",
+      "test_sha256": "22f5902b88682115accb4171f42f4eb558d4dbfe82b592dc3eed4cc124104c87",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_top.v",
+          "test_sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+          "candidate_sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_cmd.v",
+          "test_sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+          "candidate_sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+          "test_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "candidate_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/spi_master.v",
+          "test_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+          "candidate_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/spi_sniffer.v",
+          "test_sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+          "candidate_sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+          "same": true
+        },
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        }
+      ],
+      "scope": "Frozen portable case with current candidate source hashes."
+    },
+    {
+      "test": "portable_verification_hybrid64_lutqoi\\runs\\spi_tail_20261030_181224\\result.json",
+      "test_sha256": "f86be1affcede577fe0f98cb12c750ef77f002779c5393cbefb4a4c0905a45f3",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_top.v",
+          "test_sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+          "candidate_sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_cmd.v",
+          "test_sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+          "candidate_sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+          "test_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "candidate_sha256": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/spi_master.v",
+          "test_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+          "candidate_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/spi_sniffer.v",
+          "test_sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+          "candidate_sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+          "same": true
+        },
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        }
+      ],
+      "scope": "Frozen portable case with current candidate source hashes."
+    },
+    {
+      "test": "portable_verification_hybrid64_lutqoi\\runs\\scanout_20261030_181538\\result.json",
+      "test_sha256": "3af8a8f45a540d905b0d29f5bed4c67be8f57d46ca9eb20a9c9c11354e5e242b",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/video_playlist_ctrl.v",
+          "test_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+          "candidate_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+          "same": true
+        },
+        {
+          "path": "rtl/video_eof_guard.v",
+          "test_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+          "candidate_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+          "same": true
+        },
+        {
+          "path": "rtl/av_sample_sync.v",
+          "test_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "candidate_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "same": true
+        },
+        {
+          "path": "rtl/video_player.v",
+          "test_sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+          "candidate_sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+          "same": true
+        },
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        },
+        {
+          "path": "rtl/video_codec8_raster.v",
+          "test_sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+          "candidate_sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+          "same": true
+        },
+        {
+          "path": "rtl/codec12_block_decoder_experimental.v",
+          "test_sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+          "candidate_sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+          "same": true
+        },
+        {
+          "path": "rtl/gradient_block_experimental.v",
+          "test_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+          "candidate_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+          "same": true
+        },
+        {
+          "path": "rtl/fat32_sector_mapper.v",
+          "test_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "candidate_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "same": true
+        },
+        {
+          "path": "rtl/rgb565_pair_pack.v",
+          "test_sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+          "candidate_sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+          "same": true
+        },
+        {
+          "path": "rtl/context_huffman_decoder.v",
+          "test_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "candidate_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "same": true
+        },
+        {
+          "path": "rtl/codec12_lossless_restore.v",
+          "test_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "candidate_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "same": true
+        },
+        {
+          "path": "rtl/codec_byte_queue.v",
+          "test_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+          "candidate_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+          "test_sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+          "candidate_sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/frame_fifo_read.v",
+          "test_sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781",
+          "candidate_sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781",
+          "same": true
+        }
+      ],
+      "scope": "Frozen portable case with current candidate source hashes."
+    },
+    {
+      "test": "portable_verification_hybrid64_lutqoi\\runs\\long_control_20261030_181545\\result.json",
+      "test_sha256": "fef14eb3c0a230ad18df3d58a672b679559a574da2d4c638e73beb51d96a0062",
+      "test_passed": true,
+      "source_matches": true,
+      "modules": [
+        {
+          "path": "rtl/video_playlist_ctrl.v",
+          "test_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+          "candidate_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+          "same": true
+        },
+        {
+          "path": "rtl/video_eof_guard.v",
+          "test_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+          "candidate_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+          "same": true
+        },
+        {
+          "path": "rtl/av_sample_sync.v",
+          "test_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "candidate_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+          "same": true
+        },
+        {
+          "path": "rtl/video_player.v",
+          "test_sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+          "candidate_sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+          "same": true
+        },
+        {
+          "path": "rtl/video_byte_ram.v",
+          "test_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "candidate_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+          "same": true
+        },
+        {
+          "path": "rtl/video_codec8_raster.v",
+          "test_sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+          "candidate_sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+          "same": true
+        },
+        {
+          "path": "rtl/codec12_block_decoder_experimental.v",
+          "test_sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+          "candidate_sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+          "same": true
+        },
+        {
+          "path": "rtl/gradient_block_experimental.v",
+          "test_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+          "candidate_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+          "same": true
+        },
+        {
+          "path": "rtl/fat32_sector_mapper.v",
+          "test_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "candidate_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+          "same": true
+        },
+        {
+          "path": "rtl/rgb565_pair_pack.v",
+          "test_sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+          "candidate_sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+          "same": true
+        },
+        {
+          "path": "rtl/context_huffman_decoder.v",
+          "test_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "candidate_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+          "same": true
+        },
+        {
+          "path": "rtl/codec12_lossless_restore.v",
+          "test_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "candidate_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+          "same": true
+        },
+        {
+          "path": "rtl/codec_byte_queue.v",
+          "test_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+          "candidate_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/sd_arbiter.v",
+          "test_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "candidate_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+          "same": true
+        },
+        {
+          "path": "user_source/hdl_source/SD/frame_fifo_write.v",
+          "test_sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+          "candidate_sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+          "same": true
+        }
+      ],
+      "scope": "Frozen portable case with current candidate source hashes."
+    }
+  ],
+  "additional_checks": {
+    "top_only_declared_geometry_timeout_changes": true,
+    "bmp_only_qoi_memory_selection": true,
+    "fifo16KiB_unchanged": true,
+    "sd_clock_unchanged": true
+  },
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\top_tf_hdmi_audio.v": "c2517c1d9bd6e8fdf9af37608c6aa2e1dfcc316d63a93f32f566100fcb45da58",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\bmp_read.v": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4"
+  },
+  "scope": "Only completed exact-source tests reused. Current QOI/mixedRAM/FAT/arbiter andphysical SPI plus switching regressions. AV fullsize/sustained,STA anddelivery verification are separate mandatory gates."
+}

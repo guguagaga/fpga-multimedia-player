@@ -1,0 +1,67 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 02:03:13 on Oct 31,2026
+# vlog D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/candidate/project/user_source/hdl_source/qoi_stream.v D:/TD3/sim_release/eg4/eg_logic_dram.v 
+# -- Compiling module qoi_stream
+# -- Compiling module EG_LOGIC_DRAM
+# 
+# Top level modules:
+# 	qoi_stream
+# End time: 02:03:13 on Oct 31,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 02:03:13 on Oct 31,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/candidate/project/user_source/hdl_source/SD/sd_card_bmp.v D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/candidate/project/user_source/hdl_source/SD/bmp_read.v D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/candidate/project/rtl/img_scaler.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb
+# -- Compiling module sd_card_bmp
+# -- Compiling module key_press_debounce
+# -- Compiling module bmp_read
+# -- Compiling module img_scaler
+# -- Compiling module image_expand_5_4
+# -- Compiling module image_fit_720p
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb
+# 	img_scaler
+# 	image_expand_5_4
+# 	EG_PHY_BRAM32K
+# 	glbl
+# End time: 02:03:14 on Oct 31,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl "+W=1280" "+H=960" "+KIND=0" 
+# Start time: 02:03:14 on Oct 31,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.sd_card_bmp
+# Loading work.image_fit_720p
+# Loading work.key_press_debounce
+# Loading work.bmp_read
+# Loading work.qoi_stream
+# Loading work.glbl
+# Loading work.EG_LOGIC_DRAM
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 52, found 39.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/dut File: D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v Line: 7
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'scan_sector'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'found_count_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'scan_done_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'auto_mode_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'cfg_boundary_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'auto_on_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'write_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'disp_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'fade_req_toggle'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'firstimg_fallback_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'firstimg_diag_o'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'source_top_down'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(7): [TFMPC] - Missing connection for port 'file_base_lba'.
+# PASS IMAGE CHAIN kind=          0        1280x        960 fit=        960x        720 pixels=     921600 sectors=       3841 faststep=          2
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/hdmi_no_signal_v185/scaler_compare_pipeline/tests/integration_ase/kind0_1280x960/tb.v(78)
+#    Time: 92623245 ns  Iteration: 1  Instance: /tb
+# End time: 02:07:15 on Oct 31,2026, Elapsed time: 0:04:01
+# Errors: 0, Warnings: 14

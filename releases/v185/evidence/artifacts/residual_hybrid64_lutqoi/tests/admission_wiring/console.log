@@ -1,0 +1,2 @@
+ADMISSION_WIRING_PASS checks=768
+tb.sv:28: $finish called at 8478500 (1ps)

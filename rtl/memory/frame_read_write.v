@@ -33,6 +33,8 @@ module frame_read_write #(
   input read_clk,  // data read module clock
   input read_req,  // data read module read request,keep '1' until read_req_ack = '1'
   output read_req_ack,  // data read module read request response
+  output [1:0] scanout_bank,
+  output scanout_toggle,
   output read_finish,  // data read module read request finish
   input[ADDR_BITS - 1:0]           read_addr_0,                // data read module read request base address 0, used when read_addr_index = 0
   input[ADDR_BITS - 1:0]           read_addr_1,                // data read module read request base address 1, used when read_addr_index = 1
@@ -218,6 +220,8 @@ module frame_read_write #(
     .read_addr_1    (read_addr_1),
     .read_addr_2    (read_addr_2),
     .read_addr_3    (read_addr_3),
+    .scanout_bank(scanout_bank),
+    .scanout_toggle(scanout_toggle),
     .read_addr_index(read_addr_index),
     .read_len       (read_len),
     .fifo_aclr      (read_fifo_aclr),

@@ -114,3 +114,23 @@ rtl/video/video_eof_guard.v -text -whitespace
 rtl/video/video_playlist_ctrl.v -text -whitespace
 verification/playlist/* -text -whitespace
 releases/v183/evidence/timing/* -text -whitespace
+
+# v185 exact source/evidence byte identity
+rtl/video/codec12_lossless_restore.v -text -whitespace
+rtl/video/codec_byte_queue.v -text -whitespace
+rtl/video/context_huffman_decoder.v -text -whitespace
+rtl/video/residual_metadata.mem -text -whitespace
+rtl/video/residual_symbols.mem -text -whitespace
+rtl/video/residual_tree.mem -text -whitespace
+releases/v185/** -text -whitespace
+verification/codec14/** -text -whitespace
+host/video/codec14/** -text -whitespace
+tools/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# v186 frozen evidence and regression inputs retain exact recorded bytes.
+releases/v186/evidence/** -text -whitespace
+tests/v186_image_pipeline/** -text
+tests/v186_image_pipeline/**/*.log -whitespace
+tests/v186_image_pipeline/*.log -whitespace
+tests/v186_image_pipeline/**/*.hex -whitespace
+tests/v186_image_pipeline/**/*.v whitespace=cr-at-eol

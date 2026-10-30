@@ -27,8 +27,13 @@ module av_sample_sync #(
   reg [12:0] phase;
   wire frame_event = frame_q[2] != frame_seen;
   wire [12:0] period = (period_q1 >= 13'd1600 && period_q1 <= 13'd3200) ? period_q1 : 13'd3200;
-  // Preserve a positive initial phase for 20/25/30fps compatibility.
-  wire [12:0] first_phase = (period > LEAD_SAMPLES) ? period - LEAD_SAMPLES : 13'd240;
+  // High-rate startup credit must fall BETWEEN display refreshes. At30fps,
+  // half a frame is exactly one60Hz refresh: tiny clock/CDC phase differences
+  // could move a ready frame to that earlier refresh. Three quarters of a
+  // frame gives1200samples (25ms), centered between16.67ms and33.33ms.
+  // Lower rates keep the validated lead. Samples are neither skipped nor
+  // duplicated; this changes only when the next presentation is authorized.
+  wire [12:0] first_phase = (period > LEAD_SAMPLES) ? period - LEAD_SAMPLES : period - (period >> 2);
   wire consuming = enable_q[1] && started_q[1] && sample_valid && !draining_q[1];
   assign
       sample_allow = !enable_q[1] || draining_q[1] || (started_q[1] && !paused_q[1] && budget != 0);

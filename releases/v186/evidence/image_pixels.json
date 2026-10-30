@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": [
+        64,
+        36,
+        36,
+        0
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 39.809155225753784,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\64x36_aspect36_abort0.log"
+    },
+    {
+      "case": [
+        320,
+        240,
+        240,
+        15000
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 46.03260540962219,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\320x240_aspect240_abort15000.log"
+    },
+    {
+      "case": [
+        720,
+        1280,
+        1280,
+        0
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 64.25406622886658,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\720x1280_aspect1280_abort0.log"
+    },
+    {
+      "case": [
+        1920,
+        1080,
+        1080,
+        0
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 111.46788239479065,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1920x1080_aspect1080_abort0.log"
+    },
+    {
+      "case": [
+        1280,
+        480,
+        960,
+        0
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 69.65169382095337,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1280x480_aspect960_abort0.log"
+    },
+    {
+      "case": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": true,
+      "returncode": 0,
+      "seconds": 37.73452115058899,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1x1_aspect1_abort0.log"
+    }
+  ],
+  "files_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\tb.v": "fb24bafb080807fad56a37e967e64590762ed764a9e4a1da7b4e0d36f972b650",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\reference.v": "8059b593ad57e5f9a48835e32ca7053885f02c641d0956506ad24db5af45ee41",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\tb.vvp": "49ea3705b5e86bc45d52c4547e2c758c682c004e9a9be90db989a35a064a4882",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\candidate\\project\\rtl\\img_scaler.v": "a9e62b51d68a79de5bba960062216e7dae731e433fcf7c412bc19be1d2a340e1"
+  },
+  "scope": "Six complete 1280x720 output frames for both reference and candidate; every pixel checked against geometric nearest-neighbor model. Portrait/landscape, low/high source resolutions, skipped-row aspect input, one-pixel source, deterministic patterned input gaps and output backpressure; one restart during a partial frame. Native arrays, not vendor timing simulation."
+}

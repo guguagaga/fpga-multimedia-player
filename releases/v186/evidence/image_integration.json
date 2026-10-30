@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "kind": 1,
+      "w": 320,
+      "h": 240,
+      "passed": true,
+      "returncode": 0,
+      "seconds": 88.53193426132202,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind1_320x240\\console.log"
+    },
+    {
+      "kind": 0,
+      "w": 1280,
+      "h": 960,
+      "passed": true,
+      "returncode": 0,
+      "seconds": 242.33777332305908,
+      "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind0_1280x960\\console.log"
+    }
+  ],
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\candidate\\project\\user_source\\hdl_source\\qoi_stream.v": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+    "D:\\TD3\\sim_release\\eg4\\eg_logic_dram.v": "b620cebfe67f8829df3b737d1f75072b5f42bae7a2396b36616e85aa3cc9ea1e",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind1_320x240\\tb.v": "8c5aa561d9a20719d9d23ba7e9a33cc76aa4e23702128a5d67273d11ca5c85f0",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_bmp.v": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\candidate\\project\\user_source\\hdl_source\\SD\\bmp_read.v": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\candidate\\project\\rtl\\img_scaler.v": "a9e62b51d68a79de5bba960062216e7dae731e433fcf7c412bc19be1d2a340e1",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind1_320x240\\header.hex": "7f45b6ed12a11b2af2f37f142ae2718ca5926be04e9ae21831b62bbfc5a20ea5",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind0_1280x960\\tb.v": "8c5aa561d9a20719d9d23ba7e9a33cc76aa4e23702128a5d67273d11ca5c85f0",
+    "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration_ase\\kind0_1280x960\\header.hex": "b2dae7cf87f71d95ae03d88aa54721afb3fea3a7103b5ae9d840456d8188b4b6"
+  },
+  "scope": "Actual SD sector stream -> BMP/QOI reader -> image_fit -> output write/ack/commit, vendor QOI RAM models. Two full 921600-pixel frames, exact color/borders with backpressure; BMP fast row skip and QOI low-resolution adaptation."
+}

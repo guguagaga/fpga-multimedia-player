@@ -18,6 +18,30 @@
                     <Attr Name="CompileOrder" Val="1100"/>
                 </FileInfo>
             </File>
+            <File Path="../rtl/context_huffman_decoder.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="1100"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/codec_byte_queue.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="1100"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/codec12_lossless_restore.v">
+                <FileInfo>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="1100"/>
+                </FileInfo>
+            </File>
             <File Path="../rtl/gradient_block_experimental.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>

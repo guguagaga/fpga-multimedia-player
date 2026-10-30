@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\image_integration\\tb.v": "8c5aa561d9a20719d9d23ba7e9a33cc76aa4e23702128a5d67273d11ca5c85f0",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_bmp.v": "046ee46fc1733aa3e603a5234d40da93c83e7efc6b8ac993efb4199a227c52d1",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\bmp_read.v": "ecf82996bfa9179525f849d0aa315aa98fe78907684a133bdd1d3639b7d889c4",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\img_scaler.v": "e3cbbafa4d4ba395b87eabf2e1d0a1e33ca0287888f8b8e2601d03df0ef7369a",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\qoi_stream.v": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+    "D:\\TD3\\sim_release\\eg4\\eg_logic_dram.v": "b620cebfe67f8829df3b737d1f75072b5f42bae7a2396b36616e85aa3cc9ea1e"
+  },
+  "scope": "ActualBMPreader->QOI distributedindex->imagefit->write handshake;320x240QOI scaled to960x720 with borders;921600RGB output check and stalls."
+}

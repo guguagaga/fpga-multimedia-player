@@ -1,0 +1,18 @@
+{
+  "parent": "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid56_dualfat",
+  "changes": [
+    "64sectorcache=7BRAM32K+4BRAM9K; compressedFIFO16KiB unchanged",
+    "QOI256byte index moved from32KRAM to vendor distributedRAM, reuses remainingLUT resources",
+    "Audio admission timeout1.4Mcycles to cover64sectorburst; same4096PCMlowwater bypass",
+    "Codec14payload,HDMI720P60,control90.909MHz andSD22.727MHz unchanged"
+  ],
+  "required": [
+    "QOI vendor/index pixel equivalence",
+    "32KiB mixedRAM differential",
+    "SPI64lastsector",
+    "FAT64volumeboundary",
+    "90+300framecadence40k50k",
+    "Wholechip originalconstraintSTA",
+    "Vendorfull30crosscheck"
+  ]
+}

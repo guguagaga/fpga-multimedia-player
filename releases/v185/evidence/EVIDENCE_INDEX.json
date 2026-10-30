@@ -1,0 +1,478 @@
+{
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\fresh_routed_seed26.json": {
+    "path": "timing.json",
+    "sha256": "499a36b84e78aaaac2a807e98fd7cf82fe12355f8fd0dbc508bdbae4188283bf"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage_review.json": {
+    "path": "coverage.json",
+    "sha256": "194e9961f497b18234e9faacc68fe2b0868271ce689d74ff64623afcc396b8fd"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\delivery_source_evidence.json": {
+    "path": "source_evidence.json",
+    "sha256": "920efb78421f695064f2049c5537aeb0e8718480316c677c063069c75350bcf8"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\av_cadence_review.json": {
+    "path": "av_cadence.json",
+    "sha256": "155011b779fd7e28dd08f4bff97c2ef670d82eaa214d86f9ff8a0d49d2cfbc12"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\compiled_sustained_review.json": {
+    "path": "sustained_peak.json",
+    "sha256": "4bfa0e86482d3cf2d58bd123d737908f9e5c6380e4ad72a0f9f08f336a566b15"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\full_film_audit.json": {
+    "path": "full_film.json",
+    "sha256": "7afd4089870e2b855348056d2f5ce55a4df4a39f279a8dd92c5c8fcd991af0b5"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\source_identity_30fps.json": {
+    "path": "source_identity.json",
+    "sha256": "e6d2c7a90aca95d76edf3c2b55216854ed1cc5f33fd43b17eb5623f0cd0f7474"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\encoder_pairing.json": {
+    "path": "encoder_pairing.json",
+    "sha256": "5c8a74b4bfbe433592b0a23fd87caa02445c9c4964101367e209eeb265bb32e0"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\frame_assembly_audit.json": {
+    "path": "frame_assembly.json",
+    "sha256": "0ed24d8e0f996774dae7ab0110e5fc2b618007e8694d1f9e2ad451ff8665f338"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\source_export_preflight.json": {
+    "path": "source_export.json",
+    "sha256": "9d37c564495283c7924d4eff98f2484a3ef0a57b74f6011f7ea6101759b8dd17"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\peak720p_20261030_180829\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/result.json",
+    "sha256": "fd058d4c18c15976ad0a7be7c1e5e3044590bcec49b370368cb532d224e64070"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi\\result.json": {
+    "path": "artifacts/simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi/result.json",
+    "sha256": "7c829173b7df46191d57f9e8f9e410576d78a6ba8cbe4561fbfedcd75b2f237a"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi\\console.log": {
+    "path": "artifacts/simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi/console.log",
+    "sha256": "9848c03cc474afb1ee8b0a3c0eb9c2a2efa9b96d59eb5ddf9c68ca90362c40bf"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\peak720p_20261030_180829\\console.log": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/peak720p_20261030_180829/console.log",
+    "sha256": "3b551a82c7daac9a223714cab83cc93ce20c458f8f58a73488a2ba366166aee2"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\cases.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/cases.json",
+    "sha256": "08ea3599cf91b035f325c390c567553faf3f30b99bd4218acd12a771a1dfe58c"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\result.json": {
+    "path": "artifacts/simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/result.json",
+    "sha256": "bf7746bb902576823f188b0e8cb64e43adf75469eca4b7c6f749d61fb1e43cde"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\console.log": {
+    "path": "artifacts/simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/console.log",
+    "sha256": "c0001285aa9ba6ca1bcc708498ab4eeae20aed033cd9b38feada05b9a9edee68"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\result.json": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/result.json",
+    "sha256": "e4fbcaa11f7c70339f0c6d229b7f09aeceaff9b604de7f07e2a4d2e484387041"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\console.log": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/console.log",
+    "sha256": "c6fc485e8f21c3c82e12bdbcffe0a051cf22f61a7003faa453e300321dc9f661"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_acceleration_r3\\equivalence.json": {
+    "path": "artifacts/simulation_acceleration_r3/equivalence.json",
+    "sha256": "9bba167913a1cabf5f80a8e240852741325add902bc228d5e94f89e576a6eba1"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_differential\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_differential/result.json",
+    "sha256": "7f36038738daadb9adf6ba88eaa7267c1408ddf110a319ea051dacfcda8112db"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_default_equivalence/result.json",
+    "sha256": "92c01515cb939e5f9029d57c4e783ea217cc4a902b5b42ffc1f5aa10e0123418"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\frame_reuse_map.json": {
+    "path": "artifacts/frame_reuse_map.json",
+    "sha256": "21cfcbf13f06f8c32a924672a3d44011db1b0803d33e9a43ef29acb8048cbeff"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\encoded_reuse_audit.json": {
+    "path": "artifacts/encoded_reuse_audit.json",
+    "sha256": "085b4342f84eb8d5b15564bbd5af072eea6087ac01fa83cb611348b1eae36932"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\protocol.json": {
+    "path": "artifacts/full_cs30_reused/protocol.json",
+    "sha256": "eef0a2699f5be961877f7f6e2b002da9ebcfa0ba0c87e77074121bc77866da6a"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\canonical_merge.json": {
+    "path": "artifacts/full_cs30_reused/canonical_merge.json",
+    "sha256": "a551be248ae1ada5889c1cd3c260bdc6edfa0bb4515448517eb548c9879fb87d"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing0.json": {
+    "path": "artifacts/full_cs30_reused/missing0.json",
+    "sha256": "6273e84735d5612678bcb25732828e62f0c4da3a75c13a5964c4c1f245da590b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing1.json": {
+    "path": "artifacts/full_cs30_reused/missing1.json",
+    "sha256": "ec2a2e03cfcaef51d330c053248ed57bd003d6a3caa561ef6ab358896a58abce"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing2.json": {
+    "path": "artifacts/full_cs30_reused/missing2.json",
+    "sha256": "82b747a64ad932f056a900ac88622b022cf3562ecc73c750f3c7fca0081b256c"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\missing3.json": {
+    "path": "artifacts/full_cs30_reused/missing3.json",
+    "sha256": "2d67c116a79e8972aa8c9b1000cea5c3f370e576121d2c6e3181c0c9a9a188c0"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_720p30\\tool_manifest.json": {
+    "path": "artifacts/portable_encoder_720p30/tool_manifest.json",
+    "sha256": "8bf2c777079b50d525cfacf41b50ff8ac47a44c43321f23f92b062aca33b2a4b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\EXPERIMENTAL_720P30.json": {
+    "path": "artifacts/portable_encoder_smoke/EXPERIMENTAL_720P30.json",
+    "sha256": "31c0e0ba866c1809bb29994d04e1f54a6353afbfee4367586704b0d984617ef0"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\EXPERIMENTAL_AUDIO_IMA.json": {
+    "path": "artifacts/portable_encoder_smoke/EXPERIMENTAL_AUDIO_IMA.json",
+    "sha256": "78e083e343b174a58d53c4d84d3f486c8571616d48d9c12674abcca230a385c6"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_encoder_smoke\\preparation.json": {
+    "path": "artifacts/portable_encoder_smoke/preparation.json",
+    "sha256": "2bec2d3ee282ae66991f56af8adc7eb4cb81e52f7e5a0259eb306abe754be2e7"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\full_cs30_reused\\EXPERIMENTAL_720P30.json": {
+    "path": "artifacts/full_cs30_reused/EXPERIMENTAL_720P30.json",
+    "sha256": "b4db473e8d10fcfe4679aa93758b6d0348ec95f4be7d9aa7eca2531813b16ad2"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\v185_source_export_preflight\\project_manifest.json": {
+    "path": "artifacts/v185_source_export_preflight/project_manifest.json",
+    "sha256": "0afd63688c4983645794166e48ab7b5de57eccb13e1b70ff882925869ef20dfb"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\.td_flow_driver.tcl": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/.td_flow_driver.tcl",
+    "sha256": "6796c9cdd05fb42b2ebe3c7a10594036f2ce2e776c4339c93c7409e5a2db32fd"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\check.tcl": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/check.tcl",
+    "sha256": "1b254a60c176c5c8d12fca14fa5da17266ffe321690e20b4ae94dd382279596b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\clocks.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/clocks.txt",
+    "sha256": "1bba5e4c0066ceb9ebef94d6bb59b3a7562893deee27d89a0dd30693b232c321"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\coverage.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/coverage.txt",
+    "sha256": "426916143bf3559ed9bfb7808c9c6498150403d78df02a812bcbd8282dfecf9d"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\flow_stdout.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/flow_stdout.txt",
+    "sha256": "fc5ddcc430f122372bbee576c8b0dec0d1f5dd2fa51092edb504c7dfa9009013"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\HDMI1.4b_Transmitter_v1.0.prj": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/HDMI1.4b_Transmitter_v1.0.prj",
+    "sha256": "b98baa6856545a378014e2be9bfe2dd9268d405ea8f59e5bdbde8c06ab343954"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\ignored.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/ignored.txt",
+    "sha256": "129e78cc912312cb4dcea918d84e291fe962dfb5831c7def2f6729d45a581e45"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\td_20261030_181341.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/td_20261030_181341.log",
+    "sha256": "50b9879e423ba45b672cedbe036f213260d83754c9a470af2bd410f0ed1cc71a"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\td_20261030_181341.logw": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/td_20261030_181341.logw",
+    "sha256": "5597fed15b426502f7da5e4ccb350fe6dd64f4429475d7046f2f9499c613a8ca"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\coverage26\\timing.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/coverage26/timing.txt",
+    "sha256": "9c37a9479442effafbce3a37be37d7f089cde41f812341da459996cfac568fde"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\.td_flow_driver.tcl": {
+    "path": "artifacts/coverage_baseline_v167/.td_flow_driver.tcl",
+    "sha256": "6796c9cdd05fb42b2ebe3c7a10594036f2ce2e776c4339c93c7409e5a2db32fd"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\check.tcl": {
+    "path": "artifacts/coverage_baseline_v167/check.tcl",
+    "sha256": "411253db5d2e28daf003f4037f9bfd27c036f317597acaebe712fccbf16a81f2"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\clocks.txt": {
+    "path": "artifacts/coverage_baseline_v167/clocks.txt",
+    "sha256": "e6c7b42298e7734d221f55c608464c5e54c72e36bd660eb30b258e4bb36eba69"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\coverage.txt": {
+    "path": "artifacts/coverage_baseline_v167/coverage.txt",
+    "sha256": "7723c517e619adb0de06c95e6c656845ee2d16c96046e7ee586099e01414ff8b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\flow_stdout.txt": {
+    "path": "artifacts/coverage_baseline_v167/flow_stdout.txt",
+    "sha256": "ac4341c28f3ef4acfd793afb0d7b38ef97de8ab4449705faecba07bd110e91cc"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\HDMI1.4b_Transmitter_v1.0.prj": {
+    "path": "artifacts/coverage_baseline_v167/HDMI1.4b_Transmitter_v1.0.prj",
+    "sha256": "0a35c8120006f114779a11f58ec876a076cf8a42da76b83827c65183e62edae7"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\ignored.txt": {
+    "path": "artifacts/coverage_baseline_v167/ignored.txt",
+    "sha256": "2e4a69ed7cb11a350ae047d8b25c60b0465c8f06eaa99a41e1fa2b70b3b30e62"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\td_20261030_003330.log": {
+    "path": "artifacts/coverage_baseline_v167/td_20261030_003330.log",
+    "sha256": "ceee26939c342d5172510257d20cd6ccb6d6032d7d000ec38ec8eaa752b280f8"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\td_20261030_003330.logw": {
+    "path": "artifacts/coverage_baseline_v167/td_20261030_003330.logw",
+    "sha256": "af2c47bdb155003b07226ded7dea3a871ddbfcd1ddddafdd7d18c6df6f569fb8"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\coverage_baseline_v167\\timing.txt": {
+    "path": "artifacts/coverage_baseline_v167/timing.txt",
+    "sha256": "9c6849d176af3f22591679fcd64774a2aa408c4ff3a7d5a033e8c1b3507a4d16"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\fresh_routed_seed26\\flow_stdout.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/fresh_routed_seed26/flow_stdout.txt",
+    "sha256": "1617b3643bc7ac1856680d59079a881f3beea56a1704131dc3c16d9bc3c7babb"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\fresh_routed_seed26\\fresh_pr.timing": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/fresh_routed_seed26/fresh_pr.timing",
+    "sha256": "b89d317df7e8d21bc5b2f95bf2ba95e82db2b4b2eea1a67cbb39596b50b9099f"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\fresh_routed_seed26\\route.qor": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/fresh_routed_seed26/route.qor",
+    "sha256": "fec6e937aee3f2fdc321c36233f7dd10d29f4a557a94e6df5b051d03d495e1f9"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\reports\\fresh_routed_seed26\\route_drc_excerpt.txt": {
+    "path": "artifacts/residual_hybrid64_lutqoi/reports/fresh_routed_seed26/route_drc_excerpt.txt",
+    "sha256": "e229a4ed2f952c6712339917d5c09a1bbd31388e30ca99b11cb979eb5ff15e23"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\qoi_lut_index\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/qoi_lut_index/result.json",
+    "sha256": "8d3f7f2205c7f5be791b4b507681e9a0c67da65166d94e430c917fdd72564d26"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\qoi_lut_index\\tb.v": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/qoi_lut_index/tb.v",
+    "sha256": "ffc381ca23cb53577598cc48a99a832050f3fe8f3ad49846ed6bb4452e617daa"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\qoi_lut_index\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/qoi_lut_index/console.log",
+    "sha256": "60e9331ad94bf4f4a0a816be5e456c942912bed7a1574e50b55deae1fdf51e67"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\image_integration\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/image_integration/result.json",
+    "sha256": "365a7b1a1f03384d26d39e93e2aed273d052aa16ebf730ceda97dd878687b64f"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\image_integration\\tb.v": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/image_integration/tb.v",
+    "sha256": "8c5aa561d9a20719d9d23ba7e9a33cc76aa4e23702128a5d67273d11ca5c85f0"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\image_integration\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/image_integration/console.log",
+    "sha256": "56ec37c93ae345e10b852820a40a62da53caa8de30da40270290002035b994c2"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_differential\\tb.v": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_differential/tb.v",
+    "sha256": "e0c67beb1e71d5e9cf7197bcc77385dcb9a97bb1d2fde9199a6ff322016541c9"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_differential\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_differential/console.log",
+    "sha256": "1d95e771cbbcb6872866099c4c469e8555e4e05e4b0a1befcd5210a2a9666192"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\tb.sv": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_default_equivalence/tb.sv",
+    "sha256": "ad377fb6b9dfb0185b26ecc328d4bf7030c5e1c5506b903ee0ca9903636d027f"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/ram_default_equivalence/console.log",
+    "sha256": "f49ee93c94154b2470a66c048431a25b15e9463b2a714bbd02dd5bbec4d18a6e"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\fat64_cold\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/fat64_cold/result.json",
+    "sha256": "be90c48b339909a2e39495717127724fd3d54e50759f579cf1b5a49223ce0123"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\fat64_cold\\tb.v": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/fat64_cold/tb.v",
+    "sha256": "8833213e68cd487e7081225e26aae2035d3a7ae1e8e90820928403155f5a8642"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\fat64_cold\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/fat64_cold/console.log",
+    "sha256": "e91979ca82d7645f4ebafd5f7dff04fe980b46bfbe3cff5227b62b306979625a"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/arbiter_timeout/result.json",
+    "sha256": "a1123ba4772de585dad985d23bdfbfe0346d6997b03a4b9cdfb510ab43de2a2f"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\tb.v": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/arbiter_timeout/tb.v",
+    "sha256": "0ba3f770bd5aabf1c867ca26121c31223534a9b7e053f7259655225103b2d666"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\arbiter_timeout\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/arbiter_timeout/console.log",
+    "sha256": "f33f4290b44dea837fe0ea9b52a3c1a4da559b25a01d0f79e2bc617a451de0eb"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\admission_wiring\\result.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/admission_wiring/result.json",
+    "sha256": "f7936c738375fd19979bf274eb9dc42cb39432ca2be19d19693b4f9db7ec44ca"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\admission_wiring\\tb.sv": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/admission_wiring/tb.sv",
+    "sha256": "2f0a111f9bac02d39c4efa83f3411323db616320beec6978a554a61747179b65"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\admission_wiring\\console.log": {
+    "path": "artifacts/residual_hybrid64_lutqoi/tests/admission_wiring/console.log",
+    "sha256": "61a564e98ecae19ea80a542a451608283f372baf2467b24455bb2c2a7f49e998"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\tests\\frontend_corpus72\\result.json": {
+    "path": "artifacts/residual_tree/tests/frontend_corpus72/result.json",
+    "sha256": "a9cfe24a23c70afd4a8c8e790041aee5bce134cc7f2f2e6c6efb94ce5996b051"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\tests\\frontend_corpus72\\tb.v": {
+    "path": "artifacts/residual_tree/tests/frontend_corpus72/tb.v",
+    "sha256": "5427ef6a826e09821e7639e161f180df792aedb886a682d32aaaf3b819956e93"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_tree\\tests\\frontend_corpus72\\console.log": {
+    "path": "artifacts/residual_tree/tests/frontend_corpus72/console.log",
+    "sha256": "ddc3dad8cf9c1bae9e66e78aeec9541827ccbdd634593e33d907430405f3f7a5"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_pcmima\\tests\\audio_profiles\\result.json": {
+    "path": "artifacts/residual_pcmima/tests/audio_profiles/result.json",
+    "sha256": "2bce52a6935ffb7fe6da94baaebe95d0054752d90b796ef2099d0aaf79777f56"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s30\\result.json": {
+    "path": "artifacts/residual_audiohold/tests/i2s30/result.json",
+    "sha256": "8618a3ea88ba9c0789aebbe97ee60b799408fb3c67355409f2e0110037a14f99"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s30\\tb.v": {
+    "path": "artifacts/residual_audiohold/tests/i2s30/tb.v",
+    "sha256": "d9e5eb45db1cd14b2d8ecfc1d55b0dd8cceed277b5cdfd2fa16117329f573413"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s_phase_sweep\\result.json": {
+    "path": "artifacts/residual_audiohold/tests/i2s_phase_sweep/result.json",
+    "sha256": "9448c3255f1dcd2f799b087fdb97806f321d8029cb7871e2efa7d8cd83357729"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s_phase_sweep\\tb.v": {
+    "path": "artifacts/residual_audiohold/tests/i2s_phase_sweep/tb.v",
+    "sha256": "2d035c81a9bb343667f58e11178922d7965be40a0ae8331e0f58a303a520395b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s_phase_sweep_409837\\result.json": {
+    "path": "artifacts/residual_audiohold/tests/i2s_phase_sweep_409837/result.json",
+    "sha256": "8e843cbc5838ec53c4a2c96152e97885bc6f91de25b1b89470a4d6d1479bee74"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s_phase_sweep_409837\\tb.v": {
+    "path": "artifacts/residual_audiohold/tests/i2s_phase_sweep_409837/tb.v",
+    "sha256": "bab1df75523b8bb7ab7ce077e9985fd80948f49c9bedd22c407da786b6597e25"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\hold_controls\\result.json": {
+    "path": "artifacts/residual_audiohold/tests/hold_controls/result.json",
+    "sha256": "5f2879aec626a635123420554bfeb92b4b835a17d26ead1907391cd56e120a44"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\hold_controls\\tb.v": {
+    "path": "artifacts/residual_audiohold/tests/hold_controls/tb.v",
+    "sha256": "5afe938ac0abfe99d6607170fc85b7373e85e43a04b60477eeb92c5df480588f"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\hold_controls\\console.log": {
+    "path": "artifacts/residual_audiohold/tests/hold_controls/console.log",
+    "sha256": "18304bbbd4e8dcbec728096dbe5634dbdc5198f43bfdc00bff4de07e0f107627"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\result.json": {
+    "path": "artifacts/residual_logopad/tests/logo_equivalence/result.json",
+    "sha256": "07f7048f49f655d13f01d121c1c4e3cff44dfb8cea179c876db7fe5b7958afdb"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_logopad\\tests\\logo_equivalence\\tb.v": {
+    "path": "artifacts/residual_logopad/tests/logo_equivalence/tb.v",
+    "sha256": "57d81492a0d17eb5d9538eed47d9d6797acd1513237762c4f818946f4f9fd1b8"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_20261030_180719\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/result.json",
+    "sha256": "22f5902b88682115accb4171f42f4eb558d4dbfe82b592dc3eed4cc124104c87"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_20261030_180719\\tb.v": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v",
+    "sha256": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_20261030_180719\\console.log": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/console.log",
+    "sha256": "85342bd0fb97f64d69433406494b7477252d0ff730e06cd083349d44a3ffcc06"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_tail_20261030_181224\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/result.json",
+    "sha256": "f86be1affcede577fe0f98cb12c750ef77f002779c5393cbefb4a4c0905a45f3"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_tail_20261030_181224\\tb.v": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/tb.v",
+    "sha256": "b4dd347441157b89347b97d60593b1e7d44a8e19a03031d99e03513a3eb2aff6"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\spi_tail_20261030_181224\\console.log": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/spi_tail_20261030_181224/console.log",
+    "sha256": "a9fb3769e92f14f8f09a3724fce76e0fcbc2c0b93d2ae2369b09d4766ef52a47"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\scanout_20261030_181538\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/scanout_20261030_181538/result.json",
+    "sha256": "3af8a8f45a540d905b0d29f5bed4c67be8f57d46ca9eb20a9c9c11354e5e242b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\scanout_20261030_181538\\tb.sv": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/scanout_20261030_181538/tb.sv",
+    "sha256": "dd790cc202dd39583d8effa4c324551f4089418d90b37ddb1e5686aeb3e96eba"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\scanout_20261030_181538\\console.log": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/scanout_20261030_181538/console.log",
+    "sha256": "0723c3b4dffdfeb4b4725afa1162916a68814749d298a30be6ef2829a3624d3b"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\long_control_20261030_181545\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/result.json",
+    "sha256": "fef14eb3c0a230ad18df3d58a672b679559a574da2d4c638e73beb51d96a0062"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\long_control_20261030_181545\\tb.sv": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/tb.sv",
+    "sha256": "cc333c9f896402213ac03e33c41ecc31ef7b25d32c385926d70b78d753bdd738"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\long_control_20261030_181545\\console.log": {
+    "path": "artifacts/portable_verification_hybrid64_lutqoi/runs/long_control_20261030_181545/console.log",
+    "sha256": "a8b581d14c958e19a0be9250b26d9fb5549d995fc5f8ba2c2c5ea543b1af64b2"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi\\tb.v": {
+    "path": "artifacts/simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi/tb.v",
+    "sha256": "f4ecbec7c86075cc615a56eaa086519c8c6311df1deb25759f3deb7572c6c714"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi\\model.v": {
+    "path": "artifacts/simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi/model.v",
+    "sha256": "a475553e14f0f3233fd238b2325c159d4394c3a6ceec923030c1f7abb510b562"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\tb.v": {
+    "path": "artifacts/simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/tb.v",
+    "sha256": "787eee31d81dd8e06594aa1d793e7a549652b42cd471ae711403ea0ad7f74c9d"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\model.v": {
+    "path": "artifacts/simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/model.v",
+    "sha256": "a475553e14f0f3233fd238b2325c159d4394c3a6ceec923030c1f7abb510b562"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\tb.v": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/tb.v",
+    "sha256": "dbaea7c343d7852a55f4c2811492f543b7835d0ae711ba58a390461f46b831c3"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\model.v": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2/model.v",
+    "sha256": "a475553e14f0f3233fd238b2325c159d4394c3a6ceec923030c1f7abb510b562"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2\\result.json": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2/result.json",
+    "sha256": "98fa16b206f436ca12b55192e3a33d5aac56f15656192a7167604fd5c153fe8e"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2\\console.log": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2/console.log",
+    "sha256": "e717de2e809fffed58ac79e65babaf26c257177c32bec02d1056a9bb452ea355"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2\\tb.v": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2/tb.v",
+    "sha256": "f1fa9cc62c621670e470a55615472c759663657a2b7100f9dee33994142cbac0"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2\\model.v": {
+    "path": "artifacts/simulation_verilator_peak300_50000_cache56_residual_hybrid56_dualfat_fixture_r2/model.v",
+    "sha256": "a475553e14f0f3233fd238b2325c159d4394c3a6ceec923030c1f7abb510b562"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\protocol.json": {
+    "path": "artifacts/residual_hybrid64_lutqoi/protocol.json",
+    "sha256": "31f8316c075285c8271185ea741b46fc631432c8933976dc2c61b4de63db8b35"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_release\\runs\\peak30_40000_20261030_183048\\result.json": {
+    "path": "artifacts/portable_verification_hybrid64_release/runs/peak30_40000_20261030_183048/result.json",
+    "sha256": "38738ed629b519437be7c869320cde848aea2ba295a5d675d69493a9e901d8be"
+  },
+  "D:\\codexworks\\framerate_v185_20261029\\stress_fixture300\\protocol.json": {
+    "path": "artifacts/stress_fixture300/protocol.json",
+    "sha256": "faec992893d541d36f18510b9939353c403c89abfea17b4eea617898075906cf"
+  }
+}

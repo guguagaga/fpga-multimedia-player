@@ -9,6 +9,7 @@
 // One FAT-sector cache (128x32) absorbs sequential-cluster lookups. No media
 // data are stored here. A transaction is owned until its response completes.
 module fat32_sector_mapper #(
+  parameter integer PHYSICAL_PREFETCH_BLOCKS = 16,
   parameter integer IO_TIMEOUT = 25000000,
   parameter integer MAX_WALK   = 1048576
 ) (
@@ -58,9 +59,10 @@ module fat32_sector_mapper #(
   reg want_multi, want_pace, physical_multi;
   // Six 16-bit words per owner; serial metadata access costs <0.2us,
   // while keeping the complete three-stream cursor in one tiny BRAM.
-  // Shared 16-bit memory: 0..255 FAT sector, 256..287 owner contexts.
+  // Shared 16-bit memory: 0..255 video/image FAT, 256..287 cursors,
+  // 512..767 audio FAT. Remaining locations unused.
   // Only one transaction is active, so both uses share read/write ports.
-  (* ram_style="bram" *) reg [15:0] metadata_mem[0:511];
+  (* ram_style="bram" *) reg [15:0] metadata_mem[0:1023];
   reg [15:0] metadata_q, cache_low;
   reg [31:0] context_base;
   reg [15:0] context_write_data;
@@ -68,6 +70,12 @@ module fat32_sector_mapper #(
   reg [ 3:0] cursor_valid;
   reg [31:0] cache_lba, assembled, next_entry;
   reg cache_valid;
+  // Keep the audio chain lookup resident while video walks another FAT page.
+  // Bank0: video/image FAT and shared cursors. Bank1: audio FAT only.
+  // Ownership is fixed for a transaction; reset/remount invalidate both banks.
+  wire audio_cache = who == 2'd1;
+  reg [31:0] audio_cache_lba;
+  reg audio_cache_valid;
   reg [9:0] byte_count;
   reg [6:0] entry_index;
   reg [$clog2(IO_TIMEOUT+2)-1:0] watchdog;
@@ -75,6 +83,19 @@ module fat32_sector_mapper #(
   // max-cluster add/decode before it reaches fault handling and cursor enables.
   reg [27:0] max_cluster_q;
   always @(posedge clk) max_cluster_q <= max_cluster;
+  // Two full following16-sector clusters guarantee32 readable physical
+  // sectors from any offset. Requests still use FAT-translated physical LBAs.
+  // The conservative guard also covers larger cluster sizes and disables
+  // speculative read-ahead near the volume end.
+  // A request may start at the final sector of a16-sector cluster.
+  // Cover the required following clusters before speculative physical reads.
+  localparam integer PREFETCH_FOLLOWING_CLUSTERS = (PHYSICAL_PREFETCH_BLOCKS + 14) / 16;
+  reg [27:0] prefetch_last_start;
+  reg large_prefetch_safe;
+  always @(posedge clk)begin
+    prefetch_last_start<=max_cluster_q-PREFETCH_FOLLOWING_CLUSTERS;
+    large_prefetch_safe<=(cluster_shift>=4)&&(max_cluster_q>=2+PREFETCH_FOLLOWING_CLUSTERS)&&(current_cluster<=prefetch_last_start);
+  end
   reg [6:0] sector_mask;
   always @(posedge clk) begin
     case (cluster_shift)
@@ -88,8 +109,27 @@ module fat32_sector_mapper #(
       default: sector_mask <= 127;
     endcase
   end
-  wire[8:0]metadata_ra=(state==CACHE||state==FAT_FINISH||state==CACHE_HI)?
-  {1'b0,entry_index,(state==FAT_FINISH||state==CACHE_HI)}:{4'b1000,who,context_word};
+  wire[9:0]metadata_ra=(state==CACHE||state==FAT_FINISH||state==CACHE_HI)?
+  {audio_cache,1'b0,entry_index,(state==FAT_FINISH||state==CACHE_HI)}:{5'b01000,who,context_word};
+  // context_base is complete at word 2 and current_index at word 4.
+  // Sample their comparison at word 6, before CTX_CHECK uses it to restart
+  // the chain. No request latency is added, and current_cluster's final
+  // word does not participate in this decision.
+  reg cursor_restart_q;
+  always @(posedge clk)
+    if (state[13] && context_word == 6)
+      cursor_restart_q <= context_base != base_lba || current_index > target_index;
+  // OFFSET already computes the two differences. Register their independent
+  // validity predicates here and consume them in ALIGN, keeping the wide
+  // comparator out of the shared fault/cursor enable cone. Valid requests
+  // retain their latency; rejected geometry reports fault one cycle later.
+  reg offset_unmounted_q, offset_shift_bad_q, offset_base_bad_q, offset_virtual_bad_q;
+  always @(posedge clk) if (state[1]) begin
+    offset_unmounted_q <= !mounted;
+    offset_shift_bad_q <= cluster_shift > 7;
+    offset_base_bad_q <= base_lba < data_start_lba;
+    offset_virtual_bad_q <= v_lba < base_lba;
+  end
   reg [31:0] lookup_lba;
   reg lookup_at_target, lookup_walk_limit, lookup_cluster_bad, lookup_cache_hit;
   // One explicit prepare cycle: current_cluster/index and geometry have
@@ -102,7 +142,7 @@ module fat32_sector_mapper #(
       lookup_cluster_bad <= current_cluster < 2 || current_cluster > max_cluster_q;
     end
   // Address addition completes before the equality comparator is sampled.
-  always @(posedge clk) if (state[22]) lookup_cache_hit <= cache_valid && cache_lba == lookup_lba;
+  always @(posedge clk) if (state[22]) lookup_cache_hit <= audio_cache ? (audio_cache_valid && audio_cache_lba == lookup_lba) : (cache_valid && cache_lba == lookup_lba);
   wire [27:0] next_cluster = next_entry[27:0];
   // Separate wide FAT-entry validation from the shared fault/state/data
   // enables. next_entry is complete before NEXT_CHECK; the predicates
@@ -138,7 +178,7 @@ module fat32_sector_mapper #(
     metadata_q <= metadata_mem[metadata_ra];
     if (state == CTX_WRITE) metadata_mem[{4'b1000, who, context_word}] <= context_write_data;
     else if (state == FAT_READ && sd_valid_q && byte_count < 512 && byte_count[0])
-      metadata_mem[{1'b0, byte_count[8:1]}] <= {sd_data_q, assembled[7:0]};
+      metadata_mem[{audio_cache,1'b0, byte_count[8:1]}] <= {sd_data_q, assembled[7:0]};
   end
   task fault;
     input [3:0] code;
@@ -173,6 +213,8 @@ module fat32_sector_mapper #(
       cursor_valid <= 0;
       cache_valid <= 0;
       cache_lba <= 0;
+      audio_cache_valid <= 0;
+      audio_cache_lba <= 0;
       byte_count <= 0;
       assembled <= 0;
       next_entry <= 0;
@@ -208,12 +250,11 @@ module fat32_sector_mapper #(
         state[1]: begin
           offset_lba   <= v_lba - base_lba;
           physical_lba <= base_lba - data_start_lba;
-          if (!mounted || cluster_shift > 7 || base_lba < data_start_lba || v_lba < base_lba)
-            fault(1);
-          else state <= ALIGN;
+          state <= ALIGN;
         end
         state[17]: begin
-          if ((physical_lba & {25'd0, sector_mask}) != 0) fault(1);
+          if (offset_unmounted_q || offset_shift_bad_q || offset_base_bad_q || offset_virtual_bad_q ||
+              (physical_lba & {25'd0, sector_mask}) != 0) fault(1);
           else begin
             sector_in_cluster <= offset_lba & {25'd0, sector_mask};
             shift_left <= cluster_shift;
@@ -259,7 +300,7 @@ module fat32_sector_mapper #(
           else context_word <= context_word + 1'b1;
         end
         state[14]: begin
-          if (context_base != base_lba || current_index > target_index) begin
+          if (cursor_restart_q) begin
             current_index   <= 0;
             current_cluster <= first_cluster;
           end
@@ -285,7 +326,8 @@ module fat32_sector_mapper #(
               sd_lba <= lookup_lba;
               byte_count <= 0;
               assembled <= 0;
-              cache_valid <= 0;
+              if (audio_cache) audio_cache_valid <= 0;
+              else cache_valid <= 0;
               state <= FAT_READ;
             end
           end
@@ -306,8 +348,13 @@ module fat32_sector_mapper #(
             if (!((byte_count == 512 && !sd_valid_q) || (byte_count == 511 && sd_valid_q)))
               fault(4);
             else begin
-              cache_lba <= fat_lba;
-              cache_valid <= 1;
+              if (audio_cache) begin
+                audio_cache_lba <= fat_lba;
+                audio_cache_valid <= 1;
+              end else begin
+                cache_lba <= fat_lba;
+                cache_valid <= 1;
+              end
               state <= GAP;
             end
           end else if (watchdog >= IO_TIMEOUT) fault(5);
@@ -336,9 +383,9 @@ module fat32_sector_mapper #(
         state[9]: begin
           physical_lba <= current_cluster - 2;
           shift_left <= cluster_shift;
-          // Never let a physical CMD18 batch cross a cluster boundary. Physically
-          // cached sectors may be reused only by exact physical-LBA matches below.
-          physical_multi<=want_multi&&(cluster_shift>=4)&&(sector_in_cluster[6:0]<={sector_mask[6:4],4'd0});
+          // Legacy16-sector batches stay inside a cluster;32-sector speculative
+          // batches stay inside the data volume. Hits require an exact physical LBA.
+          physical_multi<=want_multi&&((PHYSICAL_PREFETCH_BLOCKS>16)?large_prefetch_safe:((cluster_shift>=4)&&(sector_in_cluster[6:0]<={sector_mask[6:4],4'd0})));
           context_word <= 0;
           state <= SHIFT_LEFT;
         end
@@ -364,6 +411,7 @@ module fat32_sector_mapper #(
       if (invalidate) begin
         cursor_valid <= 0;
         cache_valid  <= 0;
+        audio_cache_valid <= 0;
       end
     end
   end

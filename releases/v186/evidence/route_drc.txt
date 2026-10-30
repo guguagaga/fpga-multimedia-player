@@ -1,0 +1,19 @@
+start command "report_route_status -drc -file route_drc.txt"
+PHY-1001 : Start multi-drive drc check......
+PHY-1001 : No multi-drive.
+PHY-1001 : Stage 1 | Clock Net Status Check
+PHY-1001 : 1 clock net(s) utilize local routing resource.
+PHY-5079 CRITICAL-WARNING: Marked 1 clock net(s) utilize the local routing resources. Please check log message and the sinks of clock nets.
+RUN-1001 : CTS Local Wire Summary
+RUN-1001 : --------------------------------------------------------------------------------------------------------------------
+RUN-1001 :            ClockName            |  DriverType  |  Clock/Fanout  |  LocalWireNum  |        NetName        |  Marked  
+RUN-1001 : --------------------------------------------------------------------------------------------------------------------
+RUN-1001 :   sys_pll_m0/pll_inst.clkc[2]   |  AL_PHY_PLL  |      0/1       |       1        |  U3/u2_ram/SDRAM_CLK  |   true   
+RUN-1001 : --------------------------------------------------------------------------------------------------------------------
+PHY-1001 : End Stage 1 | Clock Net Status Check; Time: 0.002107s wall, 0.000000s user + 0.000000s system = 0.000000s CPU (n/a%); Memory(MB): used = 959, reserved = 958, peak = 959;
+
+PHY-1001 : Stage 2 | Abnormal Timing Path check
+PHY-1001 : No abnormal timing path.
+PHY-1001 : End Stage 2 | Abnormal Timing Path check; Time: 0.125432s wall, 0.109375s user + 0.000000s system = 0.109375s CPU (87.2%); Memory(MB): used = 959, reserved = 958, peak = 959;
+
+RUN-1002 : 

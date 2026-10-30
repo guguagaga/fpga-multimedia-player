@@ -51,6 +51,8 @@ module osd_player_ui #(
   output wire [ 7:0] osd_b
 );
 
+  reg de_stage,vs_stage;
+  reg [23:0] color_out_q;
   // Scale the entire proven layout, including fonts/logo, by 5/4.
   wire [10:0] y2 = {screen_y, 1'b0};
   wire [ 9:0] pixel_x = screen_x[10:1];
@@ -888,8 +890,8 @@ module osd_player_ui #(
       video_r_d <= 8'd0;
       video_g_d <= 8'd0;
       video_b_d <= 8'd0;
-      de_out <= 1'b0;
-      vs_out <= 1'b0;
+      de_stage <= 1'b0;
+      vs_stage <= 1'b0;
     end else begin
       col_d <= col;
       text_on_d <= (in_title | in_cur | in_tot | in_hdr_t | in_hdr_f | in_vol | in_state
@@ -912,8 +914,8 @@ module osd_player_ui #(
       video_r_d <= video_r;
       video_g_d <= video_g;
       video_b_d <= video_b;
-      de_out <= de;
-      vs_out <= vs;
+      de_stage <= de;
+      vs_stage <= vs;
     end
   end
   wire pix_on = rom_data[7-col_d];
@@ -957,8 +959,23 @@ module osd_player_ui #(
     input [4:0] a;
     reg [12:0] m_f, m_b;
     begin
-      m_f = fg * a;
-      m_b = bg * (5'd16 - a);
+      // Exact Q4 constants used by the UI. Explicit 13-bit operands
+      // avoid DSP mapping and preserve both truncation stages of nested blends.
+      case (a)
+        5'd11: begin
+          m_f = ({5'd0,fg} << 3) + ({5'd0,fg} << 1) + {5'd0,fg};
+          m_b = ({5'd0,bg} << 2) + {5'd0,bg};
+        end
+        5'd13: begin
+          m_f = ({5'd0,fg} << 3) + ({5'd0,fg} << 2) + {5'd0,fg};
+          m_b = ({5'd0,bg} << 1) + {5'd0,bg};
+        end
+        5'd15: begin
+          m_f = ({5'd0,fg} << 4) - {5'd0,fg};
+          m_b = {5'd0,bg};
+        end
+        default: begin m_f = fg * a; m_b = bg * (5'd16 - a); end
+      endcase
       alpha_blend = (m_f + m_b) >> 4;
     end
   endfunction
@@ -1023,9 +1040,16 @@ module osd_player_ui #(
     else color_sel = {video_r_d, video_g_d, video_b_d};
   end
 
-  assign osd_r = color_sel[23:16];
-  assign osd_g = color_sel[15:8];
-  assign osd_b = color_sel[7:0];
+  // Register the final OSD mux before the spectrum blending cone.
+  // DE and VS travel with RGB; the downstream AXIS converter uses these
+  // aligned signals, so this adds latency without shifting visible pixels.
+  always @(posedge clk or negedge rst_n) begin
+    if(!rst_n)begin color_out_q<=0;de_out<=0;vs_out<=0;end
+    else begin color_out_q<=color_sel;de_out<=de_stage;vs_out<=vs_stage;end
+  end
+  assign osd_r = color_out_q[23:16];
+  assign osd_g = color_out_q[15:8];
+  assign osd_b = color_out_q[7:0];
 
 endmodule
 

@@ -1,0 +1,24 @@
+{
+  "frames": 300,
+  "seconds": 10,
+  "content": "Same worst225..226s payload repeated10x; no reencoding; source spatialquality unchanged.",
+  "audio": "11s original mono48k IMA-XQ and independentlydecoded reference",
+  "fixture_sha256": {
+    "audio.hex": "5afcbc0d6700b90c91d134105f6d6d26ad00f42dc4459b1c9986fff91ba6ca0a",
+    "audio_ima.wav": "07f985b0175a1e5d12b735a39bf8b0da927ec2e68b6bda17c265be1ccac86207",
+    "audio_reference.wav": "e083772ecba50798adca9ba5ae0d700a6113e7b9fa3afaaad5615ef2c83be462",
+    "audio_source.wav": "3ec4bdf9fe876bfea94833eae5a4f8efdded2e72560bceb44222166cfdb0899c",
+    "card.hex": "a2f876f225a74655ecaec69c5779a124ba2299355ba927b738994a20b89b7156",
+    "codec8_full_fixture.vh": "621a649bf25832bfbca39629877a1ae40e33d421bf2bd3c8b28f1d7e9fe8fbf1",
+    "movie.VID": "91ee28b51f3a204691dc16209140193057b10ba171d252ce0dd14a75764674d6",
+    "pcm.hex": "5e58f9f0e60c776b25a2df3c065988a0fd397c6c45ac405546a640ccb18a699e",
+    "reference.rgb565": "e38fde24c77fdb7d23497a23c3868b8a08109d85bd68884bee7e8f91f5e9719a",
+    "run.do": "727b8e024415addd061265e7ee233d14e64b4ca3ef02fe66615d011a0f5816d3",
+    "tb.v": "2d0e5dff439b96db1e5bb0c6bc70ee4ed773fcfe05485d2b08ce8871db79fc9b"
+  },
+  "purpose": "Exclude startup reserve masking small sustained deficit. No board qualification.",
+  "fixture_corrections": [
+    "Raise inherited120frame TB limit to300",
+    "Extend audio physicalcluster model guard from20to80matching11second audio"
+  ]
+}

@@ -1,4 +1,5 @@
 module media_player #(
+  parameter ENABLE_QOA = 1,
   parameter [31:0] BLIND_SCAN_LIMIT = 32'd4096,
   parameter [23:0] SEEK_DRAIN_WD = 24'd10_000_000,
   parameter [23:0] HDR_WD = 24'd10_000_000,
@@ -57,7 +58,7 @@ module media_player #(
   end
   assign dbg_state = comp_state;
   assign dbg_gate_open = comp_valid;
-  compressed_audio_reader compressed (
+  compressed_audio_reader #(.ENABLE_QOA(ENABLE_QOA)) compressed (
     .clk             (clk),
     .rst             (rst || !sd_init_done),
     .start           (start_reader),

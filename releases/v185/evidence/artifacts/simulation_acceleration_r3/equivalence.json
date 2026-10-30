@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\simulation_acceleration_r3\\tb.sv": "898b1bafcc34e769a000a851726da69d8487937a4ff56dfe49743f89f58a8d6e",
+    "D:\\codexworks\\framerate_v185_20261029\\simulation_acceleration_r3\\model.v": "6d3d365f758d79fbcd53335b4e51b479ea60e6b0d82b7948828f8f9d975cf56c",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+  },
+  "scope": "100k random same-clock16bit/full or byte write,read hold andsame-address collisions; initialized exhaustive reads. Only these project configurations,not generic primitive equivalence."
+}

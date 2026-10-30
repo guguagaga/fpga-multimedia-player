@@ -1,0 +1,48 @@
+--- v185/timing.sdc
++++ production_clock_repair/timing.sdc
+@@ -37,22 +37,11 @@
+ rename_clock -name {audio_mclk}  -source [get_ports {clk}] -master_clock {clk} [get_pins {u_audio_pll/pll_inst.clkc[2]}]
+ 
+ # ------------------------------------------------------------
+-# 4. 从原 timing(2).sdc 迁移过来的 HDMI 像素/串行时钟约束
+-#
+-#    原文件是：
+-#      create_clock -name pixel_clk  ... [get_nets {S_pixel_clk}]
+-#      create_clock -name serial_clk ... [get_nets {S_serial_clk}]
+-#      set_clock_groups -exclusive ...
+-#
+-#    在整合工程里，这两个时钟已经由 video_pll 产生，并通过 derive_clocks 建出来了，
+-#    所以这里只保留“组关系”，不再重复 create_clock。
+-#
+-#    这里沿用原作者的写法，把 video_clk 和 hdmi_5x_clk 设成 exclusive。
+-#    如果后面 Timing Analyzer 明确显示两者之间需要做同步时序分析，再把这一条去掉。
++# 4. HDMI pixel/serializer clocks are simultaneous outputs of video_pll.
++# Their 1:5 relationship is derived from the PLL. Analyze transfers in
++# lane_lvds_10_1; neither mutually exclusive nor asynchronous to each other.
++# No new false paths or multicycle exceptions are introduced.
+ # ------------------------------------------------------------
+-set_clock_groups -exclusive \
+-    -group [get_clocks {video_clk}] \
+-    -group [get_clocks {hdmi_5x_clk}]
+ 
+ # ------------------------------------------------------------
+ # 5. 音频 I2S 发生器/接收器跨域
+@@ -65,7 +54,7 @@
+     -group [get_clocks {video_clk hdmi_5x_clk sd_card_clk ext_mem_clk}]
+ 
+ # ------------------------------------------------------------
+-# 6. video / sd / ext_mem / hdmi_5x 之间的跨域
++# 6. Keep pixel/serializer together; retain existing SD/ext_mem CDC groups
+ #
+ #    2026-10-14 开启。条件（见上面第 72~73 行的要求）已逐条核实：
+ #    这三个时钟来自**不同的 PLL**，彼此没有固定相位关系，
+@@ -87,8 +76,7 @@
+ set_clock_groups -asynchronous \
+     -group [get_clocks {sd_card_clk}] \
+     -group [get_clocks {ext_mem_clk}] \
+-    -group [get_clocks {video_clk}] \
+-    -group [get_clocks {hdmi_5x_clk}]
++    -group [get_clocks {video_clk hdmi_5x_clk}]
+ 
+ # ------------------------------------------------------------
+ # 7. 其余 Input/Output delay 先保持空白

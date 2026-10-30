@@ -82,6 +82,8 @@ module video_player #(
   output reg pix_en,
   output reg [31:0] pix_data,
   output wire [15:0] img_h_o,
+  input wire scanout_event,
+  input wire [1:0] scanout_bank,
   input wire vsync_tick,  // 视频域 vsync 的单拍脉冲（已同步到本域）
   output reg [1:0] wr_buf_idx,
   output reg [1:0] dp_buf_idx,
@@ -222,8 +224,22 @@ module video_player #(
   wire bf_empty = (bf_wp == bf_rp);
   wire bf_full = bf_usedw[BF_AW];
   wire wrfin_pulse = wrfin_s2 ^ wrfin_s1;
-  wire            frame_commit = (state == V_FIN) && !movie_last_shown &&
-                                   (wrfin_pulse || wrfin_seen) &&
+  // One complete frame may wait for its presentation credit while the
+  // third SDRAM bank receives the following frame. Do not recycle the old
+  // displayed bank until a scanout boundary has sampled its replacement.
+  reg ready_valid, ready_last, retired_valid;
+  reg [1:0] ready_bank, retired_bank;
+  wire decode_last, decode_exhausted;
+  wire frame_enqueue = (state == V_FIN) && !ready_valid &&
+                       (wrfin_pulse || wrfin_seen) && !pause && !decode_exhausted;
+  wire write_bank_free = wr_buf_idx != dp_buf_idx &&
+                         (!ready_valid || wr_buf_idx != ready_bank) &&
+                         (!retired_valid || wr_buf_idx != retired_bank);
+  // Two decoded frames cover startup transport/decoder burst jitter.
+  // A one-frame movie bypasses preroll; no header/PCM samples are skipped.
+  wire preroll_ready = disp_ok || ready_last ||
+                       (state==V_FIN && (wrfin_seen || wrfin_pulse));
+  wire            frame_commit = preroll_ready && ready_valid && !retired_valid && !movie_last_shown &&
                                    (!AV_SYNC || disp_ok || present_enable) &&
                                    (deficit >= ACC_ONE) && !pause && (!AV_SYNC || !disp_ok || timeline_run_q);
   wire use_audio_clock = AUDIO_MASTER && audio_clock_active;
@@ -234,6 +250,8 @@ module video_player #(
     reg [31:0] remaining;
     reg one_left, low_zero, finished;
     assign movie_last_shown = finished;
+    assign decode_last = one_left;
+    assign decode_exhausted = remaining == 0;
     assign playlist_header_valid = remaining != 0;
     always @(posedge clk or posedge rst) begin
       if (rst) begin remaining<=0;one_left<=0;low_zero<=0;finished<=0;end
@@ -248,15 +266,18 @@ module video_player #(
             18: remaining[23:16] <= sd_sec_read_data_q;
             19: remaining[31:24] <= sd_sec_read_data_q;
           endcase
-        end else if(frame_commit) begin
+        end else if(frame_enqueue) begin
           remaining[15:0] <= remaining[15:0] - 16'd1;
           if(low_zero) remaining[31:16] <= remaining[31:16] - 16'd1;
-          if(one_left) finished<=1;
+
         end
+        if(frame_commit && ready_last) finished<=1;
       end
     end
   end else begin : g_legacy_loop
     assign movie_last_shown = 1'b0;
+    assign decode_last = 1'b0;
+    assign decode_exhausted = 1'b0;
     assign playlist_header_valid = 1'b1;
   end endgenerate
   wire pacing_tick = use_audio_clock ? audio_frame_tick : vsync_tick;
@@ -295,6 +316,7 @@ module video_player #(
                          {{up_value[15:11],up_value[15:13]},
                           {up_value[10:5],up_value[10:9]},
                           {up_value[4:0],up_value[4:2]}};
+  reg codec_huffman;
   wire c8_run = play && use_block_codec && ((state == V_STRM) || (state == V_DRAIN));
   reg c8_run_q;
   always @(posedge clk or posedge rst) begin
@@ -302,6 +324,32 @@ module video_player #(
     else c8_run_q <= c8_run;
   end
   wire c8_ready, c8_pv, c8_done, c8_fault, c8_busy, c8_out_valid;
+  wire block_byte_ready, block_fault, entropy_in_ready, entropy_valid, entropy_done, entropy_fault;
+  wire [7:0] entropy_byte;
+  wire entropy_queue_ready, entropy_queue_valid;
+  wire [7:0] entropy_queue_byte;
+  wire [7:0] block_byte=codec_huffman?entropy_queue_byte:bf_q;
+  wire block_byte_valid=codec_huffman?entropy_queue_valid:bf_qv;
+  codec_byte_queue #(.AW(10)) u_entropy_queue(
+    .clk(clk),.clear(rst||!c8_run_q||!codec_huffman),
+    .in_data(entropy_byte),.in_valid(entropy_valid),.in_ready(entropy_queue_ready),
+    .out_data(entropy_queue_byte),.out_valid(entropy_queue_valid),
+    .out_ready(codec_huffman&&block_byte_ready));
+  assign c8_ready=codec_huffman?entropy_in_ready:block_byte_ready;
+  assign c8_fault=block_fault||(codec_huffman&&entropy_fault);
+  wire [7:0] entropy_raw_byte;
+  wire [2:0] entropy_raw_context;
+  wire entropy_raw_valid,entropy_raw_ready;
+  codec12_lossless_restore u_entropy_restore(
+    .clk(clk),.rst(rst),.start(!c8_run_q||!codec_huffman),
+    .in_data(entropy_raw_byte),.in_context(entropy_raw_context),
+    .in_valid(entropy_raw_valid),.in_ready(entropy_raw_ready),
+    .out_data(entropy_byte),.out_valid(entropy_valid),.out_ready(entropy_queue_ready));
+  context_huffman_decoder u_entropy(
+    .clk(clk),.rst(rst),.start(!c8_run_q||!codec_huffman),
+    .in_data(bf_q),.in_valid(bf_qv&&codec_huffman&&c8_run_q),.in_ready(entropy_in_ready),
+    .out_data(entropy_raw_byte),.out_context(entropy_raw_context),.out_valid(entropy_raw_valid),.out_ready(entropy_raw_ready),
+    .frame_done(entropy_done),.fault(entropy_fault));
   wire [15:0] c8_rgb, c8_out_rgb, c8_mem_wdata;
   wire c8_mem_we;
   wire [C8_RAM_AW-1:0] c8_mem_waddr, c8_mem_raddr;
@@ -316,13 +364,13 @@ module video_player #(
     .rst       (rst),
     .enable    (c8_run_q),
     .pause     (c8_pause),
-    .byte_valid(bf_qv),
-    .byte_data (bf_q),
-    .byte_ready(c8_ready),
+    .byte_valid(block_byte_valid),
+    .byte_data (block_byte),
+    .byte_ready(block_byte_ready),
     .pix_valid (c8_pv),
     .pixel     (c8_rgb),
     .frame_done(c8_done),
-    .fault     (c8_fault)
+    .fault     (block_fault)
   );
   video_codec8_raster #(
     .FRAME_W(FRAME_W),
@@ -510,6 +558,7 @@ module video_player #(
       bf_rdreq            <= 1'b0;
       bf_pending          <= 0;
       bf_qv               <= 1'b0;
+      codec_huffman       <= 0;
       state               <= V_IDLE;
       dstate              <= D_OP;
       fps_inc             <= FPS_INC;
@@ -553,6 +602,8 @@ module video_player #(
       dp_buf_idx          <= 2'd0;
       active              <= 1'b0;
       disp_ok             <= 1'b0;
+      ready_valid <= 0;ready_last <= 0;ready_bank <= 0;
+      retired_valid <= 0;retired_bank <= 0;
     end else begin
       // ---- defaults ----
       pix_en <= 1'b0;
@@ -639,6 +690,7 @@ module video_player #(
         up_phase <= 0;
         active  <= 1'b0;
         disp_ok <= 1'b0;
+        ready_valid <= 0;retired_valid <= 0;
         pcnt    <= 0;
         emit_n  <= 8'd0;
         bf_qv   <= 1'b0;
@@ -662,6 +714,15 @@ module video_player #(
           // 欠帧累加（饱和，避免长时间卡顿后溢出回绕）
           if (deficit > 20'hFFFFF - pacing_credit) deficit <= 20'hFFFFF;
           else deficit <= deficit + pacing_credit;
+        end
+
+        if(scanout_event && scanout_bank==dp_buf_idx) retired_valid <= 0;
+        if(frame_commit) begin
+          dp_buf_idx <= ready_bank;
+          disp_ok <= 1'b1;
+          ready_valid <= 0;
+          retired_bank <= dp_buf_idx;
+          retired_valid <= 1;
         end
 
         // ---- SD sector retire / loop ----
@@ -707,18 +768,19 @@ module video_player #(
                 5'd2: hdr_magic <= hdr_magic && (sd_sec_read_data_q == 8'h47);  // 'G'
                 5'd3: hdr_magic <= hdr_magic && (sd_sec_read_data_q == 8'h56);  // 'V'
                 5'd5: begin
+                  codec_huffman <= (sd_sec_read_data_q == 8'd14);
                   codec332 <= (sd_sec_read_data_q == 8'd2) || (sd_sec_read_data_q == 8'd5);
                   codec_up <= (sd_sec_read_data_q == 8'd5) ||
                                         (sd_sec_read_data_q == 8'd6) ||
                                         (sd_sec_read_data_q == 8'd7);
                   codec_approx <= (sd_sec_read_data_q == 8'd7);
-                  codec_block <= (sd_sec_read_data_q == 8'd8) || (sd_sec_read_data_q == 8'd9) || ((sd_sec_read_data_q == 8'd10) || (sd_sec_read_data_q == 8'd12));
+                  codec_block <= (sd_sec_read_data_q == 8'd8) || (sd_sec_read_data_q == 8'd9) || ((sd_sec_read_data_q == 8'd10) || ((sd_sec_read_data_q == 8'd12) || (sd_sec_read_data_q == 8'd14)));
                   // codec 3 = 320x240 -> 2x2 (rows and columns doubled)
                   // codec 4 = 320x480 -> 2x1 (columns only; full vertical
                   //           detail, half horizontal.  Costs ~4 LUT more
                   //           than codec 3 because it simply does NOT set
                   codec_bad <= !((sd_sec_read_data_q == 8'd8) || (sd_sec_read_data_q == 8'd9) ||
-                                     ((sd_sec_read_data_q == 8'd10) || (sd_sec_read_data_q == 8'd12)) || (LEGACY_CODECS &&
+                                     ((sd_sec_read_data_q == 8'd10) || ((sd_sec_read_data_q == 8'd12) || (sd_sec_read_data_q == 8'd14))) || (LEGACY_CODECS &&
                                      ((sd_sec_read_data_q == 8'd1) || (sd_sec_read_data_q == 8'd2) ||
                                       (sd_sec_read_data_q == 8'd5) || (sd_sec_read_data_q == 8'd6) ||
                                       (sd_sec_read_data_q == 8'd7))));
@@ -758,6 +820,11 @@ module video_player #(
                 5'd13: file_bytes[15:8] <= sd_sec_read_data_q;
                 5'd14: file_bytes[23:16] <= sd_sec_read_data_q;
                 5'd15: file_bytes[31:24] <= sd_sec_read_data_q;
+                // Fixed-table revision guard; legacy headers are unaffected.
+                5'd20: if(codec_huffman)hdr_magic<=hdr_magic&&(sd_sec_read_data_q==8'h48);
+                5'd21: if(codec_huffman)hdr_magic<=hdr_magic&&(sd_sec_read_data_q==8'h36);
+                5'd22: if(codec_huffman)hdr_magic<=hdr_magic&&(sd_sec_read_data_q==8'h44);
+                5'd23: if(codec_huffman)hdr_magic<=hdr_magic&&(sd_sec_read_data_q==8'h31);
                 default: ;
               endcase
               if (hdr_idx != 5'd31) hdr_idx <= hdr_idx + 5'd1;
@@ -783,9 +850,24 @@ module video_player #(
 
           // ------------------------------------------------ ask for a frame
           V_REQ: begin
+            // Compressed bytes have their own FIFO. A retired/queued pixel
+            // bank may delay decoding, but must not idle read-ahead while
+            // that FIFO has sector-sized headroom. Never touch pixel-bank
+            // ownership here; stop/EOF/pause and the existing SD handshake
+            // remain authoritative. One outstanding sector bounds capacity.
+            // Do not issue the first payload from this early state:
+            // header-derived end/last-sector registers need their existing
+            // SETTLE latency. A ready/displayed frame proves that boundary
+            // pipeline is established for subsequent waiting banks.
+            if ((disp_ok || ready_valid) && !decode_exhausted && !pause &&
+                !inflight && !sd_sec_read && (bf_usedw <= BF_HI)) begin
+              sd_sec_read <= 1'b1;
+              sd_sec_read_addr <= sec_addr;
+              inflight <= 1'b1;
+            end
             wrfin_seen <= 1'b0;  // only look at pulses from now on
             // Keep the final displayed buffer intact until its PCM finishes.
-            if (movie_last_shown) begin
+            if (decode_exhausted || !write_bank_free) begin
               write_req <= 1'b0;
             end else if (write_req_ack) begin
               write_req  <= 1'b0;
@@ -958,11 +1040,22 @@ module video_player #(
 
           // ------------------------------------------------ frame complete
           V_FIN: begin
-            if (frame_commit) begin
+            // Reuse the existing byte FIFO while this complete frame waits
+            // for its display credit. Do not consume/decode the next frame
+            // or change audio/presentation timing here. Existing arbiter,
+            // exact-LBA mapping and sector-retirement logic still own IO.
+            if (!frame_enqueue && !decode_exhausted && !pause &&
+                !inflight && !sd_sec_read && (bf_usedw <= BF_HI)) begin
+              sd_sec_read <= 1'b1;
+              sd_sec_read_addr <= sec_addr;
+              inflight <= 1'b1;
+            end
+            if (frame_enqueue) begin
               wrfin_seen <= 1'b0;
-              dp_buf_idx <= wr_buf_idx;  // hard cut
+              ready_bank <= wr_buf_idx;
+              ready_last <= decode_last;
+              ready_valid <= 1'b1;
               wr_buf_idx <= (wr_buf_idx == 2'd2) ? 2'd0 : (wr_buf_idx + 2'd1);
-              disp_ok    <= 1'b1;
               pcnt       <= 0;
               emit_n     <= 8'd0;
               dstate     <= D_OP;

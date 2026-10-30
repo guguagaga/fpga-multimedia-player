@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "presentations": [
+    [
+      1,
+      7575760,
+      0
+    ],
+    [
+      2,
+      10606064,
+      1600
+    ],
+    [
+      3,
+      13636368,
+      3200
+    ],
+    [
+      4,
+      16666672,
+      4800
+    ],
+    [
+      5,
+      19696976,
+      6400
+    ],
+    [
+      6,
+      22727280,
+      8000
+    ],
+    [
+      7,
+      25757584,
+      9600
+    ],
+    [
+      8,
+      28787888,
+      11200
+    ],
+    [
+      9,
+      31818192,
+      12800
+    ],
+    [
+      10,
+      34848496,
+      14400
+    ],
+    [
+      11,
+      37878800,
+      16000
+    ],
+    [
+      12,
+      40909104,
+      17600
+    ],
+    [
+      13,
+      43939408,
+      19200
+    ],
+    [
+      14,
+      46969712,
+      20800
+    ],
+    [
+      15,
+      50000016,
+      22400
+    ],
+    [
+      16,
+      53030320,
+      24000
+    ],
+    [
+      17,
+      56060624,
+      25600
+    ],
+    [
+      18,
+      59090928,
+      27200
+    ],
+    [
+      19,
+      62121232,
+      28800
+    ],
+    [
+      20,
+      65151536,
+      30400
+    ],
+    [
+      21,
+      68181840,
+      32000
+    ],
+    [
+      22,
+      71212144,
+      33600
+    ],
+    [
+      23,
+      74242448,
+      35200
+    ],
+    [
+      24,
+      77272752,
+      36800
+    ],
+    [
+      25,
+      80303056,
+      38400
+    ],
+    [
+      26,
+      83333360,
+      40000
+    ],
+    [
+      27,
+      86363664,
+      41600
+    ],
+    [
+      28,
+      89393968,
+      43200
+    ],
+    [
+      29,
+      92424272,
+      44800
+    ],
+    [
+      30,
+      95454576,
+      46400
+    ]
+  ],
+  "interval_cycles": [
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304,
+    3030304
+  ],
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\av_sample_sync.v": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_byte_ram.v": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_player.v": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_codec8_block_decoder.v": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_codec8_raster.v": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\rgb565_pair_pack.v": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\sd_arbiter.v": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_sec_read_write.v": "b88b47d281a69d968345b856cbe194d28f7d35eee7212c7495ee7d2bf19ac0fb",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\SD\\frame_fifo_write.v": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\fat32_sector_mapper.v": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\compressed_audio_reader.v": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\sector_byte_source.v": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\ima_stream.v": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\user_source\\hdl_source\\qoa_stream.v": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\codec12_block_decoder_experimental.v": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\gradient_block_experimental.v": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\context_huffman_decoder.v": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\codec12_lossless_restore.v": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\codec_byte_queue.v": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\residual_metadata.mem": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\residual_symbols.mem": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\residual_tree.mem": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+  },
+  "evidence_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\portable_verification_hybrid64_lutqoi\\runs\\peak720p_20261030_180829\\result.json": "fd058d4c18c15976ad0a7be7c1e5e3044590bcec49b370368cb532d224e64070"
+  },
+  "scope": "Currentcandidate vendor-model30frames."
+}

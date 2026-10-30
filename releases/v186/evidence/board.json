@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-10-31T02:16:23.660381+08:00",
+  "reported_by": "user",
+  "bit_sha256": "016341c80951ce1d6d8fefe87817cf7b6c0ff8a1900fee5fbfc5f66023d612ae",
+  "original_bit": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\board_test_seed26\\codec14_v185_HDMI_CLOCK_SCALER_REPAIR_seed26_INTERNAL_STA_PASS_BOARD_TEST.bit",
+  "board_confirmed": true,
+  "startup_and_picture_normal": true,
+  "second_cs_video_smooth": true,
+  "audio_normal": true,
+  "second_cs_full_duration_tested": true,
+  "end_av_sync_normal": true,
+  "automatic_next_video_normal": true,
+  "user_confirmation": "这些也都测试正常",
+  "scope": "User confirmed this exact repair candidate: startup, full ~4m31s CS playback, end AV sync and automatic switch. Not an instrumented capture of unique frames; no claim of every card/display or multi-hour soak."
+}

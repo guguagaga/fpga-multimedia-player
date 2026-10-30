@@ -1,0 +1,86 @@
+CHECKED720 frame=1 pixels=921600 bank=1 cycles=3389283
+PROGRESS video cycles=5000000 frames=1 pixels=302336 cmd18=4
+CHECKED720 frame=2 pixels=921600 bank=2 cycles=6178158
+PRESENT720 n=1 cycle=7575760 consumed=0
+CHECKED720 frame=3 pixels=921600 bank=0 cycles=9736374
+PROGRESS video cycles=10000000 frames=3 pixels=0 cmd18=8
+PRESENT720 n=2 cycle=10606064 consumed=1600
+CHECKED720 frame=4 pixels=921600 bank=1 cycles=13107111
+PRESENT720 n=3 cycle=13636368 consumed=3200
+PROGRESS video cycles=15000000 frames=4 pixels=292096 cmd18=12
+CHECKED720 frame=5 pixels=921600 bank=2 cycles=15973871
+PRESENT720 n=4 cycle=16666672 consumed=4800
+CHECKED720 frame=6 pixels=921600 bank=0 cycles=19385049
+PRESENT720 n=5 cycle=19696976 consumed=6400
+PROGRESS video cycles=20000000 frames=6 pixels=75264 cmd18=16
+CHECKED720 frame=7 pixels=921600 bank=1 cycles=21919549
+PRESENT720 n=6 cycle=22727280 consumed=8000
+PROGRESS video cycles=25000000 frames=7 pixels=455936 cmd18=20
+CHECKED720 frame=8 pixels=921600 bank=2 cycles=25022406
+PRESENT720 n=7 cycle=25757584 consumed=9600
+CHECKED720 frame=9 pixels=921600 bank=0 cycles=27938302
+PRESENT720 n=8 cycle=28787888 consumed=11200
+PROGRESS video cycles=30000000 frames=9 pixels=302080 cmd18=24
+CHECKED720 frame=10 pixels=921600 bank=1 cycles=31033611
+PRESENT720 n=9 cycle=31818192 consumed=12800
+CHECKED720 frame=11 pixels=921600 bank=2 cycles=34781933
+PRESENT720 n=10 cycle=34848496 consumed=14400
+PROGRESS video cycles=35000000 frames=11 pixels=36096 cmd18=29
+CHECKED720 frame=12 pixels=921600 bank=0 cycles=37083962
+PRESENT720 n=11 cycle=37878800 consumed=16000
+PROGRESS video cycles=40000000 frames=12 pixels=430686 cmd18=33
+CHECKED720 frame=13 pixels=921600 bank=1 cycles=40144602
+PRESENT720 n=12 cycle=40909104 consumed=17600
+CHECKED720 frame=14 pixels=921600 bank=2 cycles=43134202
+PRESENT720 n=13 cycle=43939408 consumed=19200
+PROGRESS video cycles=45000000 frames=14 pixels=204800 cmd18=37
+CHECKED720 frame=15 pixels=921600 bank=0 cycles=46276131
+PRESENT720 n=14 cycle=46969712 consumed=20800
+CHECKED720 frame=16 pixels=921600 bank=1 cycles=49204459
+PROGRESS video cycles=50000000 frames=16 pixels=0 cmd18=41
+PRESENT720 n=15 cycle=50000016 consumed=22400
+CHECKED720 frame=17 pixels=921600 bank=2 cycles=52268577
+PRESENT720 n=16 cycle=53030320 consumed=24000
+PROGRESS video cycles=55000000 frames=17 pixels=424960 cmd18=45
+CHECKED720 frame=18 pixels=921600 bank=0 cycles=55610676
+PRESENT720 n=17 cycle=56060624 consumed=25600
+CHECKED720 frame=19 pixels=921600 bank=1 cycles=58488055
+PRESENT720 n=18 cycle=59090928 consumed=27200
+PROGRESS video cycles=60000000 frames=19 pixels=225280 cmd18=49
+CHECKED720 frame=20 pixels=921600 bank=2 cycles=61889058
+PRESENT720 n=19 cycle=62121232 consumed=28800
+CHECKED720 frame=21 pixels=921600 bank=0 cycles=64338273
+PROGRESS video cycles=65000000 frames=21 pixels=0 cmd18=53
+PRESENT720 n=20 cycle=65151536 consumed=30400
+CHECKED720 frame=22 pixels=921600 bank=1 cycles=67404056
+PRESENT720 n=21 cycle=68181840 consumed=32000
+PROGRESS video cycles=70000000 frames=22 pixels=424960 cmd18=58
+CHECKED720 frame=23 pixels=921600 bank=2 cycles=70320396
+PRESENT720 n=22 cycle=71212144 consumed=33600
+CHECKED720 frame=24 pixels=921600 bank=0 cycles=73444676
+PRESENT720 n=23 cycle=74242448 consumed=35200
+PROGRESS video cycles=75000000 frames=24 pixels=164096 cmd18=62
+PRESENT720 n=24 cycle=77272752 consumed=36800
+CHECKED720 frame=25 pixels=921600 bank=1 cycles=77288236
+CHECKED720 frame=26 pixels=921600 bank=2 cycles=79585566
+PROGRESS video cycles=80000000 frames=26 pixels=0 cmd18=66
+PRESENT720 n=25 cycle=80303056 consumed=38400
+CHECKED720 frame=27 pixels=921600 bank=0 cycles=82685981
+PRESENT720 n=26 cycle=83333360 consumed=40000
+PROGRESS video cycles=85000000 frames=27 pixels=368896 cmd18=70
+CHECKED720 frame=28 pixels=921600 bank=1 cycles=85553851
+PRESENT720 n=27 cycle=86363664 consumed=41600
+CHECKED720 frame=29 pixels=921600 bank=2 cycles=88739366
+PRESENT720 n=28 cycle=89393968 consumed=43200
+PROGRESS video cycles=90000000 frames=29 pixels=148992 cmd18=74
+CHECKED720 frame=30 pixels=921600 bank=0 cycles=91609012
+PRESENT720 n=29 cycle=92424272 consumed=44800
+PROGRESS video cycles=95000000 frames=30 pixels=0 cmd18=76
+PRESENT720 n=30 cycle=95454576 consumed=46400
+FINITE_EOF_PASS
+CONTINUITY first=7575760 last=95454576 stalls=594 maxstall=34 empty=20339835 decode_busy=24424621 wait_fin=781071
+PASS720 real IMA video decoded=30 presented=30 PCM_samples=48000 cycles=98684848 audio_sectors=52 buffering=594
+- D:/codexworks/framerate_v185_20261029/simulation_verilator_peak30_40000_cache64full_defer1400000_residual_hybrid64_lutqoi\tb.v:301: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
+- Verilator: $finish at 1s; walltime 183.458 s; speed 5.917 ms/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 10 MB

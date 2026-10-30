@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "seconds": 76.15448522567749,
+  "results": [
+    {
+      "phase": 1,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:27:49 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 17,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:27:53 on Oct 30,2026, Elapsed time: 0:00:03\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 33,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:27:58 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 49,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:03 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 65,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:07 on Oct 30,2026, Elapsed time: 0:00:03\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 81,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:12 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 97,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:17 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 113,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:22 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 129,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:26 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 145,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:31 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 161,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:36 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 177,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:41 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 193,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:46 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 209,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:51 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 225,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:28:56 on Oct 30,2026, Elapsed time: 0:00:05\n# Errors: 0, Warnings: 38\n"
+    },
+    {
+      "phase": 241,
+      "passed": true,
+      "summary": "722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_grade'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_in_chg_cnt'.\n# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(10): [TFMPC] - Missing connection for port 'dbg_lat_cnt'.\n# BOUNDED_HOLDS repeats=0\n# PASS I2S cadence delay=0 good=3200 silence_frames=0 period=256\n# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/residual_audiohold/tests/i2s_phase_sweep/tb.v(36)\n#    Time: 1638928 ns  Iteration: 1  Instance: /tb\n# End time: 09:29:00 on Oct 30,2026, Elapsed time: 0:00:04\n# Errors: 0, Warnings: 38\n"
+    }
+  ],
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\i2s_phase_sweep\\tb.v": "2d035c81a9bb343667f58e11178922d7965be40a0ae8331e0f58a303a520395b",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\rtl\\av_sample_sync.v": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\user_source\\hdl_source\\wav_sample_builder.v": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\user_source\\hdl_source\\i2s_transmitter.v": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67"
+  },
+  "scope": "16 frame-grant phases across the256audio-clock I2S frame;3200source pairs each,board-ratio timing;zero insertion forbidden,at most2complete-pair holds per source ACK."
+}

@@ -280,7 +280,7 @@ module bmp_read #(
   end
   qoi_stream #(
     .EXTERNAL_PIXELS(1'b1),
-    .BRAM32_INDEX(1)
+    .BRAM32_INDEX(2)
   ) u_qoi (
     .clk            (clk),
     .rst            (rst || load_abort || !sd_init_done),
@@ -372,9 +372,16 @@ module bmp_read #(
   // clocks. Register its byte-limit comparison before the request-enable
   // cone; the in-flight sector and byte counters are never interrupted.
   reg q_limit_hit_q;
+  reg [15:0] q_limit_parts;
   always @(posedge clk or posedge rst) begin
-    if (rst) q_limit_hit_q <= 0;
-    else q_limit_hit_q <= bmp_len_cnt >= q_byte_limit;
+    if (rst) begin q_limit_hit_q <= 0; q_limit_parts <= 0; end
+    else begin
+      // The sector counter is stable while QOI drains its buffered bytes.
+      // Resolve the limit before requesting another sector, using the same
+      // grouped comparator as the existing BMP retirement pipeline.
+      q_limit_parts <= compare_groups(bmp_len_cnt, q_byte_limit);
+      q_limit_hit_q <= !merge_less(q_limit_parts);
+    end
   end
   // Sector retirement has a three-cycle byte drain. Compute wide
   // EOF/row bounds in two stages during that drain; the final byte count
@@ -568,13 +575,27 @@ module bmp_read #(
   // Separate unsigned length subtraction from the remaining validation tree.
   reg [31:0] header_payload_bytes;
   reg header_length_ok;
+  // The header is stable well before sector_end. Compare byte lanes first,
+  // then combine their registered results, avoiding one32-bit LUT chain.
+  reg [3:0] header_len_gt, header_len_eq;
+  integer header_lane;
+  always @(posedge clk or posedge rst) begin
+    if(rst) begin header_len_gt<=0;header_len_eq<=0;end
+    else for(header_lane=0;header_lane<4;header_lane=header_lane+1)begin
+      header_len_gt[header_lane]<=file_len[header_lane*8+:8]>pixel_offset[header_lane*8+:8];
+      header_len_eq[header_lane]<=file_len[header_lane*8+:8]==pixel_offset[header_lane*8+:8];
+    end
+  end
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       header_payload_bytes <= 0;
       header_length_ok <= 0;
     end else begin
       header_payload_bytes <= file_len - pixel_offset;
-      header_length_ok <= file_len >= pixel_offset;
+      header_length_ok <= header_len_gt[3] || (header_len_eq[3] &&
+          (header_len_gt[2] || (header_len_eq[2] &&
+          (header_len_gt[1] || (header_len_eq[1] &&
+          (header_len_gt[0] || header_len_eq[0]))))));
     end
   end
   reg header_ok_r;

@@ -1,0 +1,6 @@
+{"kind": 1, "w": 320, "h": 240, "passed": false, "returncode": 4, "seconds": 0.6376259326934814, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\integration\\kind1_320x240\\console.log"}
+Traceback (most recent call last):
+  File "D:\codexworks\framerate_v185_20261029\test_hdmi_scaler_integration.py", line 42, in <module>
+    assert report['passed']
+           ~~~~~~^^^^^^^^^^
+AssertionError

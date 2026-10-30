@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\tb.sv": "ad377fb6b9dfb0185b26ecc328d4bf7030c5e1c5506b903ee0ca9903636d027f",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\tests\\ram_default_equivalence\\reference.v": "9230cd02a3dafa7bf51903c11a279c37c4a639762e016d2867d5d868bda82369",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_hybrid64_lutqoi\\candidate\\project\\rtl\\video_byte_ram.v": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_bram32k.v": "d9443cdaffea436c51852fa6e859bb25650f9f87d9d0b276643db16575a75baa",
+    "D:\\TD3\\sim_release\\eg4\\eg_phy_glbl.v": "95b5fed81000f5844a5a3b110a5b8e82d59a941e6f0715015e38884192ee4fb7"
+  },
+  "reference_sha256": "daa1165d9fd517e8d2f549b6148da59e49a88e89c3d9be99cce726c0df8abff2",
+  "seconds": 9.968317985534668,
+  "structural_default_equivalence": false,
+  "scope": "Vendor reference/default-depth byteRAM exhaustive address andrandomized concurrent/hold operations AW10,12,13,14,15. Newhybrid parameter defaults0; hybrid64 mode separately differential tested."
+}

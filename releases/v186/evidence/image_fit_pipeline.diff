@@ -1,0 +1,44 @@
+--- clock_repair/img_scaler.v
++++ scaler_compare_pipeline/img_scaler.v
+@@ -740,8 +740,9 @@
+ );
+   localparam WAIT=0, CONFIG=1, FIT=2, MARGINS=3, NEXT_ROW=4,
+       READ_ROW=5, STORE=6, H_STEP=7, ROW_TAIL=8,
+-      FETCH=9, EMIT=10, V_STEP=11, DRAIN=12, DONE=13;
++      FETCH=9, EMIT=10, V_STEP=11, DRAIN=12, DONE=13, V_CHECK=14;
+   reg [3:0] state;
++  reg v_step_ge;
+   reg [23:0] fifo[0:511];
+   reg [8:0] wp, rp;
+   reg [9:0] count;
+@@ -793,6 +794,7 @@
+   always @(posedge clk) begin
+     if (rst || frame_start) begin
+       state <= WAIT;
++      v_step_ge <= 0;
+       sw <= 1; sh <= 1; sx <= 0; sy <= 0; want_x <= 0; want_y <= 0;
+       line_y <= 0; line_valid <= 0; held_x <= 0;
+       fit_w <= 1; fit_h <= 1; left <= 0; top <= 0; right <= 1; bottom <= 1;
+@@ -863,13 +865,20 @@
+             if (oy == OUT_H-1) state <= DRAIN;
+             else begin
+               oy <= oy + 1'b1;
+-              if (in_body) begin v_rem <= v_rem + sh; state <= V_STEP; end
++              if (in_body) begin v_rem <= v_rem + sh; state <= V_CHECK; end
+               else state <= NEXT_ROW;
+             end
+           end else begin ox <= ox + 1'b1; state <= FETCH; end
+         end
+-        V_STEP: if (v_rem >= fit_h) begin
++        // Register the vertical-step comparison before selecting the next
++        // state. This adds one control cycle per step, no pixel or ratio change.
++        V_CHECK: begin
++          v_step_ge <= v_rem >= fit_h;
++          state <= V_STEP;
++        end
++        V_STEP: if (v_step_ge) begin
+           v_rem <= v_rem - fit_h; want_y <= want_y + 1'b1;
++          state <= V_CHECK;
+         end else state <= NEXT_ROW;
+         DRAIN: if (sy >= sh) state <= DONE;
+         DONE: ;

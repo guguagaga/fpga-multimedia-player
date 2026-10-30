@@ -1,0 +1,6 @@
+{"case": [64, 36, 36, 0], "passed": true, "returncode": 0, "seconds": 39.809155225753784, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\64x36_aspect36_abort0.log"}
+{"case": [320, 240, 240, 15000], "passed": true, "returncode": 0, "seconds": 46.03260540962219, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\320x240_aspect240_abort15000.log"}
+{"case": [720, 1280, 1280, 0], "passed": true, "returncode": 0, "seconds": 64.25406622886658, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\720x1280_aspect1280_abort0.log"}
+{"case": [1, 1, 1, 0], "passed": true, "returncode": 0, "seconds": 37.73452115058899, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1x1_aspect1_abort0.log"}
+{"case": [1280, 480, 960, 0], "passed": true, "returncode": 0, "seconds": 69.65169382095337, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1280x480_aspect960_abort0.log"}
+{"case": [1920, 1080, 1080, 0], "passed": true, "returncode": 0, "seconds": 111.46788239479065, "log": "D:\\codexworks\\framerate_v185_20261029\\hdmi_no_signal_v185\\scaler_compare_pipeline\\tests\\1920x1080_aspect1080_abort0.log"}

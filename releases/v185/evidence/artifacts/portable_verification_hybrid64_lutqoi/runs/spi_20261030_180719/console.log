@@ -1,0 +1,66 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:07:20 on Oct 30,2026
+# vlog -sv D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/sd_spi_model.sv D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/sd_arbiter.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_top.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_cmd.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/sd_card_sec_read_write.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/spi_master.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/user_source/hdl_source/SD/spi_sniffer.v D:/codexworks/framerate_v185_20261029/residual_hybrid64_lutqoi/candidate/project/rtl/video_byte_ram.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb_sd_speed
+# -- Compiling module tb_sd_cmd_tail
+# -- Compiling module sd_spi_model
+# -- Compiling module sd_arbiter
+# -- Compiling module sd_card_top
+# -- Compiling module sd_card_cmd
+# -- Compiling module sd_card_sec_read_write
+# -- Compiling module spi_master
+# -- Compiling module spi_sniffer
+# -- Compiling module video_byte_ram
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb_sd_speed
+# 	tb_sd_cmd_tail
+# 	glbl
+# End time: 18:07:20 on Oct 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb_sd_speed work.glbl 
+# Start time: 18:07:21 on Oct 30,2026
+# Loading sv_std.std
+# Loading work.tb_sd_speed
+# Loading work.sd_arbiter
+# Loading work.sd_card_top
+# Loading work.sd_card_sec_read_write
+# Loading work.sd_card_cmd
+# Loading work.spi_master
+# Loading work.spi_sniffer
+# Loading work.sd_spi_model
+# Loading work.glbl
+# Loading work.video_byte_ram
+# Loading work.EG_PHY_BRAM32K
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'arb'.  Expected 32, found 31.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sd_speed/arb File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v Line: 11
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(11): [TFMPC] - Missing connection for port 'defer_audio'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 24, found 18.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sd_speed/dut File: D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v Line: 18
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'sd_sec_write_data_req'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'sd_sec_write_end'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'dbg_sd_cmd_err'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'dbg_snf_byte'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'dbg_snf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(18): [TFMPC] - Missing connection for port 'dbg_snf_frozen'.
+# PASS real SPI initialization with 200 kHz divider
+# MEASURE legacy=0 token_delay=0 cycles=17230 spi_bytes=524
+# MEASURE legacy=0 token_delay=33 cycles=18418 spi_bytes=557
+# MEASURE legacy=0 token_delay=1024 cycles=54094 spi_bytes=1548
+# PASS image/audio/directory arbitration: exact bytes and one end per request
+# PASS streaming64: overlap_hits=63
+# PASS CMD18 stop/drain and all 31 cached sectors across an audio read
+# PASS cancelled client request finishes the held sector
+# PASS command error followed by successful fresh CMD17
+# PASS SD speed regression legacy=0 CMD17=12 CMD18=3 CMD12=3
+# ** Note: $finish    : D:/codexworks/framerate_v185_20261029/portable_verification_hybrid64_lutqoi/runs/spi_20261030_180719/tb.v(98)
+#    Time: 160033599 ns  Iteration: 1  Instance: /tb_sd_speed
+# End time: 18:12:24 on Oct 30,2026, Elapsed time: 0:05:03
+# Errors: 0, Warnings: 9

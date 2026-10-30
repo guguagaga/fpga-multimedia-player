@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\hold_controls\\tb.v": "5afe938ac0abfe99d6607170fc85b7373e85e43a04b60477eeb92c5df480588f",
+    "D:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\candidate\\project\\user_source\\hdl_source\\i2s_transmitter.v": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67"
+  },
+  "log": "HOLD_CONTROLS_PASS checks=17\nD:\\codexworks\\framerate_v185_20261029\\residual_audiohold\\tests\\hold_controls\\tb.v:33: $finish called at 43566000 (1ps)\n",
+  "scope": "Actual I2S publication boundaries, distinctL/R pairs,maximum two holds,startup,mute,flush,ordinary starvation,recovery."
+}

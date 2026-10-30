@@ -20,7 +20,11 @@
 //   needs one every 5.3 ms (96 kB/s), so ~97% of the bus is idle and that is
 //   already enough for ~3.0 MB/s of video.  Putting video last also keeps the
 //   three existing clients bit-for-bit identical when no video is playing.
-module sd_arbiter (
+module sd_arbiter #(
+  parameter integer PREFETCH_AWARE = 0,
+  parameter integer MAX_DEFER_CYCLES = 1_000_000
+) (
+  input wire defer_audio,
   input  wire        clk,
   input  wire        rst,
   // ---- image client (sd_card_bmp) ----
@@ -116,6 +120,23 @@ module sd_arbiter (
     else if (wav_wait_cnt != WAV_WAIT_MAX[15:0]) wav_wait_cnt <= wav_wait_cnt + 16'd1;
   end
 
+  // A new audio miss cannot use the card during a physical video burst.
+  // With sufficient PCM reserve, leave ownership free for cache-hit video
+  // requests until that burst ends. Never revoke an accepted transaction.
+  // Saturating timeout preserves eventual admission even if busy sticks.
+  localparam integer DEFER_W = $clog2(MAX_DEFER_CYCLES+1);
+  reg [DEFER_W-1:0] defer_count;
+  wire defer_expired = defer_count == MAX_DEFER_CYCLES;
+  wire audio_eligible = wav_sd_sec_read &&
+      (!PREFETCH_AWARE || !defer_audio || defer_expired);
+  always @(posedge clk or posedge rst) begin
+    if (rst) defer_count <= 0;
+    else if (!PREFETCH_AWARE || !wav_sd_sec_read || ((state == SERV) && (sel == SEL_WAV)))
+      defer_count <= 0;
+    else if (defer_audio && !defer_expired)
+      defer_count <= defer_count + 1'b1;
+  end
+
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       state <= IDLE;
@@ -138,7 +159,7 @@ module sd_arbiter (
             // [Design note]音频最久等待上限：无条件抢先于所有客户端
             //   （img_priority 期间本来是图片/目录优先，这里也让音频插队：
             //     首图窗口很短，插一扇区不影响开机；但能彻底避免饿死）
-            if (wav_urgent && wav_sd_sec_read) begin
+            if (wav_urgent && audio_eligible) begin
               sel <= SEL_WAV;
               state <= SERV;
               address_latched <= wav_sd_sec_read_addr;
@@ -155,7 +176,7 @@ module sd_arbiter (
                 state <= SERV;
                 address_latched <= img_sd_sec_read_addr;
                 wav_run <= 0;
-              end else if (wav_sd_sec_read) begin
+              end else if (audio_eligible) begin
                 sel <= SEL_WAV;
                 state <= SERV;
                 address_latched <= wav_sd_sec_read_addr;
@@ -173,7 +194,7 @@ module sd_arbiter (
                 state <= SERV;
                 address_latched <= img_sd_sec_read_addr;
                 wav_run <= 0;
-              end else if (wav_sd_sec_read) begin
+              end else if (audio_eligible) begin
                 sel <= SEL_WAV;
                 state <= SERV;
                 address_latched <= wav_sd_sec_read_addr;

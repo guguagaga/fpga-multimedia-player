@@ -30,6 +30,8 @@ module frame_fifo_read #(
 
   input read_req,  // data read module read request,keep '1' until read_req_ack = '1'
   output reg read_req_ack,  // data read module read request response
+  output reg [1:0] scanout_bank,
+  output reg scanout_toggle,
   output read_finish,  // data read module read request finish
   input[ADDR_BITS - 1:0]           read_addr_0,                // data read module read request base address 0, used when read_addr_index = 0
   input[ADDR_BITS - 1:0]           read_addr_1,                // data read module read request base address 1, used when read_addr_index = 1
@@ -107,6 +109,15 @@ module frame_fifo_read #(
       rd_delay <= 4'd0;
     end else if (rd_delay < 4'd10) begin
       rd_delay <= rd_delay + 1'b1;
+    end
+  end
+  // Publish the bank actually latched at the end of S_ACK. The address
+  // and bank use the same synchronized selector on this exact edge.
+  always @(posedge mem_clk or posedge rst) begin
+    if(rst)begin scanout_bank<=0;scanout_toggle<=0;end
+    else if(state==S_ACK && !read_req_d2)begin
+      scanout_bank<=read_addr_index_d1;
+      scanout_toggle<=~scanout_toggle;
     end
   end
   always @(posedge mem_clk or posedge rst) begin
