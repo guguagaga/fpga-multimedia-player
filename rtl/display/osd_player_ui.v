@@ -502,9 +502,10 @@ module osd_player_ui #(
   // [Design note bc-osd]参数区区域与字符索引（仅 pshow 期间"存在"）
   // The same compact top-bar slot shows the brightness/contrast prompt for
   // its normal three-second lifetime.  Otherwise it continuously reports
-  // the effective carousel period, including AUTO: OFF.  It is hidden while
-  // a video is active so the text cannot be mistaken for video timing.
-  wire in_param = !video_mode &&
+  // the effective carousel period, including AUTO: OFF.  Keep this status
+  // visible in video mode too: it is a read-only image-carousel status and
+  // must not disappear merely because the viewer is checking another mode.
+  wire in_param =
                     (pixel_x >= PARAM_X) && (pixel_x < PARAM_X + 10'd88) &&
                     (pixel_y >= HDR_Y) && (pixel_y < HDR_Y + 10'd16);
   wire [3:0] param_idx = (pixel_x - PARAM_X) >> 3;
