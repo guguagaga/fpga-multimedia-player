@@ -2474,7 +2474,7 @@ module top (
   reg image_prefetch_audio_ready;
   always @(posedge sd_card_clk or posedge rst_all) begin
     if (rst_all) image_prefetch_audio_ready <= 1'b0;
-    else image_prefetch_audio_ready <= (fifo_usedw >= 14'd6144);
+    else image_prefetch_audio_ready <= (fifo_lvl == 2'd3);
   end
   sd_card_bmp #(
     .EARLY_PREFETCH_EN(1),

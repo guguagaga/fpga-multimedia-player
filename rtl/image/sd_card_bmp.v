@@ -750,6 +750,12 @@ module sd_card_bmp #(
           //   原来加载期间计时器被清零 => 实际间隔 = 周期 + 加载耗时（大图多出 13 秒）。
           //   现在：只要轮播开着就一直走，饱和在 auto_period_sec；到点后等空闲再换图。
           if (auto_run && first_image_committed && (img_found_count > 3'd1)) begin
+            // The period belongs to the image currently on screen. A normal
+            // load starts a new display interval when it finishes; a
+            // background prefetch must not restart the interval merely because
+            // its buffer became ready. At the deadline, keep the due state
+            // asserted while a load/transition is pending so the next frame
+            // flips immediately when the resource becomes available.
             if ((load_finish && pf_state != PF_DONE) ||
                 (pf_flip_pend && (fade_done_pulse || fade_wait_to))) begin
               // [Design note 计时起点修正]一次加载结束（load_busy 下降沿）= 新图该上屏了，从这里计时。
@@ -760,10 +766,20 @@ module sd_card_bmp #(
               auto_half_due_q <= 0;
               auto_cnt <= 32'd0;
             end else if (auto_step) begin
-              // 换图请求已发出 => 清零（否则 auto_step 会一直为 1）
-              sec_cnt <= 10'd0;
-              auto_due_q <= 0;
-              auto_half_due_q <= 0;
+              // A request may be waiting on SD, a prefetched buffer, or the
+              // fade handshake. Do not restart the user-visible period here;
+              // hold the saturated deadline until the new image is actually
+              // published by the paths above.
+              sec_cnt <= auto_period_sec;
+              auto_due_q <= 1'b1;
+              auto_half_due_q <= 1'b1;
+              auto_cnt <= 32'd0;
+            end else if (sec_cnt >= auto_period_sec) begin
+              // Keep a due period level rather than allowing auto_cnt to wrap
+              // while waiting for a slow SD read or transition.
+              sec_cnt <= auto_period_sec;
+              auto_due_q <= 1'b1;
+              auto_half_due_q <= 1'b1;
               auto_cnt <= 32'd0;
             end else if (auto_tick) begin
               auto_cnt <= 32'd0;

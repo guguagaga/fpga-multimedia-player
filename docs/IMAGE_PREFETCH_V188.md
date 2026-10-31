@@ -16,3 +16,9 @@
 - 工程文档：`docs/ENGINEERING_HANDOVER_R3.md`。
 - 拍摄文档：`docs/CAPTURE_PLAN_R3.md`。
 - R3用户反馈和v188失败证据分别在`verification/osd_carousel_r3`、`verification/image_prefetch_v188`。
+
+## 自动切图计时基准修正（待重新签核）
+
+检查通路后发现，原计时器在到点发出切图请求时立即把 `sec_cnt` 清零；如果下一张仍在读卡、写帧或等待淡出握手，下一次周期会从零重新开始，实际间隔就会随加载时间变长，看起来时快时慢。
+
+工作区已加入一个未签核修正：到点后保持 `sec_cnt=auto_period_sec` 和 `auto_due_q=1`，等新图真正发布或预取翻转完成后才重新计时。控制状态回归通过；该修正尚未重新综合、布线和上板，不能放入R3验收包。预读准入时序失败仍然独立记录。
