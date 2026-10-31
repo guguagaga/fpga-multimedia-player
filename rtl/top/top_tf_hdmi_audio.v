@@ -821,6 +821,23 @@ module top (
     .preset_sec ()
   );
 
+  // Bundle the effective enable and period.  Both values are generated in
+  // sd_card_clk, but the OSD renders in video_clk; a toggle marks a stable
+  // snapshot rather than synchronizing each bit independently.
+  reg [4:0] auto_status_src;
+  reg       auto_status_toggle;
+  always @(posedge sd_card_clk or posedge rst_all) begin
+    if (rst_all) begin
+      auto_status_src    <= 5'd0;
+      auto_status_toggle <= 1'b0;
+    end else begin
+      if ({img_auto_on, exp_period_code} != auto_status_src) begin
+        auto_status_src    <= {img_auto_on, exp_period_code};
+        auto_status_toggle <= ~auto_status_toggle;
+      end
+    end
+  end
+
   // ---- 单拍事件 ----
   wire exp_video_pause_evt = exp_key_press[0];  // KEY0 视频暂停/恢复
   wire exp_next_song_evt = exp_key_press[1];  // KEY1 下一首
@@ -3672,6 +3689,53 @@ seg595_display #(
     end
   end
 
+  // Safe bundled CDC for the carousel status.  auto_status_src is held until
+  // the next toggle, so the two video-domain samples see one coherent value.
+  reg [4:0] auto_status_v0, auto_status_v1, auto_status_v2;
+  reg       auto_status_t0, auto_status_t1, auto_status_t2;
+  reg [4:0] auto_status_video;
+  always @(posedge video_clk or negedge rst_all_n) begin
+    if (!rst_all_n) begin
+      auto_status_v0    <= 5'd0;
+      auto_status_v1    <= 5'd0;
+      auto_status_v2    <= 5'd0;
+      auto_status_t0    <= 1'b0;
+      auto_status_t1    <= 1'b0;
+      auto_status_t2    <= 1'b0;
+      auto_status_video <= 5'd0;
+    end else begin
+      auto_status_v0 <= auto_status_src;
+      auto_status_v1 <= auto_status_v0;
+      auto_status_v2 <= auto_status_v1;
+      auto_status_t0 <= auto_status_toggle;
+      auto_status_t1 <= auto_status_t0;
+      auto_status_t2 <= auto_status_t1;
+      // The toggle edge is deliberately observed one cycle after the
+      // bundled data has reached the second synchronizer stage.  Sampling
+      // auto_status_v1 here avoids accepting the previous value when the
+      // toggle and data arrive in the same video-clock cycle.
+      if (auto_status_t2 != auto_status_t1)
+        auto_status_video <= auto_status_v1;
+    end
+  end
+  function [9:0] auto_period_decode;
+    input [3:0] code;
+    begin
+      case (code)
+        4'd0: auto_period_decode=10'd2;   4'd1: auto_period_decode=10'd3;
+        4'd2: auto_period_decode=10'd5;   4'd3: auto_period_decode=10'd8;
+        4'd4: auto_period_decode=10'd10;  4'd5: auto_period_decode=10'd15;
+        4'd6: auto_period_decode=10'd20;  4'd7: auto_period_decode=10'd30;
+        4'd8: auto_period_decode=10'd45;  4'd9: auto_period_decode=10'd60;
+        4'd10:auto_period_decode=10'd90;  4'd11:auto_period_decode=10'd120;
+        4'd12:auto_period_decode=10'd180; 4'd13:auto_period_decode=10'd240;
+        4'd14:auto_period_decode=10'd300; default:auto_period_decode=10'd600;
+      endcase
+    end
+  endfunction
+  wire carousel_on_v = auto_status_video[4];
+  wire [9:0] carousel_period_sec_v = auto_period_decode(auto_status_video[3:0]);
+
   // ============================================================================
   // [Design note 视频音轨标题]视频模式下不显示歌单名，改显示视频音轨标识。
   //   OSD 的 song_name 是 8 字节大端 ASCII（char_rom 覆盖 0x20..0x7E，含 '/'）。
@@ -3822,6 +3886,9 @@ seg595_display #(
     .bit_depth  (bd_v1),
     .volume     (volume_v1),
     .pause      (pause_v1),
+    .carousel_on(carousel_on_v),
+    .carousel_period_sec(carousel_period_sec_v),
+    .video_mode (vp_v1),
     .kp_debug   (kp_dbg_v1),
     .sw_deg     (sw_deg),            // [Design note bc-osd]参数拨码档位（B/C 显示）
     // 4x4 格子用实时位图（每帧刷新），这样"某个键到底有没有被读到"
