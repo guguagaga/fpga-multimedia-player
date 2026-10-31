@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "functional_gain_percent": 27.9,
+  "sta_best_setup_ns": -0.03,
+  "sta_best_violations": 1,
+  "decision": "R3 baseline only; v188 research closed"
+}
