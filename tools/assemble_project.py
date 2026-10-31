@@ -1,8 +1,8 @@
 """Restore the exact validated project layout; import licensed IP locally."""
 from pathlib import Path
 import argparse,hashlib,json,shutil
-a=argparse.ArgumentParser();a.add_argument('--vendor-project',type=Path);a.add_argument('--out',type=Path,default=Path('build_workspace/candidate/project'));o=a.parse_args()
-r=Path(__file__).resolve().parents[1];items=json.loads((r/'project_manifest.json').read_text())['files'];target=o.out.resolve()
+a=argparse.ArgumentParser();a.add_argument('--vendor-project',type=Path);a.add_argument('--out',type=Path,default=Path('build_workspace/candidate/project'));a.add_argument('--manifest',type=Path,help='Versioned source manifest; defaults to the frozen release manifest');o=a.parse_args()
+r=Path(__file__).resolve().parents[1];items=json.loads((o.manifest or r/'project_manifest.json').read_text())['files'];target=o.out.resolve()
 sources=[]
 for item in items:
  src=(o.vendor_project/item['project_path']) if item['external'] and o.vendor_project else (r/item['public_path'] if item['public_path'] else None)

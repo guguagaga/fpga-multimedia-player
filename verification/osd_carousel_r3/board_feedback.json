@@ -1,0 +1,11 @@
+{
+  "recorded_date": "2026-10-31",
+  "reported_by": "user",
+  "bit_sha256": "a2f440504dbf6b1dbeb8d096bd37d5e1f40cc07833f79339d54280f0c52a0a74",
+  "user_feedback": "感觉还是受最低读取时间的约束，但是比之前交互性好了很多",
+  "interaction_improvement_reported": true,
+  "remaining_read_time_limit_reported": true,
+  "all_16_presets_individually_confirmed": false,
+  "full_video_av_regression_confirmed_for_r3": false,
+  "scope": "User feedback after R3 delivery; does not independently confirm every preset, all transitions, or full-length A/V replay."
+}
