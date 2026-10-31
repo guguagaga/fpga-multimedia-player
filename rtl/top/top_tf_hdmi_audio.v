@@ -2468,7 +2468,16 @@ module top (
   //       不占额外功能代价。
   //
   // 用 scan_sector_o（bmp_read 的扫描位置）回接成 phase B 的起点。
+  // Admit earlier background image preparation only with >=6144 PCM bytes
+  // already buffered (~32ms at 48kHz stereo16). Admission never changes the
+  // arbiter's transaction ownership, urgent-audio rule or video prefetch.
+  reg image_prefetch_audio_ready;
+  always @(posedge sd_card_clk or posedge rst_all) begin
+    if (rst_all) image_prefetch_audio_ready <= 1'b0;
+    else image_prefetch_audio_ready <= (fifo_usedw >= 14'd6144);
+  end
   sd_card_bmp #(
+    .EARLY_PREFETCH_EN(1),
     .CLK_FREQ_HZ      (SD_CORE_HZ),
     .SCAN_MAX_SECTOR  (32'd131071),
     // 2026-10-12【图片修复 2/2】3'd3 -> 3'd4：让第 4 张图能被识别
@@ -2547,6 +2556,7 @@ module top (
     .period_code    (exp_period_code),
     .auto_period_sec(exp_period_sec),
     .period_reseed  (kp_period_step),
+    .prefetch_audio_ready(image_prefetch_audio_ready),
     .cfg_boundary_o (exp_cfg_boundary),
     .state_code     (state_code),
     .bmp_width      (16'd640),

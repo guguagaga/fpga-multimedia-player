@@ -1,0 +1,6 @@
+PASS low-water admission and auto-off/manual consumes prepared frame
+PASS active-transfer video cancel and fresh image recovery
+PASS low-water half-period fallback and deadline switch
+PASS failed prefetch is not displayed and manual retry recovers
+PASS40 manual actions and10 toggles no displayed-bank overwrite frames=51 loads=52
+D:\codexworks\image_prefetch_v188\tests\control\tb.v:59: $finish called at 381890000 (1ps)

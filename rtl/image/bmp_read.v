@@ -1029,7 +1029,10 @@ module bmp_read #(
               sd_sec_read <= 0;
               sd_sec_read_addr <= sd_sec_read_addr + 1'b1;
             end
-            if ((q_done || q_error) && !sd_sec_read) begin
+            // A registered start is consumed by u_qoi on this same edge.
+            // Ignore the previous image's terminal flags until that edge has
+            // cleared them; otherwise a second QOI load exits immediately.
+            if ((q_done || q_error) && !sd_sec_read && !q_start_q) begin
               load_error <= q_error;
               state <= ST_IDLE;
             end

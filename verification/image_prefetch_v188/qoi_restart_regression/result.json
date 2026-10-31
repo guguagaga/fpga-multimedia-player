@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "r3_baseline",
+      "passed": false,
+      "expected_failure_reproduced": true,
+      "log": "D:\\codexworks\\image_prefetch_v188\\tests\\qoi_restart_regression\\r3_baseline\\console.log"
+    },
+    {
+      "case": "candidate_fixed",
+      "passed": true,
+      "expected_failure_reproduced": false,
+      "log": "D:\\codexworks\\image_prefetch_v188\\tests\\qoi_restart_regression\\candidate_fixed\\console.log"
+    }
+  ],
+  "scope": "Actual bmp_read/QOI/vendor distributedRAM; consecutive completed and invalid-end-marker files without reset"
+}
