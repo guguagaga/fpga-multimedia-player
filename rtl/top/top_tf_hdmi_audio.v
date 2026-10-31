@@ -821,22 +821,12 @@ module top (
     .preset_sec ()
   );
 
-  // Bundle the effective enable and period.  Both values are generated in
-  // sd_card_clk, but the OSD renders in video_clk; a toggle marks a stable
-  // snapshot rather than synchronizing each bit independently.
-  reg [4:0] auto_status_src;
-  reg       auto_status_toggle;
-  always @(posedge sd_card_clk or posedge rst_all) begin
-    if (rst_all) begin
-      auto_status_src    <= 5'd0;
-      auto_status_toggle <= 1'b0;
-    end else begin
-      if ({img_auto_on, exp_period_code} != auto_status_src) begin
-        auto_status_src    <= {img_auto_on, exp_period_code};
-        auto_status_toggle <= ~auto_status_toggle;
-      end
-    end
-  end
+  wire [4:0] auto_status_video;
+  carousel_status_cdc u_carousel_status (
+    .src_clk(sd_card_clk), .dst_clk(video_clk), .rst(rst_all),
+    .src_status({img_auto_on, exp_period_code}),
+    .dst_status(auto_status_video)
+  );
 
   // ---- 单拍事件 ----
   wire exp_video_pause_evt = exp_key_press[0];  // KEY0 视频暂停/恢复
@@ -3689,35 +3679,6 @@ seg595_display #(
     end
   end
 
-  // Safe bundled CDC for the carousel status.  auto_status_src is held until
-  // the next toggle, so the two video-domain samples see one coherent value.
-  reg [4:0] auto_status_v0, auto_status_v1, auto_status_v2;
-  reg       auto_status_t0, auto_status_t1, auto_status_t2;
-  reg [4:0] auto_status_video;
-  always @(posedge video_clk or negedge rst_all_n) begin
-    if (!rst_all_n) begin
-      auto_status_v0    <= 5'd0;
-      auto_status_v1    <= 5'd0;
-      auto_status_v2    <= 5'd0;
-      auto_status_t0    <= 1'b0;
-      auto_status_t1    <= 1'b0;
-      auto_status_t2    <= 1'b0;
-      auto_status_video <= 5'd0;
-    end else begin
-      auto_status_v0 <= auto_status_src;
-      auto_status_v1 <= auto_status_v0;
-      auto_status_v2 <= auto_status_v1;
-      auto_status_t0 <= auto_status_toggle;
-      auto_status_t1 <= auto_status_t0;
-      auto_status_t2 <= auto_status_t1;
-      // The toggle edge is deliberately observed one cycle after the
-      // bundled data has reached the second synchronizer stage.  Sampling
-      // auto_status_v1 here avoids accepting the previous value when the
-      // toggle and data arrive in the same video-clock cycle.
-      if (auto_status_t2 != auto_status_t1)
-        auto_status_video <= auto_status_v1;
-    end
-  end
   function [9:0] auto_period_decode;
     input [3:0] code;
     begin

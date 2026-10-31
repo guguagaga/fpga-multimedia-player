@@ -64,6 +64,23 @@ module osd_player_ui #(
   wire [ 9:0] pixel_x = screen_x[10:1];
   wire [ 9:0] pixel_y = y2 / 3;
 
+  reg carousel_on_frame;
+  reg [9:0] carousel_period_frame;
+  reg carousel_vs_d;
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      carousel_vs_d <= 1'b1;
+      carousel_on_frame <= 1'b0;
+      carousel_period_frame <= 10'd2;
+    end else begin
+      carousel_vs_d <= vs;
+      if (carousel_vs_d && !vs) begin
+        carousel_on_frame <= carousel_on;
+        carousel_period_frame <= carousel_period_sec;
+      end
+    end
+  end
+
   // ================= layout (640x480) =================
   // 顶部信息栏（标题 + 音频格式，体现多媒体播放器完整性）
   localparam [9:0] HDR_Y = 10'd12;  // 顶部文字 y
@@ -518,7 +535,7 @@ module osd_player_ui #(
     auto_hundreds = 4'd0;
     auto_tens     = 4'd0;
     auto_ones     = 4'd0;
-    case (carousel_period_sec)
+    case (carousel_period_frame)
       10'd2:   begin auto_ones=4'd2; end
       10'd3:   begin auto_ones=4'd3; end
       10'd5:   begin auto_ones=4'd5; end
@@ -684,7 +701,7 @@ module osd_player_ui #(
           4'd9: char_code = 8'h30 + c_tens;
           default: char_code = 8'h30 + c_ones;
         endcase
-      end else if (!carousel_on) begin
+      end else if (!carousel_on_frame) begin
         // "AUTO: OFF"
         case (param_idx)
           4'd0: char_code = "A";

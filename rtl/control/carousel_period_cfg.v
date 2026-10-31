@@ -73,3 +73,47 @@ module carousel_period_cfg (
   end
 
 endmodule
+
+// Coherent, latest-value status mailbox. Both domains share active-high rst.
+// The source bundle stays unchanged until the destination acknowledges it.
+// Changes while busy are coalesced; the final effective value is delivered.
+module carousel_status_cdc (
+  input            src_clk,
+  input            dst_clk,
+  input            rst,
+  input      [4:0]  src_status,
+  output reg [4:0]  dst_status
+);
+  reg [4:0] bundle;
+  reg request_toggle, ack_toggle;
+  (* ASYNC_REG = "TRUE" *) reg [1:0] ack_sync;
+  (* ASYNC_REG = "TRUE" *) reg [2:0] request_sync;
+
+  always @(posedge src_clk or posedge rst) begin
+    if (rst) begin
+      bundle <= 5'd0;
+      request_toggle <= 1'b0;
+      ack_sync <= 2'b00;
+    end else begin
+      ack_sync <= {ack_sync[0], ack_toggle};
+      if ((ack_sync[1] == request_toggle) && (src_status != bundle)) begin
+        bundle <= src_status;
+        request_toggle <= ~request_toggle;
+      end
+    end
+  end
+
+  always @(posedge dst_clk or posedge rst) begin
+    if (rst) begin
+      request_sync <= 3'b000;
+      ack_toggle <= 1'b0;
+      dst_status <= 5'd0;
+    end else begin
+      request_sync <= {request_sync[1:0], request_toggle};
+      if (request_sync[2] != ack_toggle) begin
+        dst_status <= bundle;
+        ack_toggle <= request_sync[2];
+      end
+    end
+  end
+endmodule

@@ -1,0 +1,2 @@
+PASS all 16 intervals, OFF, final RGB 71808 pixels, frame snapshot, B/C priority
+D:\codexworks\osd_carousel_v187\tests_r2\tb_rgb.v:59: $finish called at 2876831000 (1ps)
