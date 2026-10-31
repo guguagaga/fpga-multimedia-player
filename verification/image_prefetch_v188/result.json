@@ -1,13 +1,36 @@
 {
   "passed": false,
-  "feature_gain_percent": 27.9,
-  "seed24_setup_ns": -1.343,
-  "seed24_violations": 17,
-  "watermark_seed24_setup_ns": -0.03,
-  "watermark_seed24_violations": 1,
-  "seed12_setup_ns": -0.03,
-  "seed12_violations": 1,
+  "experiment": "v188 early prefetch with fifo_lvl==3 admission",
+  "functional_gain_percent": 27.9,
+  "seed24": {
+    "setup_ns": -1.343,
+    "violations": 17
+  },
+  "watermark_seed24": {
+    "setup_ns": -0.03,
+    "violations": 1
+  },
+  "watermark_seed12": {
+    "setup_ns": -0.03,
+    "violations": 1
+  },
+  "watermark_seed26": {
+    "setup_ns": -0.03,
+    "violations": 1
+  },
+  "hold_ns": 0.032,
+  "functional_tests": {
+    "control": true,
+    "audio_bound": true,
+    "qoi_restart": true,
+    "bmp_two_frames": true,
+    "qoi_three_frames": true
+  },
   "board_confirmed": false,
-  "stable_baseline": "v187-r3-auto-osd-20261031",
-  "note": "Do not burn v188 bits; retain experiments for future scheduler redesign."
+  "decision": "Do not deliver v188; R3 is sole acceptance baseline; future scheduler redesign must move admission out of current SD critical path.",
+  "bit_sha256s": [
+    "c4036d412fc9062f37c9554db68f1b7cb3c92f1c710164f3d8b389dc7e5bf86b",
+    "5d7095965a118acc091d180b8453192053561a4933594c8ffd5237da26dd031f",
+    "e79f9b2eb9873f11c657470825094f42ea0a945ab7389e566cfccf27ebde8965"
+  ]
 }
