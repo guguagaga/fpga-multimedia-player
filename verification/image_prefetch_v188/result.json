@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "reason": "Independent STA failed setup -1.343ns /17 endpoints; functional timing improvement retained as research only",
+  "bit_sha256": "c4036d412fc9062f37c9554db68f1b7cb3c92f1c710164f3d8b389dc7e5bf86b",
+  "reports_sha256": {
+    "D:\\codexworks\\image_prefetch_v188\\fixed_qoi\\reports\\result.json": "bd0c6f8a8402316f22e052f809d27241703e6f34e1776bb363199be8c8775b82",
+    "D:\\codexworks\\image_prefetch_v188\\tests\\control\\result.json": "232d0eab3ad5c170fac230ec0929055941d840f8eceb7bac5c369252226e3bdd",
+    "D:\\codexworks\\image_prefetch_v188\\tests\\audio_bound\\result.json": "d4f5c44178aa98df660045061385a8cd95bb80ada1c8d5e653d64775e622106b"
+  }
+}

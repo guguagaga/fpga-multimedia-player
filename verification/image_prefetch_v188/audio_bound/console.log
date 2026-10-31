@@ -1,0 +1,2 @@
+PASS modeled12 long image transactions max1.4M cycles, continuous48kstereo drain min_fifo=3165 max_audio_wait=1400064 audio_sectors=65
+D:\codexworks\image_prefetch_v188\tests\audio_bound\tb.v:25: $finish called at 168451935000 (1ps)

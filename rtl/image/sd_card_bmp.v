@@ -18,6 +18,7 @@
 //===================================================================
 module sd_card_bmp #(
   parameter                DIRECTORY_IMAGES  = 1,
+  parameter                EARLY_PREFETCH_EN = 0,
   parameter integer        CLK_FREQ_HZ       = 100_000_000,
   parameter         [31:0] SCAN_MAX_SECTOR   = 32'd131071,
   parameter         [ 2:0] SCAN_TARGET_COUNT = 3'd4,
@@ -53,6 +54,9 @@ module sd_card_bmp #(
   // [Design note]键盘 D 单击：立即重开计时并打开轮播。
   //   不再循环档位（档位已由拨码决定），只保留"马上从这一张重新计时"的手感。
   input             period_reseed,
+  // Same clk domain; admission permission only. Once a load starts, normal
+  // sector arbitration retains ownership and audio urgency protection.
+  input             prefetch_audio_ready,
   output     [ 3:0] state_code,
   input      [15:0] bmp_width,
   input      [15:0] bmp_height,
@@ -830,9 +834,11 @@ module sd_card_bmp #(
                // [Design note FIX-A 音频饿死]预取只在"周期过半"之后才启动。
                //   原来是一有空就预取 => 图片流几乎连续占用 SD 总线 => 音频饿死
                //   （上板症状：进度条不动、没声音、长按 KEY3 是杂音）。
-               //   改成周期前半段完全不碰卡 => 音频有充足的带宽窗口 
+          // With early admission enabled, a registered audio high-water flag
+          // permits preparation before half-period. Low reserve preserves the
+          // original half-period fallback; this does not increase SD priority.
           else if (PREFETCH_EN && auto_run && !image_load_error && (pf_state == PF_IDLE) &&
-                   !pf_flip_pend && auto_half_due_q && !scan_start2 && scan_done && bmp_ready &&
+                   !pf_flip_pend && (auto_half_due_q || (EARLY_PREFETCH_EN && prefetch_audio_ready)) && !scan_start2 && scan_done && bmp_ready &&
                    display_valid && !load_busy && !switch_lock && !vid_lock &&
                    (img_found_count > 3'd1)) begin
             load_idx           <= next_target;
