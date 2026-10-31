@@ -134,3 +134,8 @@ tests/v186_image_pipeline/**/*.log -whitespace
 tests/v186_image_pipeline/*.log -whitespace
 tests/v186_image_pipeline/**/*.hex -whitespace
 tests/v186_image_pipeline/**/*.v whitespace=cr-at-eol
+verification/osd_carousel_r3/independent_* -text -whitespace
+verification/osd_carousel_r3/resource.area -text -whitespace
+verification/osd_carousel_r3/**/*.log -text -whitespace
+verification/osd_carousel_r3/*.log -text -whitespace
+verification/osd_carousel_r3/**/*.hex -text -whitespace

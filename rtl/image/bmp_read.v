@@ -222,6 +222,16 @@ module bmp_read #(
   reg q_have, q_pending, q_valid;
   reg [9:0] q_pos;
   wire q_start = (state == ST_LOAD_WAIT) && write_req_ack && is_qoi;
+  // The decoder clears its index for 64 clocks before accepting bytes.
+  // Register the writer-ack decode so it does not fan out combinationally
+  // into all QOI pixel/state registers. The sector buffer retains bytes
+  // until din_ready; abort/reset cancels a pending start.
+  reg q_start_q;
+  always @(posedge clk or posedge rst) begin
+    if (rst) q_start_q <= 1'b0;
+    else if (load_start || load_abort || !sd_init_done) q_start_q <= 1'b0;
+    else q_start_q <= q_start;
+  end
   reg [31:0] q_byte_limit;
   always @(posedge clk) begin
     q_mem_q <= q_buf[q_pos[8:0]];
@@ -284,7 +294,7 @@ module bmp_read #(
   ) u_qoi (
     .clk            (clk),
     .rst            (rst || load_abort || !sd_init_done),
-    .start          (q_start),
+    .start          (q_start_q),
     .din            (q_byte),
     .din_valid      (q_valid),
     .din_ready      (q_byte_ready),

@@ -35,6 +35,12 @@ module osd_player_ui #(
   input  wire [15:0] bit_depth,
   input  wire [ 4:0] volume,       // 0..31
   input  wire        pause,        // 1 = paused
+  // Actual image-carousel configuration, captured at a safe SD->video
+  // boundary in the top level.  This is status only; it does not control
+  // the carousel timer.
+  input  wire        carousel_on,
+  input  wire [ 9:0] carousel_period_sec,
+  input  wire        video_mode,
   // [Design note bc-osd]参数拨码档位（video 域已同步的稳定值）：
   //   SW[1:0] = 亮度档、SW[3:2] = 对比度档；变化后显示约 3 秒。
   input  wire [ 3:0] sw_deg,
@@ -57,6 +63,23 @@ module osd_player_ui #(
   wire [10:0] y2 = {screen_y, 1'b0};
   wire [ 9:0] pixel_x = screen_x[10:1];
   wire [ 9:0] pixel_y = y2 / 3;
+
+  reg carousel_on_frame;
+  reg [9:0] carousel_period_frame;
+  reg carousel_vs_d;
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      carousel_vs_d <= 1'b1;
+      carousel_on_frame <= 1'b0;
+      carousel_period_frame <= 10'd2;
+    end else begin
+      carousel_vs_d <= vs;
+      if (carousel_vs_d && !vs) begin
+        carousel_on_frame <= carousel_on;
+        carousel_period_frame <= carousel_period_sec;
+      end
+    end
+  end
 
   // ================= layout (640x480) =================
   // 顶部信息栏（标题 + 音频格式，体现多媒体播放器完整性）
@@ -494,11 +517,43 @@ module osd_player_ui #(
   wire [2:0] state_idx = (pixel_x - STATE_X) >> 3;
 
   // [Design note bc-osd]参数区区域与字符索引（仅 pshow 期间"存在"）
-  wire in_param = pshow &&
+  // The same compact top-bar slot shows the brightness/contrast prompt for
+  // its normal three-second lifetime.  Otherwise it continuously reports
+  // the effective carousel period, including AUTO: OFF.  Keep this status
+  // visible in video mode too: it is a read-only image-carousel status and
+  // must not disappear merely because the viewer is checking another mode.
+  wire in_param =
                     (pixel_x >= PARAM_X) && (pixel_x < PARAM_X + 10'd88) &&
                     (pixel_y >= HDR_Y) && (pixel_y < HDR_Y + 10'd16);
   wire [3:0] param_idx = (pixel_x - PARAM_X) >> 3;
 
+  // The period is already one of sixteen bounded presets.  Keep the
+  // decimal digits as a compact combinational table; no general divider is
+  // inferred on the pixel path.
+  reg [3:0] auto_hundreds, auto_tens, auto_ones;
+  always @(*) begin
+    auto_hundreds = 4'd0;
+    auto_tens     = 4'd0;
+    auto_ones     = 4'd0;
+    case (carousel_period_frame)
+      10'd2:   begin auto_ones=4'd2; end
+      10'd3:   begin auto_ones=4'd3; end
+      10'd5:   begin auto_ones=4'd5; end
+      10'd8:   begin auto_ones=4'd8; end
+      10'd10:  begin auto_tens=4'd1; end
+      10'd15:  begin auto_tens=4'd1; auto_ones=4'd5; end
+      10'd20:  begin auto_tens=4'd2; end
+      10'd30:  begin auto_tens=4'd3; end
+      10'd45:  begin auto_tens=4'd4; auto_ones=4'd5; end
+      10'd60:  begin auto_tens=4'd6; end
+      10'd90:  begin auto_tens=4'd9; end
+      10'd120: begin auto_hundreds=4'd1; auto_tens=4'd2; end
+      10'd180: begin auto_hundreds=4'd1; auto_tens=4'd8; end
+      10'd240: begin auto_hundreds=4'd2; auto_tens=4'd4; end
+      10'd300: begin auto_hundreds=4'd3; end
+      default: begin auto_hundreds=4'd6; end
+    endcase
+  end
   // [Design note scroll-osd]滚动带区域与运行时间区域
   //   （sc_pos / sc_i 已上移到字符表之前——声明顺序纪律：先用后声明会变 1 位隐式线）
   wire in_scroll = (pixel_y >= SCROLL_Y) && (pixel_y < SCROLL_Y + 10'd16);
@@ -628,20 +683,55 @@ module osd_player_ui #(
         default: char_code = " ";
       endcase
     end else if (in_param) begin
-      // [Design note bc-osd]"B:+16 C:160"（11 字符固定模板）
-      case (param_idx)
-        4'd0: char_code = "B";
-        4'd1: char_code = ":";
-        4'd2: char_code = b_sign ? "-" : "+";
-        4'd3: char_code = 8'h30 + b_tens;
-        4'd4: char_code = 8'h30 + b_ones;
-        4'd5: char_code = " ";
-        4'd6: char_code = "C";
-        4'd7: char_code = ":";
-        4'd8: char_code = 8'h30 + c_hun;
-        4'd9: char_code = 8'h30 + c_tens;
-        default: char_code = 8'h30 + c_ones;
-      endcase
+      // [Design note carousel-osd] the effective period is the normal
+      // persistent status.  A recent brightness/contrast change keeps its
+      // existing three-second prompt priority.
+      if (pshow) begin
+        // "B:+16 C:160"
+        case (param_idx)
+          4'd0: char_code = "B";
+          4'd1: char_code = ":";
+          4'd2: char_code = b_sign ? "-" : "+";
+          4'd3: char_code = 8'h30 + b_tens;
+          4'd4: char_code = 8'h30 + b_ones;
+          4'd5: char_code = " ";
+          4'd6: char_code = "C";
+          4'd7: char_code = ":";
+          4'd8: char_code = 8'h30 + c_hun;
+          4'd9: char_code = 8'h30 + c_tens;
+          default: char_code = 8'h30 + c_ones;
+        endcase
+      end else if (!carousel_on_frame) begin
+        // "AUTO: OFF"
+        case (param_idx)
+          4'd0: char_code = "A";
+          4'd1: char_code = "U";
+          4'd2: char_code = "T";
+          4'd3: char_code = "O";
+          4'd4: char_code = ":";
+          4'd5: char_code = " ";
+          4'd6: char_code = "O";
+          4'd7: char_code = "F";
+          4'd8: char_code = "F";
+          default: char_code = " ";
+        endcase
+      end else begin
+        // "AUTO: 10s" / three-digit variants such as "AUTO: 120s"
+        case (param_idx)
+          4'd0: char_code = "A";
+          4'd1: char_code = "U";
+          4'd2: char_code = "T";
+          4'd3: char_code = "O";
+          4'd4: char_code = ":";
+          4'd5: char_code = " ";
+          4'd6: char_code = (auto_hundreds != 0) ? (8'h30 + auto_hundreds) :
+                            ((auto_tens != 0) ? (8'h30 + auto_tens) : " ");
+          4'd7: char_code = (auto_hundreds != 0) ? (8'h30 + auto_tens) : (8'h30 + auto_ones);
+          4'd8: char_code = (auto_hundreds != 0) ? (8'h30 + auto_ones) : "s";
+          4'd9: char_code = (auto_hundreds != 0) ? "s" : " ";
+          default: char_code = " ";
+        endcase
+      end
     end else if (in_brand_a) begin
       // [Design note brand]品牌条前半段 "anlogic "（8px ASCII，用原 char_rom）
       case (brand_a_idx)
@@ -1160,3 +1250,4 @@ module div60_16 (
   end
 
 endmodule
+
