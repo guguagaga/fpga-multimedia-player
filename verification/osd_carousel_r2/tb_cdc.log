@@ -1,0 +1,2 @@
+PASS mailbox 32 states, 1000 rapid changes, paused destination and reset
+D:\codexworks\osd_carousel_v187\tests_r2\tb_cdc.v:23: $finish called at 25196500 (1ps)

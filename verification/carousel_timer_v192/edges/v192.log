@@ -1,0 +1,2 @@
+PASS exact second-tick reset and stale deadline cancellation
+D:\codexworks\carousel_timer_validation_v192\edges\tb.v:50: $finish called at 101705000 (1ps)

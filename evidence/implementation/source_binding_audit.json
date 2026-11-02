@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "files": 131,
+  "public_manifest_matches": true,
+  "test_result_bindings_verified": [
+    "shared_pipeline",
+    "shared_pipeline_boundaries",
+    "pipeline_equivalence",
+    "onehot_equivalence",
+    "onehot_controller",
+    "onehot_full_chain"
+  ],
+  "bit_sha256": "41b03883c718e0d52f04e61a9cf0228363c1bdfc3c3e51d023bcb012e3d267f4",
+  "routed_db_sha256": "e0373427c5eb4eb1c24db8ea6f5cb2f0af04355c0a94b24e76c7762ed4a718c8"
+}

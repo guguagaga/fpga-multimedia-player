@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "frames": 450,
+  "fps": 30,
+  "duration_seconds": 15.0,
+  "width": 1280,
+  "height": 720,
+  "audio_samples": 720000,
+  "spatial_budget": 125000,
+  "verification": "Per-frame lossless-stage round trip and disk reread; IMA decoded sample count",
+  "files": {
+    "M2_VIDEO.VID": {
+      "bytes": 33390592,
+      "sha256": "a5b7298ea518ff2c8d8b34435136e36bf8a2d3cabdb2b1f5591dbbd83f86f68b"
+    },
+    "V2_AUDIO.VAU": {
+      "bytes": 361296,
+      "sha256": "55114ea09c18d40d31b71a5acf79baa5be1b9db8f677139420e8cee354314cc9"
+    }
+  },
+  "mean_video_bytes_s": 2226004.3333333335,
+  "max_frame_bytes": 76834,
+  "input": "samples/video/cs_highlights_15s.mp4",
+  "images": [
+    {
+      "input": "samples/images/artwork.jpg",
+      "output": "I1_ART.BMP",
+      "bytes": 6220854,
+      "sha256": "04701f713b2886a35e42b0f9e9dd90bbfcf027c6babdbf2ffd6c5f31f0b6ae55"
+    },
+    {
+      "input": "samples/images/landscape.jpg",
+      "output": "I2_LAND.BMP",
+      "bytes": 6220854,
+      "sha256": "be9fee316d3f7aa2e9ae21fdb295cea05d10dbe3cb1fbc3bb205510e83014864"
+    },
+    {
+      "input": "samples/images/cup.jpg",
+      "output": "I3_CUP.BMP",
+      "bytes": 2764854,
+      "sha256": "13788059416a0ffd7f69cbde40f9f0f44cf24f6029c4ea95ca467f4bca9a7bd1"
+    }
+  ],
+  "music": {
+    "rate_hz": 48000,
+    "bits": 16,
+    "channels": 2,
+    "samples_per_channel": 720005,
+    "bytes": 2880064,
+    "sha256": "d89d1a69198d06055cb47347d59e2a4d0aafe07994428ffc36936c470810080e"
+  }
+}

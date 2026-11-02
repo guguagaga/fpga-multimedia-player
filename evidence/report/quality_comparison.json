@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "second": 22,
+      "current": {
+        "mse": 30.590468388310185,
+        "psnr": 33.274942340989504,
+        "grid4_gradient_rmse": 7.6262789123795,
+        "grid8_gradient_rmse": 8.204282658493389
+      },
+      "low_budget": {
+        "mse": 58.21867476851852,
+        "psnr": 30.480180454963126,
+        "grid4_gradient_rmse": 9.825106696243065,
+        "grid8_gradient_rmse": 10.802523569515403
+      },
+      "current_token_bytes": 115805,
+      "current_h6d_bytes": 74147,
+      "low_token_bytes": 64904
+    },
+    {
+      "second": 75,
+      "current": {
+        "mse": 21.86664749710648,
+        "psnr": 34.732981569392535,
+        "grid4_gradient_rmse": 6.6415582829225945,
+        "grid8_gradient_rmse": 7.1452129027460884
+      },
+      "low_budget": {
+        "mse": 34.091047815393516,
+        "psnr": 32.80440011048522,
+        "grid4_gradient_rmse": 7.844712715077476,
+        "grid8_gradient_rmse": 8.79224519666993
+      },
+      "current_token_bytes": 119862,
+      "current_h6d_bytes": 73490,
+      "low_token_bytes": 64906
+    },
+    {
+      "second": 105,
+      "current": {
+        "mse": 29.126676432291667,
+        "psnr": 33.487894296032536,
+        "grid4_gradient_rmse": 7.415310423948699,
+        "grid8_gradient_rmse": 7.982069350425547
+      },
+      "low_budget": {
+        "mse": 50.69276945891204,
+        "psnr": 31.081343425214463,
+        "grid4_gradient_rmse": 9.052675012198847,
+        "grid8_gradient_rmse": 10.035097994978754
+      },
+      "current_token_bytes": 119748,
+      "current_h6d_bytes": 75252,
+      "low_token_bytes": 64984
+    },
+    {
+      "second": 165,
+      "current": {
+        "mse": 20.954321831597223,
+        "psnr": 34.91806751033819,
+        "grid4_gradient_rmse": 6.435537776211844,
+        "grid8_gradient_rmse": 6.776278978977625
+      },
+      "low_budget": {
+        "mse": 30.67196361400463,
+        "psnr": 33.26338780534966,
+        "grid4_gradient_rmse": 7.4470372042299955,
+        "grid8_gradient_rmse": 8.040147455322415
+      },
+      "current_token_bytes": 112261,
+      "current_h6d_bytes": 71971,
+      "low_token_bytes": 64857
+    },
+    {
+      "second": 205,
+      "current": {
+        "mse": 20.692086588541667,
+        "psnr": 34.972760737692205,
+        "grid4_gradient_rmse": 6.49062621883155,
+        "grid8_gradient_rmse": 7.019034561554665
+      },
+      "low_budget": {
+        "mse": 31.036338975694445,
+        "psnr": 33.212098743264036,
+        "grid4_gradient_rmse": 7.547111021567699,
+        "grid8_gradient_rmse": 8.451498759991287
+      },
+      "current_token_bytes": 120025,
+      "current_h6d_bytes": 74008,
+      "low_token_bytes": 64885
+    },
+    {
+      "second": 255,
+      "current": {
+        "mse": 25.547752097800927,
+        "psnr": 34.05727667530995,
+        "grid4_gradient_rmse": 7.036346043900946,
+        "grid8_gradient_rmse": 7.5275787939111325
+      },
+      "low_budget": {
+        "mse": 43.302112630208335,
+        "psnr": 31.76571275570901,
+        "grid4_gradient_rmse": 8.474952668065573,
+        "grid8_gradient_rmse": 9.444029285313361
+      },
+      "current_token_bytes": 118283,
+      "current_h6d_bytes": 74073,
+      "low_token_bytes": 64841
+    }
+  ],
+  "source_sha256": "0b7631eea7279779b68777e7982bb0dc9d04d1a0ceebeee7f51757d200495ce4",
+  "encoder_sha256": "452b0d25c6728ebd861b86b9c24895f1396e713e2123d3d889409dac0cb22123",
+  "current_matches_archived_pixels": true,
+  "current_h6d_roundtrip": true,
+  "crop": [
+    620,
+    140,
+    900,
+    330
+  ],
+  "mean_current_psnr": 34.240653854959156,
+  "mean_low_psnr": 32.101187215830926,
+  "total_current_token": 705984,
+  "total_current_h6d": 442941,
+  "scope": "Six identical RGB565 source frames. The 65000-byte comparison uses the archived packed-budget search; the current encoder uses 125000-byte pre-run budget. This is a complete encoding-strategy comparison, not a single-variable ablation or motion-rate test."
+}

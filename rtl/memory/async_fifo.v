@@ -1,45 +1,6 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Dual-clock byte FIFO and occupancy signaling.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-//===================================================================
-// async_fifo : Gray-code async FIFO with almost_full (cross clock domain)
-//===================================================================
-// Moves a byte stream from one clock domain to another.
-//   wr_clk : producer clock (SD card reader, 100 MHz)
-//   rd_clk : consumer clock (audio, 12.288 MHz)
-//
-// Standard dual-clock RAM + Gray-coded read/write pointers with 2-stage
-// synchronizers.
-//
-// 【读口 = 寄存器读（BRAM 形态），这是省 LUT 的关键】
-//   原实现是组合读：assign rd_data = mem[rd_ptr]。
-//   2048 深的组合读 TD 推断不出 BRAM，只能拼成 2048:1 的多路选择器 ——
-//   实测 u_async_fifo 占 1742 LUT、u_wav_sample_builder 占 758 LUT
-//   （时序报告里那些 mux/ramread 单元横跨两个模块），合计约 2500 LUT，
-//   是 mslice 超限（5044 / 上限 4900）的最大单一来源。
-//   改成寄存器读后 mem（2048 x 8 = 16384 bit）落进 BRAM
-//   （2 个 9K bram），这部分 LUT 基本清零。
-//
-//   【新的读握手语义：rd_en 拉高后的下一拍才有数】
-//       cycle N   : rd_en=1 且 !empty  ->  BRAM 读出 mem[rd_ptr]，rd_ptr++
-//       cycle N+1 : rd_data = mem[旧 rd_ptr]   <- 消费者在这一拍取数
-//   配套改动：wav_sample_builder 把每个字节拆成 REQ/GET 两拍
-//   （REQ 拍拉 rd_en，GET 拍取数）；i2s_transmitter 改成"提前一拍请求、
-//   下一拍锁存"，让"请求 -> 锁存"成为显式的前后拍关系。
-//
-// 【历史留档：一个曾经被误判的"根本矛盾"】
-//   早前"只改 builder"试过 3 种写法，全部失败，当时归因为
-//   "寄存器读晚一拍 vs i2s_transmitter 请求当拍锁存"的冲突。
-//   复盘结论：那个归因是错的。i2s_transmitter 在帧边界那一拍锁存，而
-//   下一帧边界在 256 拍之后 —— builder 有 256 拍余量，"必须当拍给出"
-//   从来不是约束。那 3 次失败都是 builder 状态机的字节相位/指针错位
-//   （实测分别读到第 1/2/3 个字节），不是时序问题。
-//
-// ALMOST_FULL_THRESH reserves space for one SD sector (512 bytes) so the
-// producer (wav_reader) can be back-pressured *between* sectors without
-// overflowing mid-sector.
-//===================================================================
+// 双时钟字节 FIFO，读写指针通过 Gray 码同步到对侧时钟域。
+// 数据存储采用同步读以映射块 RAM；读请求与数据有效相隔一拍。
+// 消费者以 REQ/GET 两阶段读取，避免将新指针误配到尚未更新的数据。
 module async_fifo #(
   parameter DATA_WIDTH         = 8,
   parameter ADDR_WIDTH         = 11,    // DEPTH = 2^ADDR_WIDTH = 2048

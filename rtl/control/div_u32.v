@@ -1,22 +1,7 @@
-//===================================================================
-// div_u32 : 32-cycle restoring divider (32-bit / 32-bit)
-//===================================================================
-// Serial (shift-subtract) divider. Assert `start` for one cycle, then
-// 32 clock cycles later `done` pulses with quotient = dividend/divisor
-// and remainder = dividend % divisor.
-//
-// Used by playback_status to convert PCM byte counts into seconds
-// (e.g. data_size / bytes_per_second). Keeps it synthesis-friendly on
-// the EG4S20 without instantiating a vendor divider IP.
-//===================================================================
+// Unsigned 32-bit restoring divider; start is accepted while idle.
+// PIPELINE_STEP separates comparison and subtraction into successive cycles.
+// done marks valid quotient and remainder; wait for done before requesting again.
 module div_u32 #(
-  // 1 = 把"移位-比较-相减"拆成两拍执行（推荐）。
-  // 32 位比较 + 32 位减法放在同一拍里会形成一条很长的组合环路：
-  // 实测 acc -> 移位 -> rem_cur -> ge -> rem_nxt -> acc 需要 15.8ns，
-  // 在 100MHz(10ns) 下违例（时序报告里 u_div_cur/d_reg[*] 那几条）。
-  // 拆成两拍后每拍只剩"比较"或"减法"，环路长度减半。
-  // 代价：一次除法从 32 拍变成 64 拍，而本设计最快也就 10Hz 调用一次，
-  //       完全无影响。
   parameter PIPELINE_STEP = 1
 ) (
   input  wire        clk,
@@ -88,7 +73,7 @@ module div_u32 #(
             end
           end
         end else begin
-          // ---- 原始单拍版本（PIPELINE_STEP=0 时使用）----
+          // ---- 单拍迭代路径（PIPELINE_STEP=0）----
           if (cnt == 7'd32) begin
             busy      <= 1'b0;
             done      <= 1'b1;

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "source_bindings": {
+    "rtl/carousel_period_cfg.v": "95a2c4596bcb285816bbf94ce4587b4b46da9fbe4046e085206d96ff815e60d0",
+    "rtl/osd_player_ui.v": "5635afd3b60a4f64b83965e183f3344e4cd8a9e7a35ea338dd35c4c2b2797433",
+    "user_source/hdl_source/top_tf_hdmi_audio.v": "2f471d847adf6bbf112a65d0811063c0d292be086eb8cbf0c9446f135862b90b",
+    "user_source/hdl_source/char_rom.v": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+    "user_source/hdl_source/osd_brand_rom.v": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+    "user_source/hdl_source/font_8x16.mem": "b765d409b809faf23a1c7725ab6c18f4757cb8b8789dbc21d629448747768951",
+    "user_source/hdl_source/cjk_brand_16x16.mem": "c05360036a15b28b90a8b4c9bde68ff27f8c4a13e0a3d8e062186f9a3eacffc8",
+    "user_source/hdl_source/anlogic_logo.mem": "706a539b487f46f7d117a98a49eca0a6a5afab126117fe2a0bb3fd4d49ff32de"
+  },
+  "reports_sha256": {
+    "D:\\codexworks\\osd_carousel_v187\\tests_r2\\result.json": "9ba9bf9e212876442776ad82d2e3e3c5a12a98370b3b083981027e20a0262ad8",
+    "D:\\codexworks\\osd_carousel_v187\\tests_r2\\frame_result.json": "ca30bb7bef049f42bef87d81b69e0507d4e4415c5ac0f7428afdd94934befa28",
+    "D:\\codexworks\\osd_carousel_v187\\tests_r2\\tb_effective.log": "4185d68cede06606a31dd1b672f5d1994fd4080741c62eb3a8759087a114bdf2"
+  },
+  "scope": "OSD final RGB, full-frame equivalence, effective cfg and handshake sources unchanged from tested R2; BMP/QOI start pipeline independently retested in R3"
+}

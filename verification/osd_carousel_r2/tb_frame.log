@@ -1,0 +1,2 @@
+PASS 921600 full-frame RGB pixels, only status rectangle differs, 1122 changed
+D:\codexworks\osd_carousel_v187\tests_r2\tb_frame.v:43: $finish called at 9281010000 (1ps)

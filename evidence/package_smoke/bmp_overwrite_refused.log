@@ -1,0 +1,2 @@
+usage: convert_image.py [-h] source output
+convert_image.py: error: Output already exists; choose a new filename

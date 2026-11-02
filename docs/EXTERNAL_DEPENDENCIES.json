@@ -1,0 +1,154 @@
+[
+  {
+    "project_path": "td_project/al_ip/PLL_HDMI_AUDIO.ipc",
+    "public_path": null,
+    "sha256": "d10759aa8e3c36faf18321c7b0021a7bc7dcaed6ac58d86a8817ea6c40a2b05a",
+    "bytes": 1838,
+    "external": true,
+    "bundled_path": "vendor_original/td_project/al_ip/PLL_HDMI_AUDIO.ipc"
+  },
+  {
+    "project_path": "td_project/al_ip/PLL_HDMI_AUDIO.v",
+    "public_path": null,
+    "sha256": "bc53a99151927f65cbcb3c9df24b3250872835c821abb9eea234c1e869375292",
+    "bytes": 2695,
+    "external": true,
+    "bundled_path": "vendor_original/td_project/al_ip/PLL_HDMI_AUDIO.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/anlogic_logo.mem",
+    "public_path": null,
+    "sha256": "706a539b487f46f7d117a98a49eca0a6a5afab126117fe2a0bb3fd4d49ff32de",
+    "bytes": 6272,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/anlogic_logo.mem"
+  },
+  {
+    "project_path": "user_source/hdl_source/anlogic_logo_preview.png",
+    "public_path": null,
+    "external": true,
+    "sha256": "e4bf10d9100c0cbbe52b0c60227ebc862ee53fb47f6819a5931cb294afe5a573",
+    "bytes": 3723,
+    "bundled_path": "vendor_original/user_source/hdl_source/anlogic_logo_preview.png"
+  },
+  {
+    "project_path": "user_source/hdl_source/hdmi1.4b_transmitter_core/hdmi_1_4b_transmitter_core_wrapper.enc.v",
+    "public_path": null,
+    "sha256": "867e0b0bdd874bc383d00918c9e1be3fe01edf41f343b6a0d73e262776596a63",
+    "bytes": 328975,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/hdmi1.4b_transmitter_core/hdmi_1_4b_transmitter_core_wrapper.enc.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/include/sdr_as_ram.enc.v",
+    "public_path": null,
+    "sha256": "767dbdfbd83d42223b77dfa7deab42ce8216a8fd6f6cb41b7e7593d9a345ba57",
+    "bytes": 7538,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_as_ram.enc.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/include/sdr_init_ref.enc.v",
+    "public_path": null,
+    "sha256": "6da5945f4af793610d0d64c65c7e5d2d1c86ed4c11bc5fdeacd27eb03178b9f6",
+    "bytes": 9059,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_init_ref.enc.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/include/sdr_wrrd.enc.v",
+    "public_path": null,
+    "sha256": "c7d7fe07d75f66aa88d9f986b3006319c995162434f104f9990664b374cdfdd2",
+    "bytes": 15637,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_wrrd.enc.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_16_32_256.ipc",
+    "public_path": null,
+    "sha256": "8856a5b05a2398deddc1d7ca99498324b483e5bfd701ffdb19fb23e99f3bcea4",
+    "bytes": 856,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.ipc"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_16_32_256.tcl",
+    "public_path": null,
+    "sha256": "b890a5ab821e72bb81f56d534cd422f8a4919d5941394e8bf0f77d602f366b71",
+    "bytes": 831,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.tcl"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_16_32_256.v",
+    "public_path": null,
+    "sha256": "79991b7aaa8ac66e3b100d72ca24116ee47ff8c18d8197563600671becf2815b",
+    "bytes": 28271,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_32_16_256.ipc",
+    "public_path": null,
+    "sha256": "f50a788e89ae081199a0d2da72469ede0d14225c20fdbcfaad3573b74e8126f5",
+    "bytes": 857,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.ipc"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_32_16_256.tcl",
+    "public_path": null,
+    "sha256": "b890a5ab821e72bb81f56d534cd422f8a4919d5941394e8bf0f77d602f366b71",
+    "bytes": 831,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.tcl"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/afifo_32_16_256.v",
+    "public_path": null,
+    "sha256": "3400b062b9019e062f09beceb0981964b7db13994d861d89d7997aab9d81f1f1",
+    "bytes": 28271,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/sys_pll.ipc",
+    "public_path": null,
+    "sha256": "c6ce70f4ce1a0965863a090e5be7c377bd662113b5488e4db221219b6fbe9ed2",
+    "bytes": 1825,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/sys_pll.ipc"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/sys_pll.v",
+    "public_path": null,
+    "sha256": "b39691fb9a40aba2a3465486403ab8287938a9a42de5360d394bbb7f715b7e71",
+    "bytes": 3005,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/sys_pll.v"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/video_pll.ipc",
+    "public_path": null,
+    "sha256": "1c02b8ba62776f3c24a4fa0f8e73700179bba76ffa4f7ebe390a3835591e1adc",
+    "bytes": 1490,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.ipc"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/video_pll.ipc.v19_reference",
+    "public_path": null,
+    "external": true,
+    "sha256": "ed1c7c6feb52b647b7b73cb23375db46aea510215b79a5e6497bac42fe143904",
+    "bytes": 1437,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.ipc.v19_reference"
+  },
+  {
+    "project_path": "user_source/hdl_source/ip/video_pll.v",
+    "public_path": null,
+    "sha256": "f435c86fdf64f9196014662cced1d62ac2821e0e6938e0dd12f666ef73011840",
+    "bytes": 2651,
+    "external": true,
+    "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.v"
+  }
+]

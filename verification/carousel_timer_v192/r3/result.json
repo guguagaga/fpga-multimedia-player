@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "source": "D:\\codexworks\\osd_carousel_v187\\rebuild_r3\\candidate\\project\\user_source\\hdl_source\\SD\\sd_card_bmp.v",
+  "scope": "Actual controller, accelerated 2000 cycles/second; abstract reader/scaler and external fade/memory models. Not full-pixel or hardware timing evidence."
+}

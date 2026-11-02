@@ -1,0 +1,2 @@
+usage: convert_music.py [-h] --ffmpeg FFMPEG source output
+convert_music.py: error: Output or intermediate PCM already exists

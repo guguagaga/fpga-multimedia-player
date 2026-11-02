@@ -1,0 +1,809 @@
+{
+  "passed": true,
+  "scope": "Comment-only RTL cleanup; no new synthesis, place-and-route or board test.",
+  "method": "Compare every nonblank non-comment source line, retaining internal whitespace, strings, preprocessor lines and code order; check protected comments exactly.",
+  "rtl_files_checked": 92,
+  "changed_files": [
+    "rtl/audio/audio_transition.v",
+    "rtl/audio/compressed_audio_reader.v",
+    "rtl/audio/fade_in.v",
+    "rtl/audio/hdmi_audio_tone_i2s_64fs.v",
+    "rtl/audio/i2s_transmitter.v",
+    "rtl/audio/ima_stream.v",
+    "rtl/audio/media_player_shim.v",
+    "rtl/audio/qoa_stream.v",
+    "rtl/audio/wav_player.v",
+    "rtl/audio/wav_sample_builder.v",
+    "rtl/control/button_ctrl.v",
+    "rtl/control/carousel_period_cfg.v",
+    "rtl/control/div_u32.v",
+    "rtl/control/exp_input_sync.v",
+    "rtl/control/key_long.v",
+    "rtl/control/keypad_scan.v",
+    "rtl/control/playback_status.v",
+    "rtl/control/player_ctrl.v",
+    "rtl/control/track_ctrl.v",
+    "rtl/display/brightness_contrast.v",
+    "rtl/display/char_rom.v",
+    "rtl/display/osd_brand_rom.v",
+    "rtl/display/osd_core.v",
+    "rtl/display/osd_player_ui.v",
+    "rtl/display/seg595_display.v",
+    "rtl/display/video_coord.v",
+    "rtl/display/video_timing_gen.v",
+    "rtl/image/bmp_read.v",
+    "rtl/image/image_center_720p.v",
+    "rtl/image/img_scaler.v",
+    "rtl/image/pixel_fifo_24x8.v",
+    "rtl/image/qoi_stream.v",
+    "rtl/image/sd_card_bmp.v",
+    "rtl/memory/async_fifo.v",
+    "rtl/memory/dp_ram.v",
+    "rtl/memory/frame_fifo_read.v",
+    "rtl/memory/frame_fifo_write.v",
+    "rtl/memory/frame_read_write.v",
+    "rtl/memory/rgb565_pair_pack.v",
+    "rtl/memory/sdram.v",
+    "rtl/spectrum/butterfly.v",
+    "rtl/spectrum/cordic_atan.v",
+    "rtl/spectrum/fft_256.v",
+    "rtl/spectrum/spectrum_capture.v",
+    "rtl/spectrum/spectrum_display.v",
+    "rtl/spectrum/twiddle_rom.v",
+    "rtl/storage/fat32_list.v",
+    "rtl/storage/fat32_sector_mapper.v",
+    "rtl/storage/sd_arbiter.v",
+    "rtl/storage/sd_card_cmd.v",
+    "rtl/storage/sd_card_sec_read_write.v",
+    "rtl/storage/sd_card_top.v",
+    "rtl/storage/sector_byte_source.v",
+    "rtl/storage/spi_sniffer.v",
+    "rtl/top/top_tf_hdmi_audio.v",
+    "rtl/video/av_sample_sync.v",
+    "rtl/video/codec12_block_decoder_experimental.v",
+    "rtl/video/video_byte_ram.v",
+    "rtl/video/video_codec8_block_decoder.v",
+    "rtl/video/video_codec8_raster.v",
+    "rtl/video/video_player.v"
+  ],
+  "files": [
+    {
+      "path": "rtl/audio/audio_transition.v",
+      "before_sha256": "e9531714e9d69c5ba140751c6880361b5f15cefde0ea084592ceb9327e2044f2",
+      "after_sha256": "bc8e06591d11c3aeb6d5a3caf74bc6d156921d8debc1beab6cc8b423f14b915a",
+      "noncomment_lines_sha256": "5c34295c026f83e5f09f7f4acc990c53e18b79b6da29e2bb8fa74e74419d0284",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/compressed_audio_reader.v",
+      "before_sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+      "after_sha256": "d1da2bbe060a2f747cf1e865470812254bf6e16cb1e56990379102868f10a463",
+      "noncomment_lines_sha256": "a75c559551ac4b304e20cafddcda737fafaafc2cdf649abe2295ba25ceab2021",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/fade_in.v",
+      "before_sha256": "feadc591d25d3a75619ef6b4f5c980ddba945b685b1e86c935af6f5ec9794f8a",
+      "after_sha256": "0348c587e0ce830c5e584e8d094435cd691e026f5868873e2bfcf4df93f0ae60",
+      "noncomment_lines_sha256": "916859fbf2eb8c660956560db7e2d03d0ea7a02b487249708d926c937457c846",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/hdmi_audio_tone_i2s_64fs.v",
+      "before_sha256": "b8ba5ef35cf8c85bc871fa29b8320ad659f87d2a744566e8a4a7d4d0859a7b91",
+      "after_sha256": "5acd9a54743cdca30bd6163d9f8ea237338b55e935d2964cbce485dee2e3d759",
+      "noncomment_lines_sha256": "b06ee5ea9d3f248583502225a7156c798e24e6b19e631201917ae62d4341a1e0",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/hdmi_audio_tone_pcm_scale.v",
+      "before_sha256": "e78188241795a0c4085acb01ad835e8c65c3c668d75fdb28a504cba88e7d3ec3",
+      "after_sha256": "e78188241795a0c4085acb01ad835e8c65c3c668d75fdb28a504cba88e7d3ec3",
+      "noncomment_lines_sha256": "1dfa04509e031cf757c1948d5223695d9b5156fa20ea545f3635458b1ac8bb0f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/I2S_receiver.v",
+      "before_sha256": "1bd088932c0a6fded9cd6c310289dfb840cc1db77a2fe289096740322a24bcf0",
+      "after_sha256": "1bd088932c0a6fded9cd6c310289dfb840cc1db77a2fe289096740322a24bcf0",
+      "noncomment_lines_sha256": "edad6d6479e93d0eae4a33f3cf0add59fb0f67b856ee9592d538b88ef9b8b1bf",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/i2s_rom_player_single_pll_fix64_rom_ip.v",
+      "before_sha256": "f8e7c9c56c6a21154580e030dada604572d89a1e75e8945125b2ea0dd4b3094b",
+      "after_sha256": "f8e7c9c56c6a21154580e030dada604572d89a1e75e8945125b2ea0dd4b3094b",
+      "noncomment_lines_sha256": "f62f9feb26081860089c558a18f1d4a56b542ca5e3f9e181b873342d515f4b3a",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/i2s_test_tone_gen_pll.v",
+      "before_sha256": "7614d4ca84c007a568e798b7c8cbc31eadd8a064bee53101194df13edb71e02f",
+      "after_sha256": "7614d4ca84c007a568e798b7c8cbc31eadd8a064bee53101194df13edb71e02f",
+      "noncomment_lines_sha256": "753ec8deaec82e429b9f272c0fb843e71a359cba7d34d9b8457872ec2dc62b1c",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/i2s_transmitter.v",
+      "before_sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+      "after_sha256": "0af9355431891e4905c6babf9ed112eed62aaa9ea097b08fd4c122383f50c226",
+      "noncomment_lines_sha256": "8ee73cf7c7378daeb63fee1c12f5799baae70ff09ee3c6d5d9732b9a78925394",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/ima_stream.v",
+      "before_sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+      "after_sha256": "c3441b09c938a4836fe1e6b876b6165323aa71c86795f76e1ca895f5f97c898f",
+      "noncomment_lines_sha256": "5a6fd0b6abe3a10578799005258f39fad9855cd34f3c7a5780153dd0920660a3",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/media_player.v",
+      "before_sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+      "after_sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+      "noncomment_lines_sha256": "470255b29e44e562a1adf5390bd133254b99f9b080550d6baaf0388ad889f9da",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/media_player_shim.v",
+      "before_sha256": "ee63db2d9b502a53685ecde7e18e9b08fa0e4221bc54f17ccb78841358d57899",
+      "after_sha256": "68f4d2c4111792a1418fa84065920706bef7d93f680c262ddfb436af79668219",
+      "noncomment_lines_sha256": "594cfb8d4dc191070db0db273cc74834f758a0f4d1e3b90e0eb22ea07d272029",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/qoa_stream.v",
+      "before_sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+      "after_sha256": "d11e4bf2e44e75e86e3ce809adcaf416e144923a6302dc6bc04097ec5d7c605b",
+      "noncomment_lines_sha256": "b5f962e265efbad20c2c544d347114a2d784f680c8eff983eb92db35a0300771",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/volume_control.v",
+      "before_sha256": "49689f75a1f530285e9439bca710af0069680a77f54f128a1ef2a92100f6c233",
+      "after_sha256": "49689f75a1f530285e9439bca710af0069680a77f54f128a1ef2a92100f6c233",
+      "noncomment_lines_sha256": "f5dd6db0bb466f5f9c57c5c5162d82ff1e3f258c2ca46d03426470167280069a",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/wav_player.v",
+      "before_sha256": "03235e99ea1bf9cbb7008fb1ab93893ab9bee4c57ba7d4b4a685aa53053a98e3",
+      "after_sha256": "e43bf373a5a15f3a95bd71a870ae22445f7a8fb4939a8daa62781d3518ad755c",
+      "noncomment_lines_sha256": "c39237918cce09aab123db82bf4dc263975bfc799b4fb0ef0a600b5bb2846790",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/audio/wav_sample_builder.v",
+      "before_sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+      "after_sha256": "069c80d29b4da1f14d7109912c8d816394edef5cd50f7fa4aa3021d5545aa974",
+      "noncomment_lines_sha256": "ac267baff4e9d7b26b8c33196d13c7d22d1f81e711ca2523c2d8dd43c266f998",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/button_ctrl.v",
+      "before_sha256": "deb292e097b7a21f30ee548bdaa36579e42086c913a43637c484320978f7c4f8",
+      "after_sha256": "ba814c4a61fa6ba4207228e1c15c42919812a9490ce89185d33ca75576c41077",
+      "noncomment_lines_sha256": "9629256b86d79152238abfb065d961428d89adfa5f2030d2519bed8b161f930a",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/carousel_period_cfg.v",
+      "before_sha256": "95a2c4596bcb285816bbf94ce4587b4b46da9fbe4046e085206d96ff815e60d0",
+      "after_sha256": "932a1334bd17bf73a1fce326cb6fa9ae39bcc45800614e7688410aff02443f56",
+      "noncomment_lines_sha256": "ce9cb20084423ab95602ed903993be516707cf617c6f0720799131d68130b633",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/div_u32.v",
+      "before_sha256": "9c80ab39749dfb0c2e7644a1d9622b9699f0fe9a68d00c5a7a61f257875a0879",
+      "after_sha256": "334b93514df6cf34324f5fee5933b7166cd72f0dd627313a533d2c86dfc19864",
+      "noncomment_lines_sha256": "ff9df26402d57d453616c11ab6b55f8bb0bf49ec9e76a5bebbea1ada7c8c42f0",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/exp_input_sync.v",
+      "before_sha256": "15e3af894f2623776af3251c810bcdc73fc748d0ed2db4e0abc5b63a2b54ff1a",
+      "after_sha256": "f25930b233ba7965e223e5a387d47ca670a809726f2395e3d703dac03cd4dca8",
+      "noncomment_lines_sha256": "2900f1ded7752a5ac5f5ec3bc976f708d0f97592580bf719ae94d3d89147268e",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/global_def.v",
+      "before_sha256": "04f854d7fe2f7816705b988ec59822fc258e4ed3a13529e36d0b9e6233a2682f",
+      "after_sha256": "04f854d7fe2f7816705b988ec59822fc258e4ed3a13529e36d0b9e6233a2682f",
+      "noncomment_lines_sha256": "85847925d401f639f7f7658fb0716ecefea96c7188d730f0b72c14bd95c21204",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/key_long.v",
+      "before_sha256": "3a93d8b8525018916ccf21983c4fa306ea96acf0a3861d6e6cb634b78fdf7f0d",
+      "after_sha256": "f7e8bf56e6e050a88a8d6f67bfb8341400a3491ae9e4a7aab6e245fbb5debede",
+      "noncomment_lines_sha256": "d1b193b04b7b29502af7402da28306b58952c8b3dda9d4cc0428869d2c705e0d",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/key_remove_shakes.v",
+      "before_sha256": "901aa61b08fb622d3495baa435818a424bfb859603b6d3c047fd9d76899605a3",
+      "after_sha256": "901aa61b08fb622d3495baa435818a424bfb859603b6d3c047fd9d76899605a3",
+      "noncomment_lines_sha256": "d84d38719e23a98b55b83b733698cff91e2ca4783551e5c1243f7171be9013d3",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/keypad_scan.v",
+      "before_sha256": "77768c98d48295a98374ab5994a76483ffbb74aeec27ba1caf39f3f00af9209e",
+      "after_sha256": "6ac177265215d859afa9f4510615899287f01640498d952b9270803a3bc7f089",
+      "noncomment_lines_sha256": "3939464e1f064cc52d2ae12fb28a8569c534be217e568f7c6f9f414b507dc4e6",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/playback_status.v",
+      "before_sha256": "965ae9bb4a43925c2fabf04b71818e49c0262db4b867386ece75248a0a0c796b",
+      "after_sha256": "566da693b33a49ad70b6885a5d5b3012551e80a92afc4eef8854158b267b5cd9",
+      "noncomment_lines_sha256": "222e13aec096f93c3a8bc65cc833653e804515e59c805e99942060ae1226b772",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/player_ctrl.v",
+      "before_sha256": "995d10e1c15a814b083ac10159a58bdabd6130e6a9e0637d6b8b0bde8dacc690",
+      "after_sha256": "0bdc6ddb625c4fbff2e6b14ccec7f210d90ed0ae0fbb678b9c9bf0eb2fb0d442",
+      "noncomment_lines_sha256": "3cc19ccdc818ab3c5c5fbcb995377f182045d4f38fd384f054decef185dd08fd",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/startup_pulse.v",
+      "before_sha256": "25558834de12e2285b779a79f9244a8cf1fa6bdee6b63897374e48e582757f88",
+      "after_sha256": "25558834de12e2285b779a79f9244a8cf1fa6bdee6b63897374e48e582757f88",
+      "noncomment_lines_sha256": "bce52fc57f96d4fbe60b290ee5f7a095a2149a24e736687cabd9051c43c984ee",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/control/track_ctrl.v",
+      "before_sha256": "dfe1002d5bd947e470aaa8f8b1590256f419b6b8b30eadf9be858b2f17dec83d",
+      "after_sha256": "02de1f82b216a95acf3be27a9167f1a7fdf209bc4abb5d2c5bf4a8945c9abe63",
+      "noncomment_lines_sha256": "c26d951946643f96b0dca4776db9c4b216e2675bcb8de540f86510afc673dba3",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/ax_debounce.v",
+      "before_sha256": "c420ceac08eb440dfc5dbfacf9caaf43352886652640f5302a598cf23aee1549",
+      "after_sha256": "c420ceac08eb440dfc5dbfacf9caaf43352886652640f5302a598cf23aee1549",
+      "noncomment_lines_sha256": "ecb9fe78fbd7b6c67ad6befa10b73868193531d39a433c64933d1a0b0727a58b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/brightness_contrast.v",
+      "before_sha256": "b1b4047779aaf2964fa9142638e91a9eddf4db75427a9fae5d4bf4599589efc5",
+      "after_sha256": "e020f4e811190cd1c92a88309860464c6bf48f8b12ce080b60bb5cca1cec5570",
+      "noncomment_lines_sha256": "3a7416d13b98172949e02eae8e983d0dd394ef5f0b21e0b36ca6480381c7a563",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/char_rom.v",
+      "before_sha256": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+      "after_sha256": "6bba318dff8cce8a5c3c6e5e909d18bef578f50be1fcab0f06a2675394d84ceb",
+      "noncomment_lines_sha256": "43af464f6c961358cbeb24aa977a2ff58b4f6cd401672dc479ecf6d01524d98b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/color_bar.v",
+      "before_sha256": "aded3d70e687d50d31c88838cd5bd85aa724d3802c36fe633faeac053e07a2ca",
+      "after_sha256": "aded3d70e687d50d31c88838cd5bd85aa724d3802c36fe633faeac053e07a2ca",
+      "noncomment_lines_sha256": "58ba4e056df76975df7447c639de09fd4733bf73f433679d96e2a7a40a0e3d9f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/hdmi_phy_warpper.v",
+      "before_sha256": "1f4e8053d3db9fea748ba8b732bcd12c63d1fcb39b91c51880e8a96fa3b4a9a4",
+      "after_sha256": "1f4e8053d3db9fea748ba8b732bcd12c63d1fcb39b91c51880e8a96fa3b4a9a4",
+      "noncomment_lines_sha256": "3c7002c59ce3be0f2cefab8675de374e1f2c021884f08baf4878cd36bb1f881f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/lane_lvds_10_1.v",
+      "before_sha256": "21de9e828d2b0dead56b27fa5c3772f5aafb35a77afbd63bd6bc1004fb74ad49",
+      "after_sha256": "21de9e828d2b0dead56b27fa5c3772f5aafb35a77afbd63bd6bc1004fb74ad49",
+      "noncomment_lines_sha256": "4d878ce0cf3f3f3eb0e607e0d00e9922a0504f5a2b300f29b7166e0f0426bf50",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/osd_brand_rom.v",
+      "before_sha256": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+      "after_sha256": "0a72442b2c3e252c62fe25bee1afdbc2536696a5c40640925dd65db1ce929d86",
+      "noncomment_lines_sha256": "cbef711b111e535b63aaa97d4263750ecda5c0b81a821a8b5f8442f9b168f536",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/osd_core.v",
+      "before_sha256": "d97488100842f9d97b60cdf243032dc26e84132f5b06649ea5d031b8ab9043bc",
+      "after_sha256": "6e8968a9c45de56314e770880673cd133ae40a446ad32d22400a302ec55e5baf",
+      "noncomment_lines_sha256": "5a29594a5dc1944db650384b88d08ede5debcf93932a6ab4f50e6d4f8964e03a",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/osd_player_ui.v",
+      "before_sha256": "5635afd3b60a4f64b83965e183f3344e4cd8a9e7a35ea338dd35c4c2b2797433",
+      "after_sha256": "00f280f383d1b0349b492eac337a79806fdfbfdd1929afd7de965ed36d739d78",
+      "noncomment_lines_sha256": "1fc161a77307824f8d499e1289c7d43efbcf3635789b84a926e32445cb428795",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/seg595_display.v",
+      "before_sha256": "1fb98f96b0fcad76074fbf0ad56f060320e192458466da6bb83fe5bd9a34f1bb",
+      "after_sha256": "8901bf5117e604b649d13e9e9752f53f2ee14855ddc6ed23cef55e4bec2bf667",
+      "noncomment_lines_sha256": "5aacb5ecb7d3043b922d0bfc7bcc36c6ebf375e9c6acba813dcf775510dca40e",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/seg_decoder.v",
+      "before_sha256": "294a5ea59abd3602223025ce13aa1991495b1fad95ea2d8071415e7f141ba334",
+      "after_sha256": "294a5ea59abd3602223025ce13aa1991495b1fad95ea2d8071415e7f141ba334",
+      "noncomment_lines_sha256": "4e16ac15937080e1019f44a272b05327bc67a446375090667b70c70c2d4154df",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/seg_scan.v",
+      "before_sha256": "730be25c4f46e01d695d27c5b401f04352f89c93ea56f5c296a6a8ec12543241",
+      "after_sha256": "730be25c4f46e01d695d27c5b401f04352f89c93ea56f5c296a6a8ec12543241",
+      "noncomment_lines_sha256": "4aece2c437f16468d31ef6e1e07c5d0416c926c642b4b340b5539c0166b8df82",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_coord.v",
+      "before_sha256": "a7ca80dc5b2013dc9a7f107ccbddc557d1f601ae1b679a277dccd812993160c7",
+      "after_sha256": "3d3f5de0552d56fe6877f2f82b196279ad7b521786a67a28799ea61639bc7f0d",
+      "noncomment_lines_sha256": "1917386765ac96192a0e7ef40e9f4252239e540b1863e83273294b69a3f2c547",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_define.v",
+      "before_sha256": "77748966850a8f5af0d77f2cdb08006088ba5e1a31b98391fba6cc61c5247da2",
+      "after_sha256": "77748966850a8f5af0d77f2cdb08006088ba5e1a31b98391fba6cc61c5247da2",
+      "noncomment_lines_sha256": "77748966850a8f5af0d77f2cdb08006088ba5e1a31b98391fba6cc61c5247da2",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_delay.v",
+      "before_sha256": "1c78e575a9ef86cbf5a44a08aca5dd4c5abd3f21fda5d6d4774016772d313fb3",
+      "after_sha256": "1c78e575a9ef86cbf5a44a08aca5dd4c5abd3f21fda5d6d4774016772d313fb3",
+      "noncomment_lines_sha256": "ffcc1453bd28d2d424feec05e13d984cc14e1a30facc75cec62c71b8c507200e",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_rgb_to_axis_640x480.v",
+      "before_sha256": "6b73392154b2975abf6cd2cb9fe5069bf43ce103b5dab6ad6508cfc9f9d1d26e",
+      "after_sha256": "6b73392154b2975abf6cd2cb9fe5069bf43ce103b5dab6ad6508cfc9f9d1d26e",
+      "noncomment_lines_sha256": "a7088cea0f52c165a4b067c3d55fcf08b4d389184dbc45bcbd58a0b5ceef127b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_source_test.v",
+      "before_sha256": "71e8702932e7ca4d80b2a66842967573a72eb4c9d246bfbb6c1767ba3516e9f8",
+      "after_sha256": "71e8702932e7ca4d80b2a66842967573a72eb4c9d246bfbb6c1767ba3516e9f8",
+      "noncomment_lines_sha256": "ae2a29c029789748f1105a9c775f3005f67b946466c995b591f2540dae78bf42",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_timing_data.v",
+      "before_sha256": "9b02e0732a26488693a816a9c9bbc471c6d4d1af952d39ae33e664884caf49c9",
+      "after_sha256": "9b02e0732a26488693a816a9c9bbc471c6d4d1af952d39ae33e664884caf49c9",
+      "noncomment_lines_sha256": "7f46e5e16f01b02fe80d0ef6d75ffff2baf68c7de2ae113b9237517ee256f5c8",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/display/video_timing_gen.v",
+      "before_sha256": "01f17d004b13e1886b128b1eee5212cf585347393de378ef08c3e838d8b3690a",
+      "after_sha256": "96646df987311fdcb310a3ce171a7c73d764c1aa63f8f3d216014d047fad8f37",
+      "noncomment_lines_sha256": "0fe0e7d7825ca347ef4f096d1654feef298fff9f814f9e53571fd888d494a274",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/bmp_read.v",
+      "before_sha256": "2ca117b7ecd1883bfda8039f9251d68d949b0f3c8fb5b82af8befdbfdb0aa773",
+      "after_sha256": "6cf3a669ec3249e006d568347ca4f27a36212e0698788bcd896748e7bc6b14c8",
+      "noncomment_lines_sha256": "12cbb49ef3b71aeaf031877bcb44657982519181ed8a3d678944887c23eef29f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/image_center_720p.v",
+      "before_sha256": "ed2913c9da306a45539556289bdd5c5b6ada13b344c4a3c3b6100b4cc5ccf8a8",
+      "after_sha256": "ef4da1b8e641d1d83c373e92828a611f66c0b72eae0cc790a7a6156b9d7a0c10",
+      "noncomment_lines_sha256": "720928dc05dd4bd931d4d3a1c7b364515ec0818e9748b08afc70a0c762445851",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/img_scaler.v",
+      "before_sha256": "f90bf4902ec26c229d59f3ffa4602d7d276656e8b07103368a57a5ac4707413b",
+      "after_sha256": "7a0a2224bd6d9de074248615d5eb8f03d5756dfccbd650075fa1e764b71e4e8e",
+      "noncomment_lines_sha256": "cbd4ae597df5f0891bc5845d96b7d9076d640ea6eefea8aa7f88b896149a85e1",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/pixel_fifo_24x8.v",
+      "before_sha256": "11b951b7954991ccf2ee2e7fd18ac7266b21dec77e2547d26b1e2a0c0cda200f",
+      "after_sha256": "6fa55aab26dd5716b03efaf182d06d7b087e22dfd0a8a3d9f064822181219cf0",
+      "noncomment_lines_sha256": "4197f2c38d20bd9dbea3e3c849285356564a8eaa9774545d1c1908af44ff2739",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/qoi_stream.v",
+      "before_sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+      "after_sha256": "b95bf4405646f4057d2ffe6c2af2c00b96fd83e138f270768265ccafb8a13d59",
+      "noncomment_lines_sha256": "6e2da0946d5843c5efdb801f86246084068e4d6b098edcf485e3c3e48bd6afa5",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/image/sd_card_bmp.v",
+      "before_sha256": "6ad62ea1bc99b640a23ed873232cf4ea6f2d616978d9fadff78763999519d992",
+      "after_sha256": "32918fcebb8f515c6bc39ffc7dace44b31c9d20df8ddd756e60aaf767747bf90",
+      "noncomment_lines_sha256": "4ef72172b49ebf5ca65e737baaf5b23fc1ed32ae89a692956d44ae70467ecda8",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/async_fifo.v",
+      "before_sha256": "1b4f01572715de759ad8f27a64d17f7ed053ac27c20f16b9e96c1c438258d05f",
+      "after_sha256": "a84754c2f68fce8c2699f5eae1448cccf5e676162f3c491369a55e4af86c5eb7",
+      "noncomment_lines_sha256": "b2767802c7f72ebd1792cc54771ef1dd68cf49989c46160f2bae26207c73233a",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/dp_ram.v",
+      "before_sha256": "f1e8098d619d2a0819a991d835d33ba4240a1b9593c1a8e1e52792be2cf3a109",
+      "after_sha256": "125b6cc73a6c589b6754abbf944591cd7eefcfc4bf15a1c78f9e7e9cce800989",
+      "noncomment_lines_sha256": "4eae59f38065f7bbd7894e97aa63af7fa616b0c36c0370aba99c8a28f40be093",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/frame_fifo_read.v",
+      "before_sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781",
+      "after_sha256": "10b08ee29debadb45c7efc0a757b1abcb44ad8e0ca0876a2180bbecbda75c5cd",
+      "noncomment_lines_sha256": "edc2218f247cec5c5a02d386e4e7ff97b19db527038ab904c4f39957cdbfe067",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/frame_fifo_write.v",
+      "before_sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+      "after_sha256": "7f413c64bba16bb90f293de800265014e27a3339c154c2478d6e0c5ca858b1f3",
+      "noncomment_lines_sha256": "f6e65aec94dbf13d32e86447602c4ec7a9ccd151361f3f6bcf73a087efec3560",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/frame_read_write.v",
+      "before_sha256": "2b07e7fd5cddd148824172c6c99eccaef116b4f930eddceb2f35bbcc92bcf31b",
+      "after_sha256": "b52bf0cf5a6ed3a36eeb2345038d49e3d7a4953bd25778d8344e278c75151452",
+      "noncomment_lines_sha256": "f50f02b184b53d8904c3221af8041a1c8c9baae947f7f16719983cc2bc821ead",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/rgb565_pair_pack.v",
+      "before_sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+      "after_sha256": "fcd96baafc86d96f85edfa73bab1baf7d32881689f7bc0e5f8f0780eb66ef964",
+      "noncomment_lines_sha256": "84cdcb01a16cb9621a23aebd1cbba7d2062036f9fa7330c03d4d31761bc58962",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/memory/sdram.v",
+      "before_sha256": "7ac3be0a02213aa7871650bd5ef061c92809f309ea66726d55d09952f615896c",
+      "after_sha256": "a219d7c2a02e32a8c49008141fd0666fb2a581a9366b0accee7d8006cdec0a65",
+      "noncomment_lines_sha256": "84a01820c1f775986496462296a5ab99f036cfc8cf293c59cfb9b56b3eac0474",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/audio_arc_calculate.v",
+      "before_sha256": "308e3a70a338cae6505c52fd0ee4c6f855d0ac76aea9dd738f37aead9d4a2831",
+      "after_sha256": "308e3a70a338cae6505c52fd0ee4c6f855d0ac76aea9dd738f37aead9d4a2831",
+      "noncomment_lines_sha256": "66a06b9b6ce7a085bf4c94794cdbbc778699fde2017f0effbf8c08b8d4aec106",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/audio_frame.v",
+      "before_sha256": "d8dbaf42a5031c30e23cf339ea61e533b6b300140043c3aaa4f6dd4248fb69a1",
+      "after_sha256": "d8dbaf42a5031c30e23cf339ea61e533b6b300140043c3aaa4f6dd4248fb69a1",
+      "noncomment_lines_sha256": "81d92c828cb028116095b278c352a42db377decd698eb3ac82b8f52a08a8a44c",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/butterfly.v",
+      "before_sha256": "4ee3cada6d100bda20f81a67249a0f4641404b86578ed080d56e4abf2da7726b",
+      "after_sha256": "4781bf1a219663e9777651305067269f394da7fd9e51a726d2d85bab89556415",
+      "noncomment_lines_sha256": "f2c2817dcf17e538a42f84cf3baf650fb057858a0e5da6fb573919d096488af1",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/cordic_atan.v",
+      "before_sha256": "221cdd4cd7e1c5e5386ca7704aefabfd1d2f60e54ea92715955b5aef30a5c88f",
+      "after_sha256": "6b9e80888276279e6f0d2e8d907672537fb155f6af0e4a836912a1534b829554",
+      "noncomment_lines_sha256": "884640fbf28f28a11da7e7781a7b2dbd970a138de6c2ae67ce96da29701d1820",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/fft_256.v",
+      "before_sha256": "2fecdb30c1caf3de690be503005d409158ba8d5e7e821cf64bd57cd473023cec",
+      "after_sha256": "2662ddd7e4eed5abdaefa63996efba35c6dd97592c4251441db7e86eacacfad8",
+      "noncomment_lines_sha256": "5203a3448750d2c506aa6a1bf36334538429f4b1084019595dceeb4e3738749b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/spectrum_capture.v",
+      "before_sha256": "3b317d9fa0debb61fdfbbb06ca2c50780e3fe8f1f3069916a2b61420cc74d551",
+      "after_sha256": "31ea3802b9048caafac92153f20a8c6eb33db8314d22c0029c4a33e8171cd42d",
+      "noncomment_lines_sha256": "c48fdbc6f6eb322aa1c27ba0d6f79a5b37313ea4d771f2cfe04d8024725c84af",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/spectrum_display.v",
+      "before_sha256": "fb53fff2c86a3e90b47083635b69f26f8f5389aadc03216280c9005bbda7834b",
+      "after_sha256": "94137734c759aa0a5363d3ed38a651b7b546fa8a6345536a7d11eb7dcb42815c",
+      "noncomment_lines_sha256": "e3467a9de18e0fc20c757b7ca5e0abd08c973a122cc92f24ae387fc731865511",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/spectrum/twiddle_rom.v",
+      "before_sha256": "2d8aec654be7c74659694f61c182758cf7cb2a00da1a49bbb3db36438b6ab225",
+      "after_sha256": "be0e9b50b9036aad56b75665222418bc0f82e9f54a7ff35c5ef0e4676b8cfdb6",
+      "noncomment_lines_sha256": "06b28a1d0289737bebe8066b0306cf8d51263ba3f64eafe303912ae43482a80e",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/fat32_list.v",
+      "before_sha256": "3abbbd9c2ef6c816dfbed70e26686d2f6c45e5f158718886eba9da74c4c56cff",
+      "after_sha256": "fb4a7136773ca71cfd596559b6d003ad7457e6e318d0c920ab9581d52ded9e00",
+      "noncomment_lines_sha256": "78fd8d7765e98a037e6b66ecf3209004dda0443fc5f65bc0f1b823c0fe5a70fb",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/fat32_sector_mapper.v",
+      "before_sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+      "after_sha256": "6928ffadf1ca1313ece50b630bcad8cb01352f3a67da6b49724080898d976929",
+      "noncomment_lines_sha256": "67a2a8d6d1f030b9042d40d96ad42f781f8d2c7e28a66cdfd3516dad37f48a50",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/image_directory_iterator.v",
+      "before_sha256": "307eb76abbcccb38c08e1b19f246384fdcaf9367ab357c8931ef37d3ef6c235f",
+      "after_sha256": "307eb76abbcccb38c08e1b19f246384fdcaf9367ab357c8931ef37d3ef6c235f",
+      "noncomment_lines_sha256": "11f415dd79ad7aafd74874bb4f38d45f5e1c5d3fbcff343e2bbb2f07c5ea8a7f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/sd_arbiter.v",
+      "before_sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+      "after_sha256": "fc24615c442ba9fcb1fde44fe3b7a255030786823f1e97b66d92347b3d9e7cea",
+      "noncomment_lines_sha256": "feb540e36c506ab3e4736012a60e1d4dbf4c3438db5b8370e6b0b5419b6458a0",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/sd_card_cmd.v",
+      "before_sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+      "after_sha256": "606a29813ef792341ed8455df6ce7da929330dc5f898fb9899bb569f64b401f5",
+      "noncomment_lines_sha256": "08759b64993eca6ed3569560c41f87490130e6156692060bbd4c12855245b486",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/sd_card_sec_read_write.v",
+      "before_sha256": "12013ed57b03e6ab79eb1e613c931294131465d6816dfe87f76c14decd59dd54",
+      "after_sha256": "91a03a9a86979e788422543d9a5d6c0b4698cfa146b8bbde74dc9fed059cfcd8",
+      "noncomment_lines_sha256": "c0347cc011dc7fa57f09fa760a1a34f6f58043e24cbf18d872e68dc5e6e841c9",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/sd_card_top.v",
+      "before_sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+      "after_sha256": "05377fc6d513acf2d8eea39475bd9a1b6f058abb7e3e4d35b1251c1f1473a0f9",
+      "noncomment_lines_sha256": "df348a82cde1bd4f5ab09aa8af284cb37ce9807acd1cbf35fb38fad2e56395ff",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/sector_byte_source.v",
+      "before_sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+      "after_sha256": "c15a29741b276b129a5b0d5c5d35f1861bd0790f8e4b4758a052afc17d22cb72",
+      "noncomment_lines_sha256": "9b038300f2fe3974bf241295fb2e64bf413e17f5590022f6443b056e5aa2893d",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/spi_master.v",
+      "before_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+      "after_sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+      "noncomment_lines_sha256": "718ae27108bff6133c443782fb49975e675193ebe618ac39f5ec74c76864e01f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/storage/spi_sniffer.v",
+      "before_sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+      "after_sha256": "c7a523a6d45ae71c206838501d1dee58c8959d6e9c7f2d059a4fcd89cf19aa9f",
+      "noncomment_lines_sha256": "112bd05035e71e54d3ef72938bb14c0bda7c801423e5b413010a91c4fcd486ae",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/top/top_tf_hdmi_audio.v",
+      "before_sha256": "ace6392f259be9576e6cc1f27d43d86fd043b5416d774bdd37c0f6b20f9fbd1a",
+      "after_sha256": "479c8b3a0811e87d14b49c7a1b17faacc1a6b842836f2ee41efd7966a42c9750",
+      "noncomment_lines_sha256": "d9763fb110e0b27cc240775b075b0e03a679fb41cd7c023f6dfed354e81f5a5f",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/av_sample_sync.v",
+      "before_sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+      "after_sha256": "f6a48223db74d78ad031aea464293abfb5d80b10629ed011233e5c8fa325ccb6",
+      "noncomment_lines_sha256": "636d61384f8bce17fa40dcbdfdf618127c52d87b186bccc8dd0ba3b662a584d1",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/codec12_block_decoder_experimental.v",
+      "before_sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+      "after_sha256": "d5c0ce0111243db88cdf40502c53be7b6bb93b14280083d609e008061cf222f9",
+      "noncomment_lines_sha256": "30b05d827417cd746041ee0e7dca65041429d23f929eff046833f4722da70053",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/codec12_lossless_restore.v",
+      "before_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+      "after_sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee",
+      "noncomment_lines_sha256": "3d1651f4e4d7bee84e86fe3720c45bbef3d8cd1f10d9eec317eb3ea9f80d9666",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/codec_byte_queue.v",
+      "before_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+      "after_sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720",
+      "noncomment_lines_sha256": "c74b1f1d17e2b6470fc08b0160c34389fb090e035277d19215dd00b9e9a66334",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/context_huffman_decoder.v",
+      "before_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+      "after_sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4",
+      "noncomment_lines_sha256": "55ede08fba4ee9a1569ee13cf33f6b156b2e5f71ca8ae9fb39b25310a61e0502",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/gradient_block_experimental.v",
+      "before_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+      "after_sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+      "noncomment_lines_sha256": "1f781523b4cce76b8991b44d6eff12a0f3ab6166f6576fd5c6e96b6d1f94f234",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_byte_ram.v",
+      "before_sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+      "after_sha256": "c0dfc9cd14a23b59bf0cc021270bd0c7ee6a1305900c143174b13cdb3c42f6ab",
+      "noncomment_lines_sha256": "f871e472d98ed7870a2bc03efe533a284a485e162fed2b2d0c8778b1b65f3d0b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_catalog.v",
+      "before_sha256": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+      "after_sha256": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+      "noncomment_lines_sha256": "e24e6687fc74b569ad831311238a29aad46f210d9fa4af04d946ac27d3b8503d",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_codec8_block_decoder.v",
+      "before_sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
+      "after_sha256": "61b91cb62d6f7d95f92f6a522f7517c93eb32fb0e43c009b05ec07abc7bfc69f",
+      "noncomment_lines_sha256": "13c0e0eb68377aa145f68330fb4c8819e6483faf688bc9ecbe614637585e8bca",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_codec8_raster.v",
+      "before_sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+      "after_sha256": "fb0d6e471f6776d2ab10a08b80dbec602ba9275ccc1dcc4a74423ebbe615b23e",
+      "noncomment_lines_sha256": "c7f0a53682aee80716622cdb33a63269783abd0f17b6d618f5a26c0f184802bd",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_eof_guard.v",
+      "before_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+      "after_sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+      "noncomment_lines_sha256": "5828b3924a3c28bc37a141b7c2a0dd47dee13d400b674cce7041a5b71f02604b",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_player.v",
+      "before_sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+      "after_sha256": "5d2b06993ee07be8e52d861958aea27f45e0b00cb6c737b5ce18558a66c8fc04",
+      "noncomment_lines_sha256": "3698ddb7750ad6ca1d3a0a71a6fafd58086204ec6cab83cd4c8e18f581d4a1ad",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    },
+    {
+      "path": "rtl/video/video_playlist_ctrl.v",
+      "before_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+      "after_sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+      "noncomment_lines_sha256": "974c75c443d82f83f7918c4c9f1ebddf5df7dae66e511ea51b67da35d4216bb2",
+      "noncomment_lines_equal": true,
+      "protected_comments_equal": true
+    }
+  ],
+  "unchanged_non_rtl_inputs": 73,
+  "bitstream_sha256": "41b03883c718e0d52f04e61a9cf0228363c1bdfc3c3e51d023bcb012e3d267f4"
+}

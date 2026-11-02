@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Experimental Codec12 block parser with legacy block-mode compatibility.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // Research only: full block byte parser for experimental format 12.
 // PAL2/PAL4 indices stream one byte at a time; no 64/128-bit index shift bank.

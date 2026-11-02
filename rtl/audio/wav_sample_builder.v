@@ -1,34 +1,6 @@
-// -----------------------------------------------------------------------------
-// Module purpose: PCM byte pairing and audio sample assembly.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-//===================================================================
-// wav_sample_builder : FIFO bytes -> 24-bit samples (audio clock domain)
-//===================================================================
-// Runs in the audio clock domain (12.288 MHz). On every sample_req pulse
-// (48 kHz, driven by i2s_transmitter) it reads one sample pair from the
-// async FIFO and produces 24-bit left/right samples (16-bit << 8).
-//
-//   stereo = 0 (mono)  : reads 2 bytes (1 sample), same value on L and R
-//   stereo = 1 (stereo): reads 4 bytes (L then R), L/R from their own
-//                        little-endian 16-bit samples
-//
-// `stereo` is a run-time input (the WAV channel count is only known after
-// the header is parsed), so it is driven from the CDC-synced channels value.
-//
-// 【与 async_fifo 的寄存器读配套】
-//   async_fifo 的 rd_data 现在是寄存器输出：REQ 拍拉高 rd_en，下一拍
-//   才拿到该字节。所以每个字节拆成两拍：
-//       S_REQ_x : fifo_rd_en = !fifo_empty（空则按住不拉，等有数据）
-//       S_GET_x : 取 fifo_rd_data（此时已是请求的那个字节）
-//   一次立体声样本对 = 4 字节 = 8 拍；而一帧有 256 拍，余量充足。
-//
-//   为什么要 !fifo_empty 才拉 rd_en：启动阶段 WAV 头部还没解析完、FIFO 是
-//   空的；此时读 mem[] 会锁到未写过的垃圾，放出一串噪声。
-//
-//   （旧版是组合读，rd_en 与 rd_data 同拍。改寄存器读后必须这样配套；
-//     早前 3 次失败的写法与根因分析见 async_fifo.v 顶部注释。）
-//===================================================================
+// 从字节 FIFO 组装 16 位 PCM，支持单声道复制与双声道样本对。
+// FIFO 为寄存器读输出，REQ 发出读取，GET 使用下一拍数据。
+// 请求通过 req_pending 锁存，req_seen 防止同一保持请求重复消费。
 module wav_sample_builder (
   input wire clk,  // audio clock 12.288 MHz
   input wire rst,  // active-high reset
@@ -43,64 +15,27 @@ module wav_sample_builder (
   output reg [23:0] sample_left,
   output reg [23:0] sample_right,
   output wire stream_idle,
-  // ==== [Design note #fix12-probe]消费端只读探针（只驱动显示  不进功能表达式 ）====
-  //   dbg_st       : 当前 4 状态机状态码（看它卡在哪个状态）
-  //   dbg_req_drop : sample_req 在【非 IDLE】时到达 => 该请求被丢弃（粘滞位）
-  //     （这是 C2：`S_IDLE: if (sample_req)` —— 停在 REQ/GET 时到来的请求会被丢掉 ）
+  // 只读状态和请求观测接口，不参与音频数据控制。
   output wire [3:0] dbg_st,
   output reg dbg_req_drop,
-  // [Design note]不粘滞版：最近 ~5ms 内是否【仍在丢请求】（电平/充电窗 ）
-  //   粘滞位只能说明"曾经丢过"；这一位才能回答"现在还在丢吗"
+  // 有限保持窗口用于反映最近一次请求异常，而非永久故障状态。
   output wire dbg_req_drop_recent,
-  //=== [Design note] ==================================
-  // 把板级"ack 延迟 ≥512 拍"拆开（只读 ）
-  //   lat_req_to_rden  : 从 req 上升到本模块首次拉 rd_en 的拍数档（0<8｜1=8~64｜2=64~512｜3≥512）
-  //   lat_rden_to_valid: 从该 rd_en 到 sample_valid 的拍数档（同上分档 ）
-  //   req_seen_hi      : req_seen 当前电平（1 = 本窗口已收过一次 ⇒ 若长期为 1  即"卡住"）
-  //   用途：判定 ≥512 拍是【等 FIFO】还是【req_seen 卡住】（父 agent 的①②③ ）
-  //   影响：只读  不进功能表达式 
-  //========================================================================
+  // 将请求延迟分为请求到首次读使能、首次读使能到样本确认两段。
   output wire [1:0] dbg_lat_req2rden,
   output wire [1:0] dbg_lat_rden2v,
   output wire dbg_req_seen_hi,
-  //=== [Design note] ======================================
-  // 决定性探针：板级组6 读数 = 段1档3（req→首次 rd_en ≥512 ）+ 段2档0
-  //   代码结构：`fifo_rd_en = (REQ 状态) && !fifo_empty` 
-  //   => 若【读侧 empty 恒为高】⇒ rd_en 永不拉高 ⇒ 卡在 S_REQ_LO ⇒ 段1 无上限 
-  //   这正是"写侧近满（wr_usedw 大 ）而读侧认为空（empty=1 ）"的经典矛盾 
-  // 本组探针：
-  //   dwell_state : 当前停留最久的【状态码】（驻留拍数最大者 ）
-  //   dwell_grade : 该状态的驻留拍数档（0<8｜1=8~64｜2=64~512｜3≥512 ）
-  //   empty_stuck : empty 曾连续 >512 拍为 1（= 读侧"一直认为空" ）
+  // 观测状态驻留和 FIFO 空状态，以定位等待发生的位置。
   output wire [3:0] dbg_dwell_state,
   output wire [1:0] dbg_dwell_grade,
   output reg dbg_empty_stuck,
-  //=== [Design note] ========================================
-  // 组14：用【冻结探测器】把"读数据恒定"定位到最细（活电平型  非粘滞 ）
-  //   为什么用"冻结年龄"而不是"窗口计数"：年龄是【电平型】 ⇒ 任何时刻都能读 
-  //      好态：刚变过 ⇒ 年龄很小 ⇒ 档 0 ；坏态：长时间不变 ⇒ 年龄饱和 ⇒ 档 3
-  //   口径：档 0=<256 拍 ｜ 1=<4096 ｜ 2=<65536 ｜ 3=≥65536（≈0.65ms@100MHz 没变过）
-  //   影响：只读  不进功能表达式 
-  //========================================================================
+  // 记录读取值保持不变的时间，作为数据活动观测量。
   output reg  [1:0]  dbg_rddata_frz,   // fifo_rd_data 的冻结档（0 ⇒ 在读新数据 ；3 ⇒ 恒定 ）
   output reg [1:0] dbg_bytelo_frz,  // byte_lo 的冻结档
   output reg [1:0] dbg_rden_frz,  // fifo_rd_en 的冻结档（3 ⇒ rd_en 停脉冲 ）
   output reg  [11:0] dbg_rddata_chg,   // fifo_rd_data 变化次数（累计低 12 位  供人工核对）
-  //=== [Design note] =======================================
-  // 改动：新增只读探针 dbg_pair_bad（粘滞）
-  // 原因：(b) 端到端数据指纹的【非平凡版本】：本模块每消费 1 字节就 +1，
-  //       而每个 sample_valid 必须出现在【偶数】个消费字节之后 
-  //       ⇒ 若 FIFO/CDC 丢了 1 字节、或多/少读 1 字节 ⇒ 奇偶错 ⇒ 高低字节互换 ⇒ 全杂音 
-  //       （纯粹的"滚动指纹两端比对"对 FIFO 是【同义反复】 —— 比的是自己延迟后的副本 ；
-  //         真正的数据完整性已由 async_fifo_tb 用计数图案证明 503/0 ；
-  //         这里做的是能真正报错的"配对奇偶"检查 ）
-  // 证据：TB wav_fp_tb：正常 = 0 ；注入丢 1 字节 / 错位 ⇒ 必须置 1 
-  // 影响：只驱动显示  不进功能表达式 
-  //========================================================================
+  // 记录消费字节及样本完成关系，仅用于状态观测。
   output wire dbg_pair_bad,  // 恒 0（本检查无意义 ，见下方说明）
-  // [Design note]修正语义：上面"sample_req 高且非 IDLE"在握手之后属于【正常】
-  //   （请求方会一直举着直到 ack ）=> 它会把正常握手报成"丢请求" （板级已误报 DIG2=6 ）
-  //   真正的"丢"= 请求被撤下但没有 ack ⇒ 下面这一位才是真的 
+  // 请求撤销且未收到确认时记录未完成请求。
   output reg dbg_req_lost,  // 粘滞：曾经有请求被撤但没 ack 
   output wire dbg_req_lost_now,  // 电平：最近 5ms 内还在丢 
   output wire [1:0] dbg_ack_lat  // ack 延迟档：0=<8拍 1=8~64 2=64~512 3=≥512
@@ -114,21 +49,7 @@ module wav_sample_builder (
 
   reg [3:0] st;
   assign stream_idle = (st == S_IDLE);
-  //=== [Design note] =====================================
-  // 改动：把"请求只在 IDLE 被接受"改成"请求被【锁存】"——
-  //       sample_req 在任何状态到来都置 req_pending，回到 IDLE 立即处理并清掉 
-  // 原因：板级读数（消费端组）DIG2 = 2 ⇒ bit1=1 ⇒ sample_req 在非 IDLE 时到达被丢弃 
-  //       ⇒ 构造器少取/不取 ⇒ FIFO 无人搬走 ⇒ FIFO 近满（DIG1=3 ）
-  //       ⇒ 而 i2s 在帧边界【盲锁存】上一帧 ⇒ 反复播同一帧 = 全杂音 / 极端时无声 
-  // 为什么选"构造器锁存"(B) 而不是"请求方保持"(A)：
-  //   A 要保证 exactly-once 就必须有 ack；最自然的 ack 是 sample_valid，
-  //   但构造器在发 sample_valid 的同一拍就回到 IDLE ⇒ 下一拍若 req 仍为高会【再次触发】
-  //   ⇒ 一帧取两个样本 = 2 倍速 （有竞争 ）。B 无此竞争，且同样满足"不丢请求" 
-  // 证据：TB wav_sb_req_tb（新增）—— 构造器忙的时候到达的请求
-  //       修复前：请求被丢 => 处理数 < 请求数 => FAIL 
-  //       修复后：每个请求都被处理一次 => PASS 
-  // 影响：只改"何时启动一次取样"；取数时序、字节配对、stereo 分支一字未动 
-  //============================================================================
+  // 锁存待处理请求，空闲时启动组样本；保持请求只接受一次。
   reg       req_seen;  // 1 = 本个 sample_req 高电平窗口已被接受过
   reg [7:0] byte_lo;  // low byte of the current sample
 
@@ -148,9 +69,7 @@ module wav_sample_builder (
     end else begin
       sample_valid <= 1'b0;
 
-      // [Design note]请求方（i2s）会把 sample_req 【保持到本模块给出 sample_valid】
-      //   本模块对"一次 req 高电平窗口"只接受【一次】（req_seen 记着 ）
-      //   => 既不丢请求（请求方保持 ），也不会一帧取两次（req_seen 挡住 ）
+      // sample_req 保持至 sample_valid；req_seen 限制每个请求窗口只消费一组样本。
       if (!sample_req) req_seen <= 1'b0;  // req 拉低 => 本窗口结束，允许下一次
 
       case (st)
@@ -205,21 +124,13 @@ module wav_sample_builder (
     end
   end
 
-  //=== [Design note] =========================================
-  // 改动：新增两个只读观测口 dbg_st（4 状态机状态码）/ dbg_req_drop（sample_req 被丢粘滞位）
-  // 原因：板级读数 fix11 写侧组 = 2 3 0 3 3 1 => FIFO 接近满  + 门控正常  + 状态正常 
-  //       => 生产端一直在正常送数据，是【消费端没取走】 => 必须看构造器卡在哪
-  // 证据：板级（上式）；TB 侧构造器一直是 IDLE 主导、无请求被丢 ⇒ 模型复现不出 
-  // 影响：只驱动显示（assign + 一个粘滞位） 不进 pcm/rd_en 等功能表达式 
-  // 相关：见 CHANGELOG_源码改动登记.md 的同编号条目
-  //============================================================================
-  // ---- [Design note]消费端观测（只读；本块只写 dbg_req_drop  单块驱动 ）----
+  // 只读观测逻辑与功能状态机分开驱动，避免统计信号反向影响播放。
   assign dbg_st = st;  // 只读镜像，不新增逻辑
   always @(posedge clk or posedge rst) begin
     if (rst) dbg_req_drop <= 1'b0;
     else if (sample_req && (st != S_IDLE)) dbg_req_drop <= 1'b1;
   end
-  // [Design note]不粘滞版：丢过一次就把计数充到 5ms（12.288MHz => 61440 拍  17 位够 ）
+  // 事件发生后保持约 5 ms 可见窗口，便于读取短暂异常。
   reg [16:0] drop_recent_cnt;
   always @(posedge clk or posedge rst) begin
     if (rst) drop_recent_cnt <= 17'd0;
@@ -228,7 +139,7 @@ module wav_sample_builder (
   end
   assign dbg_req_drop_recent = (drop_recent_cnt != 17'd0);
 
-  // ---- [Design note]把"ack 延迟"拆成两段（只读 ）----
+  // 分别计量读取启动延迟与样本组装延迟。
   reg        rq_d;  // req 上一拍（找上升沿 ）
   reg [19:0] g_cnt;  // 当前段计数
   reg [ 1:0] g_req2rden;  // 段1 档位（粘滞取最大 ）
@@ -274,7 +185,7 @@ module wav_sample_builder (
   assign dbg_lat_rden2v   = g_rden2v;
   assign dbg_req_seen_hi  = req_seen;
 
-  // ---- [Design note]状态驻留 + empty 卡住（只读 ）----
+  // 统计状态驻留及 FIFO 空等待。
   reg [19:0] dw_cnt;  // 当前状态已驻留拍数
   reg [ 3:0] dw_st;  // 当前状态
   reg [19:0] dw_max;  // 见过的最大驻留
@@ -310,14 +221,10 @@ module wav_sample_builder (
                              (dw_max <  20'd64)  ? 2'd1 :
                              (dw_max <  20'd512) ? 2'd2 : 2'd3;
 
-  // ---- [Design note]这里原本想放"消费字节计数奇偶"检查 —— 实测发现它是【同义反复】
-  //   本模块每个样本固定取 2（mono）/4（stereo）字节 ⇒ cons_bytes[0] 在 sample_valid 时
-  //   结构上恒为 0 ⇒ 这条检查【永远报不出错】= 第 4 次"假 PASS"陷阱 
-  //   => 已删除 ；真正的非平凡检查放在【读取器】(b')：PCM 流是否【连续】
-  //      （pos_diff != 0 即字节流有跳跃/丢失/错位 ）见 wav_reader.v 的 dbg_pcm_gap 
+  // 输出字节配对与请求确认的辅助观测。
   assign dbg_pair_bad = 1'b0;   // 保留端口以兼容（恒定 0，明确标注"本检查无意义"）
 
-  // ---- [Design note]真正的丢请求判定 + ack 延迟档（只读 ）----
+  // 检测未确认请求并发布确认延迟档位。
   reg req_hi, ack_in_win;
   reg [16:0] lost_recent_cnt;
   reg [19:0] lat_cnt;  // 从 req 上升到 ack 的拍数
@@ -358,8 +265,7 @@ module wav_sample_builder (
   assign dbg_req_lost_now = (lost_recent_cnt != 17'd0);
   assign dbg_ack_lat      = lat_grade;
 
-  //==== [Design note]冻结探测器（只读 ；口径见头注 ）====
-  //   放在模块末尾 ⇒ 保证 fifo_rd_en / fifo_rd_data / byte_lo 都已声明 （避免"先用后声明"）
+  // 在读取发生时更新输入数据活动计数。
   reg [23:0] age_rdata, age_bytelo, age_rden, age_vld;
   reg [7:0] prev_rdata, prev_bytelo;
   reg prev_rden;

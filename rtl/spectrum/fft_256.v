@@ -1,27 +1,8 @@
-//===================================================================
-// 256-point Radix-2 DIT FFT (single-butterfly time-multiplexed)
-//   -- synchronous-RAM (BRAM) version, 5-cycle butterfly
-//===================================================================
-// Architecture: 1 butterfly unit + 2 true dual-port RAMs (real/imag)
-//               + 1 twiddle factor ROM, time-multiplexed by a state
-//               machine to run 8 stages x 128 = 1024 butterflies.
-//
-// Flow:
-//   1) S_LOAD : load 256 time-domain samples (write at bit-reversed addr)
-//   2) S_BFLY : 8 butterfly stages, 128 per stage, 5 cycles each
-//               (read addr -> data valid + butterfly -> butterfly out
-//                -> write back)
-//   3) S_OUT  : read out 256 frequency bins in natural order
-//
-// RAM is synchronous-read (BRAM), so a butterfly now takes 5 cycles:
-//   sub_cnt 0: present read addr (RAM latches data)
-//   sub_cnt 1: data valid -> butterfly samples (din_valid)
-//   sub_cnt 2: second pair of real products
-//   sub_cnt 3: scaled butterfly outputs; sub_cnt 4: write back
-//
-// Key: butterfly internally scales by 1/2 before narrowing per stage,
-//      8 stages = total scale 256, to prevent overflow.
-//===================================================================
+// 256-point radix-2 DIT FFT with one shared butterfly and synchronous RAM.
+// Load samples at bit-reversed addresses; emit frequency bins in natural order.
+// Eight stages perform 1024 butterflies. Each butterfly uses five scheduler cycles:
+// address, first products, second products, scaled outputs, writeback.
+// Each stage scales by 1/2 before narrowing, giving total normalization of 1/256.
 module fft_256 (
   input  wire        clk,
   input  wire        rst_n,
@@ -95,32 +76,10 @@ module fft_256 (
   wire bf_din_valid = (state == S_BFLY) && (sub_cnt == 2'd1);
   wire signed [15:0] bf_y0_re, bf_y0_im, bf_y1_re, bf_y1_im;
 
-  // ==================================================================
-  // 2026-10-10 修复（真功能缺陷：先用后声明 ⇒ 隐式 1 位 ⇒ 宽输入被截断）
-  //   【TD 原文】HDL-7225 CRITICAL-WARNING: 'tw_re' is already implicitly
-  //     declared on line 108 in fft_256.v(115)
-  //   【根因】下面 `butterfly u_bf` 在【第 106~108 行】就引用了
-  //     `ram_a_dout_re/im`、`ram_b_dout_re/im`、`tw_re`、`tw_im`，
-  //     而它们的 `wire [15:0]` 真声明原本在【第 115 行 / 第 138 行】
-  //     ⇒ Verilog 对"尚未声明的名字"建【隐式 1 位线网】
-  //     ⇒ 连接只取 bit 0、其余 15 位被补 0 丢弃 
-  //   【后果】`butterfly.v` 的 `x0_re/x0_im/x1_re/x1_im/w_re/w_im` 都是 16 位，
-  //     却只连到 bit 0 ⇒ 蝶形运算输入实际只有最低位 ⇒ FFT 结果不可能正确 
-  //   【修法】把这两个声明【上移到 u_bf 实例之前】（不动任何逻辑 ）
-  //     ⇒ 6 条 HDL-7225 应全部消失 ⇒ 蝶形输入恢复 16 位连通 
-  //   注：`dp_ram` 的两个实例在【声明之后】，那两处连接本来就是好的 ；
-  //          被截断的只有【引到 u_bf 的这 6 个 tap】
-  // ==================================================================
+  // 旋转因子和 RAM 输出在实例连接前显式声明位宽，避免隐式单比特网络截断数据。
   wire [15:0] tw_re, tw_im;
   wire [15:0] ram_a_dout_re, ram_a_dout_im, ram_b_dout_re, ram_b_dout_im;
-  // 2026-10-10 修复（纯声明缺失）：`bf_dout_valid` 是 butterfly 的输出连接，
-  //   原文只在此处出现一次、此后再未被读 ⇒ 隐式 1 位网。
-  //   两个独立工具都报：
-  //     · ModelSim: Warning vlog-2623 (Undefined variable) 于 fft_256.v(128)
-  //     · TD      : HDL-1007 "undeclared symbol 'bf_dout_valid', assumed default net type 'wire'" (128)
-  //   ⇒ 零功能影响（该网从未被读到），但补上声明即为"声明卫生" 
-  //   注：这是本文件同类问题的【第 7 处】—— 前 6 处（`tw_re/tw_im`、
-  //          `ram_a_dout_*`、`ram_b_dout_*`）此前已修，这一处当时漏了 （如实登记）
+  // 蝶形完成握手显式声明，便于连接检查。
   wire bf_dout_valid;
 
   butterfly u_bf (
@@ -140,8 +99,7 @@ module fft_256 (
     .y1_im     (bf_y1_im)
   );
 
-  // ---------- twiddle factor ROM (synchronous read) ----------
-  // (wire [15:0] tw_re, tw_im; -- moved above u_bf 2026-10-10)
+  // 同步读取旋转因子 ROM。
   twiddle_rom u_tw (
     .clk (clk),
     .addr(twiddle_idx),
@@ -155,8 +113,7 @@ module fft_256 (
   wire [15:0] ram_b_din_re = bf_y1_re;
   wire [15:0] ram_b_din_im = bf_y1_im;
 
-  // ---------- dual-port RAM (one for real, one for imag) ----------
-  // (wire [15:0] ram_a_dout_re/im, ram_b_dout_re/im; -- moved above u_bf 2026-10-10)
+  // 实部和虚部分别使用双端口 RAM。
 
   dp_ram u_re_ram (
     .clk  (clk),

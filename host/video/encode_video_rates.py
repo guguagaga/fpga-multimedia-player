@@ -8,7 +8,7 @@ def encode(source,output,fps=15,budget=125000,start=None,duration=None,force=Fal
     if fps not in (15,20,25,30) or budget<22501:raise ValueError('invalid rate/budget')
     if not source.is_file():raise FileNotFoundError(source)
     output.parent.mkdir(parents=True,exist_ok=True)
-    ff=Path(os.environ.get('FFMPEG','C:/Users/Admin/Desktop/ffmpeg/ffmpeg.exe'))
+    ff=Path(os.environ.get('FFMPEG','ffmpeg'))
     exe=Path(__file__).resolve().parent/'bin/encode_quad.exe'
     args=[str(ff),'-hide_banner','-loglevel','error','-threads','2']
     if start is not None:args+=['-ss',str(start)]

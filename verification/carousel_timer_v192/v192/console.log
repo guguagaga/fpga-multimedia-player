@@ -1,0 +1,82 @@
+PUBLISH n=1 t=130 interval=130 sec=0 phase=0
+FADE t=6838 age=4003
+PUBLISH n=2 t=6868 interval=6738 sec=0 phase=0
+FADE t=10872 age=4004
+PUBLISH n=3 t=10902 interval=4034 sec=0 phase=0
+FADE t=15926 age=5024
+PUBLISH n=4 t=15956 interval=5054 sec=0 phase=0
+FADE t=22980 age=7024
+PUBLISH n=5 t=23010 interval=7054 sec=0 phase=0
+FADE t=27012 age=4002
+PUBLISH n=6 t=27042 interval=4032 sec=0 phase=0
+FADE t=32066 age=5024
+PUBLISH n=7 t=32096 interval=5054 sec=0 phase=0
+FADE t=39120 age=7024
+PUBLISH n=8 t=39150 interval=7054 sec=0 phase=0
+FADE t=43154 age=4004
+PUBLISH n=9 t=43184 interval=4034 sec=0 phase=0
+FADE t=48208 age=5024
+PUBLISH n=10 t=48238 interval=5054 sec=0 phase=0
+FADE t=55262 age=7024
+PUBLISH n=11 t=55292 interval=7054 sec=0 phase=0
+FADE t=59294 age=4002
+PUBLISH n=12 t=59324 interval=4032 sec=0 phase=0
+FADE t=64348 age=5024
+PUBLISH n=13 t=64378 interval=5054 sec=0 phase=0
+FADE t=71402 age=7024
+PUBLISH n=14 t=71432 interval=7054 sec=0 phase=0
+FADE t=75436 age=4004
+PUBLISH n=15 t=75466 interval=4034 sec=0 phase=0
+FADE t=80490 age=5024
+PUBLISH n=16 t=80520 interval=5054 sec=0 phase=0
+FADE t=87544 age=7024
+PUBLISH n=17 t=87574 interval=7054 sec=0 phase=0
+FADE t=91576 age=4002
+PUBLISH n=18 t=91606 interval=4032 sec=0 phase=0
+FADE t=96630 age=5024
+PUBLISH n=19 t=96660 interval=5054 sec=0 phase=0
+FADE t=103684 age=4942
+PUBLISH n=20 t=103714 interval=7054 sec=0 phase=0
+FADE t=108924 age=5210
+PUBLISH n=21 t=108954 interval=5240 sec=0 phase=0
+FADE t=114118 age=5164
+PUBLISH n=22 t=114148 interval=5194 sec=0 phase=0
+FADE t=119312 age=5164
+PUBLISH n=23 t=119342 interval=5194 sec=0 phase=0
+FADE t=124506 age=5164
+PUBLISH n=24 t=124536 interval=5194 sec=0 phase=0
+FADE t=129700 age=5164
+PUBLISH n=25 t=129730 interval=5194 sec=0 phase=0
+FADE t=134894 age=5164
+PUBLISH n=26 t=134924 interval=5194 sec=0 phase=0
+FADE t=140088 age=5164
+PUBLISH n=27 t=140118 interval=5194 sec=0 phase=0
+FADE t=145282 age=5164
+PUBLISH n=28 t=145312 interval=5194 sec=0 phase=0
+FADE t=150476 age=5164
+PUBLISH n=29 t=150506 interval=5194 sec=0 phase=0
+FADE t=155670 age=5164
+PUBLISH n=30 t=155700 interval=5194 sec=0 phase=0
+FADE t=160864 age=5164
+PUBLISH n=31 t=160894 interval=5194 sec=0 phase=0
+FADE t=166058 age=5164
+PUBLISH n=32 t=166088 interval=5194 sec=0 phase=0
+FADE t=171252 age=5164
+PUBLISH n=33 t=171282 interval=5194 sec=0 phase=0
+FADE t=176446 age=5164
+PUBLISH n=34 t=176476 interval=5194 sec=0 phase=0
+FADE t=181640 age=5164
+PUBLISH n=35 t=181670 interval=5194 sec=0 phase=0
+FADE t=186834 age=5164
+PUBLISH n=36 t=186864 interval=5194 sec=0 phase=0
+FADE t=192028 age=5164
+PUBLISH n=37 t=192058 interval=5194 sec=0 phase=0
+FADE t=197222 age=5164
+PUBLISH n=38 t=197252 interval=5194 sec=0 phase=0
+FADE t=202416 age=5164
+PUBLISH n=39 t=202446 interval=5194 sec=0 phase=0
+FADE t=207610 age=5164
+PUBLISH n=40 t=207640 interval=5194 sec=0 phase=0
+PUBLISH n=41 t=219796 interval=12156 sec=0 phase=0
+PASS timer baseline, variable SD delay, reseed,20manual,video cancel publications=41
+D:\codexworks\carousel_timer_validation_v192\tb.v:80: $finish called at 2198950000 (1ps)

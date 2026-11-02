@@ -1,0 +1,945 @@
+{
+  "format": 1,
+  "release": "submission-20261102",
+  "files": [
+    {
+      "project_path": "build/_flow_run.cmd",
+      "public_path": "project_template/build/_flow_run.cmd",
+      "sha256": "f5dfde43d9d2a5ff27fe702837bc480ad0307a8e98ca19b2b903045d09ad5b48",
+      "bytes": 776,
+      "external": false
+    },
+    {
+      "project_path": "build/_mk_prj2.py",
+      "public_path": "project_template/build/_mk_prj2.py",
+      "sha256": "b0a8b6eaa4dbbd0b96268726094e724672c1e136d5a0475f126538ff888a21ad",
+      "bytes": 1394,
+      "external": false
+    },
+    {
+      "project_path": "build/fonts/font8x8_basic.h",
+      "public_path": "project_template/build/fonts/font8x8_basic.h",
+      "sha256": "49d8df366296b203ca3211bc0672cf2a762135bf12710735b6292756b19dffd5",
+      "bytes": 9596,
+      "external": false
+    },
+    {
+      "project_path": "build/fonts/README.md",
+      "public_path": "project_template/build/fonts/README.md",
+      "sha256": "94818833eca86bbbcdae286969de7b5cfec80f513bd031557321203520c40725",
+      "bytes": 619,
+      "external": false
+    },
+    {
+      "project_path": "build/gen_init_data.py",
+      "public_path": "project_template/build/gen_init_data.py",
+      "sha256": "e3e2e9505f77fd37cf33e8d8a50814151f200a11be8d3f977065e2040a9e409c",
+      "bytes": 1946,
+      "external": false
+    },
+    {
+      "project_path": "build/optimization_margin.sdc",
+      "public_path": "project_template/build/optimization_margin.sdc",
+      "external": false,
+      "sha256": "cc24655dce2492ed25dc806bb7695dfa028a5252b2e138e72cf28d5f124ed45f",
+      "bytes": 124
+    },
+    {
+      "project_path": "build/phy_stage_flow.tcl",
+      "public_path": "project_template/build/phy_stage_flow.tcl",
+      "sha256": "26aa810a05de05929807f12757f1bd156bf6661232feb0977d3544fcde9427be",
+      "bytes": 12863,
+      "external": false
+    },
+    {
+      "project_path": "build/run_flow.tcl",
+      "public_path": "project_template/build/run_flow.tcl",
+      "sha256": "6796c9cdd05fb42b2ebe3c7a10594036f2ce2e776c4339c93c7409e5a2db32fd",
+      "bytes": 773,
+      "external": false
+    },
+    {
+      "project_path": "build/settings_phy_1.cfg",
+      "public_path": "project_template/build/settings_phy_1.cfg",
+      "sha256": "756c0ea9be811571a09ca570683458b5dead8294cda25d5a229dc62b9a946b83",
+      "bytes": 725,
+      "external": false
+    },
+    {
+      "project_path": "build/settings_syn_1.cfg",
+      "public_path": "project_template/build/settings_syn_1.cfg",
+      "sha256": "32b93b6f32110b250bd0799b726b0ac714d50c94be394cd4a110dfb0e6917594",
+      "bytes": 859,
+      "external": false
+    },
+    {
+      "project_path": "rtl/av_sample_sync.v",
+      "public_path": "rtl/video/av_sample_sync.v",
+      "sha256": "e7f499dc6189d944961978335245a73f917247225b8739943aac0ff7693d60d2",
+      "bytes": 3581,
+      "external": false
+    },
+    {
+      "project_path": "rtl/brightness_contrast.v",
+      "public_path": "rtl/display/brightness_contrast.v",
+      "sha256": "b1b4047779aaf2964fa9142638e91a9eddf4db75427a9fae5d4bf4599589efc5",
+      "bytes": 3427,
+      "external": false
+    },
+    {
+      "project_path": "rtl/button_ctrl.v",
+      "public_path": "rtl/control/button_ctrl.v",
+      "sha256": "deb292e097b7a21f30ee548bdaa36579e42086c913a43637c484320978f7c4f8",
+      "bytes": 8358,
+      "external": false
+    },
+    {
+      "project_path": "rtl/carousel_period_cfg.v",
+      "public_path": "rtl/control/carousel_period_cfg.v",
+      "sha256": "95a2c4596bcb285816bbf94ce4587b4b46da9fbe4046e085206d96ff815e60d0",
+      "bytes": 4400,
+      "external": false
+    },
+    {
+      "project_path": "rtl/codec12_block_decoder_experimental.v",
+      "public_path": "rtl/video/codec12_block_decoder_experimental.v",
+      "external": false,
+      "sha256": "c1fb2f94bc4b4b0add5e5efd526b6ee7a2172098afbe214dc450b2abb3662c85",
+      "bytes": 10461
+    },
+    {
+      "project_path": "rtl/codec12_lossless_restore.v",
+      "public_path": "rtl/video/codec12_lossless_restore.v",
+      "external": false,
+      "bytes": 2277,
+      "sha256": "9194c50e8917393ee71b9c66a9dc63620aaea0efad3f6fb9dae1d64bc68ff3ee"
+    },
+    {
+      "project_path": "rtl/codec_byte_queue.v",
+      "public_path": "rtl/video/codec_byte_queue.v",
+      "external": false,
+      "bytes": 1462,
+      "sha256": "d7b9f06c604f2ef7d87a07850b8168892e5763547fdc17a7d7e5725e8ac5e720"
+    },
+    {
+      "project_path": "rtl/context_huffman_decoder.v",
+      "public_path": "rtl/video/context_huffman_decoder.v",
+      "external": false,
+      "bytes": 4530,
+      "sha256": "3aac85f453bdf540434be9a795d79626b30b2f83694877752516425df0385bd4"
+    },
+    {
+      "project_path": "rtl/div_u32.v",
+      "public_path": "rtl/control/div_u32.v",
+      "sha256": "9c80ab39749dfb0c2e7644a1d9622b9699f0fe9a68d00c5a7a61f257875a0879",
+      "bytes": 3890,
+      "external": false
+    },
+    {
+      "project_path": "rtl/exp_input_sync.v",
+      "public_path": "rtl/control/exp_input_sync.v",
+      "sha256": "15e3af894f2623776af3251c810bcdc73fc748d0ed2db4e0abc5b63a2b54ff1a",
+      "bytes": 5576,
+      "external": false
+    },
+    {
+      "project_path": "rtl/fat32_list.v",
+      "public_path": "rtl/storage/fat32_list.v",
+      "sha256": "3abbbd9c2ef6c816dfbed70e26686d2f6c45e5f158718886eba9da74c4c56cff",
+      "bytes": 52838,
+      "external": false
+    },
+    {
+      "project_path": "rtl/fat32_sector_mapper.v",
+      "public_path": "rtl/storage/fat32_sector_mapper.v",
+      "external": false,
+      "sha256": "b751083ce4298d6ee93ef51518241bf8bebe90f0b43a8f89d960376128b69983",
+      "bytes": 16949
+    },
+    {
+      "project_path": "rtl/gradient_block_experimental.v",
+      "public_path": "rtl/video/gradient_block_experimental.v",
+      "external": false,
+      "sha256": "6f724cbfe32c1e0f0c49f42cc45b8bc4738e3a49ffb0e3042fc277fb0ecd9a08",
+      "bytes": 2530
+    },
+    {
+      "project_path": "rtl/image_center_720p.v",
+      "public_path": "rtl/image/image_center_720p.v",
+      "external": false,
+      "sha256": "ed2913c9da306a45539556289bdd5c5b6ada13b344c4a3c3b6100b4cc5ccf8a8",
+      "bytes": 3681
+    },
+    {
+      "project_path": "rtl/img_scaler.v",
+      "public_path": "rtl/image/img_scaler.v",
+      "sha256": "f90bf4902ec26c229d59f3ffa4602d7d276656e8b07103368a57a5ac4707413b",
+      "bytes": 39397,
+      "external": false
+    },
+    {
+      "project_path": "rtl/key_long.v",
+      "public_path": "rtl/control/key_long.v",
+      "sha256": "3a93d8b8525018916ccf21983c4fa306ea96acf0a3861d6e6cb634b78fdf7f0d",
+      "bytes": 4871,
+      "external": false
+    },
+    {
+      "project_path": "rtl/keypad_scan.v",
+      "public_path": "rtl/control/keypad_scan.v",
+      "sha256": "77768c98d48295a98374ab5994a76483ffbb74aeec27ba1caf39f3f00af9209e",
+      "bytes": 12238,
+      "external": false
+    },
+    {
+      "project_path": "rtl/osd_player_ui.v",
+      "public_path": "rtl/display/osd_player_ui.v",
+      "sha256": "5635afd3b60a4f64b83965e183f3344e4cd8a9e7a35ea338dd35c4c2b2797433",
+      "bytes": 52315,
+      "external": false
+    },
+    {
+      "project_path": "rtl/pixel_fifo_24x8.v",
+      "public_path": "rtl/image/pixel_fifo_24x8.v",
+      "sha256": "11b951b7954991ccf2ee2e7fd18ac7266b21dec77e2547d26b1e2a0c0cda200f",
+      "bytes": 3108,
+      "external": false
+    },
+    {
+      "project_path": "rtl/playback_status.v",
+      "public_path": "rtl/control/playback_status.v",
+      "sha256": "965ae9bb4a43925c2fabf04b71818e49c0262db4b867386ece75248a0a0c796b",
+      "bytes": 7447,
+      "external": false
+    },
+    {
+      "project_path": "rtl/player_ctrl.v",
+      "public_path": "rtl/control/player_ctrl.v",
+      "sha256": "995d10e1c15a814b083ac10159a58bdabd6130e6a9e0637d6b8b0bde8dacc690",
+      "bytes": 3240,
+      "external": false
+    },
+    {
+      "project_path": "rtl/residual_metadata.mem",
+      "public_path": "rtl/video/residual_metadata.mem",
+      "external": false,
+      "bytes": 2816,
+      "sha256": "8f67cafed19d0ca225081e9ca8a9ce72d844cfeefd26b7f751f328ddd286416e"
+    },
+    {
+      "project_path": "rtl/residual_symbols.mem",
+      "public_path": "rtl/video/residual_symbols.mem",
+      "external": false,
+      "bytes": 8192,
+      "sha256": "73451aa093f0b7dcbddac150d2e5f6d400dc2becb3772a8e776fc3178978a9b9"
+    },
+    {
+      "project_path": "rtl/residual_tree.mem",
+      "public_path": "rtl/video/residual_tree.mem",
+      "external": false,
+      "bytes": 14336,
+      "sha256": "eaddfb9b218e71026dea4958621c4f13dd5b41561e3a04d0c8e871d320206050"
+    },
+    {
+      "project_path": "rtl/rgb565_pair_pack.v",
+      "public_path": "rtl/memory/rgb565_pair_pack.v",
+      "external": false,
+      "sha256": "b6caa6eb88e2265bf803f6abd1b99cd0d74417c8c45cbabaa58487594e57c598",
+      "bytes": 1851
+    },
+    {
+      "project_path": "rtl/seg595_display.v",
+      "public_path": "rtl/display/seg595_display.v",
+      "sha256": "1fb98f96b0fcad76074fbf0ad56f060320e192458466da6bb83fe5bd9a34f1bb",
+      "bytes": 10745,
+      "external": false
+    },
+    {
+      "project_path": "rtl/track_ctrl.v",
+      "public_path": "rtl/control/track_ctrl.v",
+      "sha256": "dfe1002d5bd947e470aaa8f8b1590256f419b6b8b30eadf9be858b2f17dec83d",
+      "bytes": 5235,
+      "external": false
+    },
+    {
+      "project_path": "rtl/video_byte_ram.v",
+      "public_path": "rtl/video/video_byte_ram.v",
+      "external": false,
+      "sha256": "a5eed5aaeb1180b4b69c11fb8d210e1d85ed8f5b1d1fb77e6b04754f754570ca",
+      "bytes": 3513
+    },
+    {
+      "project_path": "rtl/video_catalog.v",
+      "public_path": "rtl/video/video_catalog.v",
+      "external": false,
+      "sha256": "7921cdd871af1464c513ce366a28c180e837a1be4da266177ece4f6d52569dae",
+      "bytes": 2725
+    },
+    {
+      "project_path": "rtl/video_codec8_block_decoder.v",
+      "public_path": "rtl/video/video_codec8_block_decoder.v",
+      "sha256": "5dad3d7257bee8cf792e2a914c7629766d5c801f74a42feb7d669a5e0fe6b8de",
+      "bytes": 8330,
+      "external": false
+    },
+    {
+      "project_path": "rtl/video_codec8_raster.v",
+      "public_path": "rtl/video/video_codec8_raster.v",
+      "sha256": "f5d2af2ceaf3995b751578560e2e1a18acf5e20c35d039820de86e952d28cf7b",
+      "bytes": 3362,
+      "external": false
+    },
+    {
+      "project_path": "rtl/video_eof_guard.v",
+      "public_path": "rtl/video/video_eof_guard.v",
+      "external": false,
+      "sha256": "8f7e3300948e0f82cd24d513524dd263837c076be64afb9f0de3f2a591b8de8b",
+      "bytes": 1732
+    },
+    {
+      "project_path": "rtl/video_player.v",
+      "public_path": "rtl/video/video_player.v",
+      "sha256": "c26890bdd3492ec5822af503db18c745e39ec440f19b5b7b322ad7626b2fd830",
+      "bytes": 49364,
+      "external": false
+    },
+    {
+      "project_path": "rtl/video_playlist_ctrl.v",
+      "public_path": "rtl/video/video_playlist_ctrl.v",
+      "external": false,
+      "sha256": "c2a61f32c24cf334f2e42de79ccfacc18db7a9443a50321ceb68b2a7f40ba9fc",
+      "bytes": 3437
+    },
+    {
+      "project_path": "rtl/volume_control.v",
+      "public_path": "rtl/audio/volume_control.v",
+      "sha256": "49689f75a1f530285e9439bca710af0069680a77f54f128a1ef2a92100f6c233",
+      "bytes": 1010,
+      "external": false
+    },
+    {
+      "project_path": "td_project/al_ip/PLL_HDMI_AUDIO.ipc",
+      "public_path": null,
+      "sha256": "d10759aa8e3c36faf18321c7b0021a7bc7dcaed6ac58d86a8817ea6c40a2b05a",
+      "bytes": 1838,
+      "external": true,
+      "bundled_path": "vendor_original/td_project/al_ip/PLL_HDMI_AUDIO.ipc"
+    },
+    {
+      "project_path": "td_project/al_ip/PLL_HDMI_AUDIO.v",
+      "public_path": null,
+      "sha256": "bc53a99151927f65cbcb3c9df24b3250872835c821abb9eea234c1e869375292",
+      "bytes": 2695,
+      "external": true,
+      "bundled_path": "vendor_original/td_project/al_ip/PLL_HDMI_AUDIO.v"
+    },
+    {
+      "project_path": "td_project/HDMI1.4b_Transmitter_v1.0.al",
+      "public_path": "project_template/td_project/HDMI1.4b_Transmitter_v1.0.al",
+      "sha256": "0271a202379d38287c0144112d74c1d4bc5055e4fb3d291c739e3c88cb194807",
+      "bytes": 41116,
+      "external": false
+    },
+    {
+      "project_path": "user_source/constraints_source/edid_debug.cwc",
+      "public_path": "constraints/edid_debug.cwc",
+      "sha256": "6716411e2346de08976e0ad8ed2e09eb93bdc0f60efc31bf75ba70e6cebe1f95",
+      "bytes": 59256,
+      "external": false
+    },
+    {
+      "project_path": "user_source/constraints_source/pin.adc",
+      "public_path": "constraints/pin.adc",
+      "sha256": "d7f3a243fc559cbc4670037c43111591115a66e8777432e02f0067b2d8ee0a9a",
+      "bytes": 11456,
+      "external": false
+    },
+    {
+      "project_path": "user_source/constraints_source/timing.sdc",
+      "public_path": "constraints/timing.sdc",
+      "sha256": "84bb7994433162f6fdc8675df42bf3a65185b916025b9472cf9f3f8a4cd6c319",
+      "bytes": 5412,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/anlogic_logo.mem",
+      "public_path": null,
+      "sha256": "706a539b487f46f7d117a98a49eca0a6a5afab126117fe2a0bb3fd4d49ff32de",
+      "bytes": 6272,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/anlogic_logo.mem"
+    },
+    {
+      "project_path": "user_source/hdl_source/anlogic_logo_preview.png",
+      "public_path": null,
+      "external": true,
+      "sha256": "e4bf10d9100c0cbbe52b0c60227ebc862ee53fb47f6819a5931cb294afe5a573",
+      "bytes": 3723,
+      "bundled_path": "vendor_original/user_source/hdl_source/anlogic_logo_preview.png"
+    },
+    {
+      "project_path": "user_source/hdl_source/async_fifo.v",
+      "public_path": "rtl/memory/async_fifo.v",
+      "sha256": "1b4f01572715de759ad8f27a64d17f7ed053ac27c20f16b9e96c1c438258d05f",
+      "bytes": 6533,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/audio_arc_calculate.v",
+      "public_path": "rtl/spectrum/audio_arc_calculate.v",
+      "sha256": "308e3a70a338cae6505c52fd0ee4c6f855d0ac76aea9dd738f37aead9d4a2831",
+      "bytes": 1240,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/audio_frame.v",
+      "public_path": "rtl/spectrum/audio_frame.v",
+      "sha256": "d8dbaf42a5031c30e23cf339ea61e533b6b300140043c3aaa4f6dd4248fb69a1",
+      "bytes": 10971,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/audio_transition.v",
+      "public_path": "rtl/audio/audio_transition.v",
+      "sha256": "e9531714e9d69c5ba140751c6880361b5f15cefde0ea084592ceb9327e2044f2",
+      "bytes": 3433,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/butterfly.v",
+      "public_path": "rtl/spectrum/butterfly.v",
+      "sha256": "4ee3cada6d100bda20f81a67249a0f4641404b86578ed080d56e4abf2da7726b",
+      "bytes": 2282,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/char_rom.v",
+      "public_path": "rtl/display/char_rom.v",
+      "sha256": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+      "bytes": 1024,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/cjk_brand_16x16.mem",
+      "public_path": "rtl/control/cjk_brand_16x16.mem",
+      "sha256": "c05360036a15b28b90a8b4c9bde68ff27f8c4a13e0a3d8e062186f9a3eacffc8",
+      "bytes": 864,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/compressed_audio_reader.v",
+      "public_path": "rtl/audio/compressed_audio_reader.v",
+      "sha256": "49b61b211341ea03f6b58583eb99af1e39f87c43722c0a4e86bc8299f7bc80db",
+      "bytes": 12643,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/cordic_atan.v",
+      "public_path": "rtl/spectrum/cordic_atan.v",
+      "sha256": "221cdd4cd7e1c5e5386ca7704aefabfd1d2f60e54ea92715955b5aef30a5c88f",
+      "bytes": 5805,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/dp_ram.v",
+      "public_path": "rtl/memory/dp_ram.v",
+      "sha256": "f1e8098d619d2a0819a991d835d33ba4240a1b9593c1a8e1e52792be2cf3a109",
+      "bytes": 1441,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/fade_in.v",
+      "public_path": "rtl/audio/fade_in.v",
+      "sha256": "feadc591d25d3a75619ef6b4f5c980ddba945b685b1e86c935af6f5ec9794f8a",
+      "bytes": 8502,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/fft_256.v",
+      "public_path": "rtl/spectrum/fft_256.v",
+      "sha256": "2fecdb30c1caf3de690be503005d409158ba8d5e7e821cf64bd57cd473023cec",
+      "bytes": 10132,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/font_8x16.mem",
+      "public_path": "rtl/control/font_8x16.mem",
+      "sha256": "b765d409b809faf23a1c7725ab6c18f4757cb8b8789dbc21d629448747768951",
+      "bytes": 6080,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/hdmi1.4b_transmitter_core/hdmi_1_4b_transmitter_core_wrapper.enc.v",
+      "public_path": null,
+      "sha256": "867e0b0bdd874bc383d00918c9e1be3fe01edf41f343b6a0d73e262776596a63",
+      "bytes": 328975,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/hdmi1.4b_transmitter_core/hdmi_1_4b_transmitter_core_wrapper.enc.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/hdmi_audio_tone_i2s_64fs.v",
+      "public_path": "rtl/audio/hdmi_audio_tone_i2s_64fs.v",
+      "sha256": "b8ba5ef35cf8c85bc871fa29b8320ad659f87d2a744566e8a4a7d4d0859a7b91",
+      "bytes": 3094,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/hdmi_audio_tone_pcm_scale.v",
+      "public_path": "rtl/audio/hdmi_audio_tone_pcm_scale.v",
+      "sha256": "e78188241795a0c4085acb01ad835e8c65c3c668d75fdb28a504cba88e7d3ec3",
+      "bytes": 2732,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/hdmi_phy_warpper.v",
+      "public_path": "rtl/display/hdmi_phy_warpper.v",
+      "sha256": "1f4e8053d3db9fea748ba8b732bcd12c63d1fcb39b91c51880e8a96fa3b4a9a4",
+      "bytes": 2612,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/I2S_receiver.v",
+      "public_path": "rtl/audio/I2S_receiver.v",
+      "sha256": "1bd088932c0a6fded9cd6c310289dfb840cc1db77a2fe289096740322a24bcf0",
+      "bytes": 3493,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/i2s_transmitter.v",
+      "public_path": "rtl/audio/i2s_transmitter.v",
+      "sha256": "d5e99f7dab5008f5b31e16c0e08f076d1c2bc752431511d88efba897da667d67",
+      "bytes": 19861,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/ima_stream.v",
+      "public_path": "rtl/audio/ima_stream.v",
+      "sha256": "f9e6bfde94636b4c52942eadc8e6ce1d333a77440f4152bf267f2fe502406442",
+      "bytes": 19533,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/include/global_def.v",
+      "public_path": "rtl/control/global_def.v",
+      "sha256": "04f854d7fe2f7816705b988ec59822fc258e4ed3a13529e36d0b9e6233a2682f",
+      "bytes": 373,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/include/sdr_as_ram.enc.v",
+      "public_path": null,
+      "sha256": "767dbdfbd83d42223b77dfa7deab42ce8216a8fd6f6cb41b7e7593d9a345ba57",
+      "bytes": 7538,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_as_ram.enc.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/include/sdr_init_ref.enc.v",
+      "public_path": null,
+      "sha256": "6da5945f4af793610d0d64c65c7e5d2d1c86ed4c11bc5fdeacd27eb03178b9f6",
+      "bytes": 9059,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_init_ref.enc.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/include/sdr_wrrd.enc.v",
+      "public_path": null,
+      "sha256": "c7d7fe07d75f66aa88d9f986b3006319c995162434f104f9990664b374cdfdd2",
+      "bytes": 15637,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/include/sdr_wrrd.enc.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_16_32_256.ipc",
+      "public_path": null,
+      "sha256": "8856a5b05a2398deddc1d7ca99498324b483e5bfd701ffdb19fb23e99f3bcea4",
+      "bytes": 856,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.ipc"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_16_32_256.tcl",
+      "public_path": null,
+      "sha256": "b890a5ab821e72bb81f56d534cd422f8a4919d5941394e8bf0f77d602f366b71",
+      "bytes": 831,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.tcl"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_16_32_256.v",
+      "public_path": null,
+      "sha256": "79991b7aaa8ac66e3b100d72ca24116ee47ff8c18d8197563600671becf2815b",
+      "bytes": 28271,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_16_32_256.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_32_16_256.ipc",
+      "public_path": null,
+      "sha256": "f50a788e89ae081199a0d2da72469ede0d14225c20fdbcfaad3573b74e8126f5",
+      "bytes": 857,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.ipc"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_32_16_256.tcl",
+      "public_path": null,
+      "sha256": "b890a5ab821e72bb81f56d534cd422f8a4919d5941394e8bf0f77d602f366b71",
+      "bytes": 831,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.tcl"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/afifo_32_16_256.v",
+      "public_path": null,
+      "sha256": "3400b062b9019e062f09beceb0981964b7db13994d861d89d7997aab9d81f1f1",
+      "bytes": 28271,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/afifo_32_16_256.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/sys_pll.ipc",
+      "public_path": null,
+      "sha256": "c6ce70f4ce1a0965863a090e5be7c377bd662113b5488e4db221219b6fbe9ed2",
+      "bytes": 1825,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/sys_pll.ipc"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/sys_pll.v",
+      "public_path": null,
+      "sha256": "b39691fb9a40aba2a3465486403ab8287938a9a42de5360d394bbb7f715b7e71",
+      "bytes": 3005,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/sys_pll.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/video_pll.ipc",
+      "public_path": null,
+      "sha256": "1c02b8ba62776f3c24a4fa0f8e73700179bba76ffa4f7ebe390a3835591e1adc",
+      "bytes": 1490,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.ipc"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/video_pll.ipc.v19_reference",
+      "public_path": null,
+      "external": true,
+      "sha256": "ed1c7c6feb52b647b7b73cb23375db46aea510215b79a5e6497bac42fe143904",
+      "bytes": 1437,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.ipc.v19_reference"
+    },
+    {
+      "project_path": "user_source/hdl_source/ip/video_pll.v",
+      "public_path": null,
+      "sha256": "f435c86fdf64f9196014662cced1d62ac2821e0e6938e0dd12f666ef73011840",
+      "bytes": 2651,
+      "external": true,
+      "bundled_path": "vendor_original/user_source/hdl_source/ip/video_pll.v"
+    },
+    {
+      "project_path": "user_source/hdl_source/key_remove_shakes.v",
+      "public_path": "rtl/control/key_remove_shakes.v",
+      "sha256": "901aa61b08fb622d3495baa435818a424bfb859603b6d3c047fd9d76899605a3",
+      "bytes": 1591,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/lane_lvds_10_1.v",
+      "public_path": "rtl/display/lane_lvds_10_1.v",
+      "sha256": "21de9e828d2b0dead56b27fa5c3772f5aafb35a77afbd63bd6bc1004fb74ad49",
+      "bytes": 2863,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/media_player.v",
+      "public_path": "rtl/audio/media_player.v",
+      "sha256": "0dba702dcaf306943c1d700b14157c97531ebe54ba10ed658247e19173f9af2b",
+      "bytes": 4439,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/media_player_shim.v",
+      "public_path": "rtl/audio/media_player_shim.v",
+      "sha256": "ee63db2d9b502a53685ecde7e18e9b08fa0e4221bc54f17ccb78841358d57899",
+      "bytes": 4188,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/osd_brand_rom.v",
+      "public_path": "rtl/display/osd_brand_rom.v",
+      "sha256": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4",
+      "bytes": 2009,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/osd_core.v",
+      "public_path": "rtl/display/osd_core.v",
+      "sha256": "d97488100842f9d97b60cdf243032dc26e84132f5b06649ea5d031b8ab9043bc",
+      "bytes": 3966,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/qoa_stream.v",
+      "public_path": "rtl/audio/qoa_stream.v",
+      "sha256": "ac174c19f31fe97141f19135fa42a2ec77520591115736f6775baa4ff2503f77",
+      "bytes": 17427,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/qoi_stream.v",
+      "public_path": "rtl/image/qoi_stream.v",
+      "sha256": "f1c4abefb18a54c0c0527697b933a32a74a71677ec00c3d50d7723eee97b7583",
+      "bytes": 9675,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/rom/i2s_rom_player_single_pll_fix64_rom_ip.v",
+      "public_path": "rtl/audio/i2s_rom_player_single_pll_fix64_rom_ip.v",
+      "sha256": "f8e7c9c56c6a21154580e030dada604572d89a1e75e8945125b2ea0dd4b3094b",
+      "bytes": 8375,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/ax_debounce.v",
+      "public_path": "rtl/display/ax_debounce.v",
+      "sha256": "c420ceac08eb440dfc5dbfacf9caaf43352886652640f5302a598cf23aee1549",
+      "bytes": 2110,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/bmp_read.v",
+      "public_path": "rtl/image/bmp_read.v",
+      "sha256": "2ca117b7ecd1883bfda8039f9251d68d949b0f3c8fb5b82af8befdbfdb0aa773",
+      "bytes": 49232,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/color_bar.v",
+      "public_path": "rtl/display/color_bar.v",
+      "sha256": "aded3d70e687d50d31c88838cd5bd85aa724d3802c36fe633faeac053e07a2ca",
+      "bytes": 9032,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/frame_fifo_read.v",
+      "public_path": "rtl/memory/frame_fifo_read.v",
+      "sha256": "ab9204de89510ae04cc255e3c8911f832084d78a274e8fa4e9d21a03b164e781",
+      "bytes": 10749,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/frame_fifo_write.v",
+      "public_path": "rtl/memory/frame_fifo_write.v",
+      "sha256": "7cb9f5efe41bf6d48dc4b83c9e58636e2c18374dbc4f67cd9f1b6e1c0c507e15",
+      "bytes": 16303,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/frame_read_write.v",
+      "public_path": "rtl/memory/frame_read_write.v",
+      "sha256": "2b07e7fd5cddd148824172c6c99eccaef116b4f930eddceb2f35bbcc92bcf31b",
+      "bytes": 10775,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/sd_card_bmp.v",
+      "public_path": "rtl/image/sd_card_bmp.v",
+      "sha256": "6ad62ea1bc99b640a23ed873232cf4ea6f2d616978d9fadff78763999519d992",
+      "bytes": 59003,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/sd_card_cmd.v",
+      "public_path": "rtl/storage/sd_card_cmd.v",
+      "sha256": "9e7983ab613a37dd5a1c197b1d05e84d8d58a1a4255a7c4c7807f8b6899a843f",
+      "bytes": 16086,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/sd_card_sec_read_write.v",
+      "public_path": "rtl/storage/sd_card_sec_read_write.v",
+      "sha256": "12013ed57b03e6ab79eb1e613c931294131465d6816dfe87f76c14decd59dd54",
+      "bytes": 24457,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/sd_card_top.v",
+      "public_path": "rtl/storage/sd_card_top.v",
+      "sha256": "dc3064999f65cdf0a8caae70d573b143ee72df80c1bc31461d512fc5fb690f21",
+      "bytes": 8683,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/sdram.v",
+      "public_path": "rtl/memory/sdram.v",
+      "sha256": "7ac3be0a02213aa7871650bd5ef061c92809f309ea66726d55d09952f615896c",
+      "bytes": 3158,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/seg_decoder.v",
+      "public_path": "rtl/display/seg_decoder.v",
+      "sha256": "294a5ea59abd3602223025ce13aa1991495b1fad95ea2d8071415e7f141ba334",
+      "bytes": 833,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/seg_scan.v",
+      "public_path": "rtl/display/seg_scan.v",
+      "sha256": "730be25c4f46e01d695d27c5b401f04352f89c93ea56f5c296a6a8ec12543241",
+      "bytes": 3642,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/spi_master.v",
+      "public_path": "rtl/storage/spi_master.v",
+      "sha256": "f27d5aa1eb44feddd872319516ec5cc5b8f29ffea01dc90e665937d106da6caf",
+      "bytes": 4142,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/spi_sniffer.v",
+      "public_path": "rtl/storage/spi_sniffer.v",
+      "sha256": "06fdb4560b9b952917e08de4a0494a89571eeff9fd1ccd907025157d3969d816",
+      "bytes": 3514,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/video_define.v",
+      "public_path": "rtl/display/video_define.v",
+      "sha256": "77748966850a8f5af0d77f2cdb08006088ba5e1a31b98391fba6cc61c5247da2",
+      "bytes": 21,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/video_delay.v",
+      "public_path": "rtl/display/video_delay.v",
+      "sha256": "1c78e575a9ef86cbf5a44a08aca5dd4c5abd3f21fda5d6d4774016772d313fb3",
+      "bytes": 1454,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/video_timing_data.v",
+      "public_path": "rtl/display/video_timing_data.v",
+      "sha256": "9b02e0732a26488693a816a9c9bbc471c6d4d1af952d39ae33e664884caf49c9",
+      "bytes": 2170,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/SD/video_timing_gen.v",
+      "public_path": "rtl/display/video_timing_gen.v",
+      "sha256": "01f17d004b13e1886b128b1eee5212cf585347393de378ef08c3e838d8b3690a",
+      "bytes": 4421,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/sd_arbiter.v",
+      "public_path": "rtl/storage/sd_arbiter.v",
+      "sha256": "6df75a503dd43d15117ffaa847605f68d720a3addfe0b4cade24b35d57a33ff5",
+      "bytes": 13598,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/sector_byte_source.v",
+      "public_path": "rtl/storage/sector_byte_source.v",
+      "sha256": "d4012540924d5da2135c83c119fe4c15244da56c067e9c97126f926641707b47",
+      "bytes": 3832,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/spectrum_capture.v",
+      "public_path": "rtl/spectrum/spectrum_capture.v",
+      "sha256": "3b317d9fa0debb61fdfbbb06ca2c50780e3fe8f1f3069916a2b61420cc74d551",
+      "bytes": 35364,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/spectrum_display.v",
+      "public_path": "rtl/spectrum/spectrum_display.v",
+      "sha256": "fb53fff2c86a3e90b47083635b69f26f8f5389aadc03216280c9005bbda7834b",
+      "bytes": 33432,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/startup_pulse.v",
+      "public_path": "rtl/control/startup_pulse.v",
+      "sha256": "25558834de12e2285b779a79f9244a8cf1fa6bdee6b63897374e48e582757f88",
+      "bytes": 615,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/test/i2s_test_tone_gen_pll.v",
+      "public_path": "rtl/audio/i2s_test_tone_gen_pll.v",
+      "sha256": "7614d4ca84c007a568e798b7c8cbc31eadd8a064bee53101194df13edb71e02f",
+      "bytes": 3645,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/top_tf_hdmi_audio.v",
+      "public_path": "rtl/top/top_tf_hdmi_audio.v",
+      "sha256": "ace6392f259be9576e6cc1f27d43d86fd043b5416d774bdd37c0f6b20f9fbd1a",
+      "bytes": 220419,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/twiddle_256.mem",
+      "public_path": "rtl/control/twiddle_256.mem",
+      "sha256": "0bf31f89128529810262e43971742ebbdb3287b1e6ca8ee09c1a0f953a59010b",
+      "bytes": 1280,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/twiddle_rom.v",
+      "public_path": "rtl/spectrum/twiddle_rom.v",
+      "sha256": "2d8aec654be7c74659694f61c182758cf7cb2a00da1a49bbb3db36438b6ab225",
+      "bytes": 1234,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/video_coord.v",
+      "public_path": "rtl/display/video_coord.v",
+      "sha256": "a7ca80dc5b2013dc9a7f107ccbddc557d1f601ae1b679a277dccd812993160c7",
+      "bytes": 1776,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/video_rgb_to_axis_640x480.v",
+      "public_path": "rtl/display/video_rgb_to_axis_640x480.v",
+      "sha256": "6b73392154b2975abf6cd2cb9fe5069bf43ce103b5dab6ad6508cfc9f9d1d26e",
+      "bytes": 1577,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/video_source_test.v",
+      "public_path": "rtl/display/video_source_test.v",
+      "sha256": "71e8702932e7ca4d80b2a66842967573a72eb4c9d246bfbb6c1767ba3516e9f8",
+      "bytes": 2231,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/wav_player.v",
+      "public_path": "rtl/audio/wav_player.v",
+      "sha256": "03235e99ea1bf9cbb7008fb1ab93893ab9bee4c57ba7d4b4a685aa53053a98e3",
+      "bytes": 33362,
+      "external": false
+    },
+    {
+      "project_path": "user_source/hdl_source/wav_sample_builder.v",
+      "public_path": "rtl/audio/wav_sample_builder.v",
+      "sha256": "10451909f1b065d99a60551f6d5493363b7284809c9644af85a2c320e40daa27",
+      "bytes": 20363,
+      "external": false
+    },
+    {
+      "project_path": "rtl/image_directory_iterator.v",
+      "public_path": "rtl/storage/image_directory_iterator.v",
+      "sha256": "307eb76abbcccb38c08e1b19f246384fdcaf9367ab357c8931ef37d3ef6c235f",
+      "bytes": 6653,
+      "external": false
+    }
+  ],
+  "board_confirmed": false,
+  "baseline_commit": "65eae84",
+  "scope": "Competition submission: all 131 build inputs bundled; vendor_original preserves original vendor-generated and protected IP."
+}

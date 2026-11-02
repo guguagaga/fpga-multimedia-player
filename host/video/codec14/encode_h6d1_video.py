@@ -1,20 +1,29 @@
-"""Prepare a true20/30fps10s board-test sample at unchanged spatial quality."""
+"""Encode a 720P video with the production spatial budget and H6D1 tables."""
 from pathlib import Path
 import argparse,concurrent.futures,hashlib,json,os,struct,subprocess,sys,time,wave
 from decimal import Decimal
-a=argparse.ArgumentParser(description="Experimental H6D1, true720P, unchanged125000 spatial budget. Requires H6D1 RTL; not readable by v183.")
+a=argparse.ArgumentParser(description="H6D1 720P encoder, fixed 125000-byte spatial budget; use the matching RTL and code tables.")
 a.add_argument('--ffmpeg',type=Path,required=True)
 a.add_argument('--fps',type=int,choices=[20,30],required=True)
-a.add_argument('--seconds',type=Decimal,required=True)
+duration_group=a.add_mutually_exclusive_group(required=True)
+duration_group.add_argument('--seconds',type=Decimal)
+duration_group.add_argument('--frames',type=int)
 a.add_argument('--start',type=Decimal,default=Decimal(0))
 a.add_argument('--video',type=Path,required=True)
 a.add_argument('--audio',type=Path,required=True)
 a.add_argument('--output',type=Path,required=True)
 args=a.parse_args();fps=args.fps
-assert args.seconds>0 and args.start>=0
-exact_count=args.seconds*fps
-assert exact_count==int(exact_count), 'Duration must contain an integer number of target frames'
-count=int(exact_count);samples=count*48000//fps
+assert args.start>=0
+if args.frames is not None:
+ assert args.frames>0
+ count=args.frames
+else:
+ assert args.seconds>0
+ exact_count=args.seconds*fps
+ assert exact_count==int(exact_count), 'Duration must contain an integer number of target frames'
+ count=int(exact_count)
+args.seconds=Decimal(count)/fps
+samples=count*48000//fps
 assert args.video.is_file() and args.audio.is_file()
 R=Path(__file__).resolve().parent;W=args.output.resolve()
 assert W.drive.upper()=='D:', 'This project writes work and outputs to D: only'
@@ -22,9 +31,9 @@ W.mkdir(parents=True,exist_ok=False)
 E=R;sys.path.insert(0,str(E))
 from repack_codec12_stream import repack
 FF=str(args.ffmpeg.resolve());assert args.ffmpeg.is_file();encoder=E/'encode_blocks_experimental.exe';raw=W/'source.rgb565';started=time.time()
-(R/'tmp').mkdir(exist_ok=True)
-os.environ.update(TEMP=str(R/'tmp'),TMP=str(R/'tmp'),PYTHONDONTWRITEBYTECODE='1')
-command=[FF,'-nostdin','-hide_banner','-v','error','-threads','2','-ss',str(args.start),'-i',str(args.video),'-vf',f'scale=1280:720:flags=lanczos,fps={fps}','-frames:v',str(count),'-pix_fmt','rgb565le','-f','rawvideo','-n',str(raw)]
+(W/'tmp').mkdir(exist_ok=True)
+os.environ.update(TEMP=str(W/'tmp'),TMP=str(W/'tmp'),PYTHONDONTWRITEBYTECODE='1')
+command=[FF,'-nostdin','-hide_banner','-v','error','-threads','2','-ss',str(args.start),'-i',str(args.video),'-vf',f'fps={fps}:eof_action=pass,scale=1280:720:flags=lanczos','-fps_mode','passthrough','-frames:v',str(count),'-pix_fmt','rgb565le','-f','rawvideo','-n',str(raw)]
 subprocess.run(command,check=True);frame_bytes=1843200;assert raw.stat().st_size==count*frame_bytes
 workers=min(4,count);bounds=[count*i//workers for i in range(workers+1)]
 def encode(i):

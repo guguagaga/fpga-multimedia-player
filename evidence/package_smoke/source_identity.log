@@ -1,0 +1,3 @@
+PASS: 112 packaged FPGA inputs, 19 external dependencies
+PASS: 13 media-tool identities
+Scope: file identity only; physical implementation and board tests are separate.

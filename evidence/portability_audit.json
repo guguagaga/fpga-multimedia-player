@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "date": "2026-11-02",
+  "checks": {
+    "source_verify": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "assemble_relative": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "project_paths": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "video_help": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "image_help": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "audio_help": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "relative_video_conversion": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "portable_entrypoint_path_scan": {
+      "passed": true,
+      "files": 34,
+      "hits": []
+    }
+  },
+  "test_method": "Created ZIP and extracted into a fresh Unicode directory; ran commands with unpacked source as cwd and relative package/output paths.",
+  "external_tools": "FFmpeg and FFprobe supplied explicitly as test-host command-line arguments; not embedded in production scripts.",
+  "unchanged": "Signed RTL, constraints, project templates and original vendor IP unchanged.",
+  "scope": "Source identity, 131-input assembly, generated project path resolution, three help entrypoints and actual 20fps encode; no new FPGA build or full simulation run.",
+  "archived_paths": "Historical experiment scripts and logs under verification/evidence may retain old paths; explicitly identified in verification/README.md and not called by production build/encode entrypoints."
+}

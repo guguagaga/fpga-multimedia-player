@@ -1,0 +1,2 @@
+FATAL: D:\codexworks\carousel_timer_validation_v192\edges\tb.v:37: reset priority at timer boundary sec=1 phase=0
+       Time: 21346000  Scope: tb.reset_edge

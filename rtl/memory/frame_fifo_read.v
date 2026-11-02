@@ -1,7 +1,4 @@
-// -----------------------------------------------------------------------------
-// Module purpose: SDRAM frame read addresses and FIFO-fill scheduling.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
+// SDRAM frame read addresses and FIFO-fill scheduling.
 `timescale 1ns / 1ps
 module frame_fifo_read #(
   parameter MEM_DATA_BITS = 32,

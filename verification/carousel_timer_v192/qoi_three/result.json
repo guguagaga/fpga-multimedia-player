@@ -1,0 +1,19 @@
+{
+  "case": "qoi_three",
+  "passed": true,
+  "seconds": 537.3915724754333,
+  "events": [
+    "# EVENT LOAD id=0 cycle=2553 pf=0",
+    "# EVENT WRITTEN id=0 cycle=3505921 load_cycles=3503368",
+    "# EVENT DISPLAY id=0 cycle=3505953 since_auto=3505953",
+    "# EVENT LOAD id=1 cycle=5508508 pf=1",
+    "# EVENT WRITTEN id=1 cycle=9052183 load_cycles=3543675",
+    "# EVENT READY id=1 cycle=9052215",
+    "# EVENT DISPLAY id=1 cycle=9052267 since_auto=5546313",
+    "# EVENT LOAD id=2 cycle=11054821 pf=1",
+    "# EVENT WRITTEN id=2 cycle=14565667 load_cycles=3510846",
+    "# EVENT READY id=2 cycle=14565699",
+    "# EVENT DISPLAY id=2 cycle=14565751 since_auto=11059797",
+    "# PASS EARLY=0 flip1=5546313 flip2=11059797 min_fifo=6097 max_audio_wait=21341 frames=3 sectors=1852"
+  ]
+}

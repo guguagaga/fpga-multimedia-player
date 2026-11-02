@@ -1,18 +1,6 @@
-//===================================================================
-// True dual-port RAM (dp_ram) -- SYNCHRONOUS read version (BRAM)
-//===================================================================
-// Write: synchronous (posedge clk + we)
-// Read : synchronous (posedge clk, data valid next cycle)
-//
-// This synchronous-read form lets the synthesizer map the RAM into a
-// block RAM (BRAM), which frees up LUTs. The combinational-read version
-// (assign dout = mem[addr]) forces distributed RAM = huge LUT usage,
-// which blew past the EG4S20 LUT limit.
-//
-// The FFT uses it to store 256 complex numbers (one RAM for real, one
-// for imag). A butterfly reads addr_a/addr_b, then writes back to the
-// same addresses (on a later cycle, so no read/write conflict).
-//===================================================================
+// Common-clock dual-port RAM with synchronous writes and one-cycle reads.
+// Each port returns the stored value sampled at the clock edge.
+// The caller schedules accesses to avoid conflicting writes to the same address.
 module dp_ram #(
   parameter DEPTH = 256,
   parameter WIDTH = 16

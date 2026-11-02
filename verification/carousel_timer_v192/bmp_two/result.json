@@ -1,0 +1,15 @@
+{
+  "case": "bmp_two",
+  "passed": true,
+  "seconds": 255.45395159721375,
+  "events": [
+    "# EVENT LOAD id=0 cycle=2553 pf=0",
+    "# EVENT WRITTEN id=0 cycle=3195749 load_cycles=3193196",
+    "# EVENT DISPLAY id=0 cycle=3195781 since_auto=3195781",
+    "# EVENT LOAD id=1 cycle=5198336 pf=1",
+    "# EVENT WRITTEN id=1 cycle=8387767 load_cycles=3189431",
+    "# EVENT READY id=1 cycle=8387799",
+    "# EVENT DISPLAY id=1 cycle=8387851 since_auto=5192069",
+    "# PASS EARLY=1 flip1=5192069 flip2=5192069 min_fifo=6097 max_audio_wait=1974 frames=2 sectors=926"
+  ]
+}

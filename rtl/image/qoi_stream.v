@@ -1,10 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Streaming QOI image decoder.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-// Independently implemented from the public QOI specification, 2026-10-26.
-// RGB/RGBA opcodes, modulo-256 deltas, 64-entry RGBA index, RUN and end marker.
-// ready/valid at both ends; outputs RGB (alpha is tracked for correct hashing).
 module qoi_stream #(
   parameter EXTERNAL_PIXELS = 1'b0,
   parameter BRAM32_INDEX = 0

@@ -33,7 +33,7 @@ module media_player_shim #(parameter ENABLE_QOA = 1) (
   output wire        pcm_valid,
   output wire [ 7:0] pcm_data,
   output wire [ 2:0] dbg_state,
-  output wire        dbg_gate_open,           // [Design note]透传内部 gate_open
+  output wire        dbg_gate_open,           // 透传内部 gate_open
   output wire [ 7:0] dbg_fp,
   output wire        dbg_silent_hit,
   output wire        dbg_posbad_hit,
@@ -92,7 +92,7 @@ module media_player_shim #(parameter ENABLE_QOA = 1) (
   // 真实观测：只保留设计真正提供的那一位
   assign dbg_state         = core_dbg_state[2:0];
 
-  // 以下均为【常量桩】—— 不是真实观测（旧 reader 的探针，本设计不再提供）
+  // 以下兼容观测端口输出常量，不代表实时采样结果。
   //   用寄存器驱动，复位后恒定（避免未寄存/悬空 ）
   assign dbg_pcm_start_odd = 1'b0;
   assign dbg_pcm_sum32     = 32'd0;

@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Audio transition envelope and command handoff.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 // SD-domain command sequencer. Fade acknowledgement is synchronized from
 // the audio domain only after gain zero and two physical I2S frame edges.
 // Latest selection wins while fading. Sector is captured a cycle after the

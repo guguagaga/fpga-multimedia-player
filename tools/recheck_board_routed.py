@@ -1,12 +1,12 @@
 """Reopen a new routed database with its original constraints before first STA."""
 from pathlib import Path
-import argparse, hashlib, json, re, subprocess, datetime
+import argparse, hashlib, json, re, subprocess, datetime, sys
 from audit_clock_scope import audit_clock_scope
 
 a = argparse.ArgumentParser()
 a.add_argument('root', type=Path)
 a.add_argument('--seed', type=int, default=18)
-a.add_argument('--td-command', default='D:/TD3/bin/td_commands_prompt.exe')
+a.add_argument('--td-command', required=True, help='Installed td_commands_prompt.exe path')
 args = a.parse_args()
 root = args.root.resolve()
 project = root / 'candidate/project'
@@ -30,7 +30,7 @@ assert policy['original_sdc_sha256'] == baseline['constraint_sha256']
 assert sha(sdc) == policy['candidate_sdc_sha256']
 assert all(sha(project / n) == h for n, h in policy['rtl_sha256'].items())
 assert sha(project / 'user_source/hdl_source/ip/sys_pll.v') == baseline['source_sha256']['user_source/hdl_source/ip/sys_pll.v']
-subprocess.run(['python', str(project / 'build/_mk_prj2.py'), str(out)], check=True)
+subprocess.run([sys.executable, str(project / 'build/_mk_prj2.py'), str(out)], check=True)
 tcl = f'''import_device eagle_s20.db -package EG4S20BG256
 open_project HDMI1.4b_Transmitter_v1.0.prj -noanalyze
 import_db {{{db.as_posix()}}}

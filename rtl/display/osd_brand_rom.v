@@ -1,22 +1,5 @@
-//===================================================================
-// osd_brand_rom : 品牌条用到的两片字模/位图 ROM
-//===================================================================
-// [Design note brand]OSD 顶部品牌条（安路 logo + "anlogic 多媒体播放系统"）的数据源。
-//
-//   cjk  : 9 个汉字 16x16 点阵，每字 16 行、每行 16 位（bit15 = 最左列）
-//          顺序 = 安 路 多 媒 体 播 放 系 统
-//          addr = 字号*16 + 行号   （0..143）
-//          144 x 16 bit = 288 B
-//   logo : 安路标识位图 94x18，一个字节一个像素
-//          0 = 透明（露出底板）  1 = 红（A 的斜条纹）  2 = 白（LOGIC 字样）
-//          addr = (y-43)*94 + (x-18)
-//          1692 B
-//
-// 两个读口都是「无条件同步读」（always @(posedge clk) dout <= mem[addr]，
-// 外面不套 if）——这是数组被推断成 ERAM 的硬条件（见学习指南第 04 章）。
-// 数据由 gen_brand_assets.py 从 simhei.ttf 与安路 logo 图片生成，
-// .mem 文件与本文件同目录（与 font_8x16.mem 的用法一致）。
-//===================================================================
+// 顶部品牌条的字模与位图 ROM。
+// 中文采用 16×16 点阵，图像和字符地址分别查表，输出与像素流水对齐。
 `timescale 1ns / 1ps
 
 module osd_brand_rom (
@@ -37,9 +20,8 @@ module osd_brand_rom (
 
   always @(posedge clk) cjk_dout <= cjk[cjk_addr];
 
-  // Entries1692..2047 repeat entry0, matching the former address clamp
-  // for every11-bit address. Remove the comparator/mux from the long
-  // coordinate-to-ROM path without changing pixels or synchronous latency.
+  // 地址 1692～2047 重复地址 0 的内容，使整个 11 位地址空间都有定义。
+  // 在 ROM 内容中实现范围补齐，避免地址路径额外串接边界选择。
   wire [10:0] logo_a = logo_addr;
   always @(posedge clk) logo_dout <= logo[logo_a];
 

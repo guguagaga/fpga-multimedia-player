@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-02",
+  "bit_sha256": "41b03883c718e0d52f04e61a9cf0228363c1bdfc3c3e51d023bcb012e3d267f4",
+  "video": "用户反馈：当前的视频通路暂时没发现问题",
+  "image_carousel": "用户反馈：轮播切图没问题",
+  "card_test_images": 18,
+  "audio_switching_noise": "尚未获得本轮专项复测反馈",
+  "scope": "视频与轮播反馈，不扩展为所有功能或无限时间的无故障保证"
+}

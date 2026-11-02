@@ -1,7 +1,4 @@
-// -----------------------------------------------------------------------------
-// Module purpose: SDRAM frame write addresses and FIFO-drain scheduling.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
+// SDRAM frame write addresses and FIFO-drain scheduling.
 `timescale 1ns / 1ps
 module frame_fifo_write #(
   parameter MEM_DATA_BITS = 32,
@@ -38,10 +35,7 @@ module frame_fifo_write #(
   input[ADDR_BITS - 1:0]           write_addr_3,               // data write module write request base address 1, used when write_addr_index = 3
   input[1:0]                       write_addr_index,           // select valid base address from write_addr_0 write_addr_1 write_addr_2 write_addr_3
   input [ADDR_BITS - 1:0] write_len,  // data write module write request data length
-  // [Design note 缩放·写侧补黑]本次要写的源图高度（1..FRAME_HEIGHT）。
-  //   为什么需要端口：写起始偏移必须从"写死 479*640"变成"(H-1)*640"，
-  //   才能把 H 行真实像素顶到内存行 0..H-1（图在上）。
-  //   H = FRAME_HEIGHT 时它与原常量完全相同 ⇒ 逐位不变。
+  // 源图高度用于确定垂直翻转的首行偏移，范围为 1..FRAME_HEIGHT。
   input [15:0] write_img_h,
   input write_top_down,
   output reg fifo_aclr,  // to fifo asynchronous clear
@@ -55,19 +49,11 @@ module frame_fifo_write #(
   // stream row 0 -> memory row FRAME_HEIGHT-1, stream row 1 -> memory row FRAME_HEIGHT-2, ...
   localparam [ADDR_BITS - 1:0] VFLIP_LINE_JUMP = (FRAME_WIDTH * 2) - 1;
   localparam [15:0] VFLIP_LINE_LAST_X = FRAME_WIDTH - 1;
-  // [Design note 缩放·写侧补黑]本帧总字数 = 640*480 = 307200（补黑要"恰好"补到它）
+  // FRAME_WORDS 定义完整帧的存储字数及补黑终点。
   localparam [ADDR_BITS - 1:0] FRAME_WORDS = FRAME_WIDTH * FRAME_HEIGHT;
   localparam [15:0] FH16 = FRAME_HEIGHT;
 
-  // ---- 运行时可配的 VFLIP 起始偏移 ----------------------------------------
-  //   原来是写死的 localparam (FRAME_HEIGHT-1)*FRAME_WIDTH = 479*640 = 306560。
-  //   现在要按本帧源图高度 H 算 (H-1)*640：
-  //     写流第 0 行（BMP 最底行）落到内存行 H-1，最后一行落到内存行 0
-  //     => H 行真实像素占内存行 0..H-1（图在上）
-  //   640 = 2^9 + 2^7，所以用移位相加实现，不产生乘法器/DSP 
-  //   跨时钟：write_img_h 来自 sd_card_clk 域，但它在整帧期间稳定（头部解析后
-  //   到本帧写请求之间有数百微秒），这里按 write_addr_index 同样的惯例做两级同步，
-  //   只在 S_ACK 那一拍取样 ⇒ 功能安全。
+  // 按源图高度 H 计算翻转起始行 (H-1)*FRAME_WIDTH，使有效像素和补黑区域位置一致。
   reg [15:0] img_h_d0, img_h_d1;
   reg [1:0] top_down_sync;
   reg flip_frame;
@@ -83,20 +69,7 @@ module frame_fifo_write #(
   end
 
   wire [15:0] vflip_img_h = (img_h_d1 == 16'd0) ? FH16 : (img_h_d1 > FH16) ? FH16 : img_h_d1;
-  // 19 位足够：(FRAME_HEIGHT-1)*FRAME_WIDTH = 479*640 = 306560 < 2^19 = 524288 
-  // 与 21 位的 write_addr_N 相加时零扩展，结果仍是 21 位 ⇒ 语义不变、加法器更窄。
-  // ================================================================
-  // 2026-10-13 TIMING FIX (merged from the other build)
-  //   Board/STA fact: this offset was COMBINATIONAL and was the worst
-  //   path of the whole design in the tool build:
-  //     ext_mem_clk  requirement 8 ns, actual 21.40 ns -> SWNS -6.699 ns
-  //   Chain: (H-1)<<9 + (H-1)<<7  ->  + write_addr_N  ->  App_wr_addr_r
-  //   It is a per-frame CONSTANT: only img_h_d1 feeds it, and that is a
-  //   two-stage synchroniser of write_img_h, stable for hundreds of us
-  //   before the frame write starts.  It is used ONLY in S_ACK (once per
-  //   frame), so registering it costs nothing functionally.
-  //   Revert: delete this always block and restore the wire expression.
-  // ================================================================
+  // 起始行偏移使用满足帧尺寸的位宽，预计算后用于帧写地址。
   reg  [18:0] vflip_first_addr_offset_r;
   reg  [15:0] vflip_h_minus_one;
   always @(posedge mem_clk or posedge rst) begin
@@ -218,15 +191,7 @@ module frame_fifo_write #(
         if (flip_frame) begin
           if (wr_x == VFLIP_LINE_LAST_X) begin
             wr_x <= 16'd0;
-            // [Design note 缩放·写侧补黑]行末步进加模 307200 回绕。
-            //   原实现是裸的 addr -= 1279：从内存行 0 再往上就下溢。
-            //   A1 口径要补黑到内存行 H..479，即"写完行 0 之后绕到行 479，
-            //   再一行一行往上填"，所以必须取模回绕。
-            //   行末 addr = 行首+639；减 1279 = 行首-640。
-            //   行首 < 640 时会变负 ⇒ 改成 +（FRAME_WORDS-1279）= +305921，
-            //   等价于 (行首-640) mod 307200 
-            //   H=480 时这一拍之后不再有写（整帧正好 307200 字），
-            //   该寄存器的死值不影响任何 SDRAM 写 ⇒ 逐位不变 
+            // 行末地址按完整帧范围回绕，使翻转后的补黑行仍落在当前帧缓冲区内。
             if (App_wr_addr_r >= write_base + VFLIP_LINE_JUMP)
               App_wr_addr_r <= App_wr_addr_r - VFLIP_LINE_JUMP;
             else App_wr_addr_r <= App_wr_addr_r + (FRAME_WORDS - VFLIP_LINE_JUMP);

@@ -1,19 +1,6 @@
-//===================================================================
-// osd_player_ui : bottom player bar (progress + time + song title)
-//===================================================================
-// Overlays a professional music-player HUD at the bottom of the video:
-//   - song title (8-char 8.3 short name) on the top-left of the bar
-//   - a progress bar (played = bright, unplayed = dim, dot at cursor)
-//   - current time "m:ss" (left) and total "m:ss" (right) under the bar
-//
-// Text is drawn with the shared 8x16 char_rom. Everything is blended
-// over the background (translucent glass look) using the same Q4 alpha
-// blend used by the spectrum.
-//
-// Inputs tot_sec/cur_sec/progress/song_name are slow (already CDC-synced
-// into video_clk by the top level). The mm:ss split uses two serial
-// dividers (tot once, cur every ~1s).
-//===================================================================
+// Overlay the track name, progress bar and elapsed/total time.
+// Status inputs must be synchronized to the pixel clock by the caller.
+// Text uses the 8x16 font ROM; time conversion uses serial dividers.
 module osd_player_ui #(
   parameter [26:0] TICK_CYCLES = 27'd74_249_999  // ~1s @ 25 MHz (cur_sec refresh)
 ) (
@@ -35,7 +22,13 @@ module osd_player_ui #(
   input  wire [15:0] bit_depth,
   input  wire [ 4:0] volume,       // 0..31
   input  wire        pause,        // 1 = paused
-  // [Design note bc-osd]参数拨码档位（video 域已同步的稳定值）：
+  // Actual image-carousel configuration, captured at a safe SD->video
+  // boundary in the top level.  This is status only; it does not control
+  // the carousel timer.
+  input  wire        carousel_on,
+  input  wire [ 9:0] carousel_period_sec,
+  input  wire        video_mode,
+  // 参数拨码档位（video 域已同步的稳定值）：
   //   SW[1:0] = 亮度档、SW[3:2] = 对比度档；变化后显示约 3 秒。
   input  wire [ 3:0] sw_deg,
   // ---- 键盘自检页（调试用）----
@@ -58,6 +51,23 @@ module osd_player_ui #(
   wire [ 9:0] pixel_x = screen_x[10:1];
   wire [ 9:0] pixel_y = y2 / 3;
 
+  reg carousel_on_frame;
+  reg [9:0] carousel_period_frame;
+  reg carousel_vs_d;
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      carousel_vs_d <= 1'b1;
+      carousel_on_frame <= 1'b0;
+      carousel_period_frame <= 10'd2;
+    end else begin
+      carousel_vs_d <= vs;
+      if (carousel_vs_d && !vs) begin
+        carousel_on_frame <= carousel_on;
+        carousel_period_frame <= carousel_period_sec;
+      end
+    end
+  end
+
   // ================= layout (640x480) =================
   // 顶部信息栏（标题 + 音频格式，体现多媒体播放器完整性）
   localparam [9:0] HDR_Y = 10'd12;  // 顶部文字 y
@@ -78,10 +88,10 @@ module osd_player_ui #(
   localparam [9:0] TOT_X = 10'd560;  // right-aligned (5 chars x 8px)
   localparam [9:0] VOL_X = 10'd170;  // "VOL xx" (6 chars) 顶部栏
   localparam [9:0] STATE_X = 10'd250;  // "PLAY "/"PAUSE" (5 chars) 顶部栏
-  // [Design note bc-osd]参数区 "B:+16 C:160" (11 chars x 8px = 88px)
+  // 参数区 "B:+16 C:160" (11 chars x 8px = 88px)
   //   顶部栏中间空档：STATE 尾(290) .. FMT 头(416) 之间，取 304 起步。
   localparam [9:0] PARAM_X = 10'd304;
-  // [Design note scroll-osd]滚动标语带 + 运行时间戳区
+  // 滚动标语带 + 运行时间戳区
   //   滚动带：y=44..59 全宽 16px（顶栏底板 8..35 与频谱 y>=151 之间的干净横带）；
   //   标语 33 字符 + 尾部空白补齐到 114 字符（912px 周期）——屏幕宽 640px，
   //   周期必须 > 640+264=904px 才能保证【同一时刻屏上只有一段标语】；
@@ -90,15 +100,8 @@ module osd_player_ui #(
   // Full-width ticker; the centered brand panel is composited above it.
   localparam [9:0] UPT_X = 10'd544;
 
-  // ========== [Design note brand]顶部品牌条：安路 logo + 「anlogic 多媒体播放系统」==========
-  //   位置：滚动带那一行（y=40..63），正好在顶栏底板(8..35)下方、频谱(y>=151)上方。
-  //   内容：左边 94x18 的安路 logo（红条纹 A + LOGIC），右边
-  //         "anlogic "（8 个 8px ASCII，用原 char_rom）+ 9 个汉字（16x16，用 osd_brand_rom）。
-  //   底板：半透明暗色（复用顶栏 panel 的混合色），保证白底图片上也看得清。
-  //   BRAND_ON=0 时整块回到原来的滚动英文标语（行为与改动前一致）。
   localparam BRAND_ON = 1'b1;
-  // Move the original brand group right by 140 logical pixels: the
-  // 344-pixel panel now centers at x=320. Keep all vertical coordinates.
+  // The 344-pixel brand panel is centered at logical x=320.
   localparam [9:0] BRAND_X0 = 10'd148;  // 底板
   localparam [9:0] BRAND_X1 = 10'd492;
   localparam [9:0] BRAND_Y0 = 10'd40;
@@ -139,8 +142,7 @@ module osd_player_ui #(
 
   localparam [7:0] TEXT_R = 8'hFF, TEXT_G = 8'hFF, TEXT_B = 8'hFF;
 
-  // ================= mm:ss split（【面积回收 2 · 2026-10-07】改成常数除法）=================
-  // cur: 每 ~1s 刷新一次；tot: tot_sec 变化时刷新
+  // 将秒数拆为分和秒；当前时间及总时长分别在更新事件后提交。
   reg [26:0] timer;
   reg        tick;
   always @(posedge clk or negedge rst_n) begin
@@ -165,7 +167,7 @@ module osd_player_ui #(
   end
   wire tot_changed = (tot_sec != tot_sec_d);
 
-  // [Design note bc-osd]参数区显隐：sw_deg 变化 ⇒ 显示约 3 秒后自动消失。
+  // 参数区显隐：sw_deg 变化 ⇒ 显示约 3 秒后自动消失。
   //   复用上面的 ~1s tick：变化时计时器置 3，每 tick 减 1（3 个 tick ≈ 3 秒）。
   //   pad 级同步（top 侧）已保证 sw_deg 是稳定值，这里只做"变化"检测。
   reg [3:0] sw_deg_d;
@@ -182,7 +184,7 @@ module osd_player_ui #(
   end
   wire       pshow = (pshow_cnt != 2'd0);
 
-  // [Design note scroll-osd]帧时基：vs 下降沿 = 场边界（video_coord 同极性）
+  // 帧时基：vs 下降沿 = 场边界（video_coord 同极性）
   //   ⇒ 滚动相位每帧 +1px，实现平滑左移。
   reg        vs_d;
   reg  [9:0] sc_ph;
@@ -197,7 +199,7 @@ module osd_player_ui #(
     end
   end
 
-  // [Design note scroll-osd]运行时间秒表（零除法 BCD；tick = 1s）
+  // 运行时间秒表（零除法 BCD；tick = 1s）
   //   显示 "UP mm:ss"；59:59 后回 00:00。
   reg [3:0] upt_sec_o, upt_sec_t, upt_min_o, upt_min_t;
   always @(posedge clk or negedge rst_n) begin
@@ -226,18 +228,8 @@ module osd_player_ui #(
     end
   end
 
-  // 原来这里挂了两个 div_u32（各 ~106 FF + ~180 LUT）。它们的除数是常数 60、
-  // 被除数只有 16 位，所以换成本文件末尾那个专用的 16 拍 restoring 除法器
-  // `div60_16`（rem 恒 < 60 ⇒ 只要 7 位），面积约为 div_u32 的 1/3。
-  //   ⚠ 一开始我试过"纯组合常数除法"（x/15 用移位相加再 >>2），
-  //     被 TB 的全量穷举否掉了：x=60 会算成 0（应为 1）、x=3600 算成 59:60，
-  //     共 4152 个错值。那个恒等式在有截断时并不精确，所以放弃。
-  //   现在的 div60_16 由 `div60_const_tb.v` 对 x=0..65535 全量穷举证明精确。
-  //
-  // 【声明顺序纪律】cur_start/tot_start 必须在被 div60_16 实例引用之前声明：
-  //   曾经把实例放在声明前面 ⇒ TD 报 HDL-7225 "already implicitly declared"，
-  //   把它们当成未驱动的 1 位隐式 wire ⇒ 除法器永远不启动、mm:ss 不刷新。
-  //   （这条坑本项目已踩过多次，务必保持"先声明后使用"。）
+  // div60_16 使用固定除数 60 的逐位除法，余数位宽受常数范围限制。
+  // 启动与完成握手使分秒结果在转换结束时一次发布。
   reg cur_start, tot_start;
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -271,8 +263,7 @@ module osd_player_ui #(
     .r    (tot_r7)
   );
 
-  // 【面积回收 2 · 2026-10-07】两个 div_u32 已换成 div60_16（见上）。
-  //   值在除法 done 的那一拍锁存，与原实现时序语义完全一致。
+  // 除法完成时同时锁存商和余数，避免显示两者属于不同转换。
   reg [7:0] cur_min, cur_secmod, tot_min, tot_secmod;
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -299,7 +290,7 @@ module osd_player_ui #(
   wire [3:0] tot_sec_tens = tot_secmod / 10, tot_sec_ones = tot_secmod % 10;
   wire [3:0] vol_ten = volume / 10, vol_one = volume % 10;
 
-  // [Design note bc-osd]参数区显示数字（查表，零除法）：
+  // 参数区显示数字（查表，零除法）：
   //   ⚠ 档位↔数值映射必须与 top 的 bc_bright / bc_contrast 保持一致！
   reg        b_sign;  // 1 = 负
   reg [3:0] b_tens, b_ones;  // 亮度两位十进制
@@ -351,22 +342,14 @@ module osd_player_ui #(
     endcase
   end
 
-  // [Design note scroll-osd]滚动相位映射（放在字符表之前——声明顺序纪律）
-  //   pos = pixel_x + 相位（0..958）：字形列 = pos[2:0]。
-  //   循环取模 + 单段周期（两轮板测修复合并）：
-  //     ① 首版（"≥33 即空格"）⇒ 文字只滚出、右侧无新字（只在左半滚动）；
-  //     ② 二版（mod 40 = 320px 周期）⇒ 屏宽 640 > 320，同一时刻显示【两段】；
-  //        ⇒ 周期取 114 字符 = 912px（> 屏宽 640 + 文字 264 = 904）⇒ 屏上恒
-  //        只有一段；文字滚完约 4.4s，整屏空白约 10.9s 后下一段进入。
-  //     取模实现：pos>>3 <= 193 < 2x114 ⇒ 一次比较减法即可，零除法。
-  //       相位 911→0 与 114 字符周期天然衔接（912 = 114x8）。
-  // Keep one continuous scrolling phase across the entire screen.
+  // 字符位置由像素横坐标与滚动相位相加，再映射到周期内字符及字形列。
+  // 相位和字符序号使用同一周期，避免滚动边界跳变。
   wire [10:0] sc_pos = {1'b0, pixel_x} + {1'b0, sc_ph};  // 0..1550（11 位防溢出）
   wire [ 7:0] sc_i8 = sc_pos[10:3];  // 0..193
   wire [ 7:0] sc_i_m = (sc_i8 >= 8'd114) ? (sc_i8 - 8'd114) : sc_i8;
   wire [ 6:0] sc_i = sc_i_m[6:0];  // 0..113（<=127）
 
-  // [Design note scroll-osd]滚动标语字符表
+  // 滚动标语字符表
   //   "WELCOME TO FPGA MULTIMEDIA PLAYER"（33 字符）+ 空格补齐；
   //   33 及以后全部走 default 空格 ⇒ 文字与空白共 40 格循环左移。
   reg  [ 7:0] sc_char;
@@ -493,20 +476,51 @@ module osd_player_ui #(
   wire [2:0] vol_idx = (pixel_x - VOL_X) >> 3;
   wire [2:0] state_idx = (pixel_x - STATE_X) >> 3;
 
-  // [Design note bc-osd]参数区区域与字符索引（仅 pshow 期间"存在"）
-  wire in_param = pshow &&
+  // 参数区区域与字符索引（仅 pshow 期间"存在"）
+  // The same compact top-bar slot shows the brightness/contrast prompt for
+  // its normal three-second lifetime.  Otherwise it continuously reports
+  // the effective carousel period, including AUTO: OFF.  Keep this status
+  // visible in video mode too: it is a read-only image-carousel status and
+  // must not disappear merely because the viewer is checking another mode.
+  wire in_param =
                     (pixel_x >= PARAM_X) && (pixel_x < PARAM_X + 10'd88) &&
                     (pixel_y >= HDR_Y) && (pixel_y < HDR_Y + 10'd16);
   wire [3:0] param_idx = (pixel_x - PARAM_X) >> 3;
 
-  // [Design note scroll-osd]滚动带区域与运行时间区域
-  //   （sc_pos / sc_i 已上移到字符表之前——声明顺序纪律：先用后声明会变 1 位隐式线）
+  // The period is already one of sixteen bounded presets.  Keep the
+  // decimal digits as a compact combinational table; no general divider is
+  // inferred on the pixel path.
+  reg [3:0] auto_hundreds, auto_tens, auto_ones;
+  always @(*) begin
+    auto_hundreds = 4'd0;
+    auto_tens     = 4'd0;
+    auto_ones     = 4'd0;
+    case (carousel_period_frame)
+      10'd2:   begin auto_ones=4'd2; end
+      10'd3:   begin auto_ones=4'd3; end
+      10'd5:   begin auto_ones=4'd5; end
+      10'd8:   begin auto_ones=4'd8; end
+      10'd10:  begin auto_tens=4'd1; end
+      10'd15:  begin auto_tens=4'd1; auto_ones=4'd5; end
+      10'd20:  begin auto_tens=4'd2; end
+      10'd30:  begin auto_tens=4'd3; end
+      10'd45:  begin auto_tens=4'd4; auto_ones=4'd5; end
+      10'd60:  begin auto_tens=4'd6; end
+      10'd90:  begin auto_tens=4'd9; end
+      10'd120: begin auto_hundreds=4'd1; auto_tens=4'd2; end
+      10'd180: begin auto_hundreds=4'd1; auto_tens=4'd8; end
+      10'd240: begin auto_hundreds=4'd2; auto_tens=4'd4; end
+      10'd300: begin auto_hundreds=4'd3; end
+      default: begin auto_hundreds=4'd6; end
+    endcase
+  end
+  // 滚动带和运行时间区域使用已计算的字符位置。
   wire in_scroll = (pixel_y >= SCROLL_Y) && (pixel_y < SCROLL_Y + 10'd16);
   wire in_upt = (pixel_y >= HDR_Y) && (pixel_y < HDR_Y + 10'd16) &&
                   (pixel_x >= UPT_X) && (pixel_x < UPT_X + 10'd64);
   wire [2:0] upt_idx = (pixel_x - UPT_X) >> 3;
 
-  // ================= [Design note brand]顶部品牌条区域 =================
+  // ================= 顶部品牌条区域 =================
   wire in_brand_bg = BRAND_ON && (pixel_x >= BRAND_X0) && (pixel_x < BRAND_X1) &&
                        (pixel_y >= BRAND_Y0) && (pixel_y < BRAND_Y1);
   wire in_logo     = BRAND_ON && (pixel_x >= LOGO_X) && (pixel_x < LOGO_X + LOGO_W) &&
@@ -628,22 +642,57 @@ module osd_player_ui #(
         default: char_code = " ";
       endcase
     end else if (in_param) begin
-      // [Design note bc-osd]"B:+16 C:160"（11 字符固定模板）
-      case (param_idx)
-        4'd0: char_code = "B";
-        4'd1: char_code = ":";
-        4'd2: char_code = b_sign ? "-" : "+";
-        4'd3: char_code = 8'h30 + b_tens;
-        4'd4: char_code = 8'h30 + b_ones;
-        4'd5: char_code = " ";
-        4'd6: char_code = "C";
-        4'd7: char_code = ":";
-        4'd8: char_code = 8'h30 + c_hun;
-        4'd9: char_code = 8'h30 + c_tens;
-        default: char_code = 8'h30 + c_ones;
-      endcase
+      //  the effective period is the normal
+      // persistent status.  A recent brightness/contrast change keeps its
+      // existing three-second prompt priority.
+      if (pshow) begin
+        // "B:+16 C:160"
+        case (param_idx)
+          4'd0: char_code = "B";
+          4'd1: char_code = ":";
+          4'd2: char_code = b_sign ? "-" : "+";
+          4'd3: char_code = 8'h30 + b_tens;
+          4'd4: char_code = 8'h30 + b_ones;
+          4'd5: char_code = " ";
+          4'd6: char_code = "C";
+          4'd7: char_code = ":";
+          4'd8: char_code = 8'h30 + c_hun;
+          4'd9: char_code = 8'h30 + c_tens;
+          default: char_code = 8'h30 + c_ones;
+        endcase
+      end else if (!carousel_on_frame) begin
+        // "AUTO: OFF"
+        case (param_idx)
+          4'd0: char_code = "A";
+          4'd1: char_code = "U";
+          4'd2: char_code = "T";
+          4'd3: char_code = "O";
+          4'd4: char_code = ":";
+          4'd5: char_code = " ";
+          4'd6: char_code = "O";
+          4'd7: char_code = "F";
+          4'd8: char_code = "F";
+          default: char_code = " ";
+        endcase
+      end else begin
+        // "AUTO: 10s" / three-digit variants such as "AUTO: 120s"
+        case (param_idx)
+          4'd0: char_code = "A";
+          4'd1: char_code = "U";
+          4'd2: char_code = "T";
+          4'd3: char_code = "O";
+          4'd4: char_code = ":";
+          4'd5: char_code = " ";
+          4'd6: char_code = (auto_hundreds != 0) ? (8'h30 + auto_hundreds) :
+                            ((auto_tens != 0) ? (8'h30 + auto_tens) : " ");
+          4'd7: char_code = (auto_hundreds != 0) ? (8'h30 + auto_tens) : (8'h30 + auto_ones);
+          4'd8: char_code = (auto_hundreds != 0) ? (8'h30 + auto_ones) : "s";
+          4'd9: char_code = (auto_hundreds != 0) ? "s" : " ";
+          default: char_code = " ";
+        endcase
+      end
     end else if (in_brand_a) begin
-      // [Design note brand]品牌条前半段 "anlogic "（8px ASCII，用原 char_rom）
+      // 品牌条前半段 "anlogic "（8px ASCII，用原 char_rom）
       case (brand_a_idx)
         3'd0: char_code = "a";
         3'd1: char_code = "n";
@@ -655,10 +704,10 @@ module osd_player_ui #(
         default: char_code = " ";
       endcase
     end else if (in_scroll) begin
-      // [Design note scroll-osd]滚动标语（相位已折算进字符号/列映射）
+      // 滚动标语（相位已折算进字符号/列映射）
       char_code = sc_char;
     end else if (in_upt) begin
-      // [Design note scroll-osd]运行时间 "UP mm:ss"
+      // 运行时间 "UP mm:ss"
       case (upt_idx)
         3'd0:    char_code = "U";
         3'd1:    char_code = "P";
@@ -782,8 +831,8 @@ module osd_player_ui #(
   wire kpd_in_col = kp_debug && in_kpd_col;
   wire [9:0] row_base = (in_title)             ? (pixel_y - TITLE_Y)
                         : (in_hdr_t || in_hdr_f || in_vol || in_state || in_param || in_upt) ? (pixel_y - HDR_Y)
-                        : (in_brand_a)           ? (pixel_y - BRAND_TY)   // [Design note brand]"anlogic" 段
-  : (in_scroll) ? (pixel_y - SCROLL_Y)  // [Design note scroll-osd]
+                        : (in_brand_a)           ? (pixel_y - BRAND_TY)   // "anlogic" 段
+  : (in_scroll) ? (pixel_y - SCROLL_Y)  // 
   : (kp_debug && in_kpd_title) ? (pixel_y - KPD_TITLE_Y)
                         : (kpd_in_row || kpd_in_col) ? (pixel_y - KPD_INFO_Y)
                         : (kp_debug && in_kpd_bmp)   ? (pixel_y - KPD_BMP_Y)
@@ -795,10 +844,10 @@ module osd_player_ui #(
                         : (in_hdr_f) ? (pixel_x - FMT_HX)
                         : (in_vol)   ? (pixel_x - VOL_X)
                         : (in_state) ? (pixel_x - STATE_X)
-                        : (in_param) ? (pixel_x - PARAM_X)   // [Design note bc-osd-fix2]参数区列举地址（漏 ⇒ 落到 560 下溢、字形被截）
-  : (in_upt) ? (pixel_x - UPT_X)  // [Design note scroll-osd]
-  : (in_brand_a) ? (pixel_x - BRAND_TX) // [Design note brand]"anlogic" 段（漏了会落到 TOT_X 下溢）
-  : (in_scroll)? {7'd0, sc_pos[2:0]}   // [Design note scroll-osd]列=相位后的列（不是屏内 x 低位）
+                        : (in_param) ? (pixel_x - PARAM_X)   // 参数区采用局部横坐标，避免字形列地址下溢
+  : (in_upt) ? (pixel_x - UPT_X)  // 
+  : (in_brand_a) ? (pixel_x - BRAND_TX) // "anlogic" 字符区采用自身起点计算列地址
+  : (in_scroll)? {7'd0, sc_pos[2:0]}   // 列=相位后的列（不是屏内 x 低位）
   : (kp_debug && in_kpd_title) ? (pixel_x - KPD_TITLE_X)
                         : (kpd_in_row)               ? (pixel_x - KPD_ROW_X)
                         : (kpd_in_col)               ? (pixel_x - KPD_COL_X)
@@ -808,16 +857,6 @@ module osd_player_ui #(
                         : ((in_cur)  ? (pixel_x - CUR_X) : (pixel_x - TOT_X));
   wire [2:0] col = col_base[2:0];
 
-  // 2026-10-10 修复（声明顺序）：`char_code_safe` 的声明【上移到首次使用之前】。
-  //   原文 L468 先用了它、L470 才声明 ⇒ 两个独立工具都报：
-  //     · ModelSim: Error vlog-2730 (Undefined variable) + vlog-2388 (already declared)
-  //     · TD      : HDL-5373 WARNING "identifier 'char_code_safe' is used before its declaration ... (468)"
-  //   ⇒ 隐式 1 位网 ⇒ 后被真实 8 位声明取代 ⇒ 改为先声明再使用（不动任何逻辑 ）
-  // guard: non-printable bytes (e.g. 0x00 in a short name) -> space
-  // The printable range maps to 0..94; invalid bytes map to space (0).
-  // Subtracting 32 modulo 128 leaves the low five bits unchanged. Compute
-  // its high two bits directly and gate the final index, avoiding a guarded
-  // byte mux followed by arithmetic on the coordinate-to-font-ROM path.
   wire char_printable = !char_code[7] && (|char_code[6:5]) &&
                         (char_code[6:0] != 7'h7f);
   wire [6:0] char_index = {7{char_printable}} &
@@ -830,16 +869,12 @@ module osd_player_ui #(
     .dout(rom_data)
   );
 
-  // ================= [Design note brand]品牌字模 / logo 位图 ROM =================
+  // ================= 品牌字模 / logo 位图 ROM =================
   //   cjk_addr  = 汉字序号*16 + 行号（0..143），16 位一行（bit15 = 最左列）
   //   logo_addr = (y-LOGO_Y)*LOGO_W + (x-LOGO_X)，一个字节一个像素
   //               0=透明 1=红(A 的条纹) 2=白(LOGIC)
   //   两个口都是同步读（外面不套 if）⇒ 综合器映射进 ERAM，不占 LUT。
   wire [7:0] cjk_addr = {brand_c_gly, brand_c_row};
-  // [Design note brand]logo 行基址 (y-LOGO_Y)*94 用移位相加实现：
-  //   94 = 64+16+8+4+2，写成移位相加后综合成纯 LUT/加法，不占 DSP
-  //   （原来直接写 `* LOGO_W` 被映射成 1 个 DSP；带频谱时 DSP 一共只有 29 个，
-  //     FFT 的 butterfly 就要 4 个，不能在这里浪费）。
   wire [10:0] logo_row = {1'b0, (pixel_y - LOGO_Y)};
   wire [10:0] logo_base = (logo_row << 6) + (logo_row << 4) + (logo_row << 3)
                           + (logo_row << 2) + (logo_row << 1);
@@ -865,7 +900,7 @@ module osd_player_ui #(
   // 表现为最右一列/最后一行格子整格不亮。
   reg       in_kpd_grid_d;
   reg       kpd_hit_d;
-  // [Design note brand]汉字位/logo 像素都要跟着同步读延后一拍
+  // 汉字位/logo 像素都要跟着同步读延后一拍
   //   汉字：选择位 = bit(15 - 列)，列号必须用延后一拍的列号
   //   logo: ROM output already has one-cycle latency, matching the delayed region.
   reg [3:0] brand_c_col_d;
@@ -895,10 +930,10 @@ module osd_player_ui #(
     end else begin
       col_d <= col;
       text_on_d <= (in_title | in_cur | in_tot | in_hdr_t | in_hdr_f | in_vol | in_state
-                          | in_param   // [Design note bc-osd-fix]参数区文字层白名单
-      | in_scroll | in_upt  // [Design note scroll-osd]滚动带 / 运行时间
-      | in_brand_a  // [Design note brand]"anlogic" 那段
-      | in_brand_c  // [Design note brand]9 个汉字（走 cjk 位选择）
+                          | in_param   // 参数区文字层白名单
+      | in_scroll | in_upt  // 滚动带 / 运行时间
+      | in_brand_a  // "anlogic" 那段
+      | in_brand_c  // 9 个汉字（走 cjk 位选择）
       | (kp_debug & (in_kpd_title | in_kpd_grid | in_kpd_row | in_kpd_col
                                         | in_kpd_cnt | in_kpd_bmp))) && de;
       brand_c_col_d <= brand_c_col;
@@ -919,7 +954,7 @@ module osd_player_ui #(
     end
   end
   wire pix_on = rom_data[7-col_d];
-  // [Design note brand]汉字当前像素：cjk_data 是同步读出来的，列号用延后一拍的
+  // 汉字当前像素：cjk_data 是同步读出来的，列号用延后一拍的
   wire pix_cjk = cjk_data[4'd15-brand_c_col_d];
   // Select one font source: ticker ASCII must never leak into the CJK glyphs.
   wire pix_on_all = in_brand_c_d ? pix_cjk : pix_on;
@@ -934,9 +969,6 @@ module osd_player_ui #(
   wire in_prog_y = (pixel_y >= PROG_Y) && (pixel_y < PROG_Y + PROG_H);
   wire in_prog_x = (pixel_x >= PROG_X0) && (pixel_x < PROG_X1);
   wire [9:0] prog_w = PROG_X1 - PROG_X0;  // 560
-  // v109 routed worst display path started at progress_s1, through
-  // multiplication, comparisons and color selection (21.147ns).
-  // Register slow metadata arithmetic; raster RGB/DE/VS latency is unchanged.
   reg [17:0] prog_mul;
   always @(posedge clk or negedge rst_n)
     if (!rst_n) prog_mul <= 18'd0;
@@ -1030,7 +1062,7 @@ module osd_player_ui #(
       else if (in_state_d) color_sel = pause ? {st_r, st_g, st_b} : {vol_r, vol_g, vol_b};
       else color_sel = {text_r, text_g, text_b};
     end
-        // [Design note scroll-osd]滚动带底：半透明暗色（图片透出 = 多图层混合；
+        // 滚动带底：半透明暗色（图片透出 = 多图层混合；
         //   文字像素已在上面的"文字优先"分支处理）。复用顶栏 panel 的混合色。
     else if (in_scroll_d) color_sel = {panel_r, panel_g, panel_b};
     else if (in_prog_x && in_prog_y && prog_played) color_sel = {play_r, play_g, play_b};
@@ -1055,7 +1087,6 @@ endmodule
 
 //===================================================================
 
-// div60_16 : 【面积回收 2 · 2026-10-07】专用 16 拍 restoring 除法器（除数恒为 60）
 
 //-------------------------------------------------------------------
 
@@ -1160,3 +1191,4 @@ module div60_16 (
   end
 
 endmodule
+

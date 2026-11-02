@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Streaming QOA decoder for the supported audio profile.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 // QOA file streaming decoder, fixed 48 kHz mono/stereo profile.
 // Algorithm/table based on qoa.h, Copyright (c) 2023 Dominic Szablewski, MIT.
 // Retain the accompanying license in docs/licenses/QOA_MIT.txt.

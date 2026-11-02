@@ -1,18 +1,6 @@
-//===================================================================
-// video_coord : rebuild pixel coordinate (active_x, active_y)
-//===================================================================
-// The official video pipeline (video_timing_data -> video_delay) only
-// outputs hs/vs/de and RGB, but the OSD / spectrum overlays need the
-// (x,y) pixel coordinate. This module rebuilds it from de and vs.
-//
-// Rebuild rules (verified against spectrum_display):
-//   - active_x increments while de=1 (0..639), resets at line end
-//   - active_y increments on the de falling edge (new line)
-//   - active_y resets on the vs falling edge (new frame)
-//
-// active_x/active_y are aligned with de (same cycle), so an overlay
-// reading them + de + RGB in the same clock sees consistent pixels.
-//===================================================================
+// Reconstruct active pixel coordinates from DE and VS.
+// X advances during DE; Y advances at line end and resets at frame sync.
+// Coordinates align with the active pixel stream for OSD and spectrum overlays.
 module video_coord (
   input  wire        clk,
   input  wire        rst_n,

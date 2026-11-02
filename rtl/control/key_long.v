@@ -1,36 +1,7 @@
 `timescale 1ns / 1ps
-//===========================================================================
-// key_long : one board button -> a qualified "tap" level + a "hold" pulse
-//---------------------------------------------------------------------------
-// WHY THIS MODULE EXISTS AT ALL
-//   The board has four buttons and three are already overloaded:
-//     KEY1 (B2) short = play/pause, long = fast-forward, double = auto-playback
-//     KEY4 (C1) short = slideshow on/off, long = next track
-//     KEY3 (B1) short = next image            <- no long-press function yet
-//   KEY3 is therefore where video play/stop lives.
-//
-// WHY IT MUST NOT BE A NAIVE PULSE
-//   The first version fed KEY3 straight into sd_card_bmp.key_next and used a
-//   separate 1.2 s hold detector.  That deadlocked the feature on the board:
-//   the first ~20 ms of the hold is indistinguishable from a normal tap, so
-//   sd_card_bmp started loading the next image, and an image load keeps
-//   img_loading high for load+fade = 0.3..5.3 s (I4 alone is 4.7 s to read).
-//   The 1.2 s hold pulse then landed INSIDE that window and the "may I start
-//   video?" condition was false, so the request was silently dropped --
-//   i.e. holding KEY3 did nothing, and it did it every time.
-//
-// THE FIX: OWN THE GESTURE
-//   This module decides tap-vs-hold FIRST and then tells the image path
-//   "this was only a tap" by synthesising a short active-low pulse on tap_n.
-//     * key down < HOLD_MS  -> on release, tap_n goes low for TAP_MS
-//                              (sd_card_bmp's 20 ms debounce accepts it)
-//     * key down >= HOLD_MS -> hold_pulse fires once, tap_n NEVER pulses
-//   So a long press no longer starts an image load, img_loading stays 0, and
-//   the video can take over immediately.
-//
-//   TAP_MS must be > sd_card_bmp's 20 ms debounce; 40 ms is comfortable and
-//   still feels instant.
-//===========================================================================
+// 按键手势判定：短按在释放后输出 tap_n，长按到门限仅输出一次 hold_pulse。
+// 先完成手势分类再启动图片或视频操作，避免长按的前段误触发短按功能。
+// TAP_MS 应覆盖后级消抖时间，使短按脉冲能够可靠接收。
 module key_long #(
   parameter integer CLK_FREQ_HZ = 100_000_000,
   parameter integer HOLD_MS     = 1200,

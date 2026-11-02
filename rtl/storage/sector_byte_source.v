@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Sector request and byte-stream handshake adapter.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 // Indivisible SD sector -> backpressured bytes. One synchronous 512-byte RAM.
 // cancel never withdraws an in-flight request. restart is legal only idle.
 module sector_byte_source #(

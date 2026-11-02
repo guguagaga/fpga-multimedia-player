@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "checks": {
+    "video_20fps_metadata": {
+      "passed": true,
+      "frames": 4,
+      "audio_samples": 9600
+    },
+    "video_overwrite_refused": {
+      "passed": true,
+      "exit_code": 2
+    },
+    "bmp_overwrite_refused": {
+      "passed": true,
+      "exit_code": 2
+    },
+    "music_overwrite_refused": {
+      "passed": true,
+      "exit_code": 2
+    },
+    "source_identity": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "complete_project_assembly": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "python_syntax": {
+      "passed": true,
+      "files": 59
+    },
+    "audio_extract": {
+      "passed": true,
+      "exit_code": 0,
+      "log": "package_smoke/audio_extract.log"
+    },
+    "video_20fps_separate_audio_unicode": {
+      "passed": true,
+      "exit_code": 0,
+      "log": "package_smoke/video_20fps_separate_audio_unicode.log"
+    },
+    "bmp_convert": {
+      "passed": true,
+      "exit_code": 0,
+      "log": "package_smoke/bmp_convert.log"
+    },
+    "music_convert": {
+      "passed": true,
+      "exit_code": 0,
+      "log": "package_smoke/music_convert.log"
+    },
+    "video_30fps_metadata": {
+      "passed": true,
+      "frames": 7,
+      "audio_samples": 11200,
+      "report": "package_smoke/video30_conversion.json"
+    },
+    "powershell_syntax": {
+      "passed": true,
+      "files": 5
+    },
+    "build_policy_source_binding": {
+      "passed": true,
+      "note": "Current SDC and all Verilog hashes bound; generic full build not executed."
+    },
+    "complete_project_assembly_bundled": {
+      "passed": true,
+      "inputs": 131,
+      "vendor_inputs": 19,
+      "external_project_argument_used": false
+    }
+  },
+  "scope": "All 131 build inputs packaged and verified, complete assembly using bundled vendor_original, media-tool smoke tests and script syntax; no new synthesis or full RTL regression."
+}

@@ -1,0 +1,110 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 01:17:33 on Nov 01,2026
+# vlog D:/codexworks/osd_carousel_v187/rebuild_v192/candidate/project/user_source/hdl_source/qoi_stream.v D:/TD3/sim_release/eg4/eg_logic_dram.v 
+# -- Compiling module qoi_stream
+# -- Compiling module EG_LOGIC_DRAM
+# 
+# Top level modules:
+# 	qoi_stream
+# End time: 01:17:33 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 01:17:33 on Nov 01,2026
+# vlog -sv D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v D:/codexworks/osd_carousel_v187/rebuild_v192/candidate/project/user_source/hdl_source/SD/sd_card_bmp.v D:/codexworks/osd_carousel_v187/rebuild_v192/candidate/project/user_source/hdl_source/SD/bmp_read.v D:/codexworks/osd_carousel_v187/rebuild_v192/candidate/project/rtl/img_scaler.v D:/TD3/sim_release/eg4/eg_phy_bram32k.v D:/TD3/sim_release/eg4/eg_phy_glbl.v 
+# -- Compiling module tb
+# -- Compiling module sd_card_bmp
+# -- Compiling module key_press_debounce
+# -- Compiling module bmp_read
+# -- Compiling module img_scaler
+# -- Compiling module image_expand_5_4
+# -- Compiling module image_fit_720p
+# -- Compiling module EG_PHY_BRAM32K
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	tb
+# 	img_scaler
+# 	image_expand_5_4
+# 	EG_PHY_BRAM32K
+# 	glbl
+# End time: 01:17:33 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 01:17:33 on Nov 01,2026
+# vlog D:/codexworks/osd_carousel_v187/rebuild_v192/candidate/project/user_source/hdl_source/sd_arbiter.v 
+# -- Compiling module sd_arbiter
+# 
+# Top level modules:
+# 	sd_arbiter
+# End time: 01:17:33 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb work.glbl "+W=320" "+H=240" "+KIND=1" -gEARLY=0 
+# Start time: 01:17:33 on Nov 01,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.sd_arbiter
+# Loading work.sd_card_bmp
+# Loading work.image_fit_720p
+# Loading work.key_press_debounce
+# Loading work.bmp_read
+# Loading work.qoi_stream
+# Loading work.glbl
+# Loading work.EG_LOGIC_DRAM
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'arb'.  Expected 32, found 25.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/arb File: D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v Line: 19
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'fat_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'fat_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'vid_sd_sec_read_data'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'vid_sd_sec_read_data_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'vid_sd_sec_read_end'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(19): [TFMPC] - Missing connection for port 'vid_grant'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 52, found 40.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/dut File: D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v Line: 77
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'scan_sector'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'found_count_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'scan_done_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'auto_mode_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'cfg_boundary_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'auto_on_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'write_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'disp_buf_idx'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'firstimg_fallback_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'firstimg_diag_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'source_top_down'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(77): [TFMPC] - Missing connection for port 'file_base_lba'.
+# EVENT LOAD id=0 cycle=2553 pf=0
+# PROGRESS cycle=1000000 n=262343 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6144 qoi=4 fit=10 ack=0 wreq=0
+# PROGRESS cycle=2000000 n=526080 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6144 qoi=4 fit=5 ack=0 wreq=0
+# PROGRESS cycle=3000000 n=789158 state=4 req=0 card_req=0 arb=0 audio_req=0 fifo=6144 qoi=5 fit=10 ack=0 wreq=0
+# EVENT WRITTEN id=0 cycle=3505921 load_cycles=3503368
+# EVENT DISPLAY id=0 cycle=3505953 since_auto=3505953
+# PROGRESS cycle=4000000 n=921600 state=1 req=0 card_req=0 arb=1 audio_req=0 fifo=6629 qoi=11 fit=13 ack=0 wreq=0
+# PROGRESS cycle=5000000 n=921600 state=1 req=0 card_req=0 arb=1 audio_req=0 fifo=6550 qoi=11 fit=13 ack=0 wreq=0
+# EVENT LOAD id=1 cycle=5508508 pf=1
+# PROGRESS cycle=6000000 n=122880 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6470 qoi=4 fit=6 ack=0 wreq=0
+# PROGRESS cycle=7000000 n=386015 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6390 qoi=4 fit=9 ack=0 wreq=0
+# PROGRESS cycle=8000000 n=644603 state=4 req=0 card_req=0 arb=0 audio_req=0 fifo=6311 qoi=9 fit=9 ack=0 wreq=0
+# PROGRESS cycle=9000000 n=906240 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6231 qoi=4 fit=5 ack=0 wreq=0
+# EVENT WRITTEN id=1 cycle=9052183 load_cycles=3543675
+# EVENT READY id=1 cycle=9052215
+# EVENT DISPLAY id=1 cycle=9052267 since_auto=5546313
+# PROGRESS cycle=10000000 n=921600 state=1 req=0 card_req=0 arb=1 audio_req=0 fifo=6151 qoi=11 fit=13 ack=0 wreq=0
+# PROGRESS cycle=11000000 n=921600 state=1 req=0 card_req=0 arb=1 audio_req=0 fifo=6584 qoi=11 fit=13 ack=0 wreq=0
+# EVENT LOAD id=2 cycle=11054821 pf=1
+# PROGRESS cycle=12000000 n=245760 state=4 req=1 card_req=1 arb=0 audio_req=0 fifo=6504 qoi=4 fit=5 ack=0 wreq=0
+# PROGRESS cycle=13000000 n=509297 state=4 req=0 card_req=0 arb=0 audio_req=0 fifo=6424 qoi=5 fit=9 ack=0 wreq=0
+# PROGRESS cycle=14000000 n=771840 state=4 req=0 card_req=0 arb=0 audio_req=0 fifo=6345 qoi=5 fit=7 ack=0 wreq=0
+# EVENT WRITTEN id=2 cycle=14565667 load_cycles=3510846
+# EVENT READY id=2 cycle=14565699
+# EVENT DISPLAY id=2 cycle=14565751 since_auto=11059797
+# PASS EARLY=0 flip1=5546313 flip2=11059797 min_fifo=6097 max_audio_wait=21341 frames=3 sectors=1852
+# ** Note: $finish    : D:/codexworks/carousel_timer_validation_v192/qoi_three/tb.v(73)
+#    Time: 160223360 ns  Iteration: 1  Instance: /tb
+# End time: 01:26:29 on Nov 01,2026, Elapsed time: 0:08:56
+# Errors: 0, Warnings: 21

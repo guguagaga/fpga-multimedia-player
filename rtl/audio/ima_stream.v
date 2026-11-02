@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: IMA ADPCM and PCM WAV streaming decode.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 // IMA ADPCM WAV block decoder. ADPCM-XQ is an offline encoder for this
 // standard format; its lookahead/noise shaping requires no extra RTL decoder.
 // 48 kHz mono/stereo, power-of-two blockAlign 64..4096, fact sample trim.
@@ -83,7 +79,7 @@ module ima_stream (
   reg [3:0] output_len;
   assign pcm_mode = (is_pcm);
   // Expose one synchronous write port per channel to RAM inference.
-  // Read latency and read-before-write behavior remain unchanged.
+  // Read latency and read-before-write ordering follow the synchronous RAM interface.
   wire buf_header_write = (state == BLOCK_CHECK);
   wire buf_decode_write = (state == DECODE);
   wire buf_pcm_write = (state == GET_BYTE) && is_pcm && din_valid && (data_left != 0);

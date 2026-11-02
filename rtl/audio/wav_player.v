@@ -63,14 +63,7 @@ module wav_player #(
   reg [15:0] new_format, new_channels, new_bits, new_align;
   reg [31:0] new_rate, new_size, new_offset;
 
-  // [Design note 时序 F2]scan_stop 的 "-1" 预寄存。
-  //   F1 之后 WNS 只剩 -94 ps / 25 个端点，其中 15 个全在这一族：
-  //       wav_sector → (+1) → (比 scan_stop) → CE        ← 3 级 + 一条 32 位比较
-  //   判据 "wav_sector+1 < scan_stop" 精确等价于 "wav_sector < scan_stop-1"，
-  //   而 scan_stop 只在 scan_start 时装载一次（下面第 389 行），所以把
-  //   scan_stop-1 一起寄存，比较器前面就少了一个 32 位加法器。
-  //   scan_stop = scan_start_sector + 4096 >= 4096，减 1 不会退化成负数；
-  //   BLIND_SCAN_LIMIT==0 时这条判据本来就被短路，不受影响。
+  // 预存 scan_stop-1，使扇区边界判断只执行比较，缩短地址控制路径。
   reg [31:0] scan_stop_m1;
   always @(posedge clk or posedge rst) begin
     if (rst) scan_stop_m1 <= 32'd0;
@@ -87,17 +80,7 @@ module wav_player #(
     else fifo_almost_full_q <= fifo_almost_full;
   end
   wire [31:0] length_now = {sd_sec_read_data, chunk_len[31:8]};
-  // ================================================================
-  // [Design note 时序]把三个"控制事件"输入就地打一拍。
-  //   seek / track_sel / scan_start 由 u_button_ctrl / u_track_ctrl 产生，
-  //   它们在芯片另一侧，实测最差路径是
-  //       u_button_ctrl/ff_tick_reg -> ... 6 级 LUT ... -> chunk_len[*].ce
-  //   而 0 级那一段网线就占 2.03 ns（跨 20 行布局）。在本模块入口打一拍，
-  //   发射点就落到这个锥体旁边的触发器上，那 2.0 ns 的跨片网线消失。
-  //   三者都是"脉冲/电平事件"，本模块内所有使用点统一延后一拍，
-  //   相对时序完全不变（状态机看到的仍是同一个脉冲，只晚 10 ns）。
-  //   复位时清零，与原值一致。
-  // ================================================================
+  // seek、track_sel、scan_start 在模块入口统一寄存一拍，限制跨模块控制扇出。
   reg seek_q, track_sel_q, scan_start_q;
   always @(posedge clk or posedge rst) begin
     if (rst) begin
@@ -116,27 +99,10 @@ module wav_player #(
       ((state == ST_SEEK) && ((action == ACT_SELECT) || (action == ACT_SEEK)));
   wire gate_open = ((state == ST_STREAM && !track_sel_q && !scan_start_q && !seek_q) ||
                     (old_tail && partial_frame)) && (bus_pos >= wanted) && (bus_pos < end_pos);
-  // ================================================================
-  // 2026-10-13 TIMING FIX (merged): precompute the seek constants
-  //   Worst sd_card_clk path (delay 12.216 ns, logic level 11,
-  //   requirement 10 ns, SWNS -2.496 ns) ran:
-  //     channels -> step_bytes -> (data_offset + pcm_out_cnt + step_bytes)
-  //              -> compare end_pos -> subtract data_offset -> mask -> add
-  //   data_offset, step_bytes (from channels) and frame_mask are all FIXED
-  //   once the header is parsed, so their combination can be precomputed
-  //   and held.  The live path then reduces to a single add of pcm_out_cnt.
-  //   Revert: delete these two registers and use data_offset+step_bytes
-  //   and ~frame_mask directly again.
-  // ================================================================
+  // 文件头确定后预计算偏移和对齐掩码，使实时跳转路径仅处理变化的采样偏移。
   reg [31:0] seek_base_r;  // data_offset + step_bytes
   reg [31:0] frame_mask_n_r;  // ~frame_mask  (mask off sub-frame bytes)
-  // [Design note 时序 F1]step_bytes 打一拍。
-  //   它来自顶层的组合三目 ((wav_channels==2) ? 1920000 : 960000)，
-  //   跨模块长线 + 2 级 LUT 直接串进 seek/repeat 的 6 加法器锥里
-  //   （E1 里那条 level 11 的最差路径，起点的前 2.8 ns 全是这一段）。
-  //   在模块入口寄存后，发射点落到本模块内。
-  //   等价性：step_bytes 只在 ACT_START 之后被用到，而 channels 更在之后才变，
-  //   晚一拍取到的永远是同一个值（帧稳定量）。
+  // 寄存 step_bytes，播放和跳转逻辑使用稳定的声道相关步长。
   reg [31:0] step_bytes_r;
   always @(posedge clk or posedge rst) begin
     if (rst) step_bytes_r <= 32'd960_000;
@@ -153,41 +119,17 @@ module wav_player #(
   end
   wire [32:0] seek_sum_p = {1'b0, pcm_out_cnt} + {1'b0, seek_base_r};
 
-  // ====================================================================
-  // [Design note 时序 F1]seek/repeat 的目标偏移，去掉一次 32 位减 + 一次 32 位加。
-  //
-  //   原式（两条）：
-  //       T = data_offset + ((sum - data_offset) & frame_mask_n_r)
-  //   展开：frame_mask_n_r 只清掉最低 1~2 位，所以
-  //       (sum - D) & M = (sum - D) - ((sum - D) & ~M)
-  //       T = D + (sum - D) - ((sum - D) & ~M) = sum - ((sum - D) & ~M)
-  //   而 (sum-D) 的"低位"只看 sum[1:0]-D[1:0]（模 4 运算，不涉及高位借位），
-  //   于是 ~M 只取最低 2 位即可：
-  //       low = (sum[1:0] - D[1:0]) & ~M[1:0]        ← 2 位减法，代价可忽略
-  //       T   = sum[31:0] - {30'd0, low}              ← 被减数只有 2 位有效
-  //   逐位等价（已用 D=100/101/103, sum=107/108/110, 单声道与立体声交叉验证）。
-  //   实测这段在 E1 里是 level 11 / ADDER=6 的最差族（-0.344）。
-  //
-  //   前提：sum >= D 恒成立（sum = pcm_out_cnt + D + step_bytes，两项都非负，
-  //   step_bytes >= 960000），所以原式的 32 位减法不会回绕、新式也无需处理借位。
-  // ====================================================================
+  // 按采样帧边界对齐目标地址：T = sum - ((sum-D) & ~M)。
+  // 掩码只影响最低两位，低位差值使用两位运算，避免宽减法后再加回基址。
   wire [1:0] seek_low = (seek_sum_p[1:0] - data_offset[1:0]) & ~frame_mask_n_r[1:0];
   wire [31:0] seek_target = (seek_sum_p[32] || seek_sum_p >= {1'b0, end_pos}) ?
       data_offset : (seek_sum_p[31:0] - {30'd0, seek_low});
   wire [32:0] repeat_sum = {1'b0, seek_latched} + {1'b0, step_bytes_r};
-  // [Design note 时序]这里原来用组合的 ~frame_mask（= channels==2 的比较），
-  //   于是 channels_reg[4] 成了 30 个违例端点的发射点。frame_mask_n_r 是
-  //   同一个值的寄存版，而且 repeat_target 只在 ACT_SEEK 时使用，
-  //   那条路径必经 ST_STREAM（头部已解析 ⇒ frame_mask_n_r 已装载），
-  //   复位值 0xFFFFFFFE 也与 channels=0/1 时的 ~frame_mask 相同。
-  //   同一个代数化简见上面的 seek_target（这里把 sum 换成 repeat_sum，其余相同）。
+  // 重复播放地址使用已寄存的帧对齐掩码，保持与采样边界一致。
   wire [1:0] rep_low = (repeat_sum[1:0] - data_offset[1:0]) & ~frame_mask_n_r[1:0];
   wire [31:0] repeat_target = (repeat_sum[32] || repeat_sum >= {1'b0, end_pos}) ?
       data_offset : (repeat_sum[31:0] - {30'd0, rep_low});
-  // [Design note 时序]riff 的"合法长度上界"= riff_length + 8，原来是每次
-  //   判断都重算的一条加法，且直接串在 new_offset/new_size 的写使能锥里
-  //   （38 个违例端点，9 级 ADDER=6）。riff_length 在头部第 4..7 字节就定下来，
-  //   判据只在 HP_LEN 结束那一拍用，所以把它做成寄存器，等价且不占路径。
+  // 预存 RIFF 长度上界 riff_length+8，避免每次解析块长度时重复加法。
   reg [32:0] riff_limit_r;
   always @(posedge clk or posedge rst) begin
     if (rst) riff_limit_r <= 33'd0;
@@ -211,17 +153,10 @@ module wav_player #(
       chunk_offset_bad <= chunk_payload_offset > riff_limit_r;
     end
   end
-  // [Design note 时序]MAX_HEADER_BYTES = 65536 = 2^16，所以
-  //   "bus_pos >= 65536" 精确等价于 "bus_pos[31:16] 非零"（16 输入 NOR，2 级 LUT），
-  //   不再是一条 32 位减法借位链。参数若改成非 2 的幂，自动退回比较（下面的三目在
-  //   MAX_HEADER_BYTES 是 localparam 时会被常量折叠，不产生任何硬件）。
+  // MAX_HEADER_BYTES 为 2 的幂时通过高位非零判断越界，其余参数使用常数比较。
   wire hdr_too_long = (MAX_HEADER_BYTES == 32'd65536) ?
       (|bus_pos[31:16]) : (bus_pos >= MAX_HEADER_BYTES);
-  // [Design note 时序]end_pos-1 预寄存（end_pos 每首只装载一次，见 ACT_START/ACT_SELECT）。
-  //   用途：把 "bus_pos+1 == end_pos" 改写成 "bus_pos == end_pos-1"，
-  //   从 EOF 判定路径上拿掉一个 32 位加法器。它只在 bus_pos 走完整个文件后才可能相等，
-  //   而 end_pos 装载后要几百万拍才会到，所以这一级 1 拍的延迟完全无害；
-  //   复位值 32'd0 - 1 = 0xFFFF_FFFF，bus_pos 永远到不了，不会误触发。
+  // 预存 end_pos-1，以当前位置比较检测最后一个字节。
   reg [31:0] end_pos_m1_r;
   always @(posedge clk or posedge rst) begin
     if (rst) end_pos_m1_r <= 32'd0 - 32'd1;
@@ -329,11 +264,7 @@ module wav_player #(
           pcm_data <= sd_sec_read_data;
           pcm_valid <= 1;
           pcm_out_cnt <= pcm_out_cnt + 1'b1;
-          // [Design note 时序]原来写的是 bus_pos+1'b1==end_pos —— 一个 32 位加法
-          //   + 32 位相等比较，起于 bus_pos（每字节都变），实测是 action/*.ce 与
-          //   bus_pos_b1 那条 9 级锥的一段。end_pos 每首只装载一次，所以把
-          //   end_pos-1 预寄存，这里只做一次 32 位相等比较（无加法）。
-          //   等价：bus_pos+1 == end_pos  ⟺  bus_pos == end_pos-1（无符号整数）。
+          // 当前位置等于 end_pos-1 时结束读取，避免在 EOF 比较前串接加法。
           if (state == ST_STREAM && bus_pos == end_pos_m1_r) begin
             track_end <= 1;
             wav_ready <= 1;
@@ -380,25 +311,7 @@ module wav_player #(
               if (field_index == 3) begin
                 payload_index <= 0;
                 if (chunk_id == 32'h61746164) begin  // "data"
-                  // ============================================================
-                  // [Design note 时序 v2]这一段是 D1 之后唯一的最差族
-                  //   （65 个端点全由 bus_pos 发出，9 级 / ADDER=5）：
-                  //     bus_pos → (+1) → (+length_now) → (比 riff_limit) → OR → CE
-                  //   三处等价改写把加法器从 5 个砍到 2 个：
-                  //
-                  //   ① length_now>32'h0fffffff  ⟺  |length_now[31:28]
-                  //      （常数比较 → 4 输入 NOR，不再占减法链）
-                  //   ② length_now > riff_limit - (bus_pos+1)
-                  //      ⟺ length_now + bus_pos + 1 > riff_limit
-                  //      ⟺ length_now + bus_pos >= riff_limit      ← 少一个 +1
-                  //      两式都是 33 位无符号精确算术（length_now<=0x0fffffff、
-                  //      bus_pos<=65536），不会溢出。原式在
-                  //      bus_pos+1 > riff_limit 时会回绕，但那时③已经单独置了
-                  //      header_bad，最终 OR 结果不变。
-                  //   ③ bus_pos+1 > riff_limit  ⟺  bus_pos >= riff_limit
-                  //
-                  //   新的一串：bus_pos → (+length_now) → (>= riff_limit_r) → OR
-                  // ============================================================
+                  // 使用扩展位宽检查块长度与 RIFF 边界，避免溢出后误接受非法数据块。
                   if (!fmt_seen || !format_ok || length_now == 0 || (|length_now[31:28]) ||
                       (length_now & ((new_channels == 2) ? 32'd3 : 32'd1)) != 0 ||
                       chunk_offset_bad || ({1'b0, length_now} > chunk_available))
@@ -509,30 +422,11 @@ module wav_player #(
       end else begin
         if (inflight_wd != INFLIGHT_WD_MAX) inflight_wd <= inflight_wd + 16'd1;
         // Mirrors the saturated counter on this same edge, so timeout
-        // observation retains its original cycle while reducing fanout.
+        // observation stays aligned with the control event while limiting fanout.
         inflight_expired <= (inflight_wd >= INFLIGHT_WD_MAX - 1);
       end
 
-      // ====================================================================
-      // [Design note ST_SEEK 停留超时超时恢复 修"播几分钟后音乐永久停止"]
-      //
-      //   上板数码管读数 212122 解码（seg_data_0 = 最左）：
-      //     d0 = 2  => wav_dbg_state = 2 = ST_STREAM（播放器看起来"正常"）
-      //     d2 = 2  => {wav_ready, video_play} = 10（wav_ready=1）
-      //     d3 = 1, d4 = 2  => sd_state = 5'b10001 = 17 = S_WAIT_READ_WRITE
-      //   => SD 侧空等"新请求"，播放器侧空等"数据" => 双方互锁 
-      //
-      //   根因：ST_SEEK 的放行条件依赖 fifo_drained，而它是顶层算出来的
-      //         `fifo_empty && (builder_idle || empty_cnt==EMPTY_HOLD)`。
-      //         一旦异步 FIFO 的 empty 标志不一致（写侧近满/读侧认空这类
-      //         经典 CDC 问题），fifo_empty 会长期为 0 => fifo_drained 恒 0
-      //         => ST_SEEK 永远出不去。按切歌能恢复，因为 track_sel 走了
-      //         另一条 ACT_SELECT 通路。
-      //
-      //   修法：在 ST_SEEK 停留超过 100 ms 就强制放行（丢掉最多 100 ms 音频，
-      //         换来整机不卡死）。这是"保命"不是"优化"：正常一次 seek 只要
-      //         几微秒，100 ms 有 1 万倍余量，正常路径绝不会误触发 
-      // ====================================================================
+      // 跳转等待超时后恢复控制流程，防止失去扇区完成响应而永久等待。
       if (state != ST_SEEK) seek_stay_cnt <= 24'd0;
       else if (seek_stay_cnt != SEEK_STAY_MAX) seek_stay_cnt <= seek_stay_cnt + 24'd1;
 
@@ -655,7 +549,7 @@ module wav_player_shim (
   output wire        pcm_valid,
   output wire [ 7:0] pcm_data,
   output wire [ 2:0] dbg_state,
-  output wire        dbg_gate_open,           // [Design note]透传内部 gate_open
+  output wire        dbg_gate_open,           // 透传内部 gate_open
   output wire [ 7:0] dbg_fp,
   output wire        dbg_silent_hit,
   output wire        dbg_posbad_hit,
@@ -710,7 +604,7 @@ module wav_player_shim (
   // 真实观测：只保留设计真正提供的那一位
   assign dbg_state         = core_dbg_state[2:0];
 
-  // 以下均为【常量桩】—— 不是真实观测（旧 reader 的探针，本设计不再提供）
+  // 以下兼容观测端口输出常量，不代表实时采样结果。
   //   用寄存器驱动，复位后恒定（避免未寄存/悬空 ）
   assign dbg_pcm_start_odd = 1'b0;
   assign dbg_pcm_sum32     = 32'd0;

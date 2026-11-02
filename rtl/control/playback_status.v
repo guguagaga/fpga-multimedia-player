@@ -1,18 +1,7 @@
-//===================================================================
-// playback_status : song timing / progress (sd_card_clk domain)
-//===================================================================
-// Converts the WAV reader's PCM byte counter into OSD-friendly values:
-//   tot_sec  = data_size / bytes_per_second
-//   cur_sec  = pcm_out_cnt / bytes_per_second
-//   progress = pcm_out_cnt * 256 / data_size   (Q8, 0..255)
-//
-// bytes_per_second = sample_rate * channels * (bit_depth/8).
-//
-// The three divisions run on a shared 32-cycle serial divider each
-// (tot once at wav_ready, cur/progress every ~0.1s). All outputs are
-// slow (16-bit seconds / 8-bit progress), so the caller can two-flop
-// them into the video_clk domain directly.
-//===================================================================
+// Convert PCM byte counts to elapsed seconds, total seconds and Q8 progress.
+// bytes_per_second = sample_rate * channels * (bit_depth / 8).
+// A shared serial divider schedules the three calculations in the SD domain.
+// The caller synchronizes status outputs into the display clock domain.
 module playback_status (
   input  wire        clk,          // sd_card_clk (100 MHz)
   input  wire        rst,          // active-high
@@ -27,18 +16,6 @@ module playback_status (
   output reg  [ 7:0] progress      // Q8 progress 0..255
 );
 
-  // bytes_per_second = sample_rate * channels * (bit_depth >> 3)
-  // (kept generic; the reader currently only accepts 48kHz/16-bit)
-  //
-  // 这条链子必须拆成两级流水，不能只寄存在末尾：
-  //   实测（引入本模块时的综合报告）"wav_reader/channels -> bps_r" 是
-  //   12.98ns / 6 级逻辑，因为 sample_rate(32b) x channels(16b) x
-  //   (bit_depth>>3) 两个乘法 + 移位 + 加法全挤在同一个时钟周期里，
-  //   100MHz(10ns) 下违例 -3.1ns。
-  //   拆法：第一拍只算 (sample_rate * channels)，第二拍再乘
-  //   bytes_per_sample。两拍各自只有一个乘法器，路径减半。
-  //   代价：bps 晚一拍可用（tot_start/cur_start 本来就有 1~2 拍延迟，
-  //   而且这些信号是秒级更新的，完全无影响）。
   wire [15:0] bytes_per_sample = {11'd0, bit_depth[15:3]};  // bit_depth/8，只需移位
 
   reg  [31:0] bps_stage;  // 第一级：sample_rate * channels
@@ -81,14 +58,8 @@ module playback_status (
     end
   end
 
-  // ================= 【面积回收 3 · 2026-10-07】三个除法共用一个 div_u32 =================
-  // 原来 tot/cur/prog 各挂一个 div_u32（每个 ~106 FF + ~180 LUT）。它们都是慢调用
-  // （wav_ready 时一次 / update_pulse 周期一次，最快 ~10Hz），完全没必要三个并行：
-  // 用一个仲裁器把请求排队、串行复用同一个除法器。
-  //   代价：一个 32 位 3:1 输入选择（~80 LUT）+ 3 个 pending 标志；
-  //   收益：省掉 2 个 div_u32（~212 FF + ~360 LUT）。
-  // 语义保持：每路请求被锁存到 pending，轮到时才启动；被服务那一拍各自给出
-  // `*_done` 单拍脉冲，下游锁存逻辑（tot_sec/cur_sec/progress）一行都不用改。
+  // 总时长、当前时间和进度按调度顺序共用一个 div_u32。
+  // 这些低速计算互斥发起，减少除法器资源并保持结果与对应请求配对。
   reg tot_start, cur_start, prog_start;
   always @(posedge clk or posedge rst) begin
     if (rst) begin

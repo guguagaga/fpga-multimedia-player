@@ -1,0 +1,260 @@
+{
+  "passed": true,
+  "changed_files": 36,
+  "removed_lines": 289,
+  "scope": "Comments only; non-comment RTL and protected directives verified by comment_cleanup.json",
+  "files": [
+    {
+      "path": "rtl/audio/audio_transition.v",
+      "before_lines": 97,
+      "after_lines": 93,
+      "before_sha256": "50d6dbb44d9a0237076ff5add4cb64b8ef5a497fec6450fb1da14a5e6739d47d",
+      "after_sha256": "bc8e06591d11c3aeb6d5a3caf74bc6d156921d8debc1beab6cc8b423f14b915a"
+    },
+    {
+      "path": "rtl/audio/compressed_audio_reader.v",
+      "before_lines": 345,
+      "after_lines": 341,
+      "before_sha256": "902a41d038ecb191544ea7f35857181640ae4a21257b765d29078546f4284b8d",
+      "after_sha256": "d1da2bbe060a2f747cf1e865470812254bf6e16cb1e56990379102868f10a463"
+    },
+    {
+      "path": "rtl/audio/fade_in.v",
+      "before_lines": 143,
+      "after_lines": 143,
+      "before_sha256": "57050d5431ae1505bce6346599552b64b219fe2aa5cc3d61d2dd8fb506d73ca0",
+      "after_sha256": "0348c587e0ce830c5e584e8d094435cd691e026f5868873e2bfcf4df93f0ae60"
+    },
+    {
+      "path": "rtl/audio/ima_stream.v",
+      "before_lines": 587,
+      "after_lines": 583,
+      "before_sha256": "24f958906cdf0ca6c7e981db169fd8b896b8784d6bf60c19c7dcfd45f66c4e19",
+      "after_sha256": "c3441b09c938a4836fe1e6b876b6165323aa71c86795f76e1ca895f5f97c898f"
+    },
+    {
+      "path": "rtl/audio/qoa_stream.v",
+      "before_lines": 510,
+      "after_lines": 506,
+      "before_sha256": "66fedbafd739907286b0078cb8cf1e079bba00e4bebc44ef8e644541ae7d4ca3",
+      "after_sha256": "d11e4bf2e44e75e86e3ce809adcaf416e144923a6302dc6bc04097ec5d7c605b"
+    },
+    {
+      "path": "rtl/control/button_ctrl.v",
+      "before_lines": 212,
+      "after_lines": 208,
+      "before_sha256": "5f9ec22bb4069443e001e54878a883361a00587a8afdc9132ce5ff23ea7cefd2",
+      "after_sha256": "ba814c4a61fa6ba4207228e1c15c42919812a9490ce89185d33ca75576c41077"
+    },
+    {
+      "path": "rtl/control/carousel_period_cfg.v",
+      "before_lines": 119,
+      "after_lines": 101,
+      "before_sha256": "95a2c4596bcb285816bbf94ce4587b4b46da9fbe4046e085206d96ff815e60d0",
+      "after_sha256": "932a1334bd17bf73a1fce326cb6fa9ae39bcc45800614e7688410aff02443f56"
+    },
+    {
+      "path": "rtl/control/div_u32.v",
+      "before_lines": 99,
+      "after_lines": 91,
+      "before_sha256": "e070eb499a50570eba079892903a423ccfb7ebdf07f10a91a03a1d3bc57e4e94",
+      "after_sha256": "334b93514df6cf34324f5fee5933b7166cd72f0dd627313a533d2c86dfc19864"
+    },
+    {
+      "path": "rtl/control/playback_status.v",
+      "before_lines": 180,
+      "after_lines": 169,
+      "before_sha256": "76d8a9ebb4b06d98941345a9337089ccbb9df8e35eb7f7a30f652ae82309f281",
+      "after_sha256": "566da693b33a49ad70b6885a5d5b3012551e80a92afc4eef8854158b267b5cd9"
+    },
+    {
+      "path": "rtl/control/track_ctrl.v",
+      "before_lines": 136,
+      "after_lines": 125,
+      "before_sha256": "dfe1002d5bd947e470aaa8f8b1590256f419b6b8b30eadf9be858b2f17dec83d",
+      "after_sha256": "02de1f82b216a95acf3be27a9167f1a7fdf209bc4abb5d2c5bf4a8945c9abe63"
+    },
+    {
+      "path": "rtl/display/char_rom.v",
+      "before_lines": 26,
+      "after_lines": 16,
+      "before_sha256": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+      "after_sha256": "6bba318dff8cce8a5c3c6e5e909d18bef578f50be1fcab0f06a2675394d84ceb"
+    },
+    {
+      "path": "rtl/display/osd_core.v",
+      "before_lines": 110,
+      "after_lines": 97,
+      "before_sha256": "d97488100842f9d97b60cdf243032dc26e84132f5b06649ea5d031b8ab9043bc",
+      "after_sha256": "6e8968a9c45de56314e770880673cd133ae40a446ad32d22400a302ec55e5baf"
+    },
+    {
+      "path": "rtl/display/osd_player_ui.v",
+      "before_lines": 1207,
+      "after_lines": 1194,
+      "before_sha256": "959acb63b05cac330169bbb069a3dd65bdea5381e679f507700da8a7de11130c",
+      "after_sha256": "00f280f383d1b0349b492eac337a79806fdfbfdd1929afd7de965ed36d739d78"
+    },
+    {
+      "path": "rtl/display/video_coord.v",
+      "before_lines": 49,
+      "after_lines": 37,
+      "before_sha256": "a7ca80dc5b2013dc9a7f107ccbddc557d1f601ae1b679a277dccd812993160c7",
+      "after_sha256": "3d3f5de0552d56fe6877f2f82b196279ad7b521786a67a28799ea61639bc7f0d"
+    },
+    {
+      "path": "rtl/display/video_timing_gen.v",
+      "before_lines": 130,
+      "after_lines": 116,
+      "before_sha256": "01f17d004b13e1886b128b1eee5212cf585347393de378ef08c3e838d8b3690a",
+      "after_sha256": "96646df987311fdcb310a3ce171a7c73d764c1aa63f8f3d216014d047fad8f37"
+    },
+    {
+      "path": "rtl/image/bmp_read.v",
+      "before_lines": 963,
+      "after_lines": 960,
+      "before_sha256": "238e90d798d004a2c6616261871f63a67cddd567d721a0238fe353944d163d3f",
+      "after_sha256": "6cf3a669ec3249e006d568347ca4f27a36212e0698788bcd896748e7bc6b14c8"
+    },
+    {
+      "path": "rtl/image/image_center_720p.v",
+      "before_lines": 117,
+      "after_lines": 112,
+      "before_sha256": "87e6da21868bf241717610504a692821a453fe1dc1c92a8175c2355539eaac35",
+      "after_sha256": "ef4da1b8e641d1d83c373e92828a611f66c0b72eae0cc790a7a6156b9d7a0c10"
+    },
+    {
+      "path": "rtl/image/pixel_fifo_24x8.v",
+      "before_lines": 88,
+      "after_lines": 56,
+      "before_sha256": "11b951b7954991ccf2ee2e7fd18ac7266b21dec77e2547d26b1e2a0c0cda200f",
+      "after_sha256": "6fa55aab26dd5716b03efaf182d06d7b087e22dfd0a8a3d9f064822181219cf0"
+    },
+    {
+      "path": "rtl/memory/dp_ram.v",
+      "before_lines": 40,
+      "after_lines": 28,
+      "before_sha256": "5a8bfb549843df7a3cbd3c9f46a067656da351b729c52812e3a3c1ade6616abc",
+      "after_sha256": "125b6cc73a6c589b6754abbf944591cd7eefcfc4bf15a1c78f9e7e9cce800989"
+    },
+    {
+      "path": "rtl/memory/frame_fifo_read.v",
+      "before_lines": 239,
+      "after_lines": 236,
+      "before_sha256": "8f6ca735083ecc083bd97a23000158b6fa54274b3788786dec3380adfcdef61e",
+      "after_sha256": "10b08ee29debadb45c7efc0a757b1abcb44ad8e0ca0876a2180bbecbda75c5cd"
+    },
+    {
+      "path": "rtl/memory/frame_fifo_write.v",
+      "before_lines": 309,
+      "after_lines": 306,
+      "before_sha256": "a93ad7b106f0270e402af207d845e32d1b219a4a73e8fae1103937d907e395f7",
+      "after_sha256": "7f413c64bba16bb90f293de800265014e27a3339c154c2478d6e0c5ca858b1f3"
+    },
+    {
+      "path": "rtl/memory/rgb565_pair_pack.v",
+      "before_lines": 52,
+      "after_lines": 48,
+      "before_sha256": "8aacd82e188c9da4e9b3fa4658a69fad34d837d227a45f8881542eb481ab90cf",
+      "after_sha256": "fcd96baafc86d96f85edfa73bab1baf7d32881689f7bc0e5f8f0780eb66ef964"
+    },
+    {
+      "path": "rtl/spectrum/butterfly.v",
+      "before_lines": 75,
+      "after_lines": 74,
+      "before_sha256": "4ee3cada6d100bda20f81a67249a0f4641404b86578ed080d56e4abf2da7726b",
+      "after_sha256": "4781bf1a219663e9777651305067269f394da7fd9e51a726d2d85bab89556415"
+    },
+    {
+      "path": "rtl/spectrum/cordic_atan.v",
+      "before_lines": 153,
+      "after_lines": 138,
+      "before_sha256": "221cdd4cd7e1c5e5386ca7704aefabfd1d2f60e54ea92715955b5aef30a5c88f",
+      "after_sha256": "6b9e80888276279e6f0d2e8d907672537fb155f6af0e4a836912a1534b829554"
+    },
+    {
+      "path": "rtl/spectrum/fft_256.v",
+      "before_lines": 236,
+      "after_lines": 217,
+      "before_sha256": "f408f734f38703ed857482dfa10bad4065888bead6b0715fa5e35125c9b0b2c3",
+      "after_sha256": "2662ddd7e4eed5abdaefa63996efba35c6dd97592c4251441db7e86eacacfad8"
+    },
+    {
+      "path": "rtl/spectrum/spectrum_display.v",
+      "before_lines": 576,
+      "after_lines": 560,
+      "before_sha256": "80aa4a6d4989d6ebd1a675a17132dca7b0ad9369c8527df83dee8a6e5e6f4b5c",
+      "after_sha256": "94137734c759aa0a5363d3ed38a651b7b546fa8a6345536a7d11eb7dcb42815c"
+    },
+    {
+      "path": "rtl/spectrum/twiddle_rom.v",
+      "before_lines": 32,
+      "after_lines": 20,
+      "before_sha256": "eebbc27e80be7d04ec3190e7820f163f666548b418d30aebe6b4e67740fb0f30",
+      "after_sha256": "be0e9b50b9036aad56b75665222418bc0f82e9f54a7ff35c5ef0e4676b8cfdb6"
+    },
+    {
+      "path": "rtl/storage/fat32_sector_mapper.v",
+      "before_lines": 413,
+      "after_lines": 409,
+      "before_sha256": "b2a6bfb7e41ca57ce4dd1e6235254fa093b4fb585f3074a8f6b5ce2c96a89db7",
+      "after_sha256": "6928ffadf1ca1313ece50b630bcad8cb01352f3a67da6b49724080898d976929"
+    },
+    {
+      "path": "rtl/storage/sd_arbiter.v",
+      "before_lines": 213,
+      "after_lines": 209,
+      "before_sha256": "526eb3e69639476b45a164ffd06825ae779ac5b9092fbb75e9fbe03a26c18c27",
+      "after_sha256": "fc24615c442ba9fcb1fde44fe3b7a255030786823f1e97b66d92347b3d9e7cea"
+    },
+    {
+      "path": "rtl/storage/sector_byte_source.v",
+      "before_lines": 117,
+      "after_lines": 113,
+      "before_sha256": "e36d2535f439ba0ddec3593685ac8ee2678f59ace3b09eaf018feed4fb40d89b",
+      "after_sha256": "c15a29741b276b129a5b0d5c5d35f1861bd0790f8e4b4758a052afc17d22cb72"
+    },
+    {
+      "path": "rtl/top/top_tf_hdmi_audio.v",
+      "before_lines": 3110,
+      "after_lines": 3109,
+      "before_sha256": "298cdd9b8c6d2a6b8b4ac66f9aa30cb51a68fbb0b49b72e41c45b0bfa7ad0d6c",
+      "after_sha256": "479c8b3a0811e87d14b49c7a1b17faacc1a6b842836f2ee41efd7966a42c9750"
+    },
+    {
+      "path": "rtl/video/av_sample_sync.v",
+      "before_lines": 86,
+      "after_lines": 82,
+      "before_sha256": "e3a90051de7b38dc45c315a2e68a77c388aafebf325a2a9e38c7d11def83c039",
+      "after_sha256": "f6a48223db74d78ad031aea464293abfb5d80b10629ed011233e5c8fa325ccb6"
+    },
+    {
+      "path": "rtl/video/codec12_block_decoder_experimental.v",
+      "before_lines": 310,
+      "after_lines": 306,
+      "before_sha256": "7e9e20ed182d94d171bdd37436f7ff3d0fe97d8657194c9b4dc2292c4f9941e5",
+      "after_sha256": "d5c0ce0111243db88cdf40502c53be7b6bb93b14280083d609e008061cf222f9"
+    },
+    {
+      "path": "rtl/video/video_byte_ram.v",
+      "before_lines": 97,
+      "after_lines": 93,
+      "before_sha256": "c69e25a9d56f6dd72343ff306ecc6e478c2373661d6df4f708b19ff31e0bce60",
+      "after_sha256": "c0dfc9cd14a23b59bf0cc021270bd0c7ee6a1305900c143174b13cdb3c42f6ab"
+    },
+    {
+      "path": "rtl/video/video_codec8_raster.v",
+      "before_lines": 100,
+      "after_lines": 96,
+      "before_sha256": "f7e61d992f5e643d971b400f28ed6617b73d902c8b2cc8cbf35bd060f4b9ce80",
+      "after_sha256": "fb0d6e471f6776d2ab10a08b80dbec602ba9275ccc1dcc4a74423ebbe615b23e"
+    },
+    {
+      "path": "rtl/video/video_player.v",
+      "before_lines": 1030,
+      "after_lines": 1025,
+      "before_sha256": "44372b5f928652c3178f7d79ffde16881fd8c3a011f95138e101d5c0e9230fbe",
+      "after_sha256": "5d2b06993ee07be8e52d861958aea27f45e0b00cb6c737b5ce18558a66c8fc04"
+    }
+  ]
+}

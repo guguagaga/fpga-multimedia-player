@@ -1,0 +1,30 @@
+[
+  {
+    "test": "simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2",
+    "passed": true,
+    "data_correct": true,
+    "frames": 300,
+    "latency_cycles": 40000,
+    "intervals": 299,
+    "interval_ms": [
+      33.333344
+    ],
+    "modules_changed_since_test": [
+      "sd_card_sec_read_write.v"
+    ]
+  },
+  {
+    "test": "simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2",
+    "passed": true,
+    "data_correct": true,
+    "frames": 300,
+    "latency_cycles": 50000,
+    "intervals": 299,
+    "interval_ms": [
+      33.333344
+    ],
+    "modules_changed_since_test": [
+      "sd_card_sec_read_write.v"
+    ]
+  }
+]

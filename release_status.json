@@ -1,101 +1,49 @@
 {
-  "release": "v186-720p30-board-confirmed-20261031",
-  "board_confirmed": true,
-  "stable_release": "v186-720p30-board-confirmed-20261031",
-  "seed": 26,
-  "bit_sha256": "016341c80951ce1d6d8fefe87817cf7b6c0ff8a1900fee5fbfc5f66023d612ae",
+  "release": "submission-20261102",
+  "date": "2026-11-02",
+  "source_scope": "112 public FPGA inputs; 19 matching external vendor inputs available in complete Release archive; no user sample media or bitstream in Git source history",
+  "bit_sha256": "41b03883c718e0d52f04e61a9cf0228363c1bdfc3c3e51d023bcb012e3d267f4",
   "video": {
     "width": 1280,
     "height": 720,
-    "fps": 30,
-    "frames": 8136,
-    "seconds": 271.2
+    "fps": 30
   },
   "hdmi_scanout": "1280x720@60Hz",
   "timing": {
-    "Setup WNS": 265.0,
-    "Setup TNS": 0.0,
-    "Num of violated S-EP": 0.0,
-    "Hold WNS": 30.0,
-    "Hold TNS": 0.0,
-    "Num of violated H-EP": 0.0,
-    "#slices": 9391.0,
-    "#RAMs": 79.0,
-    "#DSPs": 22.0
+    "setup_wns_ns": 0.318,
+    "hold_wns_ns": 0.022,
+    "setup_violated_endpoints": 0,
+    "hold_violated_endpoints": 0,
+    "coverage_percent": 96.36
   },
   "resources": {
-    "lut": 18207,
+    "lut": 18365,
     "lut_total": 19600,
+    "slices": 9445,
+    "slices_total": 9800,
+    "registers": 11872,
     "bram9k": 63,
     "bram9k_total": 64,
     "bram32k": 16,
     "bram32k_total": 16,
-    "slices_percent": 95.83
+    "dsp": 22,
+    "dsp_total": 29
   },
-  "gates": {
-    "timing": {
-      "path": "releases/v186/evidence/timing.json",
-      "sha256": "7c13c0fe99dc53c4072b6b40ca2fde097c329790ac0dfafb38a721e1d7d76f00"
-    },
-    "board": {
-      "path": "releases/v186/evidence/board.json",
-      "sha256": "919f91149d772703d0ed6bd7696ffcb69c36b35a258cb3b4864aa4b6b06bf92f"
-    },
-    "image_pixels": {
-      "path": "releases/v186/evidence/image_pixels.json",
-      "sha256": "ec6e2de174e8ba3cf76f41e197787f6ef07bdb7d93817a22dac7da32fa3f1656"
-    },
-    "image_integration": {
-      "path": "releases/v186/evidence/image_integration.json",
-      "sha256": "e740e311073168906b0b37ebc4bf520aa67384c23eadef3c169ec06193aebb3e"
-    },
-    "media_reuse": {
-      "path": "releases/v186/evidence/media_reuse.json",
-      "sha256": "77b27dfeb41920800540b42b8273fd92e66576a0b256cf91424498d55960dfdd"
-    },
-    "full_film": {
-      "path": "releases/v185/evidence/full_film.json",
-      "sha256": "7afd4089870e2b855348056d2f5ce55a4df4a39f279a8dd92c5c8fcd991af0b5"
-    },
-    "source_identity": {
-      "path": "releases/v185/evidence/source_identity.json",
-      "sha256": "e6d2c7a90aca95d76edf3c2b55216854ed1cc5f33fd43b17eb5623f0cd0f7474"
-    },
-    "encoder_pairing": {
-      "path": "releases/v185/evidence/encoder_pairing.json",
-      "sha256": "5c8a74b4bfbe433592b0a23fd87caa02445c9c4964101367e209eeb265bb32e0"
-    },
-    "frame_assembly": {
-      "path": "releases/v185/evidence/frame_assembly.json",
-      "sha256": "0ed24d8e0f996774dae7ab0110e5fc2b618007e8694d1f9e2ad451ff8665f338"
-    },
-    "av_cadence": {
-      "path": "releases/v185/evidence/av_cadence.json",
-      "sha256": "155011b779fd7e28dd08f4bff97c2ef670d82eaa214d86f9ff8a0d49d2cfbc12"
-    },
-    "sustained_peak": {
-      "path": "releases/v185/evidence/sustained_peak.json",
-      "sha256": "4bfa0e86482d3cf2d58bd123d737908f9e5c6380e4ad72a0f9f08f336a566b15"
-    },
-    "source_export": {
-      "path": "releases/v186/evidence/source_export.json",
-      "sha256": "0d4a256446d1a2d4fc8ea15fceb251dad84943e32798d3f93415e9e7be873cf1"
-    }
+  "board_feedback": {
+    "date": "2026-11-02",
+    "bit_sha256": "41b03883c718e0d52f04e61a9cf0228363c1bdfc3c3e51d023bcb012e3d267f4",
+    "video": "用户反馈：当前的视频通路暂时没发现问题",
+    "image_carousel": "用户反馈：轮播切图没问题",
+    "card_test_images": 18,
+    "audio_switching_noise": "尚未获得本轮专项复测反馈",
+    "scope": "视频与轮播反馈，不扩展为所有功能或无限时间的无故障保证"
   },
-  "media": {
-    "sd_ready/M2_VIDEO.VID": {
-      "bytes": 601860608,
-      "sha256": "6499cfe047820a1e8634b9592030a8d1609eaf0d86fb79d8b85328a3a22b6f4e"
-    },
-    "sd_ready/V2_AUDIO.VAU": {
-      "bytes": 6531188,
-      "sha256": "317733fb49a1e39fbd70061ee5f427ec7e332b51b6ce4a7a3d31d49f4e5a58dd"
-    }
+  "evidence": {
+    "timing": "evidence/timing.json",
+    "comment_only_equivalence": "evidence/comment_cleanup.json",
+    "header_only_equivalence": "evidence/header_cleanup.json",
+    "spectrum": "verification/spectrum/spectrum_math_verification.json",
+    "media_samples": "evidence/media_samples_conversion.json"
   },
-  "board_scope": "User confirmed this exact repair candidate: startup, full ~4m31s CS playback, end AV sync and automatic switch. Not an instrumented capture of unique frames; no claim of every card/display or multi-hour soak.",
-  "withdrawn_previous_release": "v185-720p30-board-test-20261030",
-  "pending_enhancements": [
-    "OSD auto-image interval display",
-    "Spectrum improvements: review and resource/timing measurement before integration"
-  ]
+  "note": "Timing evidence refers to the preserved implementation bitstream; comment-only source cleanup does not constitute a new place-and-route run."
 }

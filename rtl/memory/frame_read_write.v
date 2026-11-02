@@ -69,8 +69,7 @@ module frame_read_write #(
   input[ADDR_BITS - 1:0]           write_addr_3,               // data write module write request base address 1, used when write_addr_index = 3
   input[1:0]                       write_addr_index,           // select valid base address from write_addr_0 write_addr_1 write_addr_2 write_addr_3
   input [ADDR_BITS - 1:0] write_len,  // data write module write request data length
-  // [Design note 缩放·写侧补黑]透传"本帧源图高度"给 frame_fifo_write，
-  //   用来把 VFLIP 写起始偏移从 479*640 改成 (H-1)*640（图在上、黑在下）。
+  // 将源图高度传入写控制器，用于翻转首行地址及补黑区域定位。
   input [15:0] write_img_h,
   input write_top_down,
   input write_en,  // data write module write request for one data
@@ -78,7 +77,7 @@ module frame_read_write #(
 
 );
   // Vendor depth-512 FIFO ports export 9-bit occupancy. Explicitly extend
-  // at the controller boundary so the formerly floating bit9 cannot produce
+  // at the controller boundary so the upper occupancy bit cannot produce
   // an X/Z comparison in simulation or depend on synthesis tie-off handling.
   wire [8:0] wrusedw;
   wire [8:0] rdusedw;

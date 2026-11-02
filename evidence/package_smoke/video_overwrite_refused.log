@@ -1,0 +1,5 @@
+usage: encode_video.py [-h] [--audio AUDIO] --ffmpeg FFMPEG
+                       [--ffprobe FFPROBE] --output OUTPUT [--fps {20,30}]
+                       [--start START] [--seconds SECONDS] [--slot {1,2,3,4}]
+                       input
+encode_video.py: error: Output directory already exists; select a new directory

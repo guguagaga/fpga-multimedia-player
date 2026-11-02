@@ -1,6 +1,6 @@
 
 module hdmi_audio_tone_i2s_64fs #(
-  parameter [31:0] PHASE_INC = 32'd39370534,  // 兼容旧顶层，实际本版内部不用它
+  parameter [31:0] PHASE_INC = 32'd39370534,  // 接口保留参数，模块内部不使用
   parameter signed [23:0] AMP = 24'sd2000000,
   parameter integer NOTE_HOLD_FRAMES = 24000  // 每个音持续 0.5s @ 48kHz
 ) (

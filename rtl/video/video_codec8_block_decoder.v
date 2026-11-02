@@ -39,7 +39,7 @@ module video_codec8_block_decoder #(
        (state == S_PAL_HI) || (state == S_RAW_LO) || (state == S_RAW_HI) || (state == S_RUN_COUNT));
 
   // Protocol indices are consumed LSB first. A fixed tap avoids the
-  // two-dimensional variable-index mux from the original idx_mem.
+  // two-dimensional variable-index mux on the pixel path.
   // Register index operations locally. This cuts the long playback/FIFO
   // control path before the 64-bit shift register's clock enable.
   reg idx_load_pending, idx_step_pending;
@@ -58,7 +58,7 @@ module video_codec8_block_decoder #(
     if (idx_load_pending) idx_shift <= {idx_load_data, idx_shift[63:16]};
     else if (idx_step_pending) idx_shift <= {1'b0, idx_shift[63:1]};
   end
-  // Forward the pending operation so observable pixel timing is unchanged.
+  // Forward the pending operation to align index data with pixel emission.
   wire pal_bit = quad_mode ? pix_idx[2] :
       idx_load_pending ? idx_shift[16] : idx_step_pending ? idx_shift[1] : idx_shift[0];
   wire [15:0] pal_pix = pal_bit ? pal1 : pal0;

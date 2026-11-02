@@ -1,19 +1,6 @@
-//===================================================================
-// OSD text overlay (osd_core) -- 1-cycle pipelined version
-//===================================================================
-// Overlays a short text string onto the video stream. The video is a
-// per-pixel scan, each pixel has coordinate (x, y). This module decides
-// whether the current pixel falls inside the text box:
-//     inside text 且  font bit set  -> text color
-//     otherwise                     -> original image color
-//
-// char_rom is synchronous-read (BRAM), so the font row arrives 1 cycle
-// after the address. To keep everything aligned, de/vs/rgb are also
-// delayed 1 cycle. osd_r/g/b are then COMBINATIONAL (based on those
-// 1-cycle-delayed signals), so they stay aligned with de_out/vs_out.
-//
-// Font: 8x16 dots, 16 bytes per char, bit7 = leftmost column.
-//===================================================================
+// Overlay 8x16 text using a synchronous font ROM.
+// Delay RGB, DE and VS by one clock to align them with the returned font row.
+// Set font bits select the text color; other pixels retain the input color.
 module osd_core #(
   parameter       X0     = 0,      // text top-left x
   parameter       Y0     = 0,      // text top-left y

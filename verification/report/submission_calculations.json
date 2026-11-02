@@ -1,0 +1,63 @@
+{
+  "raw_bytes_per_second": 55296000,
+  "video_mean_bytes_per_second": 2219247.44100295,
+  "lossless_reduction_percent": 36.95191854044973,
+  "spi_bytes_per_second": 2840909.090909091,
+  "max_frame_pure_spi_ms": 28.77424,
+  "peak_second_payload_fraction": 0.861130336,
+  "frame_interval_ms": 33.333344,
+  "pcm_reserve_ms": {
+    "4096": 21.333333333333332,
+    "8192": 42.666666666666664
+  },
+  "fft": {
+    "window_ms": 5.333333333333333,
+    "bin_hz": 187.5,
+    "enbw_hz": 281.25,
+    "butterflies": 1024,
+    "memory_bits": 16384,
+    "computation_us": 75.88612368024133
+  },
+  "magnitude_max_relative_overestimate": 0.1180339887498949,
+  "resources": {
+    "LUT": [
+      18365,
+      19600
+    ],
+    "registers": [
+      11872,
+      19600
+    ],
+    "Slice": [
+      9445,
+      9800
+    ],
+    "BRAM9K": [
+      63,
+      64
+    ],
+    "BRAM32K": [
+      16,
+      16
+    ],
+    "DSP": [
+      22,
+      29
+    ],
+    "PLL": [
+      3,
+      4
+    ]
+  },
+  "utilization_percent": {
+    "LUT": 93.69897959183673,
+    "registers": 60.57142857142857,
+    "Slice": 96.37755102040816,
+    "BRAM9K": 98.4375,
+    "BRAM32K": 100.0,
+    "DSP": 75.86206896551724,
+    "PLL": 75.0
+  },
+  "passed": true,
+  "scope": "Arithmetic identities and report values; does not replace RTL or board tests."
+}

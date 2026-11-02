@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Debounced button gestures: tap, double tap, hold and repeated seek.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // Debounced active-low board buttons. The top assigns business functions:
 // A/KEY2: tap = pause, double = auto-next toggle, hold = repeated seek.
@@ -11,10 +7,7 @@
 module button_ctrl #(
   parameter [20:0] DEBOUNCE      = 21'd2_000_000,   // 20ms @100MHz
   parameter [25:0] LONG_PRESS    = 26'd40_000_000,  // 400ms: normal taps must not seek
-  // [Design note key4-split]B 键独立长按门限 = 400ms（24 位装不下 ⇒ 26 位）：
-  //   原因：KEY4 新分工 = 短按 轮播开关 / 长按 切歌。若沿用 A 键 80ms 门限，
-  //   人手"正常按一下"（150~250ms）会被判成长按 ⇒ 轮播几乎按不出来 。
-  // Both A and B use a 400ms hold threshold by default.
+  // B 键使用独立长按门限，区分短按轮播与长按切歌。
   parameter [25:0] LONG_PRESS_B  = 26'd40_000_000,  // 400ms
   parameter [23:0] REPEAT_PERIOD = 24'd10_000_000,  // 100ms 快进一步
   parameter [25:0] DBL_WINDOW    = 26'd30_000_000   // 300ms between releases
@@ -32,9 +25,7 @@ module button_ctrl #(
   output reg  long_a,      // A 长按中（电平）
   output reg  long_b,      // B 长按中（电平）
   output reg  ff_tick,     // 快进一步（1 拍）
-  // [Design note key4-split]B 键"长按触发"的 1 拍脉冲（仿 A 键 ff_tick 的首次触发）：
-  //   top 用它做"KEY4 长按 = 切歌"。不能把 long_b（电平）直接喂 track_ctrl.next_req ——
-  //   那会在按住期间每拍推一次索引（滑索引隐患，2026-10-11 前已记录在案）。
+  // B 键首次到达长按门限时仅输出一拍事件，避免按住期间连续推进曲目。
   output reg  long_b_tick
 );
 
@@ -108,7 +99,7 @@ module button_ctrl #(
     end
   end
 
-  reg [25:0] b_hold;  // [Design note] 24→26 位（LONG_PRESS_B=400ms 超 24 位量程）
+  reg [25:0] b_hold;  //  26 位计数覆盖 LONG_PRESS_B 长按门限
   reg b_long;
 
   always @(posedge clk or negedge rst_n) begin
@@ -119,7 +110,7 @@ module button_ctrl #(
       b_hold <= 26'd0;
       b_long <= 1'b0;
     end else if (!b_long) begin
-      if (b_hold >= LONG_PRESS_B) b_long <= 1'b1;  // [Design note] B 键 400ms
+      if (b_hold >= LONG_PRESS_B) b_long <= 1'b1;  //  B 键 400ms
       else b_hold <= b_hold + 26'd1;
     end
   end
@@ -209,11 +200,7 @@ module button_ctrl #(
       if (!level_a && !a_long && (a_hold == LONG_PRESS - 26'd1)) ff_tick <= 1'b1;
       if (!level_a && a_long && (a_rep >= REPEAT_PERIOD)) ff_tick <= 1'b1;
 
-      // [Design note key4-split]B 键长按触发：严格 1 拍脉冲（门限 = LONG_PRESS_B 400ms）。
-      //   必须用精确等值（==LONG_PRESS_B-1），不能用 ff_tick 那样的 ">= LONG_PRESS-1"：
-      //   后者会让脉冲宽 2 拍，而 track_ctrl.next_req 是【电平式消费】（无一次性门控），
-      //   2 拍高电平会连推 2 次索引 = 一次长按切 2 首 。
-      //   A and B now both use exact threshold comparisons (one clock).
+      // 在门限精确相等时输出一次长按事件，避免连续两拍触发。
       if (!level_b && !b_long && (b_hold == LONG_PRESS_B - 26'd1)) long_b_tick <= 1'b1;
     end
   end

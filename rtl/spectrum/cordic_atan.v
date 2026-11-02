@@ -1,21 +1,6 @@
-//===================================================================
-// cordic_atan : CORDIC vector-mode arctangent -> spectrum angle bin
-//===================================================================
-// Computes the angle of a screen-space vector (dx, dy) and maps it to
-// a 0..47 bin (48 bins evenly spaced around a full circle).
-//
-// Screen convention: y grows DOWNWARD (screen top = y0).
-//   angle_math = atan2(dy, dx), 0 = right, + = downward (screen).
-// We remap so bin 0 sits at the TOP (12 o'clock) and increases
-// CLOCKWISE (top -> right -> bottom -> left), the classic audio-
-// spectrum layout.
-//
-// Angle format: Q16 unsigned, full circle = 65536.
-//   bin = clock_angle * 48 / 65536  (48 bins)
-//
-// Pipeline latency: 1 pre-process + STAGES CORDIC stages cycles.
-//   dout_valid is din_valid delayed by that same latency.
-//===================================================================
+// Pipelined CORDIC maps screen-space vectors to 48 clockwise angle bins.
+// Bin 0 points up; screen Y increases downward. Internal angles use Q16 turns.
+// Latency is one preprocessing cycle plus STAGES; dout_valid follows the pipeline.
 module cordic_atan #(
   parameter STAGES = 8
 ) (

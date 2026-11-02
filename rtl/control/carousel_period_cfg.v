@@ -1,24 +1,6 @@
-//===================================================================
-// carousel_period_cfg : auto carousel period preset (16 steps)
-//===================================================================
-// A 4 bit DIP switch (exp_sw[3:0], active LOW) selects the auto carousel
-// period. The switch is decoded to a logical code 0..15 first
-// (0 = every switch OFF) and then mapped to a bounded period in seconds:
-//
-//   code :  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
-//   sec  :  2   3   5   8  10  15  20  30  45  60  90 120 180 240 300 600
-//
-// The table is strictly increasing, has no 0 entry and fits in 10 bits
-// (600 < 1024), so the saturating second counter downstream can never
-// wrap and never sees a zero or negative period.
-//
-// A new preset is NOT taken the moment the switch changes. It is taken
-// at `boundary`, which the top level drives with
-//     (!auto_on) || image load finished
-// so a period change can never disturb an in flight image load or a
-// pending prefetch, and the carousel keeps its current deadline until
-// the picture on screen has finished loading.
-//===================================================================
+// Map the decoded switch selector to one of 16 carousel periods (2..600 s).
+// preset_sec follows the selector; period_sec and preset_code latch at boundary.
+// The caller supplies boundary so the active interval changes at a safe point.
 module carousel_period_cfg (
   input            clk,
   input            rst,          // active HIGH
@@ -72,4 +54,48 @@ module carousel_period_cfg (
     end
   end
 
+endmodule
+
+// Coherent, latest-value status mailbox. Both domains share active-high rst.
+// The source bundle stays unchanged until the destination acknowledges it.
+// Changes while busy are coalesced; the final effective value is delivered.
+module carousel_status_cdc (
+  input            src_clk,
+  input            dst_clk,
+  input            rst,
+  input      [4:0]  src_status,
+  output reg [4:0]  dst_status
+);
+  reg [4:0] bundle;
+  reg request_toggle, ack_toggle;
+  (* ASYNC_REG = "TRUE" *) reg [1:0] ack_sync;
+  (* ASYNC_REG = "TRUE" *) reg [2:0] request_sync;
+
+  always @(posedge src_clk or posedge rst) begin
+    if (rst) begin
+      bundle <= 5'd0;
+      request_toggle <= 1'b0;
+      ack_sync <= 2'b00;
+    end else begin
+      ack_sync <= {ack_sync[0], ack_toggle};
+      if ((ack_sync[1] == request_toggle) && (src_status != bundle)) begin
+        bundle <= src_status;
+        request_toggle <= ~request_toggle;
+      end
+    end
+  end
+
+  always @(posedge dst_clk or posedge rst) begin
+    if (rst) begin
+      request_sync <= 3'b000;
+      ack_toggle <= 1'b0;
+      dst_status <= 5'd0;
+    end else begin
+      request_sync <= {request_sync[1:0], request_toggle};
+      if (request_sync[2] != ack_toggle) begin
+        dst_status <= bundle;
+        ack_toggle <= request_sync[2];
+      end
+    end
+  end
 endmodule

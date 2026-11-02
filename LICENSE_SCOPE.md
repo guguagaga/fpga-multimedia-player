@@ -1,3 +1,9 @@
-# Source and license scope
+# 源码与原厂依赖许可范围
 
-This is a public source presentation of the team project, not a blanket license grant for every included file. Existing notices remain in force. Vendor-encrypted and vendor-generated IP are not redistributed; import matching files locally under your own authorization. Third-party algorithm references retain the licenses in docs/licenses. The team should confirm authorship and ownership before adding a uniform project-wide software license.
+本目录是竞赛提交工程的完整构建输入归档，包括团队维护的 RTL、PC 编码工具、工程配置，以及从用户合法持有工程保留的原厂模块。所有 131 项输入均由 project_manifest.json 记录。
+
+`vendor_original` 保存 19 项原厂生成或受保护的构建依赖，按原始目录与字节内容保存，保留原版权、许可和加密内容。它们属于原厂 IP，不是团队原创。打包不改变原有许可，也不授予额外的修改、解密、再许可或公开分发权利。
+
+第三方算法和工具保留各自许可证：ADPCM-XQ 的 C 源码与 BSD 许可位于 host/third_party/adpcm-xq；其他引用资料许可位于 docs/licenses。文件内已有权利声明继续生效，不使用统一项目许可证覆盖原有条款。
+
+此归档用于本次竞赛工程提交和接收方复现。公开 GitHub 发布应采用相应公开源码范围，并分别遵守原厂与第三方许可。

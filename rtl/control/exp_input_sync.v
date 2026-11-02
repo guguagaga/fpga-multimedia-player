@@ -1,35 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Expansion-board input synchronization and debounce.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-//===================================================================
-// exp_input_sync : EDA expansion board (V3.0) input conditioner
-//===================================================================
-// 13 asynchronous inputs arrive on the 40 pin header J1:
-//   exp_key[4:0] : 5 push buttons,  PULLUP on the board, active LOW
-//   exp_sw [7:0] : 8 DIP switches,  PULLUP on the board, active LOW
-//
-// Every input goes through a 4 stage delay line clocked by ONE shared
-// sampling tick (SAMPLES x DEBOUNCE_MS/SAMPLES = DEBOUNCE_MS in total):
-//   * stage 1 is the sampling synchronizer for the asynchronous pin
-//   * stages 2..4 finish the synchronization and reject any level that
-//     does not hold for the whole window (contact bounce)
-//   * keys   : a single clock wide press pulse on the 1 -> 0 edge of the
-//              debounced level, so a held key never auto repeats
-//   * switch : the debounced logical level, 1 = switch ON
-//
-// Area is deliberately minimal: this design is at ~94 % slices already, so
-//   - one shared tick divider instead of 13 counters
-//   - 4 samples per input (52 flops total) instead of a per input counter
-//   - the 4 bit AND/NOR decoders are one LUT each
-// The debounced LEVEL is also exported (key_down / sw_level) so consumers
-// that already have their own 20 ms debouncer can use the level directly
-// and no extra pulse stretcher is needed at the top level.
-//
-// Nothing here depends on the extension board being plugged in: with the
-// header open the on board pull ups keep every input at 1, which decodes
-// as "no key pressed" and "every switch OFF".
-//===================================================================
 module exp_input_sync #(
   // Frequency of `clk` in Hz. Used only to derive the sampling tick.
   parameter integer CLK_FREQ_HZ = 100_000_000,

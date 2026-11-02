@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "continuous_bound_proof": "Polynomial identities, t in [0,1]",
+  "integer_floor_bound_cases": 32769,
+  "maximum_half_truncation_error": 0.5,
+  "decay_initial_states": 249,
+  "alpha_blend_combinations": 65536,
+  "min_tilted_magnitude": 32,
+  "fft_clock_mhz": 74.256,
+  "compute_time_us": 75.88612368024133,
+  "compute_to_window_percent": 1.4228648190045248,
+  "source": "verify_derived_formulas.py",
+  "scope": "Report identities and integer bounds; does not replace full hardware verification"
+}

@@ -1,0 +1,171 @@
+{
+  "date": "2026-11-02",
+  "scope": "Read-only source and evidence audit; not a new RTL simulation run",
+  "peak_tests": [
+    {
+      "result": "D:\\codexworks\\framerate_v185_20261029\\delivery_v185_720p30_cache64_seed26_20261030\\evidence\\artifacts\\simulation_verilator_peak300_40000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\result.json",
+      "sha256": "bf7746bb902576823f188b0e8cb64e43adf75469eca4b7c6f749d61fb1e43cde",
+      "frames": 300,
+      "intervals": 299,
+      "interval_cycles": 3030304,
+      "cycle_ns": 11,
+      "interval_ms": 33.333344,
+      "initial_data_latency_cycles": 40000,
+      "initial_data_latency_ms": 0.44,
+      "matched_source_files": [
+        "av_sample_sync.v",
+        "video_byte_ram.v",
+        "video_player.v",
+        "video_codec8_block_decoder.v",
+        "video_codec8_raster.v",
+        "rgb565_pair_pack.v",
+        "sd_arbiter.v",
+        "frame_fifo_write.v",
+        "fat32_sector_mapper.v",
+        "compressed_audio_reader.v",
+        "sector_byte_source.v",
+        "ima_stream.v",
+        "qoa_stream.v",
+        "codec12_block_decoder_experimental.v",
+        "gradient_block_experimental.v",
+        "context_huffman_decoder.v",
+        "codec12_lossless_restore.v",
+        "codec_byte_queue.v",
+        "residual_metadata.mem",
+        "residual_symbols.mem",
+        "residual_tree.mem"
+      ],
+      "changed_source_files": [
+        "sd_card_sec_read_write.v"
+      ]
+    },
+    {
+      "result": "D:\\codexworks\\framerate_v185_20261029\\delivery_v185_720p30_cache64_seed26_20261030\\evidence\\artifacts\\simulation_verilator_peak300_50000_cache64full_defer1400000_residual_hybrid64_lutqoi_fixture_r2\\result.json",
+      "sha256": "e4fbcaa11f7c70339f0c6d229b7f09aeceaff9b604de7f07e2a4d2e484387041",
+      "frames": 300,
+      "intervals": 299,
+      "interval_cycles": 3030304,
+      "cycle_ns": 11,
+      "interval_ms": 33.333344,
+      "initial_data_latency_cycles": 50000,
+      "initial_data_latency_ms": 0.55,
+      "matched_source_files": [
+        "av_sample_sync.v",
+        "video_byte_ram.v",
+        "video_player.v",
+        "video_codec8_block_decoder.v",
+        "video_codec8_raster.v",
+        "rgb565_pair_pack.v",
+        "sd_arbiter.v",
+        "frame_fifo_write.v",
+        "fat32_sector_mapper.v",
+        "compressed_audio_reader.v",
+        "sector_byte_source.v",
+        "ima_stream.v",
+        "qoa_stream.v",
+        "codec12_block_decoder_experimental.v",
+        "gradient_block_experimental.v",
+        "context_huffman_decoder.v",
+        "codec12_lossless_restore.v",
+        "codec_byte_queue.v",
+        "residual_metadata.mem",
+        "residual_symbols.mem",
+        "residual_tree.mem"
+      ],
+      "changed_source_files": [
+        "sd_card_sec_read_write.v"
+      ]
+    }
+  ],
+  "inheritance": {
+    "changed_module": "sd_card_sec_read_write.v",
+    "change": "Per-request burst_blocks selects 16 sectors for multi_paced/image requests, 64 for unpaced/video requests. Cache range, read block count, and retained cache count use this selection.",
+    "top_connection": "fat32_sector_mapper.pace = img_sd_grant; video requests are unpaced.",
+    "exact_equivalence_new_run": false
+  },
+  "calculations": {
+    "nominal_core_hz": "90909090.90909090909090909091",
+    "spi_payload_bytes_s": "2840909.090909090909090909091",
+    "raw_rgb565_bytes_s": "55296000",
+    "video_mean_bytes_s": "2219247.441002949852507374631",
+    "video_mean_bytes_frame": "73974.91470009832841691248771",
+    "video_mean_bits_pixel": "0.6421433567716868786190320114",
+    "video_raw_compression_ratio": "24.91655458438196745406729253",
+    "lossless_stage_reduction_percent": "36.95191854044973877729937518",
+    "max_frame_pure_payload_ms": "28.77424000000000000000000000",
+    "peak_second_video_bytes": 2446393,
+    "peak_second_pure_payload_ms": "861.1303360000000000000000000",
+    "video_mean_percent_spi_payload_capacity": "78.11750992330383480825958701",
+    "peak_second_percent_spi_payload_capacity": "86.11303360000000000000000000",
+    "pcm_stereo_bytes_s": 192000,
+    "pcm_reserve4096_ms": "21.33333333333333333333333333",
+    "pcm_capacity8192_ms": "42.66666666666666666666666667",
+    "image_burst16_test_ms": "6.184673",
+    "frame_rgb565_bytes": 1843200,
+    "frame_rgb565_bits": 14745600,
+    "bram_nominal_bits": 1114112,
+    "fft_butterflies": 1024,
+    "fft_butterfly_cycles": 5120
+  },
+  "resources": [
+    {
+      "name": "Slice",
+      "used": 9445,
+      "capacity": 9800,
+      "remaining": 355,
+      "percent": 96.3776
+    },
+    {
+      "name": "LUT",
+      "used": 18365,
+      "capacity": 19600,
+      "remaining": 1235,
+      "percent": 93.699
+    },
+    {
+      "name": "register",
+      "used": 11872,
+      "capacity": 19600,
+      "remaining": 7728,
+      "percent": 60.5714
+    },
+    {
+      "name": "BRAM9K",
+      "used": 63,
+      "capacity": 64,
+      "remaining": 1,
+      "percent": 98.4375
+    },
+    {
+      "name": "BRAM32K",
+      "used": 16,
+      "capacity": 16,
+      "remaining": 0,
+      "percent": 100.0
+    },
+    {
+      "name": "DSP",
+      "used": 22,
+      "capacity": 29,
+      "remaining": 7,
+      "percent": 75.8621
+    },
+    {
+      "name": "PLL",
+      "used": 3,
+      "capacity": 4,
+      "remaining": 1,
+      "percent": 75.0
+    }
+  ],
+  "latest_board_feedback": {
+    "video": "当前的视频通路暂时没发现问题",
+    "carousel": "轮播切图没问题",
+    "audio_noise": "尚未单独收到修复确认"
+  },
+  "limits": [
+    "300-frame bench contains no image client; SD command/data latency and SDRAM consumption are models.",
+    "Video decoding, queue, FAT mapping and arbiter hashes match test snapshot; top-level whole-system was not included in this bench.",
+    "Resource allocation below explains current architecture; no claim of reconstructed historical planning or unmeasured per-module physical utilization."
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "passed": true,
+  "scope": "Actual controller and preset logic, modeled peripherals, accelerated 2000cycles/second, all16 presets with mid-prefetch changes and error recovery"
+}

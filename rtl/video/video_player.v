@@ -1,46 +1,22 @@
-// -----------------------------------------------------------------------------
-// Module purpose: FPGV parser, video decode control and frame-buffer write scheduling.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
-// FPGV video controller with file validation, byte buffering and frame writes.
-// Top-level v167 selects720P block-codec playback and disables legacy RLE modes.
-// The default parameter values remain reusable640x480 settings; the top overrides them.
-// The byte FIFO must retain space for one in-flight512-byte sector.
-// Audio-master timing grants frames from consumed-sample progress; presentation
-// is synchronized to the display boundary. Triple buffering separates readers/writers.
-// SPI upper-bound throughput is SD_CORE_HZ/32 bytes/s at divider0, before overhead.
-// See docs/ARCHITECTURE.md and encoder/README.md for profiles and file layout.
+// Parse FPGV data and schedule decoded pixels into owned frame-buffer banks.
+// Byte-FIFO admission reserves space for one complete in-flight SD sector.
+// Audio consumption grants presentation credit; scanout feedback releases banks.
+// Geometry and FIFO capacity are selected by the integration parameters.
 module video_player #(
   parameter PLAYLIST_SUPPORT = 0,
-  // Default keeps historical RLE/COPY_UP formats available to other projects.
-  // Top selects zero for the720P Codec8/9/10/12 block-codec implementation.
+  // RLE/COPY_UP support is parameterized; the integration selects block modes.
   parameter                LEGACY_CODECS = 1,
   parameter                AV_SYNC       = 0,
   parameter                AUDIO_MASTER  = 0,
   parameter integer        ORPHAN_CYCLES = 60000,
   parameter         [31:0] FRAME_PIXELS  = 32'd307200,  // 640*480, fixed by the write side
   parameter         [15:0] FRAME_H       = 16'd480,
-  // ---- byte FIFO -------------------------------------------------------
-  // 2026-10-17 codec 3 FIX: 原来 128 深 / BF_HI=64，而一个在途扇区有 512 字节
-  //   ⇒ 一份扇区到齐之前 FIFO 必然被顶到满，只要解码器在这段时间里停一下
-  //   就有字节被丢（push 有 `!bf_full` 保护，满了直接不要）。
-  //   codec 1 从不停（每个 token 之间只隔 1~2 拍，排空率 ≥ 到达率），所以这个
-  //   隐患一直没暴露；codec 3 每行要复放 640 拍、完全不取字节 ⇒ 可能溢出。
-  //   现在深度放到 BF_HI + 512 = 576 以上：一个在途扇区可以整份吞下，
-  //   解码器短暂停顿不再丢字节。1024 x 8 bit = 8192 bit，落 1 个 BRAM9k。
+  // Reserve at least one 512-byte sector above the request watermark so
+  // accepted data still fits when decoding is stalled.
   parameter integer        BF_AW         = 10,          // 1024 byte FIFO
-  // [Design note 带宽修复]门限必须接近 FIFO 深度，不能是"快空了才要"。
-  //
-  //   原来 BF_HI=64：一个扇区到齐后水位约 576，必须等它掉到 64 才再发请求，
-  //   中间约 102 us 里 卡是空闲的、没有任何读请求在途。SD 卡每次从空闲
-  //   恢复都要付一次访问延迟（常见 200~400 us），于是每扇区实际耗时
-  //   164(数据) + 102(空等) + ~290(卡恢复) ≈ 554 us ⇒ 只有 0.92 MB/s，
-  //   实测视频以 6 fps 播放、7:02 的内容播了 23:14（用户实测数字）。
-  //
-  //   改成 480 后：请求在上一笔一结束就发（因为水位还没掉到门限），
-  //   卡始终连续读，有效速率回到 25MHz SPI 的上限附近。
-  //   留 32 字节余量：480 + 512(一个扇区) = 992 < 1024，不会顶满丢字节。
+  // Request the next sector while enough space remains for its full payload.
+  // The integration overrides this watermark together with FIFO depth.
   parameter         [15:0] BF_HI         = 16'd480      // request next sector below this
 ) (
   input wire clk,
@@ -56,18 +32,8 @@ module video_player #(
   input wire pause,  // hold decoded video and its timeline
   input wire [31:0] start_sector,  // first sector of the .VID file
   input wire [1:0] img_disp_buf,  // buffer currently on screen (image path)
-  // [Design note 视频]帧率上限靠编码器做，不在这里做。
-  //   实测过两种节流方式：
-  //     1) 这里等一个 vsync（需要把 video_clk 的 vsync 同步过来）：能锁 60fps，
-  //        但停下来等的时候，上一个扇区的 512 字节还在往 128 深的字节 FIFO
-  //        里灌 ⇒ 溢出丢字节 ⇒ 下一帧花掉（仿真已复现）。
-  //        要做对得把 FIFO 加到 ~600 深（1 个 BRAM），而本设计 slices 已 96%，
-  //        不值得为一个纯显示效果再花面积。
-  //     2) 编码器侧用 0xC0 填充字节把每帧字节数补到"目标 fps"对应值：
-  //        零硬件代价、帧率精确、解码器天然跳过填充（0xC0..0xFE 是保留
-  //        码，只消耗 3 个时钟/字节，而同样的字节要 32 个时钟才到）。
-  //   ⇒ 采用 (2)，见 tools/vid_encode.py 的 --pace。
-  // ---- SD sector read (to sd_arbiter) ----
+  // SD sector interface. Presentation timing is handled independently of
+  // compressed frame size; pending reads retain their transaction ownership.
   output reg sd_sec_read,
   output reg [31:0] sd_sec_read_addr,
   input wire [7:0] sd_sec_read_data,
@@ -92,15 +58,9 @@ module video_player #(
   output reg active,  // 1 = video owns the write path and the display
   output reg disp_ok,  // 1 = at least one video frame is on screen
   output wire [3:0] dbg_state
-  // [Design note 面积回收]原有两个调试计数器 dbg_frames(16FF) / dbg_bytes(32FF)
-  //   在顶层是悬空 wire（只连不用）⇒ 纯浪费 48 个 FF + 两个加法器。
-  //   删掉它们是为了把 slices 从 96.08% 压回去：加完视频音轨后布局变挤，
-  //   WNS 从 −699ps 掉到 −1627ps，而最差路径全落在 wav_reader 的 WAV 头解析上
-  //   —— 那正是这次要用的音频通路，不能留着这个风险。
 );
-  // Local register isolates the top-level AV-start fanout from the credit
-  // arithmetic. Start/stop eligibility follows by one 100MHz clock (10ns);
-  // pause and displayed-frame sample accounting retain their direct gates.
+  // Register AV-start locally to limit control fanout. Start/stop eligibility
+  // follows by one input clock; pause and displayed-frame accounting remain direct.
   reg timeline_run_q;
   always @(posedge clk or posedge rst) begin
     if (rst) timeline_run_q <= 0;
@@ -132,7 +92,7 @@ module video_player #(
   localparam [3:0] V_DRAIN = 4'd5;  // frame full, swallow tokens until END
   // Presentation pacing is independent of compressed frame size.
   // 74.25MHz / (1650*750) = 60Hz scanout; credit per refresh is
-  // fps*1000 against a 60000-unit frame. Audio-paced credit is unchanged.
+  // fps*1000 against a 60000-unit frame; audio-master pacing uses sample credit.
   localparam [19:0] ACC_ONE = 20'd60000;
   localparam [15:0] FPS_INC = 16'd15000;  // legacy/default 15 fps
   reg [15:0] fps_inc;  // header selects 15/20/25/30 fps without changing clocks
@@ -286,12 +246,9 @@ module video_player #(
   wire emit_done = (emit_n == 8'd0) && !arm && (up_left == 0);
   wire [6:0] tok_cnt = {1'b0, bf_q[5:0]} + 7'd1;
 
-  // 565 / 332 -> 24-bit RGB (MSB replication, matching tools/vid_refhash.py)
-  //   565: R8={R5,R5[4:2]}  G8={G6,G6[5:4]}  B8={B5,B5[4:2]}
-  //   332: R8={R3,R3,R3[2:1]} G8 同理, B8={B2 x4}
-  //   ⚠ 332 的复制必须是高位（R3[2:1] = emit_val[7:6]），
-  //     写成低位（[6:5]）会差 1 个 LSB —— 这个 bug 真的发生过：
-  //     TB 的参考哈希对不上，逐像素 diff 抓到 ref=0xffdb55 / rtl=0xffda55。
+  // Expand RGB565/RGB332 channels by repeating their most significant bits.
+  // RGB565: R8={R5,R5[4:2]}, G8={G6,G6[5:4]}, B8={B5,B5[4:2]}.
+  // RGB332: R8={R3,R3,R3[2:1]}, G8 uses the same rule, B8 repeats B2.
   wire [7:0] v_r5 = {emit_val[15:11], emit_val[15:13]};
   wire [7:0] v_g6 = {emit_val[10:5], emit_val[10:9]};
   wire [7:0] v_b5 = {emit_val[4:0], emit_val[4:2]};
@@ -299,11 +256,8 @@ module video_player #(
   wire [7:0] v_g3 = {emit_val[4:2], emit_val[4:2], emit_val[4:3]};
   wire [7:0] v_b2 = {emit_val[1:0], emit_val[1:0], emit_val[1:0], emit_val[1:0]};
 
-  // Codec 5 adds COPY_UP to RGB332; codec 6 uses the same token format
-  // with RGB565 payloads, preserving full colour in repeated rows.
-  // The encoder caps these at 12 pixels: at two clocks per pixel this
-  // remains faster than 25 MHz SPI, including token decoding overhead.
-  // A synchronous row RAM holds the previous row at each column.
+  // COPY_UP reads the previous scanline from synchronous RAM. The token
+  // format selects RGB332 or RGB565 payload interpretation.
   wire normal_fire = LEGACY_CODECS && play && !pause && !arm && (emit_n != 0) && (up_left == 0) &&
                        !frame_full && !write_almost_full;
   wire copy_fire = LEGACY_CODECS && play && !pause && (up_left != 0) && up_phase &&
@@ -607,7 +561,7 @@ module video_player #(
     end else begin
       // ---- defaults ----
       pix_en <= 1'b0;
-      // Release the external level request at the original handshake
+      // Release the external level request at the completion handshake
       // edge. Keep inflight until the delayed response is consumed,
       // so no new request can bypass the last pipelined byte.
       if (sd_sec_read_end) sd_sec_read <= 1'b0;
@@ -698,14 +652,8 @@ module video_player #(
         bf_wp   <= {(BF_AW+1){1'b0}};
         bf_rp   <= {(BF_AW+1){1'b0}};
       end else begin
-        // ---- [Design note 换帧节流]vsync 累加（必须留在本 always 块内）----
-        //   ⚠ 陷阱：原来的写法 `vs_acc + FPS_INC >= 6'd60` 在 vs_acc=54 时
-        //     54+18=72，而 vs_acc 只有 6 位 => 回绕成 8 => 判断为假，
-        //     累加器永远不触发（板上实测 4~5 fps，正是这个 bug）。
-        //   改成 `vs_acc >= 60-FPS_INC`：比较在 6 位内恒成立，而
-        //     `vs_acc + FPS_INC - 60` 因为结果一定 <60，按模运算仍是正确值。
-        // Retire and accrue credit together; neither event may overwrite the other.
-        // Debit first also leaves room for the tick at saturation.
+        // Retire and accrue presentation credit in one owning process so neither
+        // event overwrites the other. Debit first leaves room at saturation.
         if (frame_commit) begin
           deficit <= deficit - (pacing_tick ? (ACC_ONE - pacing_credit) : ACC_ONE);
         end else if (AV_SYNC && !timeline_run_q) begin
@@ -775,10 +723,7 @@ module video_player #(
                                         (sd_sec_read_data_q == 8'd7);
                   codec_approx <= (sd_sec_read_data_q == 8'd7);
                   codec_block <= (sd_sec_read_data_q == 8'd8) || (sd_sec_read_data_q == 8'd9) || ((sd_sec_read_data_q == 8'd10) || ((sd_sec_read_data_q == 8'd12) || (sd_sec_read_data_q == 8'd14)));
-                  // codec 3 = 320x240 -> 2x2 (rows and columns doubled)
-                  // codec 4 = 320x480 -> 2x1 (columns only; full vertical
-                  //           detail, half horizontal.  Costs ~4 LUT more
-                  //           than codec 3 because it simply does NOT set
+                  // Codec 3 expands 320x240 in both axes; codec 4 expands 320x480 horizontally.
                   codec_bad <= !((sd_sec_read_data_q == 8'd8) || (sd_sec_read_data_q == 8'd9) ||
                                      ((sd_sec_read_data_q == 8'd10) || ((sd_sec_read_data_q == 8'd12) || (sd_sec_read_data_q == 8'd14))) || (LEGACY_CODECS &&
                                      ((sd_sec_read_data_q == 8'd1) || (sd_sec_read_data_q == 8'd2) ||
@@ -792,8 +737,8 @@ module video_player #(
                 hdr_magic <= hdr_magic && (sd_sec_read_data_q == ((FRAME_PIXELS / FRAME_H) >> 8));
                 5'd8: hdr_magic <= hdr_magic && (sd_sec_read_data_q == (FRAME_H & 255));
                 5'd9: hdr_magic <= hdr_magic && (sd_sec_read_data_q == (FRAME_H >> 8));
-                // Zero is accepted for historical files/tests with an unset FPS field.
-                // Other unsupported rates fail header validation explicitly.
+                // A zero FPS field uses the default rate. Unsupported nonzero rates fail
+                // header validation explicitly.
                 5'd10: begin
                   case (sd_sec_read_data_q)
                     8'd0, 8'd15: begin

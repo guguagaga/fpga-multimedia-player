@@ -1,0 +1,50 @@
+Reading pref.tcl
+
+# 2020.1
+
+# do run.do
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 01:17:43 on Nov 01,2026
+# vlog D:/codexworks/osd_carousel_v187/rebuild_r3/candidate/project/user_source/hdl_source/qoi_stream.v D:/TD3/sim_release/eg4/eg_logic_dram.v 
+# -- Compiling module qoi_stream
+# -- Compiling module EG_LOGIC_DRAM
+# 
+# Top level modules:
+# 	qoi_stream
+# End time: 01:17:43 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 01:17:43 on Nov 01,2026
+# vlog -sv D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v D:/codexworks/osd_carousel_v187/rebuild_r3/candidate/project/user_source/hdl_source/SD/bmp_read.v 
+# -- Compiling module tb
+# -- Compiling module bmp_read
+# 
+# Top level modules:
+# 	tb
+# End time: 01:17:43 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim work.tb 
+# Start time: 01:17:43 on Nov 01,2026
+# Loading sv_std.std
+# Loading work.tb
+# Loading work.bmp_read
+# Loading work.qoi_stream
+# Loading work.EG_LOGIC_DRAM
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 40, found 30.
+#    Time: 0 ps  Iteration: 0  Instance: /tb/dut File: D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v Line: 6
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'scan_done'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'scan_found_valid'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'scan_found_sector'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'scan_found_total'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'state_code'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'img_h_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'source_top_down'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'img_w_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'aspect_h_o'.
+# ** Warning: (vsim-3722) D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(6): [TFMPC] - Missing connection for port 'scan_sector_o'.
+# ** Fatal: restart prematurely returned idle number=2 stale_done=0 stale_error=0
+#    Time: 63470 ns  Scope: tb.one_load File: D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v Line: 27
+# ** Note: $finish    : D:/codexworks/carousel_timer_validation_v192/qoi_restart/r3_baseline/tb.v(27)
+#    Time: 63470 ns  Iteration: 1  Instance: /tb
+# End time: 01:17:43 on Nov 01,2026, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 11

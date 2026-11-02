@@ -1,99 +1,8 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Image scaling and output-raster adaptation.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-//===================================================================
-// img_scaler : scale a W x H pixel stream to exactly DST_W x DST_H.
-//              Nearest neighbour, no line buffer.
-//===================================================================
-// THE LOCKED ALGORITHM  (verified pixel-exact for 640x480 .. 4096x2160)
-//   The source is ONE FLAT STREAM of W*H pixels in BMP order.
-//   Output pixel (j,k) needs the stream pixel
-//       want = row_base + (k * W) / DST_W
-//       row_base = floor(j*H/DST_H) * W
-//   `want` is monotone, so the scaler walks the stream:
-//       while (ptr <= want) begin
-//           consume one source pixel (ready=1, held=pixel, ptr++)
-//           if (ptr <= want) ready = 0     // WAIT slot, emits nothing
-//       end
-//       emit held
-//
-//   BOTH AXES STEP IRREGULARLY, BY MORE THAN ONE
-//       horizontal : floor((k+1)W/640) - floor(kW/640)  reaches W/640
-//       vertical   : floor((j+1)H/480) - floor(jH/480)  reaches H/480
-//   Measured vertical steps: H=600 -> [1,1,1,2,...], H=1080 -> [2,2,2,3,...]
-//
-//-------------------------------------------------------------------
-// WHY THIS VERSION EXISTS  (timing)
-//-------------------------------------------------------------------
-//   The locked version advanced the row boundary with a 9-deep cascade of
-//   conditional subtractions.  Mapped to logic that is 33 levels deep
-//   (22 adders) and measured at 39.95 ns against a 10 ns budget:
-//
-//       row_acc_reg[1] -> 9-deep cascade -> vsum * w_eff -> row_base_reg
-//       Slack -30.067 ns, Logic Level 33 (ADDER=22 MULT18=1)
-//
-//   No arrangement of pipeline registers fixes that, because the
-//   recurrence is closed inside one clock:
-//       row_acc  <- f(row_acc)                    and
-//       row_base <- row_base + g(row_acc)
-//   Registers only relocate a loop; they cannot shorten a 33-level chain
-//   that must both start and end on a register.
-//
-//   So the arithmetic was replaced rather than re-timed.  Writing
-//       h_eff = hq * DST_H + hr              (hq, hr constant per frame)
-//   the vertical recurrence
-//       acc' = (acc + h_eff) mod DST_H ,  step = (acc + h_eff) div DST_H
-//   becomes
-//       acc' = (acc + hr) mod DST_H ,     step = hq + carry
-//       carry = ((acc + hr) >= DST_H)
-//   which is ONE adder and ONE conditional subtractor, not nine.  For
-//   H=1080/DST_H=480 that is hq=2, hr=120 giving 2,2,2,3,2,2,2,3 - exactly
-//   what the cascade produced - and for H=600/480 it is hq=1, hr=120
-//   giving 1,1,1,2.
-//
-//   The remainder then advances ONCE PER ROW, gated by the row boundary, and
-//   the whole chain is four registers latched on that boundary:
-//
-//       boundary k :  vrem_q  == rem_k      (rem_0 = 0)
-//                     sum_n   == rem_k + hr         (combinational)
-//                     carry_n == sum_n >= DST_H     (combinational)
-//                     rem_{k+1} = carry_n ? sum_n - DST_H : sum_n
-//                     step_k    = hq + carry_n
-//                     row_inc_lat = step_k * w_eff
-//                     row_base += row_inc_lat
-//
-//   carry_n is the carry of rem_{k+1} + hr, i.e. c_{k+1}, and step_k is
-//   hq + c_{k+1} - the step row_base advances by at boundary k+1.  Both
-//   destinations are registers, so the extra logic level is free.
-//
-//   THE FOUR MISTAKES THAT COST SEVERAL ATTEMPTS, all of them indexing:
-//     1. Deriving the step and the remainder in the SAME cycle as the
-//        boundary that consumes them.  A register written on the boundary
-//        cycle still shows its OLD value to that cycle's reader, so the
-//        increment was always one row late and every padding step (the 2 in
-//        H=600's 1,1,1,2) landed a row late: row_base read 3200 where it had
-//        to read 4000.
-//     2. Letting the step free-run once per clock.  It then changes 640
-//        times per row and cannot be sampled at a boundary at all.
-//     3. Accumulating the step products instead of deriving the step, which
-//        never sums to exactly one row of steps.
-//     4. Reading the step through a REGISTERED carry.  That delays it by a
-//        whole row; taking it from the successor carry is what finally
-//        aligned it.
-//
-//   The only closed loops are now short:
-//       vrem_q -> (+hr) -> sum_q -> (-DST_H) -> vrem_q     (one adder)
-//       row_base -> (+row_inc_lat) -> row_base             (one adder)
-//
-//   The released 9-deep cascade measured 33 logic levels, 22 adders and
-//   39.951 ns against a 10 ns budget.  This structure removes the cascade
-//   entirely rather than trying to retime it.
-//
-// BYPASS
-//   If W < DST_W or H < DST_H the source passes through unchanged, one
-//   output per input, and nothing is emitted after the input stops.
-//===================================================================
+// 流式最近邻缩放，无行缓存；通过 ready 对源像素施加背压。
+// 输出坐标 (j,k) 对应源地址 floor(j*H/DST_H)*W + floor(k*W/DST_W)。
+// 将源高度分解为 H=hq*DST_H+hr，以余数进位决定相邻输出行的源地址步长。
+// 行边界只提交预计算步长，避免宽乘除运算进入闭环地址更新路径。
+// 缩放条件不满足时按输入节拍旁路；后级负责居中及显示区域适配。
 `timescale 1ns / 1ps
 
 module img_scaler #(
@@ -121,10 +30,6 @@ module img_scaler #(
 );
 
   wire [15:0] w_eff = (src_w == 16'd0) ? 16'd1 : src_w;
-  // [Design note 时序]把 h_eff 的"取 0 保护"寄存一拍再送进除法。
-  //   原来 src_h -> (==0?1:) -> /DST_H -> hq_r 是一条链，实测是 sd_card_clk
-  //   域的第 1 名违规路径（-0.019ns，起于 bmp_read/height_reg）。
-  //   src_h 每帧只变一次、很稳，寄存一拍只是让商晚一个周期算出，无害。
   reg  [15:0] h_eff_r;
   always @(posedge clk or posedge rst) begin
     if (rst) h_eff_r <= 16'd1;
@@ -174,31 +79,6 @@ module img_scaler #(
   reg [ 4:0] hq_r;
   reg [16:0] hr_r;
 
-  // hq and hr are frame-stable, so they are registered; the divide then
-  // never runs combinationally from bmp_read's header registers.  hr is
-  // derived from the REGISTERED hq (same always block, so hq_r is the value
-  // from the previous clock - which is exactly the settled quotient),
-  // because hq*DST_H is a constant multiply and needs no second divide.
-  // Writing hr_r <= h_eff - ((h_eff / DST_H) * DST_H) instead leaves the
-  // divide in the path: 13 levels, 17.775 ns, -7.891 ns.
-  // hr needs the product hq_r*DST_H, and leaving that multiply in hr's own
-  // path was still too long after routing.  Worse, feeding the multiply
-  // straight from the divide (hr_r -> mult) reopened it again.
-  //
-  // So the horizontal/vertical pairs are both built as a strict register
-  // chain, one arithmetic operation per stage:
-  //     hq_r     <= h_eff / DST_H          (divide,   stage 1)
-  //     hq_dst_q <= hq_r * DST_H           (multiply, stage 1)
-  //     hr_r     <= h_eff - hq_dst_q       (subtract, stage 2)
-  // Every multiply and every divide in this design ends in a register whose
-  // output is only SUBTRACTED, COMPARED or ADDED.  hq/hr/wq/wr are
-  // frame-stable, so the extra pipeline depth costs nothing: three clocks
-  // instead of one still settles thousands of cycles before the first row
-  // boundary, and src_w/src_h are already held stable per frame by bmp_read.
-  // For 480 = 32*15, x=h>>5 and x=256*a+16*b+c.
-  // x/15 = 17*a+b+(a+b+c)/15. The digit sum is at most 37,
-  // so two small comparisons replace the long constant divider.
-  // hq remains five bits, exactly preserving the original truncation.
   generate
     if (DST_H == 480) begin : g_div480
       reg [5:0] digit_sum;
@@ -229,7 +109,7 @@ module img_scaler #(
   reg  [15:0] out_row;
   // Accepted production dimensions are <=4096 per axis. One-past-end
   // is2^24, so25bits retain it and the final row lookahead without wrap.
-  // The unbounded reusable scaler keeps its original32bit arithmetic.
+  // The unbounded reusable scaler uses 32-bit arithmetic.
   localparam ADDR_W = BOUNDED_WIDTH ? 25 : 32;
   reg  [ADDR_W-1:0] ptr;
   reg  [      23:0] held;
@@ -270,41 +150,6 @@ module img_scaler #(
                                   // next boundary's row_base add reads it from a
                                   // register that was written a whole row earlier
 
-  // sum_q is the STAGED remainder sum.  The chain advances only on a row
-  // boundary, so for the whole of row k+1:
-  //     vrem_q  == rem_{k+1}
-  //     sum_q   == rem_{k+1} + hr
-  //     carry_q == (rem_{k+1} + hr >= DST_H) == c_{k+1}
-  // which is exactly the carry step_{k+1} needs.  Reading the carry
-  // combinationally out of sum_q in the boundary cycle instead yields c_k
-  // (sum_q still describes the row that is ending) and row_base then lands
-  // on 0/3200 where it has to be 800/4000.
-  //
-  //   The chain MUST be gated.  Free-running it advances 640 times per row,
-  //   so a single register of carry cannot hold the right phase - that is
-  //   why the value is only ever correct when the row length happens to
-  //   match the step-sequence period.
-  // sum_q must be vrem_q + hr FOR THE SAME ROW.  Loading it with the
-  // successor sum (rem_n + hr) instead puts it one row ahead of vrem_q, the
-  // carry is then taken from the wrong row, and vrem_q fails to wrap: it
-  // grows 120,240,360,480,600,... past the modulus, row_base advances by a
-  // constant step for ever, and H=1080 comes out 1920 short at row 4.
-  //
-  // ------------------------------------------------------------------
-  // 2026-10-20 TIMING: 17-bit adder + 17-bit compare -> 10 bits + one LUT5.
-  //
-  //   vrem_q < DST_H and hr < DST_H, so sum_n < 2*DST_H = 960 and ten bits
-  //   are enough.  The 17-bit adder followed by a 17-bit subtractor-compare
-  //   cost six adder levels and were the HEAD of the worst path in the whole
-  //   design (-1.110 ns, ADDER=6 MULT18=1):
-  //       vrem_q -> sum_n -> carry_n -> step_n -> mult0.a  (10.66 ns)
-  //
-  //   DST_H = 480 = 10'b01_1110_0000, and for sum < 1024
-  //       sum >= 480  <=>  sum[9] | (sum[8] & sum[7] & sum[6] & sum[5])
-  //   because [480, 511] is exactly the set of ten-bit values with [8:5]
-  //   all set.  So the compare is ONE LUT5 off the adder, not a five-level
-  //   carry chain.  Bit-exact, not an approximation.
-  // ------------------------------------------------------------------
   wire [       9:0] sum_n = {1'b0, vrem_q[8:0]} + {1'b0, hr[8:0]};  // <= 958
   wire              carry_n = sum_n[9] | (sum_n[8] & sum_n[7] & sum_n[6] & sum_n[5]);
   wire [       9:0] rem_n = carry_n ? (sum_n - DST_H[9:0]) : sum_n;
@@ -318,23 +163,6 @@ module img_scaler #(
   wire [       4:0] step_nw = hq + {4'd0, carry_n};
   wire [       3:0] step_n = (step_nw > 5'd15) ? 4'd15 : step_nw[3:0];
 
-  // ------------------------------------------------------------------
-  // 2026-10-20 TIMING: the boundary multiply is now a two-way select.
-  //
-  //   step_n = hq + carry_n, and hq/w_eff are frame-stable, so
-  //       step_n * w_eff  is  hq*w_eff  or  (hq+1)*w_eff
-  //   - only TWO values for a whole frame.  Both are built here, off the
-  //   per-pixel path, and the boundary cycle just picks one.  That takes
-  //   the MULT18 (3.56 ns) and the step adder out of the path that ran
-  //   vrem_q -> sum_n -> carry_n -> step_n -> mult -> row_inc_lat.
-  //
-  //   index 0 = carry_n 0 -> clamp(hq)     * w_eff
-  //   index 1 = carry_n 1 -> clamp(hq + 1) * w_eff
-  //   The clamp at 15 is the same clamp step_n applies, so index 1 is
-  //   row_inc0 + w_eff only while hq < 15; at hq == 15 both are 15*w_eff.
-  //   hq <= 8 for any image up to 4096 lines, so this never bites; it is
-  //   spelled out anyway so the two forms stay bit-identical.
-  // ------------------------------------------------------------------
   wire [       3:0] hq_c = (hq_r > 5'd15) ? 4'd15 : hq_r[3:0];
   wire              hq_more = (hq_r < 5'd15);
   reg [31:0] row_inc0_q, row_inc1_q;
@@ -532,12 +360,6 @@ module img_scaler #(
         carry_q <= carry_n;  // the SUCCESSOR carry
         vstep_q <= step_n;
       end
-      // the increment is latched one cycle EARLIER than the boundary
-      // that consumes it: row_base reads row_inc_lat on the boundary
-      // cycle, and a register written in that same cycle still shows its
-      // old value to that read.
-      // (2026-10-20) select between the two precomputed products instead
-      // of multiplying step_n by w_eff here.
       if (boundary_d) row_inc_lat <= carry_n ? row_inc1_q : row_inc0_q;
 
       if (src_frame_start) begin
@@ -726,10 +548,12 @@ endmodule
 // Nearest-neighbour sampling preserves source detail without inventing texture.
 // Input high-water leaves 256 words for an indivisible SD sector and pipelines.
 module image_fit_720p #(
+  parameter ENABLE_ZOOM = 0,
   parameter integer OUT_W = 1280,
   parameter integer OUT_H = 720
 ) (
   input wire clk, rst, frame_start,
+  input wire zoom_small,
   input wire [15:0] src_w, src_h, aspect_h,
   input wire in_valid,
   input wire [23:0] in_pixel,
@@ -740,9 +564,16 @@ module image_fit_720p #(
 );
   localparam WAIT=0, CONFIG=1, FIT=2, MARGINS=3, NEXT_ROW=4,
       READ_ROW=5, STORE=6, H_STEP=7, ROW_TAIL=8,
-      FETCH=9, EMIT=10, V_STEP=11, DRAIN=12, DONE=13, V_CHECK=14;
+      FETCH=9, EMIT=10, V_STEP=11, DRAIN=12, DONE=13, V_CHECK=14, SIZE=15;
   reg [3:0] state;
   reg v_step_ge;
+  // Latch a mode per complete frame, never change sampling mid-image.
+  reg small_q;
+  always @(posedge clk) begin
+    if (rst) small_q <= 0;
+    else if (frame_start) small_q <= ENABLE_ZOOM && zoom_small;
+  end
+
   reg [23:0] fifo[0:511];
   reg [8:0] wp, rp;
   reg [9:0] count;
@@ -750,6 +581,8 @@ module image_fit_720p #(
   reg qvalid;
   reg [12:0] sw, sh, sx, sy, want_x, want_y, line_y, held_x;
   reg [10:0] fit_w, fit_h, left, top, right, bottom, dx, ox, oy;
+  wire [11:0] quarter_w_ceil = ({1'b0,fit_w} + 12'd3) >> 2;
+  wire [11:0] quarter_h_ceil = ({1'b0,fit_h} + 12'd3) >> 2;
   reg [13:0] h_rem, v_rem;
   reg [23:0] held, line_q;
   // Explicit 11-bit addressing and power-of-two storage are required for
@@ -830,6 +663,15 @@ module image_fit_720p #(
         end else begin
           fit_w <= wide ? OUT_W : ((quotient == 0) ? 1 : quotient);
           fit_h <= wide ? ((quotient == 0) ? 1 : quotient) : OUT_H;
+          state <= ENABLE_ZOOM ? SIZE : MARGINS;
+        end
+        SIZE: begin
+          // floor(3*n/4), clamped for very thin images; keep OUT_W*OUT_H
+          // output pixels so SDRAM/display timing does not change.
+          if (small_q) begin
+            fit_w <= fit_w > 1 ? fit_w - quarter_w_ceil[10:0] : 1;
+            fit_h <= fit_h > 1 ? fit_h - quarter_h_ceil[10:0] : 1;
+          end
           state <= MARGINS;
         end
         MARGINS: begin

@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Block-to-raster pixel reordering.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // Convert 8x8 block order to scanlines using seven rows of shared RGB565 RAM.
 // Row zero goes directly to the output. Rows one through seven are written

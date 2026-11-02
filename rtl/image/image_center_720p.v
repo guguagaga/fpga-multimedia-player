@@ -1,12 +1,7 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Image placement within the 720P output raster.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
-// Preserve the proven 800x600 image/scaler path, centering its raster within
-// a 1280x720 frame. Queued pixels tolerate SD-sector and 5/4-expander bursts.
-// Orientation is handled by the frame writer as before; symmetric margins
-// remain centered for either top-down QOI/BMP or bottom-up BMP.
+// Center an 800x600 image raster within a 1280x720 output frame.
+// Buffer incoming pixels across source bursts and sink backpressure.
+// The frame writer handles orientation; equal margins preserve centering.
 module image_center_720p (
   input wire clk, rst, disable_image, write_req,
   input wire source_valid,

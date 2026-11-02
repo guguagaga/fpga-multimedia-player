@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Audio format probing, decoder control, sample serialization and seek.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 // Autodetect QOA / shared PCM and IMA WAV decoding. Format is selected
 // by file bytes. Compressed seek discards decoded samples; past EOF restarts.
 module compressed_audio_reader #(parameter ENABLE_QOA = 1) (

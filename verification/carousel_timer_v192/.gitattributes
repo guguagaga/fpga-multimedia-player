@@ -1,0 +1,2 @@
+# Preserve simulator logs as evidence, including tool-generated trailing spaces.
+**/*.log -whitespace

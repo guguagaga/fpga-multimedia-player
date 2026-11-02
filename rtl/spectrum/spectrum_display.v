@@ -1,71 +1,18 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Spectrum overlay composed with the incoming pixel stream.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
-//===================================================================
-// spectrum_display : flat SMOOTH spectrum (linear interp) + beat-reactive
-//                    floating notes (no disc, no ring)
-//===================================================================
-// Layout:
-//   - smooth filled spectrum curve_pre along the bottom, log-frequency
-//     (blue bass -> red treble), 48 control bars joined by LINEAR
-//     interpolation (Q4 fraction) so it stays one continuous curve_pre.
-//     Multiplier-free: only gated shifts + adders, 0 DSP.
-//   - musical notes spray upward from the bass bars on each bass beat,
-//     floating up and fading out.
-//   - background : album art dimmed to ~75%.
-//
-// No CORDIC, no hardware multiplier. Bar index from pixel X (const divide).
-//===================================================================
+// Overlay frequency bars, optional interpolation and beat-triggered notes.
+// Read neighboring bar heights from the display memory ports.
+// Keep pixel data and display-valid signals aligned through the overlay pipeline.
 module spectrum_display #(
-  // 【第4步 A · 2026-10-07】柱宽（pitch 内实际画出来的列数，1..PITCH）。
-  //   只影响"哪些列可见"，`curve_pre`（插值出来的柱高）与 `frac_lut` 一字不改
-  //   ⇒ 数值行为逐位不变。想现场调粗细只改这一个参数。
-  //   PITCH=8，BAR_W=5 ⇒ 柱 5px + 间隙 3px。
-  //   2026-10-17 柱数 48 -> 72（用户要求"竖线条数越多观感越好"）
-  //     绘图区宽 X1-X0 = 576，PITCH 必须整除它：
-  //         PITCH=12 -> 48 柱   （原来）
-  //         PITCH= 8 -> 72 柱   （现在）
-  //         PITCH= 6 -> 96 柱   （实测 slices 97.54%，余量吃光，未采用）
-  //     改柱数时必须成套改这些地方，漏一处就会显示不全：
-  //       spectrum_display : PITCH, BAR_W, bar_index/bar_addr 位宽、
-  //                          i_m1/i_p1/i_p2 的回绕阈值
-  //       spectrum_capture : mem/b1/b2/tilt_mem 的深度、rd_addr* 位宽、
-  //                          log_map 的位宽与表、commit 阶段范围、
-  //                          两个 48 项衰减/清零循环的上界
-  //       top_tf_hdmi_audio: bar_addr* 四条 wire 的位宽
-  //     已用 tools/bump_bars.py 做过成套检查（锚点必须唯一命中才写入）。
+  // BAR_W 控制柱内可见宽度；PITCH 决定柱高采样区间。
+  // 几何参数与地址范围保持一致，避免边缘读越界。
   parameter [3:0] BAR_W = 4'd5,
-  // 【第4步 C · 2026-10-07】柱顶柔和光晕（bloom 近似）：
-  //   GLOW_R   = 光晕从柱顶向上延伸多少像素（0 或 GLOW_EN=0 即关闭）
-  //   GLOW_MIX = 混色强度（背景朝柱色混 1/2^GLOW_MIX；越小越亮，3=1/8）
-  // ================================================================
-  // 2026-10-17 INTERP_EN：跨柱线性插值开关（默认关闭）
-  //
-  //   参考图（专业示波器/RTA）的观感是"每根柱独立、之间有明确间隙、
-  //   高度锯齿跳变"。而打开插值时，48 根柱会被抹成一条光滑曲线，
-  //   永远出不来那种尖刺感 —— 这就是"对比不明显"的主因（不是倾斜）。
-  //
-  //   INTERP_EN = 0 : curve_pre = bar_data2  （每根柱一个高度，矩形，锯齿）
-  //   INTERP_EN = 1 : 原来的线性插值（平滑曲线）
-  //   关掉后那一片 13 位乘法/加法逻辑会被综合器裁掉，还可能省面积。
-  // ================================================================
+  // GLOW_R 和 GLOW_MIX 控制柱顶光晕范围及混色强度。
+  // INTERP_EN 选择相邻柱插值或独立柱高，常量关闭时相关逻辑可被综合裁剪。
   parameter INTERP_EN = 1'b0,
   parameter GRID_EN = 1'b0,  // fixed horizontal lines disabled for image viewing
   parameter GLOW_EN = 1'b1,  // 关掉柱顶发光（省混合逻辑，面积紧张时用）
   parameter [3:0] GLOW_R = 4'd6,
   parameter [3:0] GLOW_MIX = 4'd3,
-  // 【第4步 D · 2026-10-07】底部细密波段（独立图层，与音符精灵共存，不碰 note_x/note_life）
-  //   BAND_Y    = 绝对行号（默认 406 = 基线 Y0=405 下方 1px，在柱体之外，互不遮挡）
-  //   BAND_H    = 厚度（行数）
-  //   BAND_MIN  = 该列插值柱高超过它才点亮（跟幅度走，静音自动消失）
-  //   BAND_MIX  = 亮度混色（背景朝柱色混 1/2^N）
-  //   BAND_DASH = 分段：每 2^BAND_DASH 列亮 (2^BAND_DASH - 1) 列（细密分段感）
-  //   只用既有 curve_pre（已有插值结果）⇒ 不新增任何 BRAM/阵列，0 DSP 
-  // [Design note 观感微调·纯参数]用户反馈"比之前好很多，但希望每根线更细、或线更多"：
-  //   BAND_H    2 -> 1 : 线更细（1 行）
-  //   BAND_DASH 2 -> 1 : 3亮1灭 -> 1亮1灭，线更多更密
-  //   纯 parameter 改动，逻辑一字未动；0 DSP、面积几乎免费。
+  // 底部波段复用柱高数据，根据幅值门限和分段掩码绘制。
   parameter BAND_EN = 1'b1,
   parameter [9:0] BAND_Y = 10'd406,
   parameter [3:0] BAND_H = 4'd1,
@@ -78,10 +25,7 @@ module spectrum_display #(
   input  wire        de,
   input  wire        vs,
   input  wire [23:0] din_rgb,
-  // [Design note 视频]1 = 画频谱柱，0 = 纯直通（原样输出 din_rgb）。
-  //   用户要求放视频时不要频谱。做成直通而不是"停掉模块"，是因为
-  //   rgb_q_pre <= din_rgb 已经和 de_q_pre 同拍延迟了 2 拍，直接选它就能做到
-  //   像素级无差别的直通，不会引入 1 拍错位（错位 1 拍 = 整屏横移一列）。
+  // 使能关闭时使用相同流水延迟的背景像素，保持 RGB 与有效信号对齐。
   input  wire        en,
   input  wire [ 7:0] bar_data,    // bar[i-1] (p0)
   output wire [ 6:0] bar_addr,
@@ -100,18 +44,8 @@ module spectrum_display #(
   // ---- layout constants ----
   localparam [9:0] X0 = 10'd32;
   localparam [9:0] PITCH = 10'd18;  // 数组节距 18px (32*18 = 576) —— 只决定取哪个柱
-  // 2026-10-17 竖线数与数组深度解耦
-  //   LINE_PITCH 决定画多少条线，PITCH 决定从哪个柱取值。
-  //   两者独立 ⇒ 48 个采样点也能画 96 条线（显示层本来就线性插值）。
-  //   2026-10-17 再加密：LINE_PITCH 6 -> 4，竖线 96 -> 144 条
-  //   12 能被 4 整除 ⇒ x_in_bar mod 4 = x_in_bar[1:0]，
-  //   相位直接取两位，比 6px 版的「减 6 + 比较」还便宜。
-  // 2026-10-17 节距改 6px、占空 50%
-  //   参考图（专业示波器/RTA）的柱是【亮一半、暗一半】，之间有明确间隙。
-  //   之前 4px 节距 + 3px 亮 = 75% 占空，柱子连成一片，看不出"独立的柱"。
-  //   现在 6px 节距 + 3px 亮 = 50% 占空 -> 576/6 = 96 条，间隙清晰。
-  //   ⚠ 每根柱高跨 12px（PITCH），所以每 2 条竖线共用同一高度 ——
-  //     这是"96 条线 / 48 个柱高"的必然结果（数组只有 48 深）。
+  // LINE_PITCH 定义可见线条间距，PITCH 定义频带取值间距。
+  // 二者独立设置，使显示几何与频带存储规模解耦。
   localparam [9:0] LINE_PITCH = 10'd6;  // 6px 一条 -> 576/6 = 96 条
   localparam [3:0] BAR_W_LINE = 4'd3;  // 亮 3px + 暗 3px = 50% 占空
   localparam [9:0] X1 = 10'd608;
@@ -208,7 +142,7 @@ module spectrum_display #(
   // ---- fraction (x_in_bar 0..11) -> Q4 (0..15) ----
   // 输入 k = x_in_bar (0 .. PITCH-1)，输出 = round(k*16/PITCH)。
   // PITCH=12 -> x_in_bar 0..11，共 12 项；仍是 12 个不同采样点
-  // (每个柱内 12 px 一步)，与旧 Q6 表的分辨率完全相同。
+  // 列内插值位置按当前 PITCH 映射到定点比例。
   // 4 bit 权重让插值乘法只用 4 个移位项 + 3 个加法器实现（无 DSP）。
   function [3:0] frac_lut;
     input [4:0] k;
@@ -304,21 +238,13 @@ module spectrum_display #(
   wire [6:0] bar_index = bx / PITCH;
   wire [4:0] x_in_bar = bx - (bar_index * PITCH);  // 0..17
 
-  // 2026-10-17 回绕阈值必须跟着柱数走
-  //   72 柱 => 合法下标 0..71，所以：
-  //     i_m1 : (i==0)  ? 71 : i-1
-  //     i_p1 : (i==71) ? 0  : i+1
-  //     i_p2 : (i==70) ? 0 : (i==71) ? 1 : i+2
-  //   ⚠ 从 96 柱改 72 柱时这三个数曾漏改（还留着 95/94），
-  //     会让柱 71 读到越界地址、柱 70 的右邻居索引错位 —— 表现为最右侧
-  //     一两根柱异常。已修正为下面的值。
-  //   以后改柱数时，这三个阈值必须与 PITCH 一起改（清单见文件顶部）。
+  // 相邻频带地址在有效范围内环回，防止边缘插值访问越界。
   wire [6:0] i = bar_index;
   wire [6:0] i_m1 = (i == 7'd0) ? 7'd31 : (i - 7'd1);
   wire [6:0] i_p1 = (i == 7'd31) ? 7'd0 : (i + 7'd1);
   wire [6:0] i_p2 = (i == 7'd30) ? 7'd0 : (i == 7'd31) ? 7'd1 : (i + 7'd2);
 
-  assign bar_addr  = i_m1;  // 2026-10-17 p0 = bar[i-1] 现在是峰值保持
+  assign bar_addr  = i_m1;  // Peak input address.
   assign bar_addr2 = i;  // p1 = bar[i]
   assign bar_addr3 = i_p1;  // p2 = bar[i+1]
   assign bar_addr4 = i_p2;  // p3 = bar[i+2]（未使用）
@@ -434,43 +360,14 @@ module spectrum_display #(
 
   // ---- curve geometry ----
   wire [9:0] curve_top = Y0 - {2'b0, curve};
-  // 【第4步 A】可见性掩码：pitch 内前 BAR_W 列画柱，其余留作间隙。
-  //   注意这里只屏蔽列，不改 curve/frac_lut ⇒ 可见列的柱高数值与改动前逐位相同。
-  // 2026-10-17 竖线相位从 x_in_bar_q 直接取
-  //   PITCH=12 能被 LINE_PITCH=6 整除 ⇒ bx_q mod 6 == x_in_bar mod 6，
-  //   所以不需要把 bx_q 打进流水线，也不需要除法器，只要一次
-  //   "减 6 / 比较"。
-  //   LINE_PITCH=6 时，柱内相位 = x_in_bar mod 6
-  //   （12 是 6 的倍数 ⇒ bx_q mod 6 == x_in_bar mod 6）。
-  //   x_in_bar ∈ 0..11，所以 mod 6 只差一次「减 6」。
+  // 可见性掩码只选择柱内亮列，柱高保持不变；线条相位由列内位置计算。
   wire [3:0] line_col = (x_in_bar_q >= 5'd12) ? (x_in_bar_q - 5'd12) : (x_in_bar_q >= 5'd6) ?
       (x_in_bar_q - 5'd6) : x_in_bar_q[3:0];  // 0..5  (18 = 3x6)
   wire in_bar_w = (line_col < BAR_W_LINE);  // 3 亮 3 灭 -> 96 条
   wire in_fill = in_xrange_q && in_bar_w && (ay_q >= curve_top) && (ay_q <= Y0);
   wire in_edge = in_fill && (ay_q < (curve_top + 10'd3));
 
-  // ==================================================================
-  // 2026-10-17 峰值保持白点（PEAK HOLD DOT）—— 专业频谱的招牌
-  //
-  //   来源：spectrum_capture 的 mem[]，经 p0（bar_data）输出。
-  //   它与柱体 b1/b2 用不同的释放速度（峰值 -1/帧，柱体 -2/帧），
-  //   所以白点会比柱子慢半拍回落 —— 这正是要的观感。
-  //
-  //   插值：单点、不跨柱插值。峰值是"保持"量，本来就不该被邻柱平均掉。
-  //
-  //   画法：白点 3px 高，且必须落在柱体内部（ay_q >= curve_top）——
-  //   否则当柱子回落而峰值还高时，白点会浮在柱子上面，看起来像噪点。
-  //   因为峰值衰减比柱体慢，正常情况 peak >= curve 恒成立，
-  //   所以白点总是贴着柱顶出现。
-  //
-  //   配色：白点用"柱色提亮到接近白"而不是纯白，这样在亮背景上也看得见
-  //   （用 (edge>>1)+160 而不是 255，纯白在浅色专辑封面上会糊掉）。
-  //   纯比较器 + 移位 + 加减 ⇒ 0 BRAM / 0 DSP。
-  // ==================================================================
-  // ⚠ 只用 p0（bar_data）这一个抽头，不在柱间做插值：
-  //   p3（bar_data4）在 capture 侧恒 0（该读端口没有对应存储体），
-  //   拿它当第二个控制点会把峰值曲线拉塌。单点即足够，
-  //   因为峰值本身是"保持"量，本来就不该被邻柱平均掉。
+  // 峰值标记采用对应读端口的数据，不跨柱平均；可见性受绘制区域和参数控制。
   wire [7:0] pk1 = peak_q;  // peak[i]，来自 capture 的 mem[]
   wire [7:0] peak = pk1;
   wire [9:0] peak_top = Y0 - {2'b0, peak};
@@ -482,20 +379,13 @@ module spectrum_display #(
 
   // （白点配色 pk_r/pk_g/pk_b 在下方 edge_*2 声明之后定义 —— Verilog 要求先声明后使用）
 
-  // ================= 【第4步 C · 2026-10-07】柱顶柔和光晕（bloom 近似）=================
-  // 参考图里柱子周围有一圈柔和白光。这里用最省的做法做"顶端光晕"：
-  //   柱顶之上 GLOW_R 像素、且仍在柱宽范围内 ⇒ 背景按 1/2^GLOW_MIX 的比例混向柱色。
-  //   纯比较器 + 移位 + 加减 ⇒ 0 BRAM / 0 DSP （红线要求）。
-  //   半径与混色比例都是参数，现场可调；GLOW_EN=0 即完全关闭（回到只有 edge/fill/bg）。
+  // 柱顶光晕在限定半径内将背景混向柱色，采用移位加减实现。
   wire [9:0] glow_lo = (curve_top > {6'b0, GLOW_R}) ? (curve_top - {6'b0, GLOW_R}) : 10'd0;
   wire in_glow = GLOW_EN && in_xrange_q && in_bar_w && (ay_q < curve_top) && (ay_q >= glow_lo) &&
       (glow_lo != curve_top);
 
-  // ---- gradient colors ----
-  // [Design note 32 柱]渐变表仍是 48 项（蓝→红），柱数变成 32，
-  //   所以下标按 1.5 倍展开（i + i/2 = 0..46），让整条彩虹仍然铺满全屏。
-  //   不做这一步会只用到表的前 32 项 —— 右端看不到红色。
-  // grad was registered with the corresponding geometry and background.
+  // 32 个频带按 i+i/2 映射到 48 项渐变表，覆盖蓝到红的完整色域。
+  // 渐变颜色与坐标、背景在同一流水级对齐。
   wire [7:0] gr = grad[23:16];
   wire [7:0] gg = grad[15:8];
   wire [7:0] gb = grad[7:0];
@@ -508,26 +398,8 @@ module spectrum_display #(
   wire [7:0] bg_g = rgb_q[15:8] - (rgb_q[15:8] >> 2);
   wire [7:0] bg_b = rgb_q[7:0] - (rgb_q[7:0] >> 2);
 
-  // ==================================================================
-  // 2026-10-17 dB 参考网格线（GRID）—— 专业分析仪的标尺
-  //
-  //   任何一台专业 RTA / 频谱分析仪的背景都有一组水平参考线。
-  //   没有它，柱子多高全靠感觉；有了它，才像"仪器"而不是"动画"。
-  //
-  //   刻度换算（本设计的柱高是对数刻度，柱高本身就是 dB 标尺）：
-  //       bar = contrast_lut(leading_one(mag))
-  //     mag 每翻一倍 ⇒ leading_one +1 ⇒ 柱高升一档 ⇒ 约 6.02 dB。
-  //   这里取 4 条线，按柱高满量程（248）均分：
-  //       25%(62) / 50%(124) / 75%(186) / 100%(248，满刻度参考)
-  //
-  //   实现：只叠在背景上（条件带 `!in_fill`），柱子永远盖住线，
-  //   不会把柱子"划断"。颜色是背景提亮 1/4（移位+加，0 DSP）。
-  //   4 个比较器 + 3 个加法 ⇒ 约 60-100 LUT。
-  //
-  //   ⚠ 为什么不做垂直频率线：本设计的柱位是按 bin 混合分区
-  //     （低频 2 bin/柱、高频 3 bin/柱），不是严格等倍频程；
-  //     画"倍频程"竖线会与柱位对不齐，反而显得不专业。宁可只画水平线。
-  // ==================================================================
+  // 可选水平网格按显示高度位置绘制，仅作为相对高度参考。
+  // 网格处于柱体下层，GRID_EN 控制是否叠加。
   localparam [9:0] GRID_25  = Y0 - 10'd62;
   localparam [9:0] GRID_50  = Y0 - 10'd124;
   localparam [9:0] GRID_75  = Y0 - 10'd186;
@@ -550,21 +422,13 @@ module spectrum_display #(
   wire [7:0] edge_g2 = alpha_blend(edge_g, bg_g, ALPHA);
   wire [7:0] edge_b2 = alpha_blend(edge_b, bg_b, ALPHA);
 
-  // ---- 2026-10-17 峰值保持白点配色 ----
-  //   用"柱色提亮到接近白"而不是纯白 255：
-  //   浅色专辑封面上纯白会糊掉，提亮到 ~200 既醒目又保留柱色identity。
-  //   (edge>>1)+160 是凸组合，全程无符号，结果必然在 [160, 288] 内，
-  //   8 位加法器会自然截到 255 —— 不需要额外的饱和逻辑。
+  // 峰值标记通过移位和常数加法提亮，输出按 8 位表达式截取。
   wire [7:0] pk_r = (edge_r2 >> 1) + 8'd160;
   wire [7:0] pk_g = (edge_g2 >> 1) + 8'd160;
   wire [7:0] pk_b = (edge_b2 >> 1) + 8'd160;
 
-  // ---- 【第4步 C】光晕色：背景朝柱色混 1/2^GLOW_MIX（纯移位加法，0 DSP）----
-  //   ⚠ 不要写 (edge-bg)>>N 那种"带符号差值"形式：柱色可能比背景暗，
-  //     8 位无符号会下溢回绕（实测 glow_r 算出 206 而 bg=144/edge=132 ）。
-  //   改成凸组合形式，全程无符号、结果必然落在 [min(bg,edge), max(bg,edge)] 内 ：
-  //       glow = (bg*(2^N-1) + edge) >> N        （N=3 即 7/8 背景 + 1/8 柱色）
-  //   bg*(2^N-1) 用 (bg<<N) - bg 实现 ⇒ 仍是移位+加减，0 DSP 
+  // 光晕使用无符号凸组合：(bg*(2^N-1)+edge)>>N。
+  // 扩展位宽后执行移位加减，避免直接相减导致下溢。
   wire [11:0] glow_r12 = (({4'b0, bg_r} << GLOW_MIX) - {4'b0, bg_r} + {4'b0, edge_r2}) >> GLOW_MIX;
   wire [11:0] glow_g12 = (({4'b0, bg_g} << GLOW_MIX) - {4'b0, bg_g} + {4'b0, edge_g2}) >> GLOW_MIX;
   wire [11:0] glow_b12 = (({4'b0, bg_b} << GLOW_MIX) - {4'b0, bg_b} + {4'b0, edge_b2}) >> GLOW_MIX;
@@ -572,10 +436,6 @@ module spectrum_display #(
   wire [7:0] glow_g = glow_g12[7:0];
   wire [7:0] glow_b = glow_b12[7:0];
 
-  // ---- 【第4步 D】底部细密波段（独立图层）----
-  //   ⚠ 与音符精灵共存：本图层不读写 note_x/note_life/note_next，只在颜色选择里
-  //     排在音符之后（音符像素仍然优先）⇒ 两者互不干扰 
-  //   分段图案：active_x 的低 BAND_DASH 位非零 ⇒ 亮（默认 3 亮 1 灭，细密感）
   wire band_dash_on = (BAND_DASH == 3'd0) ? 1'b1 : (bx_q[BAND_DASH-1:0] != {BAND_DASH{1'b0}});
   wire in_band = BAND_EN && (ay_q >= BAND_Y) && (ay_q < (BAND_Y + {6'b0, BAND_H})) &&
       (curve > BAND_MIN) && band_dash_on;
@@ -603,15 +463,7 @@ module spectrum_display #(
   reg  [6:0] note_life                                      [0:7];  // 0..63, 0 = inactive
   reg  [2:0] note_next;  // round-robin spawn pointer (0..7)
 
-  // ========================================================================
-  // [Design note 面积]NOTE_EN = 0 把整个音符精灵图层做成死逻辑：
-  //   本块（spawn + 上浮 + 衰减）是 8 个粒子 ×(10+10+7) = 216 个 FF，
-  //   它们的写使能全在这里。NOTE_EN=0 时下面 else 分支恒不执行 ⇒ 综合器可以
-  //   把 note_x/note_y/note_life 全部剪掉；绘制侧读到的 note_life 恒 0，
-  //   于是 "note_life>0" 的 8 组比较、16×16 精灵表、优先级链也一起消失。
-  //   代价：柱底不再有小音符上浮（纯装饰）。
-  //   要恢复：把 NOTE_EN 改回 1'b1，其余一行都不用动。
-  // ========================================================================
+  // NOTE_EN 为常量关闭时，音符粒子更新和绘制逻辑可由综合器裁剪。
   localparam NOTE_EN = 1'b0;
 
   integer nk;
@@ -678,11 +530,7 @@ module spectrum_display #(
     else if (note_hit[7]) hit_lv = note_life[7][5:4];
   end
 
-  // ---- color select ----
-  //   优先级：音符精灵 > 峰值白点 > 柱顶亮边 > 柱体填充 > 柱顶光晕 > 底部波段 > dB网格 > 背景
-  //   2026-10-17：白点插在音符之后、亮边之前 —— 它要盖住亮边，
-  //     但不能盖住音符精灵（精灵是前景动效，优先级最高）。
-  //     dB 网格排在最后（仅次于背景）—— 它只是标尺，任何实际内容都要盖住它。
+  // 按前景优先级选择音符、峰值、柱体、光晕、波段、网格和背景。
   reg [23:0] color_sel;
   always @(*) begin
     if (any_note) color_sel = note_color(hit_lv);
@@ -690,7 +538,7 @@ module spectrum_display #(
     else if (in_edge) color_sel = {edge_r2, edge_g2, edge_b2};
     else if (in_fill) color_sel = {fill_r, fill_g, fill_b};
     else if (in_glow) color_sel = {glow_r, glow_g, glow_b};
-    else if (in_band) color_sel = {band_r, band_g, band_b};  // 【第4步 D】底部细密波段
+    else if (in_band) color_sel = {band_r, band_g, band_b};  // 底部波段图层
     else if (in_gridline) color_sel = {grid_r, grid_g, grid_b};  // dB 参考网格
     else color_sel = {bg_r, bg_g, bg_b};
   end

@@ -134,3 +134,12 @@ tests/v186_image_pipeline/**/*.log -whitespace
 tests/v186_image_pipeline/*.log -whitespace
 tests/v186_image_pipeline/**/*.hex -whitespace
 tests/v186_image_pipeline/**/*.v whitespace=cr-at-eol
+
+# Submission inputs retain their recorded bytes across clone and checkout.
+rtl/** -text -whitespace
+constraints/** -text -whitespace
+project_template/** -text -whitespace
+host/** -text -whitespace
+verification/** -text -whitespace
+evidence/** -text -whitespace
+docs/source_examples/** -text -whitespace

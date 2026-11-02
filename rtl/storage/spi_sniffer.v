@@ -1,30 +1,6 @@
-// spi_sniffer.v - on-chip SD card SPI byte-stream capture (2 KB, real ERAM).
-//
-// WHAT IT GIVES US
-//   The complete real-card byte stream around one sector read:
-//       ... 51 <4B addr> <fill ~1540 bytes> FE <512 data> ...
-//   On-board fill-counter measurements (2 samples): 1,536 and 1,544 bytes
-//   between the CMD17 byte and the 0xFE token - the card dribbles ~1,540
-//   bytes of 0xFF before the data token, which is why a 512 B sector costs
-//   554 us instead of 164 us (0.91 MB/s instead of 3.12).
-//
-//   Three CMD18 multi-block attempts failed on the real card while the
-//   SPI simulation was byte-perfect, so we need the real stream, not a model.
-//
-// LEARNED THE HARD WAY (do not repeat)
-//   1. Never name a signal `buf` - it is a reserved Verilog keyword (the gate
-//      primitive).  iverilog says "invalid module item", TD says HDL-8007.
-//   2. A wide vector (reg [16383:0] cap) is NOT a RAM to the synthesiser: TD
-//      maps it to LUTs (20716 > 9800 slice limit).  A RAM needs an ARRAY.
-//   3. An array only becomes ERAM if the read is SYNCHRONOUS, and the official
-//      way to force it is the attribute (* ram_style = "bram" *).
-//
-// READOUT
-//   dbg_byte walks the capture at ~2 Hz (0.5 s per byte), wrapping at 2048.
-//   On freeze the walk starts 64 bytes before the token, i.e. right at the
-//   fill -> token -> data transition.  Two 7-seg hex digits + dp for `frozen`.
-//
-// COST  2 ERAM blocks (2 KB) + ~40 LUT, in no functional path.
+// Read-only SPI receive-byte capture with a 2 KiB synchronous RAM.
+// Freeze after the selected command/token window, then walk stored bytes
+// through diagnostic outputs. Capture does not drive media requests.
 
 module spi_sniffer (
   input            clk,

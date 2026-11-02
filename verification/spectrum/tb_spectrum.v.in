@@ -1,0 +1,34 @@
+`timescale 1ns/1ps
+module tb;
+reg clk=0;always #5 clk=~clk;
+reg rst_n=0,av=0;reg [23:0] al=0;wire start,done,valid;wire [15:0] dr,di,fr,fi;
+audio_frame af(clk,rst_n,av,al,done,start,dr,di);
+fft_256 ff(clk,rst_n,start,dr,di,,done,fr,fi,valid);
+wire [7:0] b0,b1,b2,b3;wire beat;
+spectrum_capture sc(clk,rst_n,valid,fr,fi,6'd0,b0,6'd0,b1,6'd0,b2,6'd0,b3,beat);
+reg [15:0] samples[0:NUMS-1];integer f,j,outfile,bin=0,cycles=0,firstcycle;
+always @(posedge clk) begin
+ cycles=cycles+1;
+ #1;
+ if(start)firstcycle=cycles;
+ if(valid)begin $fdisplay(outfile,"F %0d %0d %0d %0d",f,bin,$signed(fr),$signed(fi));bin=bin+1;end
+ if(done)$fdisplay(outfile,"C %0d %0d",f,cycles-firstcycle);
+end
+initial begin
+ outfile=$fopen("rtl_values.txt","w");$readmemh("samples.mem",samples);
+ repeat(5)@(negedge clk);rst_n=1;
+ for(f=0;f<NFR;f=f+1)begin
+  bin=0;
+  for(j=0;j<256;j=j+1)begin
+   @(negedge clk);av=1;al={samples[f*256+j],8'b0};
+   @(negedge clk);av=0;repeat(14)@(negedge clk);
+  end
+  wait(done);repeat(20)@(negedge clk);
+  if(bin!=256)$fatal(1,"bin count %d",bin);
+  for(j=0;j<256;j=j+1)$fdisplay(outfile,"W %0d %0d %0d",f,j,$signed(af.mem[j]));
+  for(j=0;j<32;j=j+1)$fdisplay(outfile,"B %0d %0d %0d",f,j,sc.display_a[j]);
+ end
+ $fclose(outfile);$display("SPECTRUM_REPORT_PASS");$finish;
+end
+initial begin #50000000;$fatal(1,"timeout");end
+endmodule

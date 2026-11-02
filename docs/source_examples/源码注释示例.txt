@@ -1,0 +1,55 @@
+﻿源码注释示例（与交付源码对应）
+
+说明：下面摘录文件开头；同目录的 .v.txt / .py.txt 为完整源码副本，可直接用记事本打开。
+
+说明性注释只保留用途、接口约定与边界保护；版权许可和综合指令保持原样。
+
+
+
+rtl/video/video_player.v
+
+`timescale 1ns / 1ps
+// Parse FPGV data and schedule decoded pixels into owned frame-buffer banks.
+// Byte-FIFO admission reserves space for one complete in-flight SD sector.
+// Audio consumption grants presentation credit; scanout feedback releases banks.
+// Geometry and FIFO capacity are selected by the integration parameters.
+module video_player #(
+
+
+
+rtl/spectrum/fft_256.v
+
+// 256-point radix-2 DIT FFT with one shared butterfly and synchronous RAM.
+// Load samples at bit-reversed addresses; emit frequency bins in natural order.
+// Eight stages perform 1024 butterflies. Each butterfly uses five scheduler cycles:
+// address, first products, second products, scaled outputs, writeback.
+// Each stage scales by 1/2 before narrowing, giving total normalization of 1/256.
+module fft_256 (
+
+
+
+rtl/storage/sector_byte_source.v
+
+// Indivisible SD sector -> backpressured bytes. One synchronous 512-byte RAM.
+// cancel never withdraws an in-flight request. restart is legal only idle.
+module sector_byte_source #(
+
+
+
+host/image/convert_image.py
+
+"""Convert a still image to the player's uncompressed 24-bit BMP format."""
+
+import argparse
+import hashlib
+from pathlib import Path
+import struct
+
+from PIL import Image, ImageOps
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('source', type=Path)
+    parser.add_argument('output', type=Path)
+    args = parser.parse_args()

@@ -1,7 +1,7 @@
 """Independent original-constraint STA with portable baseline scope review."""
 from pathlib import Path
 import argparse,datetime,hashlib,json,os,re,subprocess,sys
-a=argparse.ArgumentParser();a.add_argument('root',type=Path);a.add_argument('--seed',type=int,default=24);a.add_argument('--td-command',default='D:/TD3/bin/td_commands_prompt.exe');args=a.parse_args()
+a=argparse.ArgumentParser();a.add_argument('root',type=Path);a.add_argument('--seed',type=int,default=24);a.add_argument('--td-command',required=True);args=a.parse_args()
 C=args.root.resolve();P=C/'candidate/project';tools=C/'tools';baseline=json.loads((tools/'coverage_baseline.json').read_text())
 assert C.drive.upper()=='D:','Build and verification outputs must be on D:'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()

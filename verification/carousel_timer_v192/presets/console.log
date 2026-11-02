@@ -1,0 +1,18 @@
+PASS preset=0 period_cycles=4000 new_code=1
+PASS preset=1 period_cycles=6000 new_code=2
+PASS preset=2 period_cycles=10000 new_code=3
+PASS preset=3 period_cycles=16000 new_code=4
+PASS preset=4 period_cycles=20000 new_code=5
+PASS preset=5 period_cycles=30000 new_code=6
+PASS preset=6 period_cycles=40000 new_code=7
+PASS preset=7 period_cycles=60000 new_code=8
+PASS preset=8 period_cycles=90000 new_code=9
+PASS preset=9 period_cycles=120000 new_code=10
+PASS preset=10 period_cycles=180000 new_code=11
+PASS preset=11 period_cycles=240000 new_code=12
+PASS preset=12 period_cycles=360000 new_code=13
+PASS preset=13 period_cycles=480000 new_code=14
+PASS preset=14 period_cycles=600000 new_code=15
+PASS preset=15 period_cycles=1200000 new_code=0
+PASS16 presets 2..600s, boundary change, failed prefetch and manual recovery
+D:\codexworks\carousel_timer_validation_v192\presets\tb.v:63: $finish called at 34765930000 (1ps)

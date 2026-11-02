@@ -1,0 +1,56 @@
+--- peak_test_sd_reader
++++ submission_sd_reader
+@@ -103,6 +103,10 @@
+   localparam MULTI_ON = 1'b1;  // 每批 16 块 = 8 KB（2026-10-21 修复收尾后重新启用）
+ 
+   reg  [ 4:0] state;
++  // Image read-ahead is latency-sensitive because PCM shares the card.
++  // Keep the video batch capacity, but bound paced image bursts to 16 sectors.
++  localparam integer IMAGE_BURST_BLOCKS = (NB_BLK > 16) ? 16 : NB_BLK;
++  reg [COUNT_W:0] burst_blocks;
+   reg  [31:0] sec_addr;
+ 
+   // ---- 预取缓冲 ----
+@@ -159,7 +163,7 @@
+   wire sf_advance=!sf_slow || sf_phase==0;
+   wire sf_end=sf_state==SF_END;
+   wire [PBUF_AW-1:0] sf_ra=sf_base+sf_count[8:0];
+-  wire sf_range=sf_ge && !(|sf_offset[31:COUNT_W]) && sf_offset[COUNT_W-1:0]<NB_BLK-1;
++  wire sf_range=sf_ge && !(|sf_offset[31:COUNT_W]) && {1'b0,sf_offset[COUNT_W-1:0]} < (burst_blocks-1'b1);
+   wire [COUNT_W:0] sf_sector_end={1'b0,sf_offset[COUNT_W-1:0]}+2;
+   wire sf_complete=rd_cnt[COUNT_W+9:9]>=sf_sector_end;
+   wire sf_idle=sf_state==SF_IDLE && !sf_valid;
+@@ -202,7 +206,7 @@
+   //   会被综合器删掉（等价）。
+   always @(posedge clk or posedge rst) begin
+     if (rst == 1'b1) rd_nb_blk <= 16'd1;
+-    else if (MULTI_ON && (state == S_CMD18 || state == S_READM)) rd_nb_blk <= NB_BLK;
++    else if (MULTI_ON && (state == S_CMD18 || state == S_READM)) rd_nb_blk <= burst_blocks;
+     else rd_nb_blk <= 16'd1;
+   end
+ 
+@@ -294,6 +298,7 @@
+       block_write_req <= 1'b0;
+       block_read_req <= 1'b0;
+       sec_addr <= 32'd0;
++      burst_blocks <= NB_BLK;
+       sd_init_done <= 1'b0;
+       // ---- 多块读状态（必须复位，否则 X 会污染数据通路）----
+       pbuf_lba <= 32'd0;
+@@ -397,6 +402,7 @@
+           end else if (sd_sec_read == 1'b1) begin
+             sec_addr <= sd_sec_read_addr;
+             hit_slow <= multi_paced;
++            burst_blocks <= multi_paced ? IMAGE_BURST_BLOCKS : NB_BLK;
+             state <= S_CACHE_CHECK;
+           end
+ 
+@@ -446,7 +452,7 @@
+             state          <= S_MEND;
+             // 第 1 块已给客户端，第 2..NB_BLK 块在 pbuf[0..NB_BLK-2]
+             pbuf_lba       <= sec_addr + 32'd1;
+-            pbuf_n         <= NB_BLK - 1;
++            pbuf_n         <= burst_blocks - 1'b1;
+           end else block_read_req <= 1'b1;
+         end
+         S_CMD12: begin

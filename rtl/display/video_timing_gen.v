@@ -1,20 +1,6 @@
-//===================================================================
-// video_timing_gen : VESA timing generator (FSM implementation)
-//===================================================================
-// Unlike the example "color_bar" which uses "counter + multiple
-// comparators", this module uses an explicit "horizontal FSM +
-// vertical FSM" to describe the scan timing. Each state lasts a fixed
-// number of cycles (or lines), so the state transitions are clear,
-// easy to read and easy to modify.
-//
-// Horizontal FSM : H_SYNC -> H_BACK_PORCH -> H_ACTIVE -> H_FRONT_PORCH
-// Vertical FSM   : V_SYNC -> V_BACK_PORCH -> V_ACTIVE -> V_FRONT_PORCH
-//
-// Default parameters = 640x480@60Hz (pixel clock 25.175MHz):
-//   H_ACTIVE=640 H_FP=16 H_SYNC=96 H_BP=48  (H_TOTAL=1280)
-//   V_ACTIVE=480 V_FP=10 V_SYNC=2  V_BP=33  (V_TOTAL=525)
-//   Both sync polarities negative (HS_POL=0, VS_POL=0)
-//===================================================================
+// Generate HS, VS and DE with horizontal and vertical timing state machines.
+// Each axis cycles through sync, back porch, active area and front porch.
+// Parameters set interval lengths and sync polarities in pixel clocks or lines.
 module video_timing_gen #(
   parameter H_ACTIVE = 12'd1280,
   parameter H_FP     = 12'd110,

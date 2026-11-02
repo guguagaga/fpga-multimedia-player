@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-02",
+  "guides": [
+    "lowRISC Verilog Coding Style Guide",
+    "Google Python Style Guide"
+  ],
+  "production_rtl_modified": false,
+  "checks": {
+    ".v": {
+      "files": 148,
+      "files_with_lines_over_120": 53,
+      "files_with_indent_tabs": 1,
+      "long_line_examples": [
+        "rtl\\image\\sd_card_bmp.v",
+        "rtl\\memory\\frame_fifo_read.v",
+        "rtl\\memory\\frame_fifo_write.v",
+        "rtl\\memory\\frame_read_write.v",
+        "rtl\\storage\\fat32_sector_mapper.v",
+        "rtl\\storage\\sd_card_top.v",
+        "rtl\\top\\top_tf_hdmi_audio.v",
+        "rtl\\video\\video_player.v"
+      ]
+    },
+    ".py": {
+      "files": 59,
+      "files_with_lines_over_120": 52,
+      "files_with_indent_tabs": 0,
+      "long_line_examples": [
+        "tools\\assemble_project.py",
+        "tools\\audit_clock_scope.py",
+        "tools\\recheck_board_routed.py",
+        "tools\\validate_build.py",
+        "tools\\verify_audio_recovery.py",
+        "tools\\verify_routed.py",
+        "host\\video\\codec_tools.py",
+        "host\\video\\encode_movie.py"
+      ]
+    },
+    ".cpp": {
+      "files": 9,
+      "files_with_lines_over_120": 9,
+      "files_with_indent_tabs": 0,
+      "long_line_examples": [
+        "host\\video\\codec12\\encode_blocks_experimental.cpp",
+        "host\\video\\codec14\\encode_blocks_experimental.cpp",
+        "host\\video\\src\\check_refinement_invariants.cpp",
+        "host\\video\\src\\encode_720p.cpp",
+        "host\\video\\src\\encode_quad.cpp",
+        "host\\video\\src\\refine_boundaries.cpp",
+        "host\\video\\src\\repack_codec10.cpp",
+        "host\\video\\src\\validate_budget55000.cpp"
+      ]
+    }
+  },
+  "scope": "Descriptive style inventory, not a complete lint or formal correctness proof."
+}

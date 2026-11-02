@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Pairwise RGB565 packing for the frame writer.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // Pixel 0 occupies bits15:0; pixel1 occupies bits31:16.
 // Every row and frame must contain an even number of pixels.
@@ -27,9 +23,8 @@ module rgb565_pair_pack (
   end
 endmodule
 
-// Input must be a synchronous show-ahead FIFO word. Advance the FIFO only
-// after consuming both halves. Output latency matches the former normal FIFO:
-// pixel_valid at edge N -> pixel_rgbx valid just after edge N.
+// 输入为同步 show-ahead FIFO 字。消费完两个 RGB565 半字后才推进 FIFO。
+// pixel_valid 在时钟沿有效时，pixel_rgbx 于该沿后更新。
 module rgb565_pair_unpack (
   input wire clk, clear, pixel_valid,
   input wire [31:0] word_data,

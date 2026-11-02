@@ -1,0 +1,348 @@
+{
+  "passed": true,
+  "scope": "Independent integer model versus unmodified RTL; nominal 48 kHz calculations; not a hardware audio measurement",
+  "source_sha256": {
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\audio_frame.v": "d8dbaf42a5031c30e23cf339ea61e533b6b300140043c3aaa4f6dd4248fb69a1",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\fft_256.v": "2fecdb30c1caf3de690be503005d409158ba8d5e7e821cf64bd57cd473023cec",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\butterfly.v": "4ee3cada6d100bda20f81a67249a0f4641404b86578ed080d56e4abf2da7726b",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\twiddle_rom.v": "2d8aec654be7c74659694f61c182758cf7cb2a00da1a49bbb3db36438b6ab225",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\spectrum_capture.v": "3b317d9fa0debb61fdfbbb06ca2c50780e3fe8f1f3069916a2b61420cc74d551",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\memory\\dp_ram.v": "f1e8098d619d2a0819a991d835d33ba4240a1b9593c1a8e1e52792be2cf3a109",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\spectrum\\spectrum_display.v": "fb53fff2c86a3e90b47083635b69f26f8f5389aadc03216280c9005bbda7834b",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\top\\top_tf_hdmi_audio.v": "ace6392f259be9576e6cc1f27d43d86fd043b5416d774bdd37c0f6b20f9fbd1a",
+    "D:\\codexworks\\image_iterator_v195_20261101\\candidate_shared_onehot\\rtl\\control\\twiddle_256.mem": "0bf31f89128529810262e43971742ebbdb3287b1e6ca8ee09c1a0f953a59010b"
+  },
+  "v193_byte_identical": {
+    "audio_frame.v": true,
+    "fft_256.v": true,
+    "butterfly.v": true,
+    "twiddle_rom.v": true,
+    "spectrum_capture.v": true,
+    "spectrum_display.v": true
+  },
+  "rtl_checks": {
+    "F": 2816,
+    "W": 2816,
+    "B": 352
+  },
+  "signal_names": [
+    "silence",
+    "impulse",
+    "dc",
+    "bin1",
+    "bin5",
+    "bin20",
+    "bin57",
+    "bin67",
+    "bin126",
+    "offbin5_4",
+    "random"
+  ],
+  "start_to_done_cycles": [
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635,
+    5635
+  ],
+  "nominal_fs": 48000,
+  "N": 256,
+  "bin_spacing_hz": 187.5,
+  "window_duration_ms": 5.333333333333333,
+  "hann_sum": 4194176,
+  "coherent_gain": 0.4999847412109375,
+  "double_gain": 0.999969482421875,
+  "hann_max_abs_error": 4.3110273640345476e-05,
+  "enbw_bins": 1.499999990453361,
+  "theoretical_enbw_hz": 281.25,
+  "max_complex_error_vs_float_fft": 2.4666020665798407,
+  "real_magnitude_upper_relative_error": 0.1180339887498949,
+  "contrast_lut": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    7,
+    16,
+    28,
+    43,
+    62,
+    84,
+    110,
+    140,
+    172,
+    208,
+    248
+  ],
+  "contrast_formula_discrepancies": [],
+  "bands": [
+    {
+      "band": 0,
+      "first_bin": 1,
+      "last_bin": 2,
+      "count": 2,
+      "low_hz": 187.5,
+      "high_hz": 375.0
+    },
+    {
+      "band": 1,
+      "first_bin": 3,
+      "last_bin": 3,
+      "count": 1,
+      "low_hz": 562.5,
+      "high_hz": 562.5
+    },
+    {
+      "band": 2,
+      "first_bin": 4,
+      "last_bin": 5,
+      "count": 2,
+      "low_hz": 750.0,
+      "high_hz": 937.5
+    },
+    {
+      "band": 3,
+      "first_bin": 6,
+      "last_bin": 6,
+      "count": 1,
+      "low_hz": 1125.0,
+      "high_hz": 1125.0
+    },
+    {
+      "band": 4,
+      "first_bin": 7,
+      "last_bin": 8,
+      "count": 2,
+      "low_hz": 1312.5,
+      "high_hz": 1500.0
+    },
+    {
+      "band": 5,
+      "first_bin": 9,
+      "last_bin": 9,
+      "count": 1,
+      "low_hz": 1687.5,
+      "high_hz": 1687.5
+    },
+    {
+      "band": 6,
+      "first_bin": 10,
+      "last_bin": 11,
+      "count": 2,
+      "low_hz": 1875.0,
+      "high_hz": 2062.5
+    },
+    {
+      "band": 7,
+      "first_bin": 12,
+      "last_bin": 12,
+      "count": 1,
+      "low_hz": 2250.0,
+      "high_hz": 2250.0
+    },
+    {
+      "band": 8,
+      "first_bin": 13,
+      "last_bin": 14,
+      "count": 2,
+      "low_hz": 2437.5,
+      "high_hz": 2625.0
+    },
+    {
+      "band": 9,
+      "first_bin": 15,
+      "last_bin": 15,
+      "count": 1,
+      "low_hz": 2812.5,
+      "high_hz": 2812.5
+    },
+    {
+      "band": 10,
+      "first_bin": 16,
+      "last_bin": 17,
+      "count": 2,
+      "low_hz": 3000.0,
+      "high_hz": 3187.5
+    },
+    {
+      "band": 11,
+      "first_bin": 18,
+      "last_bin": 18,
+      "count": 1,
+      "low_hz": 3375.0,
+      "high_hz": 3375.0
+    },
+    {
+      "band": 12,
+      "first_bin": 19,
+      "last_bin": 20,
+      "count": 2,
+      "low_hz": 3562.5,
+      "high_hz": 3750.0
+    },
+    {
+      "band": 13,
+      "first_bin": 21,
+      "last_bin": 21,
+      "count": 1,
+      "low_hz": 3937.5,
+      "high_hz": 3937.5
+    },
+    {
+      "band": 14,
+      "first_bin": 22,
+      "last_bin": 23,
+      "count": 2,
+      "low_hz": 4125.0,
+      "high_hz": 4312.5
+    },
+    {
+      "band": 15,
+      "first_bin": 24,
+      "last_bin": 24,
+      "count": 1,
+      "low_hz": 4500.0,
+      "high_hz": 4500.0
+    },
+    {
+      "band": 16,
+      "first_bin": 25,
+      "last_bin": 26,
+      "count": 2,
+      "low_hz": 4687.5,
+      "high_hz": 4875.0
+    },
+    {
+      "band": 17,
+      "first_bin": 27,
+      "last_bin": 27,
+      "count": 1,
+      "low_hz": 5062.5,
+      "high_hz": 5062.5
+    },
+    {
+      "band": 18,
+      "first_bin": 28,
+      "last_bin": 31,
+      "count": 4,
+      "low_hz": 5250.0,
+      "high_hz": 5812.5
+    },
+    {
+      "band": 19,
+      "first_bin": 32,
+      "last_bin": 33,
+      "count": 2,
+      "low_hz": 6000.0,
+      "high_hz": 6187.5
+    },
+    {
+      "band": 20,
+      "first_bin": 34,
+      "last_bin": 37,
+      "count": 4,
+      "low_hz": 6375.0,
+      "high_hz": 6937.5
+    },
+    {
+      "band": 21,
+      "first_bin": 38,
+      "last_bin": 39,
+      "count": 2,
+      "low_hz": 7125.0,
+      "high_hz": 7312.5
+    },
+    {
+      "band": 22,
+      "first_bin": 40,
+      "last_bin": 43,
+      "count": 4,
+      "low_hz": 7500.0,
+      "high_hz": 8062.5
+    },
+    {
+      "band": 23,
+      "first_bin": 44,
+      "last_bin": 45,
+      "count": 2,
+      "low_hz": 8250.0,
+      "high_hz": 8437.5
+    },
+    {
+      "band": 24,
+      "first_bin": 46,
+      "last_bin": 49,
+      "count": 4,
+      "low_hz": 8625.0,
+      "high_hz": 9187.5
+    },
+    {
+      "band": 25,
+      "first_bin": 50,
+      "last_bin": 51,
+      "count": 2,
+      "low_hz": 9375.0,
+      "high_hz": 9562.5
+    },
+    {
+      "band": 26,
+      "first_bin": 52,
+      "last_bin": 55,
+      "count": 4,
+      "low_hz": 9750.0,
+      "high_hz": 10312.5
+    },
+    {
+      "band": 27,
+      "first_bin": 56,
+      "last_bin": 57,
+      "count": 2,
+      "low_hz": 10500.0,
+      "high_hz": 10687.5
+    },
+    {
+      "band": 28,
+      "first_bin": 58,
+      "last_bin": 61,
+      "count": 4,
+      "low_hz": 10875.0,
+      "high_hz": 11437.5
+    },
+    {
+      "band": 29,
+      "first_bin": 62,
+      "last_bin": 63,
+      "count": 2,
+      "low_hz": 11625.0,
+      "high_hz": 11812.5
+    },
+    {
+      "band": 30,
+      "first_bin": 64,
+      "last_bin": 67,
+      "count": 4,
+      "low_hz": 12000.0,
+      "high_hz": 12562.5
+    },
+    {
+      "band": 31,
+      "first_bin": 68,
+      "last_bin": 126,
+      "count": 59,
+      "low_hz": 12750.0,
+      "high_hz": 23625.0
+    }
+  ],
+  "full_decay_updates": 124,
+  "minimum_full_decay_ms": 661.3333333333334,
+  "butterflies": 1024,
+  "fft_core_cycles": 5634,
+  "butterflies_per_dft_term_ratio": 0.015625
+}

@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Video input byte storage.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // One synchronous read cycle. Byte lanes preserve the untouched neighbor.
 // EG4 offers separate 9K/32K resources: large byte FIFOs must use 32K RAM.

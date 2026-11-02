@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checked_pixels": 921600,
+  "source_sha256": {
+    "D:\\codexworks\\osd_carousel_v187\\tests_r2\\tb_frame.v": "4a1ff5cc36b4958feac454b8b1ab7fbb8c38a9a6068b210dc4cc30f32acce442",
+    "D:\\codexworks\\osd_carousel_v187\\tests_r2\\reference_osd.v": "4d160089197c5f1050e40933d05ca8355ec1bdc56d3d60547fcfd829e190c982",
+    "D:\\codexworks\\osd_carousel_v187\\rebuild_r2\\candidate\\project\\rtl\\osd_player_ui.v": "5635afd3b60a4f64b83965e183f3344e4cd8a9e7a35ea338dd35c4c2b2797433",
+    "D:\\codexworks\\osd_carousel_v187\\rebuild_r2\\candidate\\project\\user_source\\hdl_source\\char_rom.v": "d1864df5d31025a090736e6e7bf4900829743d139e31e37fc2260f5f672739fa",
+    "D:\\codexworks\\osd_carousel_v187\\rebuild_r2\\candidate\\project\\user_source\\hdl_source\\osd_brand_rom.v": "9e06814180e000dadd3e6527b2f51dccedc29d10f3e7bc64cbb95ff0bab498f4"
+  }
+}

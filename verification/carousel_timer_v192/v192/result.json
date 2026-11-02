@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "source": "D:\\codexworks\\release_v182_20261029\\repository\\rtl\\image\\sd_card_bmp.v",
+  "scope": "Actual controller, accelerated 2000 cycles/second; abstract reader/scaler and external fade/memory models. Not full-pixel or hardware timing evidence."
+}

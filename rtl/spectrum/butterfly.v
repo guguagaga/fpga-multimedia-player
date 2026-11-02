@@ -1,6 +1,5 @@
 // Two real multipliers shared across the real and imaginary complex products.
 // A transaction occupies three edges: first products, second products, output.
-// Caller waits one additional cycle compared with the four-multiplier core.
 module butterfly (
   input wire clk, rst_n, din_valid,
   input wire [15:0] x0_re, x0_im, x1_re, x1_im, w_re, w_im,

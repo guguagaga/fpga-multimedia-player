@@ -1,13 +1,7 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Read-only fragmented FAT32 file-sector translation with per-client cursors.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
-// Read-only FAT32 logical-sector translator, 2026-10-27.
-// Clients retain their existing virtual LBA = first_file_LBA + sector_offset.
-// owner=2 is the raw filesystem client; other owners have independent cursors.
-// One FAT-sector cache (128x32) absorbs sequential-cluster lookups. No media
-// data are stored here. A transaction is owned until its response completes.
+// Translate file-relative sector requests through read-only FAT32 chains.
+// owner=2 is the raw filesystem client; other owners retain independent cursors.
+// FAT and cursor metadata share RAM; transaction ownership lasts until completion.
 module fat32_sector_mapper #(
   parameter integer PHYSICAL_PREFETCH_BLOCKS = 16,
   parameter integer IO_TIMEOUT = 25000000,
@@ -83,12 +77,9 @@ module fat32_sector_mapper #(
   // max-cluster add/decode before it reaches fault handling and cursor enables.
   reg [27:0] max_cluster_q;
   always @(posedge clk) max_cluster_q <= max_cluster;
-  // Two full following16-sector clusters guarantee32 readable physical
-  // sectors from any offset. Requests still use FAT-translated physical LBAs.
-  // The conservative guard also covers larger cluster sizes and disables
-  // speculative read-ahead near the volume end.
-  // A request may start at the final sector of a16-sector cluster.
-  // Cover the required following clusters before speculative physical reads.
+  // Bound speculative physical reads by the mounted data volume. The guard
+  // covers a batch starting at the final sector of a 16-sector cluster;
+  // all logical requests still use exact FAT-translated physical LBAs.
   localparam integer PREFETCH_FOLLOWING_CLUSTERS = (PHYSICAL_PREFETCH_BLOCKS + 14) / 16;
   reg [27:0] prefetch_last_start;
   reg large_prefetch_safe;
@@ -146,7 +137,7 @@ module fat32_sector_mapper #(
   wire [27:0] next_cluster = next_entry[27:0];
   // Separate wide FAT-entry validation from the shared fault/state/data
   // enables. next_entry is complete before NEXT_CHECK; the predicates
-  // are consumed only in ADVANCE. EOC/bad/loop priority is unchanged.
+  // are consumed only in ADVANCE, preserving EOC/bad/loop precedence.
   reg next_eoc_q, next_bad_q, next_loop_q;
   always @(posedge clk)
     if (state[23]) begin
@@ -383,8 +374,8 @@ module fat32_sector_mapper #(
         state[9]: begin
           physical_lba <= current_cluster - 2;
           shift_left <= cluster_shift;
-          // Legacy16-sector batches stay inside a cluster;32-sector speculative
-          // batches stay inside the data volume. Hits require an exact physical LBA.
+          // Small batches remain within their cluster; larger batches are bounded
+          // by the data volume. A cache hit requires the exact physical LBA.
           physical_multi<=want_multi&&((PHYSICAL_PREFETCH_BLOCKS>16)?large_prefetch_safe:((cluster_shift>=4)&&(sector_in_cluster[6:0]<={sector_mask[6:4],4'd0})));
           context_word <= 0;
           state <= SHIFT_LEFT;

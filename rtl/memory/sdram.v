@@ -44,12 +44,7 @@ module sdram (
 );
 `ifndef SIMULATION
   wire                   SDRAM_CLK;
-  // 2026-10-10 修复（纯声明缺失）：`SDR_CKE` 只在 `ifdef SIMULATION` 里作为端口出现，
-  //   在 `ifndef SIMULATION`（= 综合路径）这一组 wire 里【漏了】
-  //   ⇒ 两工具都报：
-  //     · ModelSim: Warning vlog-2623 (Undefined variable) 于 sdram.v(89)
-  //     · TD      : HDL-1007 "undeclared symbol 'SDR_CKE', assumed default net type 'wire'" (89)
-  //   ⇒ 与本组其它信号（SDR_RAS/SDR_CAS/...）保持一致，补上同名 wire 即可 （不动逻辑）
+  // 综合路径显式声明 SDR_CKE，与其他 SDRAM 控制信号保持一致。
   wire                   SDR_CKE;
   wire                   SDR_RAS;
   wire                   SDR_CAS;

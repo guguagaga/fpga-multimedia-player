@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Module purpose: Audio-domain sample budget and video-presentation credit synchronization.
-// Integration/validation: docs/ARCHITECTURE.md and docs/MODULE_INDEX.md.
-// -----------------------------------------------------------------------------
 `timescale 1ns / 1ps
 // Audio-domain elastic timeline. Each displayed video frame authorizes one
 // frame of PCM. Video presentation credit follows consumed samples, with a
@@ -31,7 +27,7 @@ module av_sample_sync #(
   // half a frame is exactly one60Hz refresh: tiny clock/CDC phase differences
   // could move a ready frame to that earlier refresh. Three quarters of a
   // frame gives1200samples (25ms), centered between16.67ms and33.33ms.
-  // Lower rates keep the validated lead. Samples are neither skipped nor
+  // Lower rates use LEAD_SAMPLES. Samples are neither skipped nor
   // duplicated; this changes only when the next presentation is authorized.
   wire [12:0] first_phase = (period > LEAD_SAMPLES) ? period - LEAD_SAMPLES : period - (period >> 2);
   wire consuming = enable_q[1] && started_q[1] && sample_valid && !draining_q[1];

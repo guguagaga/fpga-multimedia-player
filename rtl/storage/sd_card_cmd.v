@@ -56,11 +56,8 @@ module sd_card_cmd (
   wire [ 7:0] data_recv;
   reg  [ 9:0] wr_data_cnt;
 
-  // ---- CMD18 multi-block read (2026-10-17) ----
-  //   nb_blk 是独立端口，不能复用 cmd_data_len：
-  //     cmd_data_len != 0 在 S_CMD 里表示"这是写命令，进 S_CMD_DATA"（CMD24 用），
-  //     拿它传块数会把读命令带进写数据状态机（踩过）。
-  //   nb_blk == 0 按 1 块处理，保证老路径 cmd_data_len=0 时行为不变。
+  // CMD18 block count is a separate input. cmd_data_len selects command-data
+  // handling and must not carry the read count. A zero count means one block.
   reg  [15:0] blk_done;
   // Capture command type: CMD18 needs CMD12 even when only one block is read.
   reg         read_is_multi;
@@ -195,33 +192,16 @@ module sd_card_cmd (
           end
         end
         S_READ: begin
-          // ================================================================
-          // [Design note 回退]这里恢复成改动前逐字节一致的时序：
-          //   进入本状态时第一个字节就是数据 byte 0（令牌已在 S_READ_WAIT
-          //   吃掉），byte_cnt 0..511 是数据，512/513 是 CRC，513 处结束。
-          //
-          //   上一版我把语义改成"byte_cnt==0 找令牌 / 1..512 数据 /
-          //   513~514 CRC"，虽然在我的理想化模型里过了，但真卡上
-          //   整条 SD 读通路全废（板上现象：图片黑屏、音频卡 seek、
-          //   视频 0 帧）—— 说明真卡的令牌/填充字节时序比模型脏，
-          //   对每块第一个字节的偏移极其敏感。
-          //
-          //   CMD18 多块读因此暂停：sd_card_top 的 sd_read_multi 接 0，
-          //   所有客户端走单块 CMD17（与 FPGVA 行为一致）。
-          //   要重启多块，必须先在模型里加"劣化卡"（令牌前塞垃圾字节、
-          //   CRC 后不干净），保证老路径时序一字不改也能对。
-          // ================================================================
+          // S_READ starts after the 0xFE token has been consumed. Byte positions
+          // 0..511 are payload; 512 and 513 are CRC. This keeps payload alignment
+          // identical for the first and subsequent blocks.
           if (spi_wr_ack == 1'b1) begin
             if (byte_cnt == 16'd513) begin
               byte_cnt <= 16'd0;
-              // 【CMD18 多块】第一块的字节时序完全没有动：
-              //   0..511 数据、512/513 CRC、513 处结束，与改动前一致。
-              //   只有在"后面还有块"时，才跳到 S_READ_NEXT 去找下一个
-              //   0xFE 令牌；令牌与数据之间的字节一律不产生 valid。
+              // After payload and CRC, seek the next token only when more blocks remain.
+              // Token and inter-block fill bytes never assert payload valid.
               if (blk_done + 16'd1 >= nb_blk) begin
-                // 2026-10-26 speed fix: CMD17 ends after data + two CRC bytes.
-                // The old unconditional branch added CMD12 + 600 dummy bytes
-                // to EVERY single-sector read. Keep CMD18 cleanup unchanged.
+                // CMD17 completes after its CRC; only CMD18 requires stop/drain handling.
                 state <= read_is_multi ? S_STOP_CMD : S_READ_ACK;
                 spi_wr_req <= 1'b0;
                 blk_done <= 16'd0;
@@ -314,13 +294,9 @@ module sd_card_cmd (
             send_data  <= 8'hff;
           end
         end
-        // ================= [Design note 修复]CMD18 收尾 =================
-        // 真卡在收到 CMD18 后会持续预取并流块，直到看见 CMD12 才停。
-        // 旧实现读完最后一块就停机、再走"命令通道"发 CMD12 —— 那时卡仍在
-        // 吐第 N+1 块的数据，命令通道读到的第一个字节是数据/令牌而不是 R1
-        // ⇒ cmd_req_error ⇒ S_CMD12 无限重试 ⇒ 总线死锁（板上"只有视频黑屏"）。
-        // 修法：CMD12 用数据字节通路发出去（和卡的流处于同一串时钟里），
-        // 然后把卡剩下的"半块数据 + stuff + R1"全部读掉丢弃，总线才干净。
+        // Terminate CMD18 through the same SPI byte stream using CMD12. Drain
+        // trailing bytes before acknowledging completion so they cannot enter the
+        // next client transaction.
         S_STOP_CMD: begin
           if (spi_wr_ack == 1'b1) begin
             if (byte_cnt == 16'd5) begin
@@ -366,7 +342,7 @@ module sd_card_cmd (
   end
   always @(posedge sys_clk or posedge rst) begin
     if (rst == 1'b1) block_read_valid <= 1'b0;
-    // 恢复改动前的窗口：byte_cnt 0..511 = 一块的 512 个数据字节
+    // Only byte positions 0..511 carry payload data.
     else if (state == S_READ && byte_cnt < 16'd512) block_read_valid <= spi_wr_ack;
     else block_read_valid <= 1'b0;
   end
