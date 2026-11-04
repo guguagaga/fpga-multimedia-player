@@ -15,7 +15,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1100"/>
+                    <Attr Name="CompileOrder" Val="100"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/context_huffman_decoder.v">
@@ -23,7 +23,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1100"/>
+                    <Attr Name="CompileOrder" Val="99"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/codec_byte_queue.v">
@@ -31,7 +31,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1100"/>
+                    <Attr Name="CompileOrder" Val="98"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/codec12_lossless_restore.v">
@@ -39,15 +39,16 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1100"/>
+                    <Attr Name="CompileOrder" Val="97"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/gradient_block_experimental.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1101"/>
+                    <Attr Name="CompileOrder" Val="101"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/fat32_sector_mapper.v">
@@ -55,7 +56,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1005"/>
+                    <Attr Name="CompileOrder" Val="96"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/video_source_test.v">
@@ -391,6 +392,7 @@
             </File>
             <File Path="../user_source/hdl_source/wav_player.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -427,7 +429,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="77"/>
+                    <Attr Name="CompileOrder" Val="80"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/char_rom.v">
@@ -545,10 +547,11 @@
             </File>
             <File Path="../rtl/image_directory_iterator.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="164"/>
+                    <Attr Name="CompileOrder" Val="91"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/keypad_scan.v">
@@ -610,6 +613,7 @@
             </File>
             <File Path="../rtl/pixel_fifo_24x8.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -621,7 +625,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="75"/>
+                    <Attr Name="CompileOrder" Val="78"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/video_playlist_ctrl.v">
@@ -629,7 +633,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="75"/>
+                    <Attr Name="CompileOrder" Val="77"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/video_eof_guard.v">
@@ -637,7 +641,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="75"/>
+                    <Attr Name="CompileOrder" Val="76"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/video_catalog.v">
@@ -650,6 +654,7 @@
             </File>
             <File Path="../rtl/video_codec8_block_decoder.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
@@ -669,7 +674,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="76"/>
+                    <Attr Name="CompileOrder" Val="79"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/exp_input_sync.v">
@@ -677,7 +682,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="78"/>
+                    <Attr Name="CompileOrder" Val="81"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/carousel_period_cfg.v">
@@ -685,7 +690,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="79"/>
+                    <Attr Name="CompileOrder" Val="82"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/audio_transition.v">
@@ -693,7 +698,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="120"/>
+                    <Attr Name="CompileOrder" Val="83"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/qoi_stream.v">
@@ -701,15 +706,16 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="121"/>
+                    <Attr Name="CompileOrder" Val="84"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/qoa_stream.v">
                 <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="122"/>
+                    <Attr Name="CompileOrder" Val="85"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/ima_stream.v">
@@ -717,7 +723,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="123"/>
+                    <Attr Name="CompileOrder" Val="86"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/sector_byte_source.v">
@@ -725,7 +731,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="124"/>
+                    <Attr Name="CompileOrder" Val="87"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/compressed_audio_reader.v">
@@ -733,7 +739,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="125"/>
+                    <Attr Name="CompileOrder" Val="88"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/media_player.v">
@@ -741,7 +747,7 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="126"/>
+                    <Attr Name="CompileOrder" Val="89"/>
                 </FileInfo>
             </File>
             <File Path="../user_source/hdl_source/media_player_shim.v">
@@ -749,37 +755,43 @@
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="127"/>
+                    <Attr Name="CompileOrder" Val="90"/>
                 </FileInfo>
             </File>
             <File Path="../rtl/av_sample_sync.v">
-                <FileInfo><Attr Name="UsedInSyn" Val="true"/><Attr Name="UsedInP&R" Val="true"/><Attr Name="BelongTo" Val="design_1"/><Attr Name="CompileOrder" Val="1002"/></FileInfo>
-            </File>
-        <File Path="../rtl/rgb565_pair_pack.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1003"/>
+                    <Attr Name="CompileOrder" Val="92"/>
                 </FileInfo>
             </File>
-<File Path="../rtl/image_center_720p.v">
+            <File Path="../rtl/rgb565_pair_pack.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1004"/>
+                    <Attr Name="CompileOrder" Val="93"/>
                 </FileInfo>
             </File>
-<File Path="../rtl/video_byte_ram.v">
+            <File Path="../rtl/image_center_720p.v">
+                <FileInfo>
+                    <Attr Name="AutoExcluded" Val="true"/>
+                    <Attr Name="UsedInSyn" Val="true"/>
+                    <Attr Name="UsedInP&R" Val="true"/>
+                    <Attr Name="BelongTo" Val="design_1"/>
+                    <Attr Name="CompileOrder" Val="94"/>
+                </FileInfo>
+            </File>
+            <File Path="../rtl/video_byte_ram.v">
                 <FileInfo>
                     <Attr Name="UsedInSyn" Val="true"/>
                     <Attr Name="UsedInP&R" Val="true"/>
                     <Attr Name="BelongTo" Val="design_1"/>
-                    <Attr Name="CompileOrder" Val="1005"/>
+                    <Attr Name="CompileOrder" Val="95"/>
                 </FileInfo>
             </File>
-</Verilog>
+        </Verilog>
         <ADC_FILE>
             <File Path="../user_source/constraints_source/pin.adc">
                 <FileInfo>
@@ -873,14 +885,65 @@
     <Runs>
         <Run Name="syn_1" Type="Synthesis" ConstraintSet="constraint_1" Description="" Active="true">
             <Strategy Name="Default_Synthesis_Strategy">
+                <GateProperty>
+                    <map_mode>area_prior</map_mode>
+                    <map_strategy>2</map_strategy>
+                    <pack_effort>high</pack_effort>
+                </GateProperty>
+                <GlobalProperty>
+                    <thread>1</thread>
+                </GlobalProperty>
+                <RtlProperty>
+                    <infer_fsm>off</infer_fsm>
+                </RtlProperty>
             </Strategy>
             <UserParams>
+                <param>set_param flow thread 1</param>
+                <param>set_param rtl infer_fsm off</param>
+                <param>set_param gate map_mode area_prior</param>
+                <param>set_param gate map_strategy 2</param>
+                <param>set_param gate pack_effort high</param>
             </UserParams>
         </Run>
         <Run Name="phy_1" Type="PhysicalDesign" ConstraintSet="constraint_1" Description="" SynRun="syn_1" Active="true">
             <Strategy Name="Default_PhysicalDesign_Strategy">
+                <PlaceProperty>
+                    <effort>high</effort>
+                    <logic_level_opt>on</logic_level_opt>
+                    <macro_performance>macro_congestion</macro_performance>
+                    <opt_timing>high</opt_timing>
+                    <pack_mode>more_lut_pair</pack_mode>
+                    <post_place_opt>high</post_place_opt>
+                    <seed>18</seed>
+                </PlaceProperty>
+                <RouteProperty>
+                    <effort>routability</effort>
+                    <post_route_opt>high</post_route_opt>
+                </RouteProperty>
             </Strategy>
             <UserParams>
+                <param>set_param place effort high</param>
+                <param>set_param place opt_timing high</param>
+                <param>set_param place logic_level_opt on</param>
+                <param>set_param place crit_path_opt on</param>
+                <param>set_param place timing_driven_mode on</param>
+                <param>set_param place aggressive_opt 20</param>
+                <param>set_param place aggr_neighbor_dist 5</param>
+                <param>set_param place enhanced_beeline_opt 3</param>
+                <param>set_param place dram_area_factor 12</param>
+                <param>set_param place enhanced_gp on</param>
+                <param>set_param place macro_performance macro_congestion</param>
+                <param>set_param place non_crit_opt on</param>
+                <param>set_param place post_place_opt high</param>
+                <param>set_param place split_data_from_clock on</param>
+                <param>set_param place shifter_opt on</param>
+                <param>set_param route effort routability</param>
+                <param>set_param route post_route_opt high</param>
+                <param>set_param route postrt_opt_extra_round 4</param>
+                <param>set_param route fix_hold off</param>
+                <param>set_param route fix_hold on</param>
+                <param>set_param place pack_mode more_lut_pair</param>
+                <param>set_param place seed 18</param>
             </UserParams>
         </Run>
     </Runs>

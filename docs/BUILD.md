@@ -47,3 +47,9 @@ $tdCommand = Read-Host '输入本机 td_commands_prompt.exe 完整路径'
 `tools/verify.ps1`、`tools/verify_native720p.ps1`、`tools/verify_fat32.ps1` 在 Git checkout 中传入 `-VendorProject` 指向匹配依赖，均支持 `-Python`。仿真工具参数必须指向接收方实际安装位置。
 
 `verification/README.md` 划分可移植测试入口与开发过程归档平台。归档中的运行记录、原始 `.do` 及局部重布局脚本可能包含原实验路径，用于追溯试验输入，不属于生产构建或编码入口。它们没有在本次迁移检查中重新执行，也不会被生产构建自动调用。
+
+## 工程参数与已通过结果的复现
+
+最新 `.al` 模板保存了自定义综合和布局布线参数。完成本节的输入装配后即可用 TD 打开生成的工程。完整构建中的约束恢复已使用独立文件清单，最终检查恢复生产 SDC。
+
+从原布局数据库重新布线的已验证流程、所需本地完整包以及从源码重新构建的区别，见 [时序复现说明](TIMING_REPRODUCTION.md)。本仓库仅保存文本源码和复现脚本，不包含该流程所需的物理数据库；本次没有替换历史 Release 附件。

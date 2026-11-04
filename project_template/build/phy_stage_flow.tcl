@@ -2,6 +2,21 @@
 # Noted that only script in editable zone can be changed. 
 
 if { ![info exists alRun] } { source ./settings.cfg }
+# Keep the production file list independent of TD's mutable SDCList. Commands
+# such as clear_sdc/read_sdc can update that variable while changing constraints.
+namespace eval ::player_build {}
+if { ![info exists SDCList] || [llength $SDCList] == 0 } {
+  error "Production SDCList is missing or empty; refusing unconstrained flow"
+}
+set ::player_build::production_sdc_files $SDCList
+proc restore_production_sdc {} {
+  set production_files $::player_build::production_sdc_files
+  foreach sdc $production_files {
+    if { ![file isfile $sdc] } { error "Missing production SDC: $sdc" }
+  }
+  clear_sdc -user
+  foreach sdc $production_files { read_sdc $sdc }
+}
 proc step_begin { step } {
   set stopFile ".stop.f"
   if {[file isfile .stop.f]} {
@@ -79,10 +94,7 @@ proc prepare { step } {
   if { [info exists singleRun] } report_param
   if { [info exists sp] } {
     if { [info exists ADCList] } { foreach adc $ADCList { read_adc $adc } }
-    if { [info exists SDCList] } {
-      clear_sdc -user
-      foreach sdc $SDCList { read_sdc $sdc }
-    }
+    restore_production_sdc
   }
 }
 proc read_design_fun {} {
@@ -106,7 +118,7 @@ proc read_design_fun {} {
       incr i 2
     }
   }
-  if { [info exists SDCList] } { foreach sdc $SDCList { read_sdc $sdc } }
+  foreach sdc $::player_build::production_sdc_files { read_sdc $sdc }
   if { [info exists IpSDCList] } {
     set i 0
     while {$i < [llength $IpSDCList]} {
@@ -171,9 +183,7 @@ proc opt_place_fun {} {
 ### Editable zone for opt_place ###
   # TD interprets clock objects correctly through its SDC parser.
   # This separate file tightens optimization, not the signoff requirement.
-  upvar SDCList SDCList
-  clear_sdc -user
-  foreach sdc $SDCList { read_sdc $sdc }
+  restore_production_sdc
   read_sdc ../../../build/optimization_margin.sdc
 
   # [CHG 2026-10-11 routefix] 拥塞对策：移植 10-09 18:16 成功构建的参数（逐字来自
@@ -274,9 +284,7 @@ proc opt_route_fun {} {
   }
   report_area -io_info -file ${prj_name}_phy.area
   # Remove optimization-only constraints before final reports, DB and bit.
-  upvar SDCList SDCList
-  clear_sdc -user
-  foreach sdc $SDCList { read_sdc $sdc }
+  restore_production_sdc
   update_timing -mode final
   report_qor -step route -file route.qor
   report_timing_status -file ${prj_name}_phy.ts

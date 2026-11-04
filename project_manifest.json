@@ -41,14 +41,14 @@
       "project_path": "build/optimization_margin.sdc",
       "public_path": "project_template/build/optimization_margin.sdc",
       "external": false,
-      "sha256": "cc24655dce2492ed25dc806bb7695dfa028a5252b2e138e72cf28d5f124ed45f",
+      "sha256": "ac868f4537586e6d9d7fc6200ca1b2998d8abbed2ad51bed3c0e56ff163e790a",
       "bytes": 124
     },
     {
       "project_path": "build/phy_stage_flow.tcl",
       "public_path": "project_template/build/phy_stage_flow.tcl",
-      "sha256": "26aa810a05de05929807f12757f1bd156bf6661232feb0977d3544fcde9427be",
-      "bytes": 12863,
+      "sha256": "06f15cbc39565f2c3ba003aee2cfc4bac7b4a49ced2cc51ff05618b64a48aabd",
+      "bytes": 13326,
       "external": false
     },
     {
@@ -61,15 +61,15 @@
     {
       "project_path": "build/settings_phy_1.cfg",
       "public_path": "project_template/build/settings_phy_1.cfg",
-      "sha256": "756c0ea9be811571a09ca570683458b5dead8294cda25d5a229dc62b9a946b83",
-      "bytes": 725,
+      "sha256": "b8f58f41d3baf6e4b2988e5a5422149d8a44d56460bd020e2cb2c50879980567",
+      "bytes": 648,
       "external": false
     },
     {
       "project_path": "build/settings_syn_1.cfg",
       "public_path": "project_template/build/settings_syn_1.cfg",
-      "sha256": "32b93b6f32110b250bd0799b726b0ac714d50c94be394cd4a110dfb0e6917594",
-      "bytes": 859,
+      "sha256": "51902617c2600441c96d2820daa02e7c0d0682182a807e715ca7a767ed357836",
+      "bytes": 792,
       "external": false
     },
     {
@@ -336,8 +336,8 @@
     {
       "project_path": "td_project/HDMI1.4b_Transmitter_v1.0.al",
       "public_path": "project_template/td_project/HDMI1.4b_Transmitter_v1.0.al",
-      "sha256": "0271a202379d38287c0144112d74c1d4bc5055e4fb3d291c739e3c88cb194807",
-      "bytes": 41116,
+      "sha256": "daf79e682e3043fbf981dcf10971a9595b39603378d9007edbde0093ae468661",
+      "bytes": 44501,
       "external": false
     },
     {

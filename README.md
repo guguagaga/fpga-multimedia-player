@@ -15,6 +15,12 @@ RTL multimedia player with 720p30 video content and 720p60 HDMI output. Current 
 - [样例转换步骤](samples/README.md) · [频谱计算复核](verification/spectrum/README.md)
 - [源码注释示例](docs/source_examples/源码注释示例.txt) · [源码风格](docs/CODING_STYLE.md) · [协作方式](docs/COLLABORATION.md)
 
+## TD 工程与时序复现
+
+已同步最新工程参数、生产约束恢复修正和时序复现脚本，保持现有分模块源码结构。入口及关键参数见 [时序复现说明](docs/TIMING_REPRODUCTION.md)。
+
+从本地完整交付包的原布局数据库重新布线后，独立时序结果为建立 +0.318 ns、保持 +0.022 ns；生成位流除时间记录外与原件完全一致。从源码重新布局的结果仍须独立检查。本次 Git 更新仅包含源码、脚本、工程配置与使用说明，Release 附件和报告保持原发布内容。
+
 ## 当前实现
 
 视频使用空间块表示与可逆字节压缩后级，固定码表与 RTL 解码器配套。音轨按视频帧数生成 48 kHz 单声道 IMA ADPCM；背景音乐使用 48 kHz、16 位双声道 PCM WAV。PC 入口 `host/video/encode_video.py` 接受 FFmpeg 支持的普通视频文件，生成板端配对 VID/VAU。

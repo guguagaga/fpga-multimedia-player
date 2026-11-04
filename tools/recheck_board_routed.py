@@ -28,7 +28,23 @@ sdc = project / 'user_source/constraints_source/timing.sdc'
 policy = json.loads((root / 'CONSTRAINT_POLICY.json').read_text())
 assert policy['original_sdc_sha256'] == baseline['constraint_sha256']
 assert sha(sdc) == policy['candidate_sdc_sha256']
-assert all(sha(project / n) == h for n, h in policy['rtl_sha256'].items())
+# The constraint policy records the earlier RTL revision. Submission formatting
+# changes have a separate exact-byte manifest; never replace hashes with a
+# whitespace-stripped comparison or silently skip source identity checks.
+manifest_path = root.parent / 'project_manifest.json'
+source_binding = dict(kind='constraint_policy', sha256=sha(root / 'CONSTRAINT_POLICY.json'))
+if manifest_path.is_file():
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8-sig'))
+    entries = {item['project_path']: item['sha256'] for item in manifest['files']}
+    assert len(entries) == len(manifest['files']), 'Duplicate project manifest paths'
+    assert set(policy['rtl_sha256']).issubset(entries), 'Policy source absent from release manifest'
+    for name in policy['rtl_sha256']:
+        assert syn['sources'].get(name) == entries[name], f'Synthesis/manifest mismatch: {name}'
+        assert sha(project / name) == entries[name], f'Release source changed: {name}'
+    source_binding = dict(kind='release_project_manifest', sha256=sha(manifest_path),
+                          policy_sha256=sha(root / 'CONSTRAINT_POLICY.json'))
+else:
+    assert all(sha(project / n) == h for n, h in policy['rtl_sha256'].items())
 assert sha(project / 'user_source/hdl_source/ip/sys_pll.v') == baseline['source_sha256']['user_source/hdl_source/ip/sys_pll.v']
 subprocess.run([sys.executable, str(project / 'build/_mk_prj2.py'), str(out)], check=True)
 tcl = f'''import_device eagle_s20.db -package EG4S20BG256
@@ -86,6 +102,7 @@ if not audit['checks'].get('coverage_not_reduced') and review_path.exists():
 assert audit['passed'], audit
 assert all(sha(project / n) == h for n, h in syn['sources'].items())
 result = dict(passed=True, seed=args.seed, metrics_ps=metrics, clock_audit=audit,
+              source_binding=source_binding,
               bit_sha256=sha(bit), db_sha256=sha(db), source_sha256=syn['sources'],
               files_sha256={str(p): sha(p) for p in out.iterdir() if p.is_file()},
               rtl_change=policy.get('rtl_change'),
