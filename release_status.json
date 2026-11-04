@@ -35,8 +35,9 @@
     "video": "用户反馈：当前的视频通路暂时没发现问题",
     "image_carousel": "用户反馈：轮播切图没问题",
     "card_test_images": 18,
-    "audio_switching_noise": "尚未获得本轮专项复测反馈",
-    "scope": "视频与轮播反馈，不扩展为所有功能或无限时间的无故障保证"
+    "audio_switching_noise": "用户确认：图片切换期间音乐播放已复测正常，未发现此前的杂音问题",
+    "scope": "视频播放、图片轮播及图片切换期间音乐播放的板上功能测试；音频复测状态依据用户于 2026-11-04 的确认更新",
+    "audio_retest_confirmed_on": "2026-11-04"
   },
   "evidence": {
     "timing": "evidence/timing.json",

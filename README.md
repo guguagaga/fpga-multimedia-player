@@ -2,9 +2,9 @@
 
 基于安路 EG4S20BG256 的 RTL 多媒体系统，集成 FAT32 簇链读取、动态图片目录、BMP/QOI 自适应显示、图片轮播与两档缩放、PCM 音乐、视频播放列表、频谱和中文 OSD。
 
-当前提交设计支持 **1280×720、30 fps 视频内容**，HDMI 扫描输出为 720P60。独立恢复布线数据库、加载生产约束后，内部建立裕量 **+0.318 ns**、保持裕量 **+0.022 ns**，违例端点均为 0，时序覆盖率 96.36%。用户已反馈当前视频通路及图片轮播正常；图片切换期间音乐杂音的专项复测尚无本轮明确反馈。
+当前提交设计支持 **1280×720、30 fps 视频内容**，HDMI 扫描输出为 720P60。独立恢复布线数据库、加载生产约束后，内部建立裕量 **+0.318 ns**、保持裕量 **+0.022 ns**，违例端点均为 0，时序覆盖率 96.36%。板上测试已确认视频播放、图片轮播及图片切换期间的音乐播放正常，音乐杂音问题已复测通过。
 
-RTL multimedia player with 720p30 video content and 720p60 HDMI output. Current hardware feedback covers video playback and image carousel. Timing and numerical verification records accompany the source; the audio switching-noise retest remains separately tracked.
+RTL multimedia player with 720p30 video content and 720p60 HDMI output. Board testing has confirmed normal video playback, image carousel operation, and music playback during image changes. The retest for audio switching noise passed. Timing and numerical verification records accompany the source.
 
 ## 下载与阅读
 
